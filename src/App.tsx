@@ -1,11 +1,18 @@
 import React from "react"
-import Button from "@components/Button"
+import { ThemeProvider } from "styled-components"
+import theme from "./styles/theme"
+import { themeStore } from "./stores/themeStore"
+import GlobalStyle from "./styles/global"
+import Layout from "./Layout"
 
 const App = () => {
+  const selectedTheme = themeStore((state) => state.selectedTheme)
+
   return (
-    <div>
-      <Button />
-    </div>
+    <ThemeProvider theme={theme[selectedTheme]}>
+      <GlobalStyle />
+      <Layout />
+    </ThemeProvider>
   )
 }
 
