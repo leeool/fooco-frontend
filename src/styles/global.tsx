@@ -8,6 +8,10 @@ export default createGlobalStyle`
     box-sizing: border-box;
     font-size: 1rem;
     font-family: "Rubik", sans-serif;
+    outline: none;
+    border: none;
+    transition: background-color .3s ease-in-out;
+
   }
 
   body{

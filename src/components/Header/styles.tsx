@@ -8,6 +8,7 @@ export const HeaderContainer = styled.header`
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
   border-radius: 20px;
   padding: 0.8rem 0;
+  transition: background-color 0.3s ease-in-out;
 
   .buttons {
     display: flex;

@@ -1,4 +1,5 @@
 import React from "react"
+import { Outlet } from "react-router"
 import Header from "./components/Header"
 import { MainContainer } from "./styles/container"
 
@@ -7,7 +8,7 @@ const Layout = () => {
     <div>
       <Header />
       <MainContainer>
-        <p>testetestetesteteste </p>
+        <Outlet />
       </MainContainer>
     </div>
   )

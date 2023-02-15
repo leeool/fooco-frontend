@@ -4,12 +4,14 @@ interface IBackgroundColor {
   primary: string
   secondary: string
   tertiary: string
+  details: string
 }
 
 interface ITextColor {
   title: string
   paragraph: string
   subtitle: string
+  details: string
 }
 
 declare module "styled-components" {

@@ -4,13 +4,15 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "PORT=3000 vite",
+    "dev": " vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router": "^6.8.1",
+    "react-router-dom": "^6.8.1",
     "styled-components": "^5.3.6",
     "styled-system": "^5.1.5",
     "vite-plugin-svgr": "^2.4.0",

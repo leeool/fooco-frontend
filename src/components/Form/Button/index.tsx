@@ -4,10 +4,17 @@ import { ButtonContainer } from "./style"
 interface IButtonProps {
   children: React.ReactNode
   variant: string
+  onClick?: () => void
+  icon?: React.ReactNode
 }
 
-const Button = ({ children, variant }: IButtonProps) => {
-  return <ButtonContainer variant={variant}>{children}</ButtonContainer>
+const Button = ({ children, variant, onClick, icon }: IButtonProps) => {
+  return (
+    <ButtonContainer onClick={onClick} variant={variant}>
+      {children}
+      {icon}
+    </ButtonContainer>
+  )
 }
 
 export default Button
