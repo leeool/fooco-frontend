@@ -12,8 +12,7 @@ export const Container = styled.div`
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       text-transform: uppercase;
-      font-weight: 400;
-      width: 40%;
+      min-width: 12rem;
     }
   }
 
@@ -44,6 +43,7 @@ export const Container = styled.div`
       height: 100%;
       background-color: ${({ theme }) => theme.backgroundColor.tertiary};
       transition: background-color 0.3s ease-in-out;
+      color: ${({ theme }) => theme.textColor.subtitle};
 
       &::placeholder {
         color: ${({ theme }) => theme.textColor.details};
