@@ -12,6 +12,10 @@ export default createGlobalStyle`
     border: none;
     transition: background-color .3s ease-in-out;
 
+    &::placeholder {
+      opacity: 1;
+    }
+
   }
 
   body{

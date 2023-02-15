@@ -12,7 +12,7 @@ export const ButtonContainer = styled.button<Props>`
   cursor: pointer;
   padding: 0.6rem 1rem;
   border-radius: 20px;
-  font-weight: 600;
+  font-weight: 700;
   align-items: center;
   gap: 0.8rem;
   height: 100%;

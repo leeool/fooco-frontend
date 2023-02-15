@@ -5,12 +5,12 @@ import { MainContainer } from "./styles/container"
 
 const Layout = () => {
   return (
-    <div>
+    <>
       <Header />
       <MainContainer>
         <Outlet />
       </MainContainer>
-    </div>
+    </>
   )
 }
 
