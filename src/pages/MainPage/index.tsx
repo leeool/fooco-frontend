@@ -61,7 +61,48 @@ const MainPage = () => {
         </div>
       </BarContainer>
       <ComecarContainer>
-        <Title size="subtitle">Por onde começar</Title>
+        <Title as="h2" size="subtitle">
+          Por onde começar
+        </Title>
+        <Paragraph size="subtitle">
+          Veja como você pode entrar de cabeça do jeito certo nessa jornada!
+        </Paragraph>
+        <ul className="list">
+          <li>
+            <h3>Crie uma conta</h3>
+            <p>Leva menos de 5 minutinhos!</p>
+          </li>
+          <li>
+            <h3>Personalize seu perfil</h3>
+            <p>
+              Na plataforma Fooco, você pode personalizar tudo do seu jeito.
+            </p>
+          </li>
+          <li>
+            <h3>Faça novas amizades</h3>
+            <p>Ou encontre suas amizades da escola.</p>
+          </li>
+          <li>
+            <h3>Ganhe pontos e prêmios</h3>
+            <p>Mostre que você é um grande ancião da comunidade.</p>
+          </li>
+          <li>
+            <h3>Respeito acima de tudo</h3>
+            <p>Não seja um bobo! Contribua para um lugar prazeroso.</p>
+          </li>
+          <li>
+            <h3>Diga não ao bullying</h3>
+            <p>É possível denunciar usuários mal intencinados.</p>
+          </li>
+          <li>
+            <h3>Não compartilhe qualquer informação</h3>
+            <p>Evite compartilhar dados pessoais com desconhecidos</p>
+          </li>
+          <li>
+            <h3>Interaja com a comunidade</h3>
+            <p>Crie um ambiente confortável para compartilhar conhecimento.</p>
+          </li>
+        </ul>
       </ComecarContainer>
     </Container>
   )

@@ -5,6 +5,7 @@ interface IBackgroundColor {
   secondary: string
   tertiary: string
   details: string
+  base: string
 }
 
 interface ITextColor {
@@ -12,6 +13,7 @@ interface ITextColor {
   paragraph: string
   subtitle: string
   details: string
+  base: string
 }
 
 declare module "styled-components" {

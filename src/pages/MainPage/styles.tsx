@@ -1,4 +1,10 @@
 import styled from "styled-components"
+import { variant } from "styled-system"
+import plusIcon from "@assets/plus-icon.svg"
+
+interface IPropsParagraph {
+  size?: "title" | "subtitle"
+}
 
 export const Container = styled.section`
   display: grid;
@@ -21,8 +27,13 @@ export const InicioContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   justify-content: center;
 
+  p {
+    margin-top: 0.8rem;
+    margin-bottom: 2rem;
+  }
+
   .icone svg {
-    animation: viravira 3s linear infinite alternate;
+    animation: viravira 10s linear infinite alternate;
   }
 
   .icone {
@@ -31,11 +42,23 @@ export const InicioContainer = styled.div`
   }
 `
 
-export const Paragraph = styled.p`
+export const Paragraph = styled.p<IPropsParagraph>`
   color: ${({ theme }) => theme.textColor.paragraph};
   font-size: 1.25rem;
   line-height: 1.5;
   margin-bottom: 1rem;
+
+  ${variant({
+    prop: "size",
+    variants: {
+      title: {
+        fontSize: "1.25rem",
+      },
+      subtitle: {
+        fontSize: "1rem",
+      },
+    },
+  })}
 `
 
 export const BarContainer = styled.div`
@@ -86,4 +109,51 @@ export const BarContainer = styled.div`
   }
 `
 
-export const ComecarContainer = styled.div``
+export const ComecarContainer = styled.div`
+  .list {
+    position: relative;
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+
+  .list::before {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 100%;
+    background-color: ${({ theme }) => theme.backgroundColor.tertiary};
+    position: absolute;
+    left: 40%;
+    top: 0;
+  }
+
+  li {
+    font-family: "Roboto", sans-serif;
+    position: relative;
+  }
+
+  li::before {
+    content: "";
+    background: url(${plusIcon}) no-repeat center;
+    background-size: 1.3rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    display: inline-block;
+    position: absolute;
+    left: -1.8rem;
+    top: 0;
+  }
+
+  h3 {
+    font-weight: 400;
+    font-size: 1.25rem;
+  }
+
+  p {
+    font-size: 1rem;
+    color: ${({ theme }) => theme.textColor.paragraph};
+  }
+`

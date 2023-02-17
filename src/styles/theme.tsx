@@ -18,6 +18,7 @@ const dark = {
     paragraph: "#afafaf",
     subtitle: "#ddd",
     details: "#B9B9B9",
+    base: "#efefef",
   },
 }
 
@@ -34,6 +35,7 @@ const light = {
     paragraph: "#858585",
     subtitle: "#212121",
     details: "#B9B9B9",
+    base: "#212121",
   },
 }
 
