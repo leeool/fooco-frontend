@@ -1,9 +1,11 @@
 import { Title } from "@components/Title/style"
+import Accordion from "@components/Accordion"
 import React from "react"
 import {
   BarContainer,
   ComecarContainer,
   Container,
+  DuvidaContainer,
   InicioContainer,
   Paragraph,
 } from "./styles"
@@ -104,6 +106,22 @@ const MainPage = () => {
           </li>
         </ul>
       </ComecarContainer>
+      <DuvidaContainer>
+        <Title as="h2" size="subtitle">
+          Alguma dúvida?
+        </Title>
+        <Paragraph size="subtitle">
+          Não encontrou sua dúvida? Entre em contato com fooco.contato@gmail.com
+        </Paragraph>
+        <div className="items">
+          <Accordion
+            header={"O que é a plataforma Fooco?"}
+            content={
+              "A plataforma Fooco é um lugar no qual estudantes podem se juntar para disseminar conhecimento através do sistema de perguntas e respostas."
+            }
+          />
+        </div>
+      </DuvidaContainer>
     </Container>
   )
 }

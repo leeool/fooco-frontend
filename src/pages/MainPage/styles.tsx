@@ -157,3 +157,11 @@ export const ComecarContainer = styled.div`
     color: ${({ theme }) => theme.textColor.paragraph};
   }
 `
+
+export const DuvidaContainer = styled.div`
+  .items {
+    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+`
