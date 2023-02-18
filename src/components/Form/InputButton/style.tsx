@@ -32,9 +32,13 @@ export const Container = styled.div`
     border-bottom-left-radius: 20px;
     overflow: hidden;
 
-    svg,
     path {
+      transition: stroke 300ms ease;
       stroke: ${({ theme }) => theme.backgroundColor.details};
+    }
+
+    input:focus ~ span path {
+      stroke: ${({ theme }) => theme.backgroundColor.secondary};
     }
 
     input {
@@ -42,12 +46,17 @@ export const Container = styled.div`
       width: 100%;
       height: 100%;
       background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-      transition: background-color 0.3s ease-in-out;
       color: ${({ theme }) => theme.textColor.subtitle};
 
       &::placeholder {
         color: ${({ theme }) => theme.textColor.details};
         opacity: 1;
+      }
+
+      &:focus {
+        transition: none;
+        background-color: ${({ theme }) =>
+          theme.backgroundColor.alternativeState};
       }
     }
   }

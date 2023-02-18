@@ -2,15 +2,17 @@ import React from "react"
 import { Outlet } from "react-router"
 import Header from "./components/Header"
 import { MainContainer } from "./styles/container"
+import Footer from "./components/Footer"
 
 const Layout = () => {
   return (
-    <>
+    <MainContainer>
       <Header />
-      <MainContainer>
+      <div className="main-content">
         <Outlet />
-      </MainContainer>
-    </>
+      </div>
+      <Footer />
+    </MainContainer>
   )
 }
 

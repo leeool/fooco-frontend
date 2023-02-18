@@ -12,14 +12,13 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: 1.25rem;
-    font-family: "Roboto", sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     transition: none;
     padding: 0.8rem 1rem;
     font-family: "Rubik", sans-serif;
     width: 100%;
     text-align: start;
-    color: ${({ theme }) => theme.textColor.base};
+    color: ${({ theme }) => theme.textColor.details};
     background-color: ${({ theme }) => theme.backgroundColor.tertiary};
     cursor: pointer;
 
@@ -72,7 +71,8 @@ export const Container = styled.div`
   .content-text {
     padding: 1rem;
     line-height: 1.5;
-    font-size: 1rem;
+    font-size: 1.2rem;
+    color: ${({ theme }) => theme.textColor.subtitle};
   }
 
   @keyframes slideDown {

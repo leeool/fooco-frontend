@@ -24,11 +24,20 @@ export const ButtonContainer = styled.button<Props>`
       outlined: {
         border: "2px solid #E63A23",
         color: "#E63A23",
+        "&:hover": {
+          color: "#ff6450",
+          borderColor: "#ff6450",
+        },
       },
       solid: {
         backgroundColor: "#E63A23",
         border: "2px solid #E63A23",
+        transition: "none",
         color: "#fff",
+        "&:hover": {
+          backgroundColor: "#ff6450",
+          borderColor: "#ff6450",
+        },
       },
     },
   })};

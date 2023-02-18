@@ -1,11 +1,13 @@
 import styled from "styled-components"
 
 export const HeaderContainer = styled.header`
+  width: 100%;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 500px auto;
   gap: 2rem;
   align-items: center;
   justify-items: center;
+  justify-content: space-between;
   margin: 0 auto;
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
   border-radius: 20px;

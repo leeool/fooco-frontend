@@ -5,6 +5,7 @@ interface IBackgroundColor {
   secondary: string
   tertiary: string
   details: string
+  alternativeState: string
 }
 
 interface ITextColor {

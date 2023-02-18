@@ -1,7 +1,7 @@
 import React from "react"
 import * as Accordion from "@radix-ui/react-accordion"
 import { Container } from "./style"
-import { ReactComponent as Seta } from "@assets/seta-baixo.svg"
+import { ReactComponent as Seta } from "@assets/icons/seta-baixo.svg"
 
 interface IPropsAccordion {
   header: string

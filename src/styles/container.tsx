@@ -1,6 +1,13 @@
 import styled from "styled-components"
 
 export const MainContainer = styled.div`
-  max-width: 89rem;
-  margin: 4.5rem auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .main-content {
+    max-width: 89rem;
+    margin: 8rem auto;
+    flex: 1;
+  }
 `

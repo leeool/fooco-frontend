@@ -9,10 +9,15 @@ export default createGlobalStyle`
     font-size: 1rem;
     outline: none;
     border: none;
-    transition: background-color .3s ease-in-out;
+    transition: background-color 300ms ease-in;
 
     &::placeholder {
       opacity: 1;
+    }
+
+    &::selection {
+      background-color: ${({ theme }) => theme.backgroundColor.secondary};
+      color: #fff;
     }
 
   }

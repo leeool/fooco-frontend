@@ -12,6 +12,7 @@ const dark = {
     secondary: "#E63A23",
     tertiary: "#353535",
     details: "#B9B9B9",
+    alternativeState: "#3f3f3f",
   },
   textColor: {
     title: "#E63A23",
@@ -29,12 +30,13 @@ const light = {
     secondary: "#E63A23",
     tertiary: "#EFEFEF",
     details: "#B9B9B9",
+    alternativeState: "#e63a2322",
   },
   textColor: {
     title: "#E63A23",
     paragraph: "#858585",
     subtitle: "#212121",
-    details: "#B9B9B9",
+    details: "#999",
     base: "#212121",
   },
 }
