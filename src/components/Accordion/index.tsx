@@ -1,9 +1,10 @@
 import React from "react"
 import * as Accordion from "@radix-ui/react-accordion"
 import { Container } from "./style"
+import { ReactComponent as Seta } from "@assets/seta-baixo.svg"
 
 interface IPropsAccordion {
-  header: React.ReactNode
+  header: string
   content: React.ReactNode
 }
 
@@ -17,9 +18,11 @@ const index = ({ header, content }: IPropsAccordion) => {
   return (
     <Container>
       <Accordion.Root type="single" collapsible>
-        <Accordion.Item value="1" className="item">
+        <Accordion.Item value={header} className="item">
           <AccordionTrigger className="trigger">{header}</AccordionTrigger>
-          <Accordion.Content className="content">{content}</Accordion.Content>
+          <Accordion.Content className="content">
+            <div className="content-text">{content}</div>
+          </Accordion.Content>
         </Accordion.Item>
       </Accordion.Root>
     </Container>
@@ -28,7 +31,10 @@ const index = ({ header, content }: IPropsAccordion) => {
 
 const AccordionTrigger = ({ children, className, ...props }: Props) => (
   <Accordion.Header className={className}>
-    <Accordion.Trigger {...props}>{children}</Accordion.Trigger>
+    <Accordion.Trigger {...props}>
+      {children}
+      <Seta />
+    </Accordion.Trigger>
   </Accordion.Header>
 )
 

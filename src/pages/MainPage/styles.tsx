@@ -117,6 +117,7 @@ export const ComecarContainer = styled.div`
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     justify-content: center;
+    justify-self: center;
   }
 
   .list::before {
@@ -163,5 +164,7 @@ export const DuvidaContainer = styled.div`
     margin-top: 4rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    column-gap: 1.5rem;
+    row-gap: 1rem;
   }
 `

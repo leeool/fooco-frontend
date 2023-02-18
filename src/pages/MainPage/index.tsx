@@ -63,12 +63,14 @@ const MainPage = () => {
         </div>
       </BarContainer>
       <ComecarContainer>
-        <Title as="h2" size="subtitle">
-          Por onde começar
-        </Title>
-        <Paragraph size="subtitle">
-          Veja como você pode entrar de cabeça do jeito certo nessa jornada!
-        </Paragraph>
+        <div>
+          <Title as="h2" size="subtitle">
+            Por onde começar
+          </Title>
+          <Paragraph size="subtitle">
+            Veja como você pode entrar de cabeça do jeito certo nessa jornada!
+          </Paragraph>
+        </div>
         <ul className="list">
           <li>
             <h3>Crie uma conta</h3>
@@ -116,6 +118,12 @@ const MainPage = () => {
         <div className="items">
           <Accordion
             header={"O que é a plataforma Fooco?"}
+            content={
+              "A plataforma Fooco é um lugar no qual estudantes podem se juntar para disseminar conhecimento através do sistema de perguntas e respostas."
+            }
+          />
+          <Accordion
+            header={"O que é um projeto Open Source?"}
             content={
               "A plataforma Fooco é um lugar no qual estudantes podem se juntar para disseminar conhecimento através do sistema de perguntas e respostas."
             }
