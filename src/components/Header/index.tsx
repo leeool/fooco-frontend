@@ -6,6 +6,7 @@ import Button from "@components/Form/Button"
 import Input from "@components/Form/Input"
 import { ReactComponent as Lupa } from "@assets/icons/lupa.svg"
 import { themeStore } from "src/stores/themeStore"
+import { Link } from "react-router-dom"
 
 const index = () => {
   const toggleTheme = themeStore((state) => state.toggleSelectedTheme)
@@ -17,10 +18,12 @@ const index = () => {
         <Search />
       </span>
       <div className="buttons">
-        <Button variant="outlined" onClick={toggleTheme}>
-          Entrar
-        </Button>
-        <Button variant="solid">Criar Conta</Button>
+        <Link to={"entrar"}>
+          <Button variant="outlined">Entrar</Button>
+        </Link>
+        <Link to={"entrar/criar"}>
+          <Button variant="solid">Criar Conta</Button>
+        </Link>
       </div>
     </HeaderContainer>
   )

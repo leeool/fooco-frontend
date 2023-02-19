@@ -40,9 +40,4 @@ export const ButtonContainer = styled.button<Props>`
       },
     },
   })};
-
-  @media (max-width: 600px) {
-    font-size: 0.8rem;
-    padding: 0.4rem 0.6rem;
-  }
 `
