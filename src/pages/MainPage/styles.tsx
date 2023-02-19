@@ -36,32 +36,50 @@ export const InicioContainer = styled.div`
     display: flex;
     justify-content: center;
   }
+
+  @media (max-width: 1100px) {
+    grid-template-columns: 1fr;
+
+    .icone {
+      display: none;
+    }
+  }
 `
 
 export const BarContainer = styled.div`
   grid-column: 1 / -1;
   display: flex;
+  align-items: center;
   color: #fff;
   background-color: ${({ theme }) => theme.backgroundColor.secondary};
   border-radius: 20px;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
   justify-content: space-around;
   position: relative;
   box-shadow: 100px 0px 0px 0px
       ${({ theme }) => theme.backgroundColor.secondary},
     -100px 0px 0px 0px ${({ theme }) => theme.backgroundColor.secondary};
 
+  @media (max-width: 1100px) {
+    flex-direction: column;
+    row-gap: 3rem;
+    box-shadow: none;
+  }
+
   .list {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
     justify-content: space-around;
+    max-width: 31rem;
+    overflow-x: scroll;
 
     li {
+      flex: 1;
       display: grid;
       gap: 0.5rem;
       justify-items: center;
-      max-width: 8.125rem;
+      max-width: 8rem;
       text-align: center;
     }
 
@@ -75,6 +93,10 @@ export const BarContainer = styled.div`
   span {
     font-size: 2rem;
     font-weight: 500;
+
+    @media (max-width: 600px) {
+      font-size: 1.5rem;
+    }
   }
 
   .slogan {
@@ -104,7 +126,6 @@ export const ComecarContainer = styled.div`
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     justify-content: center;
-    justify-self: center;
   }
 
   .list::before {
@@ -156,22 +177,52 @@ export const ComecarContainer = styled.div`
   .list-2 {
     justify-self: end;
   }
+
+  @media (max-width: 600px) {
+    .list {
+      grid-template-columns: 1fr;
+      justify-content: start;
+      gap: 0;
+    }
+
+    .list::before {
+      display: none;
+    }
+
+    .list-2 {
+      justify-self: start;
+    }
+  }
 `
 
 export const DuvidaContainer = styled.div`
-  .items {
+  .duvidas {
     margin-top: 2rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 1.5rem;
     row-gap: 1rem;
   }
+  @media (max-width: 1000px) {
+    .duvidas {
+      grid-template-columns: 1fr;
+    }
+  }
 `
 
 export const DecidiuContainer = styled.div`
   display: grid;
+  justify-items: center;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
   gap: 1.5rem;
-  width: 50%;
+
+  & .input {
+    width: 60%;
+
+    @media (max-width: 1000px) {
+      width: 100%;
+    }
+  }
 `

@@ -6,6 +6,10 @@ export const Container = styled.div`
     max-width: 100%;
     border-radius: 20px;
     overflow: hidden;
+
+    &[data-state="closed"] {
+      height: fit-content;
+    }
   }
 
   .trigger button {
@@ -73,6 +77,15 @@ export const Container = styled.div`
     line-height: 1.5;
     font-size: 1.2rem;
     color: ${({ theme }) => theme.textColor.subtitle};
+  }
+
+  @media (max-width: 600px) {
+    .trigger button {
+      font-size: 1.2rem;
+    }
+    .content-text {
+      font-size: 1rem;
+    }
   }
 
   @keyframes slideDown {

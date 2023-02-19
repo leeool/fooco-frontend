@@ -14,7 +14,6 @@ import InputButton from "@components/Form/InputButton"
 import { ReactComponent as Letter } from "@assets/icons/letter.svg"
 import { ReactComponent as Seta } from "@assets/icons/seta-direita.svg"
 import { ReactComponent as Globe } from "@assets/bar/globe.svg"
-import { ReactComponent as Hat } from "@assets/bar/hat.svg"
 import { ReactComponent as Lock } from "@assets/bar/lock.svg"
 import Subtitle from "@components/Subtitle"
 
@@ -52,8 +51,22 @@ const MainPage = () => {
             <p>Projeto open source</p>
           </li>
           <li>
-            <Hat />
-            <p>Conhecimento ilimitado</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-6 h-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"
+              />
+            </svg>
+
+            <p>Ganhe pontos e recompensas</p>
           </li>
         </ul>
         <div className="slogan">
@@ -125,16 +138,42 @@ const MainPage = () => {
         </Subtitle>
         <div className="items">
           <Accordion
-            header={"O que é a plataforma Fooco?"}
-            content={
-              "A plataforma Fooco é um lugar no qual estudantes podem se juntar para disseminar conhecimento através do sistema de perguntas e respostas."
-            }
-          />
-          <Accordion
-            header={"O que é um projeto Open Source?"}
-            content={
-              "A plataforma Fooco é um lugar no qual estudantes podem se juntar para disseminar conhecimento através do sistema de perguntas e respostas."
-            }
+            className="duvidas"
+            items={[
+              {
+                header: "O que é a plataforma Fooco?",
+                content:
+                  "A plataforma Fooco é um lugar no qual pessoas podem se juntar para trocar conhecimento através do sistema de perguntas e respostas.",
+              },
+              {
+                header: "O que é um projeto Open Source?",
+                content: (
+                  <>
+                    O termo em inglês “open source” significa “código aberto” e
+                    se refere ao código-fonte de um site ou aplicativo que pode
+                    ser compartilhado com outros usuários. Consulte a{" "}
+                    <a
+                      rel="noreferrer"
+                      target="_blank"
+                      href="https://pt.wikipedia.org/wiki/C%C3%B3digo_aberto"
+                    >
+                      Wikipédia
+                    </a>{" "}
+                    para mais informações.
+                  </>
+                ),
+              },
+              {
+                header: "O que são os pontos?",
+                content:
+                  "Você ganha pontos conforme suas interações com a comunidade. Exemplo: criar posts, responder posts, fazer amigos e muito mais.",
+              },
+              {
+                header: "Posso fazer qualquer tipo de pergunta na plataforma?",
+                content:
+                  "Caso sua pergunta seja ofensiva, infringindo as regras da plataforma, você pode ser punido ou silenciado por tempo inderminado.",
+              },
+            ]}
           />
         </div>
       </DuvidaContainer>
@@ -145,13 +184,15 @@ const MainPage = () => {
           </Title>
           <Subtitle size="subtitle">Se junte a nossa comunidade agora</Subtitle>
         </div>
-        <InputButton
-          button={"Fazer Parte"}
-          buttonIcon={<Seta />}
-          id="fazerparte"
-          placeholder="seuemail@email.com"
-          icon={<Letter />}
-        />
+        <div className="input">
+          <InputButton
+            button={"Fazer Parte"}
+            buttonIcon={<Seta />}
+            id="fazerparte"
+            placeholder="seuemail@email.com"
+            icon={<Letter />}
+          />
+        </div>
       </DecidiuContainer>
     </Container>
   )

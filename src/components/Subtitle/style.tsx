@@ -22,4 +22,8 @@ export const Paragraph = styled.p<IPropsParagraph>`
       },
     },
   })}
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
 `

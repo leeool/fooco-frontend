@@ -7,7 +7,8 @@ export const FooterContainer = styled.footer`
   align-items: flex-start;
   border-radius: 20px;
   padding: 1rem 2rem;
-  height: 12rem;
+  min-height: 12rem;
+  gap: 2rem;
 
   *::selection {
     background-color: #efefef;
@@ -24,5 +25,30 @@ export const FooterContainer = styled.footer`
     h4 {
       font-size: 1.3rem;
     }
+  }
+
+  @media (max-width: 1100px) {
+    .footer-content {
+      display: flex;
+      max-width: 40rem;
+      flex-wrap: wrap;
+      justify-content: start;
+      justify-self: end;
+      gap: 2rem;
+
+      & > * {
+        flex: 1;
+      }
+    }
+    align-items: center;
+
+    svg {
+      max-width: 100%;
+      min-width: 8rem;
+    }
+  }
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    justify-items: center;
   }
 `

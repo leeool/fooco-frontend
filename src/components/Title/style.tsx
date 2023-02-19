@@ -22,4 +22,8 @@ export const Title = styled.h1<TitleProps>`
       },
     },
   })}
+
+  @media (max-width: 600px) {
+    font-size: 3rem;
+  }
 `

@@ -13,13 +13,9 @@ const index = () => {
   return (
     <HeaderContainer>
       <Logo />
-      {/* <Search /> */}
-      <Input
-        id="search"
-        placeholder="Pesquisar..."
-        type="search"
-        icon={<Lupa />}
-      />
+      <span className="search">
+        <Search />
+      </span>
       <div className="buttons">
         <Button variant="outlined" onClick={toggleTheme}>
           Entrar

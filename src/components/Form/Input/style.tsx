@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const InputContainer = styled.div`
-  width: 100%;
+  width: 31rem;
   height: 2.5rem;
 
   .icon {

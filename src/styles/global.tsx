@@ -22,6 +22,11 @@ export default createGlobalStyle`
 
   }
 
+  a {
+    color: ${({ theme }) => theme.textColor.title};
+    font-size: inherit;
+  }
+
   body{
     font-family: "Rubik", sans-serif;
     background-color: ${({ theme }) => theme.backgroundColor.primary};

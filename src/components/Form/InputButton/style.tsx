@@ -12,7 +12,7 @@ export const Container = styled.div`
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       text-transform: uppercase;
-      min-width: 12rem;
+      min-width: fit-content;
     }
   }
 
@@ -20,6 +20,10 @@ export const Container = styled.div`
     position: absolute;
     right: 0;
     padding: 0.4rem 0.8rem;
+
+    @media (max-width: 600px) {
+      display: none;
+    }
   }
 
   .inputContainer {
