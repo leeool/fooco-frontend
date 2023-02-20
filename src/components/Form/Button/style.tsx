@@ -16,6 +16,7 @@ export const ButtonContainer = styled.button<Props>`
   gap: 0.4rem;
   height: 100%;
   text-align: center;
+  justify-content: center;
   background-color: ${({ theme }) => theme.backgroundColor.primary};
 
   ${variant({

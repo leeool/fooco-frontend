@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 1.5fr 1fr;
   height: calc(100vh - 2rem);
+  position: relative;
 
   .foquinho {
     display: grid;
@@ -23,6 +24,12 @@ export const Container = styled.div`
   .outlet {
     align-self: center;
     padding: 3.125rem;
+
+    .logo svg {
+      position: absolute;
+      top: 0;
+      width: 10rem;
+    }
   }
 
   @media (max-width: 700px) {

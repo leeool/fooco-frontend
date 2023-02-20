@@ -10,6 +10,7 @@ export default createGlobalStyle`
     outline: none;
     border: none;
     transition: background-color 300ms ease-in;
+    text-decoration: none;
 
     &::placeholder {
       opacity: 1;
