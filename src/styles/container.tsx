@@ -9,5 +9,9 @@ export const MainContainer = styled.div`
     max-width: 89rem;
     margin: 8rem auto;
     flex: 1;
+
+    @media (max-width: 600px) {
+      margin-top: 4rem;
+    }
   }
 `

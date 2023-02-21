@@ -44,10 +44,6 @@ export const Container = styled.div`
 
       h1 {
         text-align: center;
-
-        @media (max-width: 700px) {
-          font-size: 2rem;
-        }
       }
     }
   }

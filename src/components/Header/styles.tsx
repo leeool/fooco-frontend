@@ -22,6 +22,7 @@ export const HeaderContainer = styled.header`
   }
 
   @media (max-width: 1100px) {
+    padding: 0.8rem 1rem;
     gap: 1rem;
 
     .buttons {

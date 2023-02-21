@@ -16,7 +16,7 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: 1.25rem;
-    font-weight: 400;
+    font-weight: 500;
     transition: none;
     padding: 0.8rem 1rem;
     font-family: "Rubik", sans-serif;
@@ -75,7 +75,7 @@ export const Container = styled.div`
   .content-text {
     padding: 1rem;
     line-height: 1.5;
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: ${({ theme }) => theme.textColor.subtitle};
   }
 

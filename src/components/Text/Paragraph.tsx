@@ -2,28 +2,28 @@ import styled from "styled-components"
 import { variant } from "styled-system"
 
 interface IPropsParagraph {
-  size?: "title" | "subtitle"
+  size: "xl" | "2xl"
 }
 
 export const Paragraph = styled.p<IPropsParagraph>`
   color: ${({ theme }) => theme.textColor.paragraph};
-  font-size: 1.25rem;
   line-height: 1.5;
-  margin-bottom: 1rem;
 
   ${variant({
     prop: "size",
     variants: {
-      title: {
+      "2xl": {
         fontSize: "1.3rem",
+        "@media (max-width: 600px)": {
+          fontSize: "1.1rem",
+        },
       },
-      subtitle: {
+      xl: {
         fontSize: "1.2rem",
+        "@media (max-width: 600px)": {
+          fontSize: "1rem",
+        },
       },
     },
   })}
-
-  @media (max-width: 600px) {
-    font-size: 1rem;
-  }
 `

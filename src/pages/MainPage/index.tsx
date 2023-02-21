@@ -1,4 +1,4 @@
-import { Title } from "@components/Title/style"
+import { Title } from "@components/Text/Title"
 import Accordion from "@components/Accordion"
 import React from "react"
 import {
@@ -15,25 +15,41 @@ import { ReactComponent as Letter } from "@assets/icons/letter.svg"
 import { ReactComponent as Seta } from "@assets/icons/seta-direita.svg"
 import { ReactComponent as Globe } from "@assets/bar/globe.svg"
 import { ReactComponent as Lock } from "@assets/bar/lock.svg"
-import Subtitle from "@components/Subtitle"
+import { Paragraph } from "@components/Text/Paragraph"
+import UseLoginStore from "src/stores/UseLoginStore"
+import { useNavigate } from "react-router-dom"
 
 const MainPage = () => {
+  const setEmail = UseLoginStore((state) => state.setEmail)
+  const navigate = useNavigate()
+
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value)
+  }
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    navigate("/entrar/criar")
+  }
+
   return (
     <Container>
       <InicioContainer>
         <div className="fazerParte">
-          <Title size="title">Faça parte dessa comunidade</Title>
-          <Subtitle size="title">
+          <Title size="2xl">Faça parte dessa comunidade</Title>
+          <Paragraph size="2xl">
             Entre em grupos, faça amizades e adquira pontos. Tudo isso enquanto
             ajuda outras pessoas e aprende coisas novas com estudantes de
             qualquer lugar do mundo.
-          </Subtitle>
+          </Paragraph>
           <InputButton
             button={"Fazer Parte"}
             buttonIcon={<Seta />}
             id="fazerparte"
             placeholder="seuemail@email.com"
             icon={<Letter />}
+            onChange={handleEmail}
+            onClick={handleClick}
           />
         </div>
         <div className="icone">
@@ -78,12 +94,12 @@ const MainPage = () => {
       </BarContainer>
       <ComecarContainer>
         <div>
-          <Title as="h2" size="subtitle">
+          <Title as="h2" size="xl">
             Por onde começar
           </Title>
-          <Subtitle size="subtitle">
+          <Paragraph size="xl">
             Veja como você pode entrar de cabeça do jeito certo nessa jornada!
-          </Subtitle>
+          </Paragraph>
         </div>
         <ul className="list">
           <div className="list-1">
@@ -129,13 +145,13 @@ const MainPage = () => {
         </ul>
       </ComecarContainer>
       <DuvidaContainer>
-        <Title as="h2" size="subtitle">
+        <Title as="h2" size="xl">
           Alguma dúvida?
         </Title>
-        <Subtitle size="subtitle">
+        <Paragraph size="xl">
           Não encontrou sua dúvida? Entre em contato com
           fooco.contato@hotmail.com
-        </Subtitle>
+        </Paragraph>
         <div className="items">
           <Accordion
             className="duvidas"
@@ -179,10 +195,10 @@ const MainPage = () => {
       </DuvidaContainer>
       <DecidiuContainer>
         <div>
-          <Title as="h2" size="subtitle">
+          <Title as="h2" size="xl">
             Eai, já se decidiu?
           </Title>
-          <Subtitle size="subtitle">Se junte a nossa comunidade agora</Subtitle>
+          <Paragraph size="xl">Se junte a nossa comunidade agora</Paragraph>
         </div>
         <div className="input">
           <InputButton
@@ -191,6 +207,8 @@ const MainPage = () => {
             id="fazerparte"
             placeholder="seuemail@email.com"
             icon={<Letter />}
+            onChange={handleEmail}
+            onClick={handleClick}
           />
         </div>
       </DecidiuContainer>

@@ -4,7 +4,7 @@ import { ButtonContainer } from "./style"
 interface IButtonProps {
   children: React.ReactNode
   variant: string
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   icon?: React.ReactNode
 }
 

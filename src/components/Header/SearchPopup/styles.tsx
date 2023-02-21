@@ -58,7 +58,7 @@ export const DialogContent = styled(Dialog.Content)`
   width: calc(100% - 5rem);
   height: fit-content;
   border-radius: 20px;
-  top: 30%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,

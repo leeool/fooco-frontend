@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { variant } from "styled-system"
 import plusIcon from "@assets/icons/plus-icon.svg"
 
 export const Container = styled.section`
@@ -55,7 +54,6 @@ export const BarContainer = styled.div`
   border-radius: 20px;
   padding: 2rem 1rem;
   justify-content: space-around;
-  position: relative;
   box-shadow: 100px 0px 0px 0px
       ${({ theme }) => theme.backgroundColor.secondary},
     -100px 0px 0px 0px ${({ theme }) => theme.backgroundColor.secondary};
@@ -140,7 +138,7 @@ export const ComecarContainer = styled.div`
   }
 
   .list li {
-    font-family: "Roboto", sans-serif;
+    font-family: "Rubik", sans-serif;
     position: relative;
     display: grid;
     grid-template-columns: auto 1fr;
@@ -152,11 +150,13 @@ export const ComecarContainer = styled.div`
       font-size: 1.25rem;
       grid-column: 2 / 3;
       line-height: 1.5;
+      color: ${({ theme }) => theme.textColor.subtitle};
     }
 
     p {
+      font-size: 1rem;
       grid-column: 2 / 3;
-      color: ${({ theme }) => theme.textColor.paragraph};
+      color: ${({ theme }) => theme.textColor.details};
     }
   }
 

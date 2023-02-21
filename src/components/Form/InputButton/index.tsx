@@ -9,21 +9,37 @@ interface Props {
   icon: React.ReactNode
   button: React.ReactNode
   buttonIcon?: React.ReactNode
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const index = ({ label, placeholder, id, icon, button, buttonIcon }: Props) => {
+const index = ({
+  label,
+  placeholder,
+  id,
+  icon,
+  button,
+  buttonIcon,
+  onChange,
+  onClick,
+}: Props) => {
   return (
     <Container>
       {label && <label htmlFor={id}>{label}</label>}
-      <div className="wrapper">
+      <form className="wrapper">
         <div className="inputContainer">
-          <input type="text" id={id} placeholder={placeholder} />
+          <input
+            type="text"
+            id={id}
+            placeholder={placeholder}
+            onChange={onChange}
+          />
           <span className="icon">{icon}</span>
         </div>
-        <Button variant="solid" icon={buttonIcon}>
+        <Button variant="solid" icon={buttonIcon} onClick={onClick}>
           {button}
         </Button>
-      </div>
+      </form>
     </Container>
   )
 }

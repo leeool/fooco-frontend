@@ -1,5 +1,5 @@
 import React from "react"
-import { Title } from "@components/Title/style"
+import { Title } from "@components/Text/Title"
 import { Container } from "./styles"
 import Input from "@components/Form/Input"
 import { ReactComponent as Letter } from "@assets/icons/letter.svg"
@@ -23,7 +23,7 @@ const index = () => {
       animate="visible"
       transition={{ type: "spring" }}
     >
-      <Title size="subtitle">Bem vindo de volta!</Title>
+      <Title size="xl">Bem vindo de volta!</Title>
       <form className="form">
         <Input
           id="email"
