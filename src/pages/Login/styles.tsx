@@ -32,6 +32,12 @@ export const Container = styled.div`
     }
   }
 
+  @media (max-width: 900px) {
+    .outlet {
+      padding: 1.5rem;
+    }
+  }
+
   @media (max-width: 700px) {
     grid-template-columns: 1fr;
 
