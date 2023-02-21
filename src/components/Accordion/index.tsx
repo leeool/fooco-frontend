@@ -14,7 +14,6 @@ interface IPropsAccordion {
 interface TriggerProps {
   children: React.ReactNode
   className?: string
-  props?: any
 }
 
 const index = ({ items, className }: IPropsAccordion) => {
@@ -34,9 +33,9 @@ const index = ({ items, className }: IPropsAccordion) => {
   )
 }
 
-const AccordionTrigger = ({ children, className, ...props }: TriggerProps) => (
+const AccordionTrigger = ({ children, className }: TriggerProps) => (
   <Accordion.Header className={className}>
-    <Accordion.Trigger {...props}>
+    <Accordion.Trigger>
       {children}
       <Seta />
     </Accordion.Trigger>
