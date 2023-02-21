@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import plusIcon from "@assets/icons/plus-icon.svg"
 
-export const Container = styled.section`
+export const Container = styled.main`
   display: grid;
   align-items: center;
   row-gap: 6rem;
@@ -17,7 +17,7 @@ export const Container = styled.section`
   }
 `
 
-export const InicioContainer = styled.div`
+export const InicioContainer = styled.section`
   display: grid;
   grid-template-columns: 1fr 1fr;
   justify-content: center;
@@ -45,7 +45,7 @@ export const InicioContainer = styled.div`
   }
 `
 
-export const BarContainer = styled.div`
+export const BarContainer = styled.section`
   grid-column: 1 / -1;
   display: flex;
   align-items: center;
@@ -116,7 +116,7 @@ export const BarContainer = styled.div`
   }
 `
 
-export const ComecarContainer = styled.div`
+export const ComecarContainer = styled.section`
   .list {
     position: relative;
     margin-top: 2rem;
@@ -195,7 +195,7 @@ export const ComecarContainer = styled.div`
   }
 `
 
-export const DuvidaContainer = styled.div`
+export const DuvidaContainer = styled.section`
   .duvidas {
     margin-top: 2rem;
     display: grid;
@@ -210,7 +210,7 @@ export const DuvidaContainer = styled.div`
   }
 `
 
-export const DecidiuContainer = styled.div`
+export const DecidiuContainer = styled.section`
   display: grid;
   justify-items: center;
   width: 100%;
