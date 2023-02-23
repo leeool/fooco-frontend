@@ -5,8 +5,13 @@ import Input from "@components/Form/Input"
 import { ReactComponent as Letter } from "@assets/icons/letter.svg"
 import { ReactComponent as Lock } from "@assets/icons/lock.svg"
 import Button from "@components/Form/Button"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
+import UseLoginStore from "src/stores/UseLoginStore"
+import Error from "@components/Text/Error"
+import UseFetch from "src/hooks/UseFetch"
+import { USER_LOGIN, USER_LOGIN2 } from "src/api/apiCalls"
+import useUserStore from "src/stores/UseUserStore"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -14,7 +19,33 @@ const animateLeft = {
   transition: { type: "spring" },
 }
 
+interface Props {
+  email: string
+  password: string
+}
+
 const index = () => {
+  const { email, password, setEmail, setPassword } = UseLoginStore()
+  const navigate = useNavigate()
+  const { request, data, error } = UseFetch()
+  const { autoLogin } = useUserStore()
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (email && password) {
+      const { url, options } = USER_LOGIN2(email, password)
+      const { response, data } = await request(url, options)
+
+      if (response && response.status < 300) {
+        navigate("/")
+        localStorage.setItem("token", data.token)
+        localStorage.setItem("id", data.user.id)
+        autoLogin()
+      }
+    }
+  }
+
   return (
     <Container
       as={motion.div}
@@ -24,13 +55,15 @@ const index = () => {
       transition={{ type: "spring" }}
     >
       <Title size="xl">Bem vindo de volta!</Title>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <Input
           id="email"
-          type="email"
+          type="text"
           placeholder="exemplo@email.com"
           icon={<Letter />}
-          label={"Email"}
+          label={"Email ou Apelido"}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <Input
           id="senha"
@@ -38,8 +71,11 @@ const index = () => {
           placeholder="******"
           icon={<Lock />}
           label={"Senha secreta"}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Button variant="solid">Entrar</Button>
+        {error && <Error>{error}</Error>}
       </form>
 
       <p>

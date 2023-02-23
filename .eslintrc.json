@@ -17,5 +17,7 @@
     "projet": ["./tsconfig.json"]
   },
   "plugins": ["react", "@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "no-unsafe-finally": "off"
+  }
 }

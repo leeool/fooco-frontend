@@ -5,12 +5,17 @@ import React from "react"
 import Layout from "./Layout"
 import Entrar from "./pages/Login/Entrar"
 import Criar from "./pages/Login/Criar"
+import Dashboard from "./pages/Dashboard"
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
+      {
+        path: "",
+        element: <Dashboard />,
+      },
       {
         path: "inicio",
         element: <MainPage />,
