@@ -9,9 +9,14 @@ export const Container = styled.main`
   .toast {
     position: absolute;
     right: 0;
-    top: 0;
+    bottom: 0;
     width: 100%;
     height: fit-content;
+
+    @media (max-width: 600px) {
+      top: o;
+      bottom: initial;
+    }
   }
 
   .foquinho {
@@ -46,7 +51,7 @@ export const Container = styled.main`
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 700px) {
     grid-template-columns: 1fr;
 
     .foquinho {

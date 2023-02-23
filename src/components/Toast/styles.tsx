@@ -6,12 +6,14 @@ const viewportPadding = "1rem"
 export const ViewPort = styled(Toast.Viewport)`
   position: absolute;
   right: 0;
-  top: 0;
+  bottom: 0;
   z-index: 9999;
   padding: ${viewportPadding};
 
   @media (max-width: 600px) {
     padding: 0;
+    top: o;
+    bottom: initial;
   }
 `
 
@@ -25,8 +27,7 @@ export const Root = styled(Toast.Root)`
   column-gap: 1rem;
   align-items: center;
   border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
-  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
-    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   max-width: 400px;
 
   svg {
@@ -38,7 +39,7 @@ export const Root = styled(Toast.Root)`
   }
 
   &[data-state="open"] {
-    animation: slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1);
+    animation: slideIn 500ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   &[data-state="closed"] {
@@ -56,6 +57,59 @@ export const Root = styled(Toast.Root)`
 
   &[data-swipe="end"] {
     animation: swipeOut 100ms ease-out;
+  }
+
+  @keyframes bounce-in-right {
+    0% {
+      -webkit-transform: translateX(600px);
+      transform: translateX(600px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+      opacity: 0;
+    }
+    38% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+      opacity: 1;
+    }
+    55% {
+      -webkit-transform: translateX(68px);
+      transform: translateX(68px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    72% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    81% {
+      -webkit-transform: translateX(32px);
+      transform: translateX(32px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    90% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
+    95% {
+      -webkit-transform: translateX(8px);
+      transform: translateX(8px);
+      -webkit-animation-timing-function: ease-in;
+      animation-timing-function: ease-in;
+    }
+    100% {
+      -webkit-transform: translateX(0);
+      transform: translateX(0);
+      -webkit-animation-timing-function: ease-out;
+      animation-timing-function: ease-out;
+    }
   }
 
   @keyframes hide {

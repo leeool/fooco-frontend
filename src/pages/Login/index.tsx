@@ -8,7 +8,7 @@ import Toast from "@components/Toast"
 import UseToastStore from "@components/Toast/UseToastStore"
 
 const index = () => {
-  const { message } = UseToastStore()
+  const { toastMessage } = UseToastStore()
 
   return (
     <Container>
@@ -16,13 +16,16 @@ const index = () => {
         <Foquinho />
       </div>
       <div className="outlet">
-        <Link to={"/inicio"} className="logo">
+        <Link to={"/comecar"} className="logo">
           <Logo />
         </Link>
         <Outlet />
       </div>
       <span className="toast">
-        <Toast title={"Foquinho está com problemas ):"} description={message} />
+        <Toast
+          title={"Foquinho está com problemas ):"}
+          description={toastMessage}
+        />
       </span>
     </Container>
   )

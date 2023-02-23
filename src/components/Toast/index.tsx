@@ -2,7 +2,6 @@ import React from "react"
 import * as Toast from "@radix-ui/react-toast"
 import UseToastStore from "./UseToastStore"
 import { Description, Root, Title, ViewPort } from "./styles"
-import { ReactComponent as Foquinho } from "@assets/foquinho.svg"
 
 interface Props {
   title: React.ReactNode
@@ -14,7 +13,7 @@ const index = ({ title, description }: Props) => {
 
   return (
     <Toast.Provider swipeDirection="right">
-      <Root open={open} onOpenChange={setOpen} duration={3000}>
+      <Root open={open} onOpenChange={setOpen} duration={5000}>
         <Title>{title}</Title>
         <Description>{description}</Description>
       </Root>
