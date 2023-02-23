@@ -7,12 +7,12 @@ export const Container = styled.main`
   row-gap: 6rem;
   justify-content: space-between;
 
-  @keyframes viravira {
+  @keyframes sobeedesce {
     from {
-      transform: rotate(-3deg);
+      transform: translateY(1rem);
     }
     to {
-      transform: rotate(7deg);
+      transform: translateY(0rem);
     }
   }
 `
@@ -28,12 +28,17 @@ export const InicioContainer = styled.section`
   }
 
   .icone svg {
-    animation: viravira 10s linear infinite alternate;
+    width: 100%;
+    height: 100%;
   }
 
   .icone {
     display: flex;
     justify-content: center;
+  }
+
+  .fazerParte {
+    align-self: center;
   }
 
   @media (max-width: 1100px) {
