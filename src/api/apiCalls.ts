@@ -17,17 +17,17 @@ export const instance = axios.create({
 //   })
 // }
 
-const USER_LOGIN = async (
-  email: string,
-  password: string
-): Promise<IUserLogin> => {
-  return instance.post("/user/login", {
-    email: email,
-    password: password,
-  })
-}
+// const USER_LOGIN = async (
+//   email: string,
+//   password: string
+// ): Promise<IUserLogin> => {
+//   return instance.post("/user/login", {
+//     email: email,
+//     password: password,
+//   })
+// }
 
-export const USER_LOGIN2 = (email: string, password: string) => {
+export const USER_LOGIN = (email: string, password: string) => {
   return {
     url: ENDPOINT + "/user/login",
     options: {
@@ -69,5 +69,3 @@ export const GET_USER = (token: string, id: string) => {
     },
   }
 }
-
-export { USER_LOGIN }

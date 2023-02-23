@@ -2,15 +2,15 @@ import { create } from "zustand"
 
 interface IThemeStore {
   selectedTheme: "light" | "dark"
-  toggleSelectedTheme: () => void
+  toggleSelectedTheme: (value: string) => void
   localTheme: () => void
 }
 
 export const themeStore = create<IThemeStore>((set, get) => ({
   selectedTheme: "light",
-  toggleSelectedTheme: () => {
-    set((state) => ({
-      selectedTheme: state.selectedTheme === "light" ? "dark" : "light",
+  toggleSelectedTheme: (value: string) => {
+    set(() => ({
+      selectedTheme: value === "light" ? "light" : "dark",
     }))
     const theme = get().selectedTheme
     localStorage.setItem("theme", theme)

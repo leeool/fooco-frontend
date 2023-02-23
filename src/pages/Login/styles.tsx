@@ -6,6 +6,14 @@ export const Container = styled.main`
   height: calc(100vh - 2rem);
   position: relative;
 
+  .toast {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: fit-content;
+  }
+
   .foquinho {
     display: grid;
     background-color: ${({ theme }) => theme.backgroundColor.secondary};
@@ -38,7 +46,7 @@ export const Container = styled.main`
     }
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
 
     .foquinho {

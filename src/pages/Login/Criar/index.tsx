@@ -7,10 +7,11 @@ import { ReactComponent as Lock } from "@assets/icons/lock.svg"
 import Button from "@components/Form/Button"
 import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
-import UseCreateUserStore from "src/stores/UseCreateUserStore"
+import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
 import Error from "@components/Text/Error"
 import { USER_POST } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
+import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -28,7 +29,7 @@ const index = () => {
     setPassword,
   } = UseCreateUserStore()
 
-  const { error, request } = UseFetch()
+  const { error, request, loading } = UseFetch()
   const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -46,7 +47,7 @@ const index = () => {
 
     // CRIAR HOOK PARA O FETCH
     const { url, options } = USER_POST(username, email, password)
-    const { response, data } = await request(url, options)
+    const { response } = await request(url, options)
 
     if (response && response.status < 300) {
       navigate("/entrar")
@@ -72,6 +73,7 @@ const index = () => {
           label={"Email"}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <Input
           id="senha"
@@ -81,6 +83,7 @@ const index = () => {
           label={"Senha secreta"}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
         <Input
           id="confirma"
@@ -90,8 +93,11 @@ const index = () => {
           label={"Confirme sua senha"}
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          required
         />
-        <Button variant="solid">Criar Conta</Button>
+        <Button variant="solid" icon={<Foquinho />} loading={loading}>
+          Criar Conta
+        </Button>
         <Error>{error}</Error>
       </form>
 

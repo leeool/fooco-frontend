@@ -16,7 +16,7 @@ import { ReactComponent as Seta } from "@assets/icons/seta-direita.svg"
 import { ReactComponent as Globe } from "@assets/bar/globe.svg"
 import { ReactComponent as Lock } from "@assets/bar/lock.svg"
 import { Paragraph } from "@components/Text/Paragraph"
-import UseLoginStore from "src/stores/UseLoginStore"
+import UseLoginStore from "src/stores/form/UseLoginStore"
 import { useNavigate } from "react-router-dom"
 
 const MainPage = () => {

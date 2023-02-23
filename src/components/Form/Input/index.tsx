@@ -1,7 +1,7 @@
-import React from "react"
+import React, { InputHTMLAttributes } from "react"
 import { InputContainer } from "./style"
 
-interface Props {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string
   label?: string
   type: string

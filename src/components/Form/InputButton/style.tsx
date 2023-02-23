@@ -7,6 +7,8 @@ export const Container = styled.div`
     align-items: center;
     width: 100%;
     height: 3rem;
+    overflow: hidden;
+    border-radius: 20px;
 
     button {
       border-top-left-radius: 0;

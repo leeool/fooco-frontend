@@ -1,3 +1,4 @@
+import UseToastStore from "@components/Toast/UseToastStore"
 import React from "react"
 import { instance } from "src/api/apiCalls"
 
@@ -7,10 +8,11 @@ interface IOptions {
   data?: { [key: string]: string }
 }
 
-const UseFetch = () => {
-  const [data, setData] = React.useState<any | null>(null)
+const UseFetch = <T,>() => {
+  const [data, setData] = React.useState<T | null>(null)
   const [error, setError] = React.useState<null | string>(null)
   const [loading, setLoading] = React.useState<boolean>(false)
+  const { setToastOpen, setMessage } = UseToastStore()
 
   const request = React.useCallback(async (url: string, options: IOptions) => {
     let response = null
@@ -25,20 +27,25 @@ const UseFetch = () => {
       if (response.status >= 300) throw new Error(response.request.data.error)
     } catch (err: any) {
       data = null
+      console.log("erro #######")
       if (
         "response" in err &&
         "data" in err.response &&
         "error" in err.response.data
       ) {
-        error = err.response.data.error
+        setToastOpen()
+        setMessage(err.response.data.error)
+        console.log(err.response.data.error)
       } else if (err instanceof Error) {
-        error = err.message
+        setToastOpen()
+        setMessage("Erro ao conectar com o servidor")
+        error = null
       }
     } finally {
       setLoading(false)
       setData(data)
       setError(error)
-      return { response, data }
+      return { response }
     }
   }, [])
 

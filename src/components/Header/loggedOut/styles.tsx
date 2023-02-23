@@ -39,10 +39,6 @@ export const HeaderContainer = styled.header`
       align-items: center;
     }
 
-    .dropdown-menu {
-      justify-self: end;
-    }
-
     & .search {
       justify-self: end;
     }

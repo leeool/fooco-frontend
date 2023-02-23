@@ -9,7 +9,7 @@ export default createGlobalStyle`
     font-size: 1rem;
     outline: none;
     border: none;
-    transition: background-color 300ms ease-in;
+    transition: background-color 200ms ease-in;
     text-decoration: none;
 
     &::placeholder {
@@ -35,4 +35,8 @@ export default createGlobalStyle`
     margin: 1rem;
   };
   
+
+  button {
+    all: unset;
+  }
 `

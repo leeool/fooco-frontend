@@ -19,6 +19,7 @@ export const InputContainer = styled.div`
 
   .icon {
     display: flex;
+    place-items: center;
     position: absolute;
     right: 0;
     padding: 0.4rem 0.8rem;

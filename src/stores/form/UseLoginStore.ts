@@ -1,4 +1,3 @@
-import { USER_LOGIN } from "src/api/apiCalls"
 import { create } from "zustand"
 
 interface Props {
