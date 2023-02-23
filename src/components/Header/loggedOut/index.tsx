@@ -13,7 +13,9 @@ const index = () => {
 
   return (
     <>
-      <Logo />
+      <Link to="/">
+        <Logo />
+      </Link>
       <DropdownMenu
         classTrigger="dropdown-menu"
         trigger={<>{selectedTheme === "light" ? <Sun /> : <Moon />}</>}

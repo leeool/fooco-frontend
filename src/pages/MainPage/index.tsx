@@ -17,11 +17,13 @@ import { ReactComponent as Globe } from "@assets/bar/globe.svg"
 import { ReactComponent as Lock } from "@assets/bar/lock.svg"
 import { Paragraph } from "@components/Text/Paragraph"
 import UseLoginStore from "src/stores/form/UseLoginStore"
-import { useNavigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
+import useUserStore from "src/stores/UseUserStore"
 
 const MainPage = () => {
   const setEmail = UseLoginStore((state) => state.setEmail)
   const navigate = useNavigate()
+  const { isLoggedIn } = useUserStore()
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
@@ -32,6 +34,7 @@ const MainPage = () => {
     navigate("/entrar/criar")
   }
 
+  if (isLoggedIn) return <Navigate to="/" replace />
   return (
     <Container>
       <InicioContainer>

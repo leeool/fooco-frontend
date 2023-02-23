@@ -9,20 +9,30 @@ import Dashboard from "./pages/Dashboard"
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
     element: <Layout />,
     children: [
       {
         path: "",
         element: <Dashboard />,
+        children: [
+          {
+            path: "",
+            element: <div>feed</div>,
+          },
+          {
+            path: "perfil",
+            element: <div>Perfil</div>,
+          },
+        ],
       },
       {
-        path: "inicio",
+        path: "comecar",
         element: <MainPage />,
       },
       {
         path: "*",
-        element: <MainPage />,
+        element: <Dashboard />,
       },
     ],
   },
