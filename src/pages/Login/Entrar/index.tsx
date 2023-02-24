@@ -10,6 +10,8 @@ import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import UseLoginStore from "src/stores/form/UseLoginStore"
 import useUserStore from "src/stores/UseUserStore"
+import UseFetch from "src/hooks/UseFetch"
+import { USER_LOGIN } from "src/api/apiCalls"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -20,13 +22,21 @@ const animateLeft = {
 const index = () => {
   const { email, password, setEmail, setPassword } = UseLoginStore()
   const useNav = useNavigate()
-  const { loginUser, loading } = useUserStore()
+  const { autoLogin } = useUserStore()
+  const { loading, request } = UseFetch<IUserLogin | null>()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (email && password) {
-      await loginUser(email, password)
+    if (!email && !password) return null
+
+    const { options, url } = USER_LOGIN(email, password)
+    const { response } = await request(url, options)
+
+    if (response && response.status < 400) {
+      localStorage.setItem("token", response.data.token)
+      localStorage.setItem("id", response.data.user.id)
+      await autoLogin()
       useNav("/")
     }
   }
