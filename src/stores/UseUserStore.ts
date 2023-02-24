@@ -23,6 +23,7 @@ const useUserStore = create<IUser>((set, get) => ({
         if (response.status >= 300) throw new Error(response.data.error)
         set({ isLoggedIn: true, userData: response.data })
       } catch (error) {
+        console.error(error)
         const logoutUser = get().logoutUser
         logoutUser()
       } finally {
