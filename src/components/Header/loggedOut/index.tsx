@@ -1,5 +1,4 @@
 import React from "react"
-import { HeaderContainer } from "./styles"
 import { ReactComponent as Logo } from "@assets/logo.svg"
 import { ReactComponent as Moon } from "@assets/icons/moon.svg"
 import { ReactComponent as Sun } from "@assets/icons/sun.svg"
@@ -16,21 +15,21 @@ const index = () => {
       <Link to="/">
         <Logo />
       </Link>
-      <DropdownMenu
-        classTrigger="dropdown-menu"
-        trigger={<>{selectedTheme === "light" ? <Sun /> : <Moon />}</>}
-        item={[
-          <span key={"1"} onClick={() => toggleSelectedTheme("dark")}>
-            <Moon />
-            Escuro
-          </span>,
-          <span key={"2"} onClick={() => toggleSelectedTheme("light")}>
-            <Sun />
-            Claro
-          </span>,
-        ]}
-      />
       <div className="buttons">
+        <DropdownMenu
+          classTrigger="dropdown-menu"
+          trigger={<>{selectedTheme === "light" ? <Sun /> : <Moon />}</>}
+          item={[
+            <span key={"1"} onClick={() => toggleSelectedTheme("dark")}>
+              <Moon />
+              Escuro
+            </span>,
+            <span key={"2"} onClick={() => toggleSelectedTheme("light")}>
+              <Sun />
+              Claro
+            </span>,
+          ]}
+        />
         <Link to={"entrar"}>
           <Button variant="outlined">Entrar</Button>
         </Link>

@@ -14,6 +14,7 @@ export const HeaderContainer = styled.header`
 
   .buttons {
     display: flex;
+    align-items: center;
     gap: 2rem;
   }
 
@@ -35,21 +36,16 @@ export const HeaderContainer = styled.header`
 
     .buttons {
       grid-column: 1 / -1;
-      justify-self: center;
       align-items: center;
+      justify-content: center;
     }
 
-    .dropdown-menu {
-      justify-self: end;
-    }
-
-    & .search {
-      justify-self: end;
-    }
-
-    & > svg {
+    & > a {
+      display: block;
+      grid-column: 1 / -1;
       min-width: 6rem;
       width: 100%;
+      justify-self: center;
     }
   }
 `
