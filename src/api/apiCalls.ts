@@ -9,24 +9,6 @@ export const instance = axios.create({
   },
 })
 
-// const USER_POST = async (username: string, email: string, password: string) => {
-//   return instance.post("/user", {
-//     username: username,
-//     email: email,
-//     password: password,
-//   })
-// }
-
-// const USER_LOGIN = async (
-//   email: string,
-//   password: string
-// ): Promise<IUserLogin> => {
-//   return instance.post("/user/login", {
-//     email: email,
-//     password: password,
-//   })
-// }
-
 export const USER_LOGIN = (email: string, password: string) => {
   return {
     url: ENDPOINT + "/user/login",
