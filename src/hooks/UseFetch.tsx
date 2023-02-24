@@ -17,7 +17,7 @@ const UseFetch = <T,>() => {
   const request = React.useCallback(async (url: string, options: IOptions) => {
     let response = null
     let error = null
-    let data = null
+    let data: T | null = null
     setLoading(true)
 
     try {
@@ -44,7 +44,7 @@ const UseFetch = <T,>() => {
       setLoading(false)
       setData(data)
       setError(error)
-      return { response }
+      return { response, data }
     }
   }, [])
 
