@@ -6,9 +6,19 @@ export const Container = styled.div`
     max-width: 100%;
     border-radius: 20px;
     overflow: hidden;
+    transition: none;
 
     &[data-state="closed"] {
       height: fit-content;
+    }
+
+    &[data-state="open"]:hover {
+      .trigger button {
+        background-color: ${({ theme }) =>
+          theme.backgroundColor.alternativeState};
+      }
+      background-color: ${({ theme }) =>
+        theme.backgroundColor.alternativeState};
     }
   }
 
@@ -16,13 +26,13 @@ export const Container = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: 1.25rem;
-    font-weight: 500;
+    font-weight: 400;
     transition: none;
     padding: 0.8rem 1rem;
     font-family: "Rubik", sans-serif;
     width: 100%;
     text-align: start;
-    color: ${({ theme }) => theme.textColor.details};
+    color: ${({ theme }) => theme.textColor.subtitle};
     background-color: ${({ theme }) => theme.backgroundColor.tertiary};
     cursor: pointer;
 
@@ -33,6 +43,11 @@ export const Container = styled.div`
     svg {
       rotate: -90deg;
       transition: 300ms ease-in-out rotate;
+    }
+
+    &[data-state="closed"]:hover {
+      background-color: ${({ theme }) =>
+        theme.backgroundColor.alternativeState};
     }
   }
 
