@@ -13,6 +13,7 @@ import { USER_POST } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
 import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
 import useUserStore from "src/stores/UseUserStore"
+import UseLoginStore from "src/stores/form/UseLoginStore"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -30,6 +31,7 @@ const index = () => {
     setPassword,
   } = UseCreateUserStore()
   const { loginUser } = useUserStore()
+  const { email: prevEmail } = UseLoginStore()
 
   const { error, request, loading } = UseFetch<Partial<IUserData>>()
   const navigate = useNavigate()
@@ -69,7 +71,7 @@ const index = () => {
           placeholder="exemplo@email.com"
           icon={<Letter />}
           label={"Email"}
-          value={email}
+          value={email || prevEmail}
           onChange={(e) => setEmail(e.target.value)}
           required
         />

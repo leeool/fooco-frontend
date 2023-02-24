@@ -21,7 +21,7 @@ import { Navigate, useNavigate } from "react-router-dom"
 import useUserStore from "src/stores/UseUserStore"
 
 const MainPage = () => {
-  const setEmail = UseLoginStore((state) => state.setEmail)
+  const { setEmail } = UseLoginStore()
   const navigate = useNavigate()
   const { isLoggedIn, loading } = useUserStore()
 
@@ -171,15 +171,7 @@ const MainPage = () => {
                   <>
                     O termo em inglês “open source” significa “código aberto” e
                     se refere ao código-fonte de um site ou aplicativo que pode
-                    ser compartilhado com outros usuários. Consulte a{" "}
-                    <a
-                      rel="noreferrer"
-                      target="_blank"
-                      href="https://pt.wikipedia.org/wiki/C%C3%B3digo_aberto"
-                    >
-                      Wikipédia
-                    </a>{" "}
-                    para mais informações.
+                    ser compartilhado com outros usuários.
                   </>
                 ),
               },
@@ -200,7 +192,7 @@ const MainPage = () => {
       <DecidiuContainer>
         <div>
           <Title as="h2" size="xl">
-            Eai, já se decidiu?
+            E então, já se decidiu?
           </Title>
           <Paragraph size="xl">Se junte a nossa comunidade agora</Paragraph>
         </div>
