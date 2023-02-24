@@ -12,6 +12,7 @@ import Error from "@components/Text/Error"
 import { USER_POST } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
 import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
+import useUserStore from "src/stores/UseUserStore"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -28,14 +29,13 @@ const index = () => {
     setEmail,
     setPassword,
   } = UseCreateUserStore()
+  const { loginUser } = useUserStore()
 
-  const { error, request, loading } = UseFetch()
+  const { error, request, loading } = UseFetch<Partial<IUserData>>()
   const navigate = useNavigate()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    // CRIAR HOOK PARA ERRO
 
     if (password !== confirmPassword) {
       alert("As senhas devem ser iguais")
@@ -43,15 +43,13 @@ const index = () => {
     }
 
     const username = email.split("@")[0]
-    console.log({ email, password, username })
 
-    // CRIAR HOOK PARA O FETCH
     const { url, options } = USER_POST(username, email, password)
-    const { response } = await request(url, options)
+    const { response, data } = await request(url, options)
 
-    if (response && response.status < 300) {
-      navigate("/entrar")
-      alert("Usuário criado com sucesso. Faça login.")
+    if (response && response.status < 300 && data) {
+      loginUser(email, password)
+      navigate("/")
     }
   }
 

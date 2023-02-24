@@ -23,7 +23,7 @@ import useUserStore from "src/stores/UseUserStore"
 const MainPage = () => {
   const setEmail = UseLoginStore((state) => state.setEmail)
   const navigate = useNavigate()
-  const { isLoggedIn } = useUserStore()
+  const { isLoggedIn, loading } = useUserStore()
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
@@ -34,6 +34,7 @@ const MainPage = () => {
     navigate("/entrar/criar")
   }
 
+  if (loading) return <div>Carregando...</div>
   if (isLoggedIn) return <Navigate to="/" replace />
   return (
     <Container>

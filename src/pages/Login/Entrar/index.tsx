@@ -9,9 +9,6 @@ import Button from "@components/Form/Button"
 import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import UseLoginStore from "src/stores/form/UseLoginStore"
-import Error from "@components/Text/Error"
-import UseFetch from "src/hooks/UseFetch"
-import { USER_LOGIN } from "src/api/apiCalls"
 import useUserStore from "src/stores/UseUserStore"
 
 const animateLeft = {
@@ -22,23 +19,15 @@ const animateLeft = {
 
 const index = () => {
   const { email, password, setEmail, setPassword } = UseLoginStore()
-  const navigate = useNavigate()
-  const { request, data, error, loading } = UseFetch<IUserLogin>()
-  const { autoLogin } = useUserStore()
+  const useNav = useNavigate()
+  const { loginUser, loading } = useUserStore()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (email && password) {
-      const { url, options } = USER_LOGIN(email, password)
-      const { response } = await request(url, options)
-
-      if (response && response.status < 300 && data) {
-        localStorage.setItem("token", data.token)
-        localStorage.setItem("id", data.user.id)
-        autoLogin()
-        navigate("/")
-      }
+      await loginUser(email, password)
+      useNav("/")
     }
   }
 
@@ -74,7 +63,6 @@ const index = () => {
         <Button variant="solid" icon={<Foquinho />} loading={loading}>
           Entrar
         </Button>
-        {error && <Error>{error}</Error>}
       </form>
 
       <p>
