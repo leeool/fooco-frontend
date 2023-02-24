@@ -38,5 +38,6 @@ export default createGlobalStyle`
 
   button {
     all: unset;
+    box-sizing: border-box;
   }
 `
