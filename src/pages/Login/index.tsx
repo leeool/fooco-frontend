@@ -9,7 +9,7 @@ import UseToastStore from "@components/Toast/UseToastStore"
 import useUserStore from "src/stores/UseUserStore"
 
 const index = () => {
-  const { toastMessage } = UseToastStore()
+  const { toastContent } = UseToastStore()
   const { isLoggedIn, loading } = useUserStore()
 
   if (loading) return <div>Carregando...</div>
@@ -26,10 +26,7 @@ const index = () => {
         <Outlet />
       </div>
       <span className="toast">
-        <Toast
-          title={"Foquinho está com problemas ):"}
-          description={toastMessage}
-        />
+        <Toast title={toastContent.title} description={toastContent.message} />
       </span>
     </Container>
   )

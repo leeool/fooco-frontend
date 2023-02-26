@@ -13,7 +13,7 @@ import { USER_POST } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
 import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
 import useUserStore from "src/stores/UseUserStore"
-import UseLoginStore from "src/stores/form/UseLoginStore"
+import UseToastStore from "@components/Toast/UseToastStore"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -40,7 +40,12 @@ const index = () => {
     e.preventDefault()
 
     if (password !== confirmPassword) {
-      alert("As senhas devem ser iguais")
+      setToastOpen()
+      setToastMessage(
+        "Verifique a senha",
+        "As senhas devem ser iguais. Tente novamente."
+      )
+
       return
     }
 
@@ -71,7 +76,7 @@ const index = () => {
           placeholder="exemplo@email.com"
           icon={<Letter />}
           label={"Email"}
-          value={email || prevEmail}
+          value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />

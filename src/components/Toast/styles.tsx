@@ -19,24 +19,14 @@ export const ViewPort = styled(Toast.Viewport)`
 
 export const Root = styled(Toast.Root)`
   background-color: ${({ theme }) => theme.backgroundColor.primary};
+  display: grid;
   padding: 1rem 1rem;
   border-radius: 10px;
-  display: grid;
-  grid-template-columns: 1fr auto;
   gap: 0.3rem;
   column-gap: 1rem;
   align-items: center;
   border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   max-width: 400px;
-
-  svg {
-    grid-row: 1 / 4;
-    grid-column: 2;
-    width: 5rem;
-    height: 4rem;
-    transform: scaleX(-1);
-  }
 
   &[data-state="open"] {
     animation: slideIn 500ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -142,11 +132,18 @@ export const Root = styled(Toast.Root)`
 
 export const Title = styled(Toast.Title)`
   font-size: 1.2rem;
-  grid-column: 1;
+  font-weight: 500;
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
 `
 
 export const Description = styled(Toast.Description)`
   font-size: 1rem;
   color: ${({ theme }) => theme.textColor.paragraph};
-  grid-column: 1;
+
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
+  }
 `

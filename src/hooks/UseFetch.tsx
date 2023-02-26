@@ -12,7 +12,7 @@ const UseFetch = <T,>() => {
   const [data, setData] = React.useState<T | null>(null)
   const [error, setError] = React.useState<null | string>(null)
   const [loading, setLoading] = React.useState<boolean>(false)
-  const { setToastOpen, setToastMessage } = UseToastStore()
+  const { setToastMessage } = UseToastStore()
 
   const request = React.useCallback(async (url: string, options: IOptions) => {
     let response = null
@@ -32,12 +32,13 @@ const UseFetch = <T,>() => {
         "data" in err.response &&
         "error" in err.response.data
       ) {
-        setToastOpen()
-        setToastMessage(err.response.data.error)
+        setToastMessage("Algo deu errado", err.response.data.error)
         console.log(err.response.data.error)
       } else if (err instanceof Error) {
-        setToastOpen()
-        setToastMessage("Erro ao conectar com o servidor")
+        setToastMessage(
+          "Erro ao conectar com o servidor",
+          "Foquinho está em ação!"
+        )
         error = null
       }
     } finally {
