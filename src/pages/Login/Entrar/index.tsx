@@ -8,10 +8,10 @@ import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
 import Button from "@components/Form/Button"
 import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
-import UseLoginStore from "src/stores/form/UseLoginStore"
 import useUserStore from "src/stores/UseUserStore"
 import UseFetch from "src/hooks/UseFetch"
 import { USER_LOGIN } from "src/api/apiCalls"
+import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -20,7 +20,7 @@ const animateLeft = {
 }
 
 const index = () => {
-  const { email, password, setEmail, setPassword } = UseLoginStore()
+  const { email, password, setEmail, setPassword } = UseCreateUserStore()
   const useNav = useNavigate()
   const { autoLogin } = useUserStore()
   const { loading, request } = UseFetch<IUserLogin | null>()

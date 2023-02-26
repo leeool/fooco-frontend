@@ -31,7 +31,7 @@ const index = () => {
     setPassword,
   } = UseCreateUserStore()
   const { loginUser } = useUserStore()
-  const { email: prevEmail } = UseLoginStore()
+  const { setToastOpen, setToastMessage } = UseToastStore()
 
   const { error, request, loading } = UseFetch<Partial<IUserData>>()
   const navigate = useNavigate()

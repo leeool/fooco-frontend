@@ -16,12 +16,12 @@ import { ReactComponent as Seta } from "@assets/icons/seta-direita.svg"
 import { ReactComponent as Globe } from "@assets/bar/globe.svg"
 import { ReactComponent as Lock } from "@assets/bar/lock.svg"
 import { Paragraph } from "@components/Text/Paragraph"
-import UseLoginStore from "src/stores/form/UseLoginStore"
 import { Navigate, useNavigate } from "react-router-dom"
 import useUserStore from "src/stores/UseUserStore"
+import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
 
 const MainPage = () => {
-  const { setEmail } = UseLoginStore()
+  const { setEmail } = UseCreateUserStore()
   const navigate = useNavigate()
   const { isLoggedIn, loading } = useUserStore()
 
