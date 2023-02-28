@@ -30,7 +30,7 @@ const light = {
     secondary: "#E63A23",
     tertiary: "#EFEFEF",
     details: "#B9B9B9",
-    alternativeState: "#e63a2322",
+    alternativeState: "#ff624e20",
   },
   textColor: {
     title: "#E63A23",
