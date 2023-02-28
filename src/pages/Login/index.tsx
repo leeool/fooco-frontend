@@ -4,15 +4,11 @@ import { Container } from "./styles"
 import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
 import { ReactComponent as Logo } from "@assets/logo.svg"
 import { Link } from "react-router-dom"
-import Toast from "@components/Toast"
-import UseToastStore from "@components/Toast/UseToastStore"
 import useUserStore from "src/stores/UseUserStore"
 
 const index = () => {
-  const { toastContent } = UseToastStore()
-  const { isLoggedIn, loading } = useUserStore()
+  const { isLoggedIn } = useUserStore()
 
-  if (loading) return <div>Carregando...</div>
   if (isLoggedIn) return <Navigate to="/" replace />
   return (
     <Container>
@@ -25,9 +21,6 @@ const index = () => {
         </Link>
         <Outlet />
       </div>
-      <span className="toast">
-        <Toast title={toastContent.title} description={toastContent.message} />
-      </span>
     </Container>
   )
 }

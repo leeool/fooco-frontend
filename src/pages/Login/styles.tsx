@@ -36,7 +36,7 @@ export const Container = styled.main`
 
   .outlet {
     align-self: center;
-    padding: 3.125rem;
+    padding: 3rem;
 
     .logo svg {
       position: absolute;
