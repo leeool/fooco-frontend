@@ -107,14 +107,17 @@ const index = () => {
       transition={{ type: "spring" }}
     >
       <Title size="xl">Faça parte da comunidade</Title>
-      <AnimatePresence>
+      <AnimatePresence mode="popLayout">
         {page === 1 ? (
           <motion.form
             variants={animateLeft}
-            initial="hidden"
-            animate="visible"
-            exit={{ opacity: 0 }}
-            transition={{ type: "spring" }}
+            key={"1"}
+            initial={{ x: "-2rem", opacity: 0 }}
+            animate={
+              page === 1 ? { x: "0", opacity: 1 } : { x: "-2rem", opacity: 0 }
+            }
+            exit={"hidden"}
+            transition={{ type: "spring", duration: 0.5 }}
             className="form"
             onSubmit={handleCreateUser}
           >
@@ -155,8 +158,11 @@ const index = () => {
         ) : (
           <motion.form
             variants={animateLeft}
-            initial="hidden"
-            animate="visible"
+            key={"2"}
+            initial={{ x: "-2rem", opacity: 0 }}
+            animate={
+              page === 2 ? { x: "0", opacity: 1 } : { x: "-2rem", opacity: 0 }
+            }
             exit={"hidden"}
             transition={{ type: "spring" }}
             className="form"
