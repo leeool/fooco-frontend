@@ -5,7 +5,7 @@ import { instance } from "src/api/apiCalls"
 interface IOptions {
   method: string
   params?: { [key: string]: string }
-  data?: { [key: string]: string }
+  data?: { [key: string]: string | undefined }
 }
 
 const UseFetch = <T,>() => {
@@ -14,7 +14,7 @@ const UseFetch = <T,>() => {
   const [loading, setLoading] = React.useState<boolean>(false)
   const { setToastMessage } = UseToastStore()
 
-  const request = React.useCallback(async (url: string, options: IOptions) => {
+  const request = async (url: string, options: IOptions) => {
     let response = null
     let error = null
     let data: T | null = null
@@ -22,8 +22,10 @@ const UseFetch = <T,>() => {
 
     try {
       setError(null)
+
       response = await instance(url, options)
       data = response.data
+
       if (response.status >= 300) throw new Error(response.request.data.error)
     } catch (err: any) {
       data = null
@@ -32,22 +34,23 @@ const UseFetch = <T,>() => {
         "data" in err.response &&
         "error" in err.response.data
       ) {
+        error = err.response.data.error
         setToastMessage("Algo deu errado", err.response.data.error)
         console.log(err.response.data.error)
       } else if (err instanceof Error) {
+        error = err.message
         setToastMessage(
           "Erro ao conectar com o servidor",
           "Foquinho está em ação!"
         )
-        error = null
       }
     } finally {
+      setError(error)
       setLoading(false)
       setData(data)
-      setError(error)
-      return { response, data }
+      return { response, data, error }
     }
-  }, [])
+  }
 
   return { data, error, loading, request }
 }
