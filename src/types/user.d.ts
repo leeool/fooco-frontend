@@ -21,3 +21,7 @@ interface IUserPosts {
   content: string
   created_at: string
 }
+
+interface IError {
+  error: string
+}
