@@ -1,10 +1,11 @@
 import React from "react"
 import Button from "../Button"
 import { Container } from "./style"
+import Input from "../Input"
 
 interface Props {
   label?: string
-  placeholder?: string
+  placeholder: string
   id: string
   icon: React.ReactNode
   button: React.ReactNode
@@ -28,12 +29,7 @@ const index = ({
       {label && <label htmlFor={id}>{label}</label>}
       <form className="wrapper">
         <div className="inputContainer">
-          <input
-            type="text"
-            id={id}
-            placeholder={placeholder}
-            onChange={onChange}
-          />
+          <input type="text" placeholder={placeholder} onChange={onChange} />
           <span className="icon">{icon}</span>
         </div>
         <Button variant="solid" icon={buttonIcon} onClick={onClick}>

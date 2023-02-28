@@ -9,6 +9,7 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   value?: string
   icon: React.ReactNode
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  props?: React.InputHTMLAttributes<HTMLInputElement>
 }
 
 const index = ({
@@ -19,6 +20,7 @@ const index = ({
   value,
   icon,
   onChange,
+  ...props
 }: Props) => {
   return (
     <InputContainer>
@@ -30,6 +32,7 @@ const index = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          {...props}
         />
         <span className="icon">{icon}</span>
       </div>

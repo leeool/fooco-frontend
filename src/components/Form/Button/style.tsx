@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { variant } from "styled-system"
 
 interface Props {
-  variant: string
+  variant: "outlined" | "solid" | "transparent"
 }
 
 export const ButtonContainer = styled.button<Props>`
@@ -10,7 +10,7 @@ export const ButtonContainer = styled.button<Props>`
   justify-content: space-between;
   border: none;
   cursor: pointer;
-  padding: 0rem 1rem;
+  padding: 0.4rem 1rem;
   min-height: 2.4rem;
   height: 100%;
   border-radius: 20px;
@@ -54,6 +54,17 @@ export const ButtonContainer = styled.button<Props>`
         "&:hover": {
           backgroundColor: "#ff6450",
           borderColor: "#ff6450",
+        },
+      },
+      transparent: {
+        backgroundColor: "transparent",
+        border: "transparent",
+        transition: "none",
+        color: "#E63A23",
+        "&:hover": {
+          color: "#ff6450",
+          backgroundColor: "transparent",
+          borderColor: "transparent",
         },
       },
     },

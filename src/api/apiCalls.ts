@@ -1,11 +1,18 @@
 import axios from "axios"
 
-const ENDPOINT = "https://fooco-backend.cyclic.app"
+interface IUserUpdate {
+  username?: string
+  email?: string
+  password?: string
+}
+
+const ENDPOINT = "https://fooco-backend.onrender.com"
 
 export const instance = axios.create({
   baseURL: ENDPOINT,
   headers: {
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
 })
 
@@ -40,13 +47,42 @@ export const USER_POST = (
   }
 }
 
-export const GET_USER = (token: string, id: string) => {
+export const GET_USER = (id: string) => {
   return {
     url: ENDPOINT + `/user/${id}`,
     options: {
       method: "GET",
+    },
+  }
+}
+
+export const USER_PUT = (
+  { username, email, password }: IUserUpdate,
+  id: string
+) => {
+  return {
+    url: ENDPOINT + "/user/" + id,
+    options: {
+      method: "PUT",
+      data: {
+        username: username,
+        email: email,
+        password: password,
+      },
       headers: {
-        Authorization: `Bearer ${token}`,
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    },
+  }
+}
+
+export const VALIDATE_TOKEN = (token: string) => {
+  return {
+    url: ENDPOINT + "/token",
+    options: {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${token}`,
       },
     },
   }

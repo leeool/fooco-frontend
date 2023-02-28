@@ -25,6 +25,7 @@ export const InputContainer = styled.div`
     padding: 0.4rem 0.8rem;
     background-color: ${({ theme }) => theme.backgroundColor.tertiary};
     z-index: 10;
+    border-radius: 0 20px 20px 0;
   }
 
   .input {
@@ -33,7 +34,6 @@ export const InputContainer = styled.div`
     display: flex;
     width: 100%;
     align-items: center;
-    overflow: hidden;
     border-radius: 20px;
 
     svg,
@@ -57,10 +57,13 @@ export const InputContainer = styled.div`
         opacity: 1;
       }
 
-      &:focus {
-        transition: none;
+      &:focus,
+      &:hover {
+        transition: 0.3s ease;
         background-color: ${({ theme }) =>
           theme.backgroundColor.alternativeState};
+        outline: 1px solid ${({ theme }) => theme.backgroundColor.secondary};
+        box-shadow: 0 0 0 4px #f3503a40;
       }
     }
   }

@@ -3,7 +3,7 @@ import { ButtonContainer } from "./style"
 
 interface IButtonProps {
   children: React.ReactNode
-  variant: string
+  variant: "outlined" | "solid" | "transparent"
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   icon?: React.ReactNode
   loading?: boolean

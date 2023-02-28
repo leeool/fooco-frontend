@@ -7,8 +7,16 @@ export const Container = styled.div`
     align-items: center;
     width: 100%;
     height: 3rem;
-    overflow: hidden;
     border-radius: 20px;
+
+    &:focus-within,
+    &:hover {
+      transition: 0.3s ease;
+      background-color: ${({ theme }) =>
+        theme.backgroundColor.alternativeState};
+      outline: 1px solid ${({ theme }) => theme.backgroundColor.secondary};
+      box-shadow: 0 0 0 4px #f3503a40;
+    }
 
     button {
       border-top-left-radius: 0;
@@ -29,14 +37,11 @@ export const Container = styled.div`
   }
 
   .inputContainer {
-    position: relative;
     display: flex;
+    align-items: center;
+    position: relative;
     height: 100%;
     width: 100%;
-    align-items: center;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    overflow: hidden;
 
     path {
       transition: stroke 300ms ease;
@@ -48,6 +53,7 @@ export const Container = styled.div`
     }
 
     input {
+      border-radius: 20px 0 0 20px;
       padding: 0.4rem 0.8rem;
       width: 100%;
       height: 100%;
@@ -57,12 +63,6 @@ export const Container = styled.div`
       &::placeholder {
         color: ${({ theme }) => theme.textColor.details};
         opacity: 1;
-      }
-
-      &:focus {
-        transition: none;
-        background-color: ${({ theme }) =>
-          theme.backgroundColor.alternativeState};
       }
     }
   }

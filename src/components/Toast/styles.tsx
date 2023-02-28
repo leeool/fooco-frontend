@@ -4,7 +4,7 @@ import * as Toast from "@radix-ui/react-toast"
 const viewportPadding = "1rem"
 
 export const ViewPort = styled(Toast.Viewport)`
-  position: absolute;
+  position: fixed;
   right: 0;
   bottom: 0;
   z-index: 9999;
