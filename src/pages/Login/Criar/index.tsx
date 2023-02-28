@@ -6,10 +6,10 @@ import { ReactComponent as Letter } from "@assets/icons/letter.svg"
 import { ReactComponent as Lock } from "@assets/icons/lock.svg"
 import Button from "@components/Form/Button"
 import { Link, useNavigate } from "react-router-dom"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
 import Error from "@components/Text/Error"
-import { USER_POST } from "src/api/apiCalls"
+import { USER_POST, USER_PUT } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
 import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
 import useUserStore from "src/stores/UseUserStore"
@@ -24,38 +24,76 @@ const animateLeft = {
 const index = () => {
   const {
     email,
+    username,
     password,
     confirmPassword,
     setConfirmPassword,
     setEmail,
+    setUsername,
     setPassword,
   } = UseCreateUserStore()
-  const { loginUser } = useUserStore()
-  const { setToastOpen, setToastMessage } = UseToastStore()
-
-  const { error, request, loading } = UseFetch<Partial<IUserData>>()
+  const { loginUser, setIsUserLoggedIn } = useUserStore()
+  const { setToastMessage } = UseToastStore()
+  const { error, request, loading, data } = UseFetch<IUserData>()
   const navigate = useNavigate()
+  const [page, setPage] = React.useState<number>(1)
+  const [userId, setUserId] = React.useState<string | null>(null)
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleCreateUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (password !== confirmPassword) {
-      setToastOpen()
-      setToastMessage(
+      return setToastMessage(
         "Verifique a senha",
         "As senhas devem ser iguais. Tente novamente."
       )
-
-      return
     }
 
-    const username = email.split("@")[0]
+    const userProv = email.split("@")[0] + Math.floor(Math.random() * 100)
 
-    const { url, options } = USER_POST(username, email, password)
-    const { response, data } = await request(url, options)
+    const { url: urlCreateUser, options: optionsCreateUser } = USER_POST(
+      userProv,
+      email,
+      password
+    )
+    const { data: createUserData, error: createUserError } = await request(
+      urlCreateUser,
+      optionsCreateUser
+    )
 
-    if (response && response.status < 300 && data) {
-      loginUser(email, password)
+    if (createUserError || !createUserData) return
+
+    setUserId(createUserData.id)
+    await loginUser(email, password)
+
+    return setPage(2)
+  }
+
+  const handleUpdateUser = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!userId) return
+    console.log("TESTE")
+
+    const { options: optionsUpdateUser, url: urlUpdateUser } = USER_PUT(
+      { username },
+      userId
+    )
+
+    const {
+      data: updateUserData,
+      error: updateUserError,
+      response: updateUserResponse,
+    } = await request(urlUpdateUser, optionsUpdateUser)
+
+    if (updateUserError) return
+
+    if (
+      updateUserResponse &&
+      updateUserResponse.status < 300 &&
+      updateUserData
+    ) {
+      setIsUserLoggedIn(true)
+      setToastMessage(`Bem-vindo(a) ${username}!`, "Usuário criado com sucesso")
       navigate("/")
     }
   }
@@ -69,42 +107,79 @@ const index = () => {
       transition={{ type: "spring" }}
     >
       <Title size="xl">Faça parte da comunidade</Title>
-      <form className="form" onSubmit={handleSubmit}>
-        <Input
-          id="email"
-          type="email"
-          placeholder="exemplo@email.com"
-          icon={<Letter />}
-          label={"Email"}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <Input
-          id="senha"
-          type="password"
-          placeholder="******"
-          icon={<Lock />}
-          label={"Senha secreta"}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <Input
-          id="confirma"
-          type="password"
-          placeholder="******"
-          icon={<Lock />}
-          label={"Confirme sua senha"}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <Button variant="solid" icon={<Foquinho />} loading={loading}>
-          Criar Conta
-        </Button>
-        <Error>{error}</Error>
-      </form>
+      <AnimatePresence>
+        {page === 1 ? (
+          <motion.form
+            variants={animateLeft}
+            initial="hidden"
+            animate="visible"
+            exit={{ opacity: 0 }}
+            transition={{ type: "spring" }}
+            className="form"
+            onSubmit={handleCreateUser}
+          >
+            <Input
+              id="email"
+              type="email"
+              placeholder="exemplo@email.com"
+              icon={<Letter />}
+              label={"Email"}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <Input
+              id="senha"
+              type="password"
+              placeholder="******"
+              icon={<Lock />}
+              label={"Senha secreta"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <Input
+              id="confirma"
+              type="password"
+              placeholder="******"
+              icon={<Lock />}
+              label={"Confirme sua senha"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            <Button variant="solid" icon={<Foquinho />} loading={loading}>
+              Avançar
+            </Button>
+          </motion.form>
+        ) : (
+          <motion.form
+            variants={animateLeft}
+            initial="hidden"
+            animate="visible"
+            exit={"hidden"}
+            transition={{ type: "spring" }}
+            className="form"
+            onSubmit={handleUpdateUser}
+          >
+            <Input
+              id="username"
+              type="text"
+              placeholder={email.split("@")[0]}
+              icon={<Letter />}
+              label={"Crie seu apelido"}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+
+            <Button variant="solid" icon={<Foquinho />} loading={loading}>
+              Criar Conta
+            </Button>
+          </motion.form>
+        )}
+      </AnimatePresence>
+      <Error>{error}</Error>
 
       <p>
         Já tem uma conta?{" "}

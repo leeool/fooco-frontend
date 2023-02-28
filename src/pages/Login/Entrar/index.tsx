@@ -22,7 +22,7 @@ const animateLeft = {
 const index = () => {
   const { email, password, setEmail, setPassword } = UseCreateUserStore()
   const useNav = useNavigate()
-  const { autoLogin } = useUserStore()
+  const { getUserWToken } = useUserStore()
   const { loading, request } = UseFetch<IUserLogin | null>()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +36,7 @@ const index = () => {
     if (response && response.status < 400) {
       localStorage.setItem("token", response.data.token)
       localStorage.setItem("id", response.data.user.id)
-      await autoLogin()
+      await getUserWToken()
       useNav("/")
     }
   }
@@ -69,6 +69,7 @@ const index = () => {
           label={"Senha secreta"}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
         <Button variant="solid" icon={<Foquinho />} loading={loading}>
           Entrar
