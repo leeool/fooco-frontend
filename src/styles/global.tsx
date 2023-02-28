@@ -44,4 +44,30 @@ export default createGlobalStyle`
     all: unset;
     box-sizing: border-box;
   }
+
+  * {
+  scrollbar-width: auto;
+  scrollbar-color:  ${({ theme }) => theme.backgroundColor.secondary}  ${({
+  theme,
+}) => theme.backgroundColor.tertiary};
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: ${({ theme }) => theme.backgroundColor.tertiary};
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: ${({ theme }) => theme.backgroundColor.tertiary};
+  border-radius: 20px;
+  border: 5px solid ${({ theme }) => theme.backgroundColor.secondary};
+}
+
+*::-webkit-scrollbar-button {
+  display: none;
+}
 `

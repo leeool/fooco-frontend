@@ -75,7 +75,6 @@ export const BarContainer = styled.section`
     gap: 1rem;
     justify-content: space-around;
     max-width: 31rem;
-    overflow-x: scroll;
 
     li {
       flex: 1;
