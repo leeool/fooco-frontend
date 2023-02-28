@@ -1,11 +1,11 @@
 import styled from "styled-components"
 
 export const Container = styled.div`
-  width: 31rem;
+  max-width: 31rem;
+  width: 100%;
 
-  @media (max-width: 1100px) {
-    width: fit-content;
-    justify-self: start;
+  @media (max-width: 1000px) {
+    max-width: 100%;
   }
 `
 
@@ -18,6 +18,7 @@ export const SearchContainer = styled.div`
     width: 1.5rem;
     right: 0.5rem;
     top: 0.5rem;
+    stroke: ${({ theme }) => theme.textColor.title};
   }
 
   input {
@@ -30,9 +31,19 @@ export const SearchContainer = styled.div`
     background-color: ${({ theme }) => theme.backgroundColor.primary};
     color: ${({ theme }) => theme.textColor.subtitle};
     transition: background-color 0.3s ease-in-out;
+    box-shadow: 0 0 0 0px #f3503a40;
 
     &::placeholder {
       color: ${({ theme }) => theme.textColor.details};
+    }
+
+    &:hover,
+    &:focus {
+      transition: 0.3s ease;
+      background-color: ${({ theme }) =>
+        theme.backgroundColor.alternativeState};
+      outline: 1px solid ${({ theme }) => theme.backgroundColor.secondary};
+      box-shadow: 0 0 0 3px #f3503a40;
     }
   }
 `
