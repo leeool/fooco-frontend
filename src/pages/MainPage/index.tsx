@@ -19,8 +19,18 @@ import { Paragraph } from "@components/Text/Paragraph"
 import { Navigate, useNavigate } from "react-router-dom"
 import useUserStore from "src/stores/UseUserStore"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
+import {
+  motion,
+  useInView,
+  useScroll,
+  useMotionValueEvent,
+} from "framer-motion"
+import { animateLeft, animateRight } from "src/helpers/animations"
 
 const MainPage = () => {
+  const list = React.useRef(null)
+  const { scrollYProgress } = useScroll({ target: list })
+  const isInView = useInView(list)
   const { setEmail } = UseCreateUserStore()
   const navigate = useNavigate()
   const { isLoggedIn, loading } = useUserStore()
@@ -34,12 +44,22 @@ const MainPage = () => {
     navigate("/entrar/criar")
   }
 
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    console.log(latest)
+  })
+
   if (loading) return <div>Carregando...</div>
   if (isLoggedIn) return <Navigate to="/" replace />
   return (
     <Container>
       <InicioContainer>
-        <div className="fazerParte">
+        <motion.div
+          className="fazerParte"
+          variants={animateLeft}
+          initial="hidden"
+          animate="visible"
+          transition={{ ...animateLeft.transition }}
+        >
           <Title size="2xl">Faça parte dessa comunidade</Title>
           <Paragraph size="2xl">
             Entre em grupos, faça amizades e adquira pontos. Tudo isso enquanto
@@ -55,10 +75,16 @@ const MainPage = () => {
             onChange={handleEmail}
             onClick={handleClick}
           />
-        </div>
-        <div className="icone">
+        </motion.div>
+        <motion.div
+          variants={animateRight}
+          initial="hidden"
+          animate="visible"
+          transition={{ ...animateRight.transition }}
+          className="icone"
+        >
           <Foquinho />
-        </div>
+        </motion.div>
       </InicioContainer>
       <BarContainer>
         <ul className="list">
@@ -105,28 +131,49 @@ const MainPage = () => {
             Veja como você pode entrar de cabeça do jeito certo nessa jornada!
           </Paragraph>
         </div>
-        <ul className="list">
-          <div className="list-1">
-            <li>
+        <div className="list">
+          <ul className="list-1" ref={list}>
+            <motion.li
+              initial={{ opacity: 0, x: "-5rem" }}
+              transition={{ type: "spring", duration: 2 }}
+              whileInView={{
+                opacity: 1,
+                x: `${scrollYProgress.get() * 5}rem`,
+              }}
+            >
               <h3>Crie uma conta</h3>
               <p>Leva menos de 5 minutinhos!</p>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li
+              initial={{ opacity: 0, x: "-5rem" }}
+              transition={{ type: "spring", duration: 1.5, bounce: 0.25 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
               <h3>Personalize seu perfil</h3>
               <p>
                 Na plataforma Fooco, você pode personalizar tudo do seu jeito.
               </p>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li
+              initial={{ opacity: 0, x: "-5rem" }}
+              transition={{ type: "spring", duration: 1.5, bounce: 0.25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
               <h3>Faça novas amizades</h3>
               <p>Ou encontre suas amizades da escola.</p>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li
+              initial={{ opacity: 0, x: "-5rem" }}
+              transition={{ type: "spring", duration: 1.5, bounce: 0.25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+            >
               <h3>Ganhe pontos e prêmios</h3>
               <p>Mostre que você é um grande ancião da comunidade.</p>
-            </li>
-          </div>
-          <div className="list-2">
+            </motion.li>
+          </ul>
+          <ul className="list-2">
             <li>
               <h3>Respeito acima de tudo</h3>
               <p>Não seja um bobo! Contribua para um lugar prazeroso.</p>
@@ -145,8 +192,8 @@ const MainPage = () => {
                 Crie um ambiente confortável para compartilhar conhecimento.
               </p>
             </li>
-          </div>
-        </ul>
+          </ul>
+        </div>
       </ComecarContainer>
       <DuvidaContainer>
         <Title as="h2" size="xl">

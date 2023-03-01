@@ -21,6 +21,7 @@ const useUserStore = create<IUser>((set, get) => ({
   setIsUserLoggedIn: (isLoggedIn: boolean) => set({ isLoggedIn }),
   loginUser: async (email: string, password: string) => {
     try {
+      set({ loading: true })
       const { url, options } = USER_LOGIN(email, password)
       const response = await instance<IUserLogin | { error: string }>(
         url,
@@ -37,6 +38,8 @@ const useUserStore = create<IUser>((set, get) => ({
       if (error instanceof Error) {
         console.error(error)
       }
+    } finally {
+      set({ loading: false })
     }
   },
   getUserWToken: async () => {

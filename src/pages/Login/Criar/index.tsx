@@ -32,9 +32,9 @@ const index = () => {
     setUsername,
     setPassword,
   } = UseCreateUserStore()
-  const { loginUser, setIsUserLoggedIn } = useUserStore()
+  const { loginUser, setIsUserLoggedIn, loading: loginLoading } = useUserStore()
   const { setToastMessage } = UseToastStore()
-  const { error, request, loading, data } = UseFetch<IUserData>()
+  const { error, request, loading } = UseFetch<IUserData>()
   const navigate = useNavigate()
   const [page, setPage] = React.useState<number>(1)
   const [userId, setUserId] = React.useState<string | null>(null)
@@ -179,7 +179,11 @@ const index = () => {
               required
             />
 
-            <Button variant="solid" icon={<Foquinho />} loading={loading}>
+            <Button
+              variant="solid"
+              icon={<Foquinho />}
+              loading={loading || loginLoading}
+            >
               Criar Conta
             </Button>
           </motion.form>
