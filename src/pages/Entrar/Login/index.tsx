@@ -28,8 +28,6 @@ const index = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (!email && !password) return null
-
     const { options, url } = USER_LOGIN(email, password)
     const { response } = await request(url, options)
 

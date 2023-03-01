@@ -21,32 +21,40 @@ import useUserStore from "src/stores/UseUserStore"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
 import {
   motion,
-  useInView,
   useScroll,
   useMotionValueEvent,
+  useTransform,
+  useSpring,
 } from "framer-motion"
 import { animateLeft, animateRight } from "src/helpers/animations"
 
 const MainPage = () => {
-  const list = React.useRef(null)
-  const { scrollYProgress } = useScroll({ target: list })
-  const isInView = useInView(list)
   const { setEmail } = UseCreateUserStore()
   const navigate = useNavigate()
   const { isLoggedIn, loading } = useUserStore()
+
+  const list = React.useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: list,
+    offset: ["start end", "end start"],
+  })
+  const xr = useTransform(scrollYProgress, [0, 0.2], [-250, 0])
+  const xrSpring = useSpring(xr, { stiffness: 500, damping: 100 })
+  const xl = useTransform(scrollYProgress, [0, 0.4], [250, 0])
+  const xlSpring = useSpring(xl, { stiffness: 500, damping: 100 })
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }
 
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    console.log(latest)
+  })
+
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     navigate("/entrar/criar")
   }
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    console.log(latest)
-  })
 
   if (loading) return <div>Carregando...</div>
   if (isLoggedIn) return <Navigate to="/" replace />
@@ -58,7 +66,7 @@ const MainPage = () => {
           variants={animateLeft}
           initial="hidden"
           animate="visible"
-          transition={{ ...animateLeft.transition }}
+          transition={{ ...animateLeft.visible.transition }}
         >
           <Title size="2xl">Faça parte dessa comunidade</Title>
           <Paragraph size="2xl">
@@ -80,7 +88,7 @@ const MainPage = () => {
           variants={animateRight}
           initial="hidden"
           animate="visible"
-          transition={{ ...animateRight.transition }}
+          transition={{ ...animateRight.visible.transition }}
           className="icone"
         >
           <Foquinho />
@@ -103,7 +111,6 @@ const MainPage = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
@@ -131,23 +138,24 @@ const MainPage = () => {
             Veja como você pode entrar de cabeça do jeito certo nessa jornada!
           </Paragraph>
         </div>
-        <div className="list">
-          <ul className="list-1" ref={list}>
+        <div className="list" ref={list}>
+          <ul className="list-1">
             <motion.li
-              initial={{ opacity: 0, x: "-5rem" }}
-              transition={{ type: "spring", duration: 2 }}
-              whileInView={{
-                opacity: 1,
-                x: `${scrollYProgress.get() * 5}rem`,
-              }}
+              variants={animateLeft}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ...animateLeft.visible.transition }}
+              viewport={{ ...animateLeft.visible.viewport }}
             >
               <h3>Crie uma conta</h3>
               <p>Leva menos de 5 minutinhos!</p>
             </motion.li>
             <motion.li
-              initial={{ opacity: 0, x: "-5rem" }}
-              transition={{ type: "spring", duration: 1.5, bounce: 0.25 }}
-              animate={{ opacity: 1, x: 0 }}
+              variants={animateLeft}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ...animateLeft.visible.transition }}
+              viewport={{ ...animateLeft.visible.viewport }}
             >
               <h3>Personalize seu perfil</h3>
               <p>
@@ -155,43 +163,69 @@ const MainPage = () => {
               </p>
             </motion.li>
             <motion.li
-              initial={{ opacity: 0, x: "-5rem" }}
-              transition={{ type: "spring", duration: 1.5, bounce: 0.25 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              variants={animateLeft}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ...animateLeft.visible.transition }}
+              viewport={{ ...animateLeft.visible.viewport }}
             >
               <h3>Faça novas amizades</h3>
               <p>Ou encontre suas amizades da escola.</p>
             </motion.li>
             <motion.li
-              initial={{ opacity: 0, x: "-5rem" }}
-              transition={{ type: "spring", duration: 1.5, bounce: 0.25 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              variants={animateLeft}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ...animateLeft.visible.transition }}
+              viewport={{ ...animateLeft.visible.viewport }}
             >
               <h3>Ganhe pontos e prêmios</h3>
               <p>Mostre que você é um grande ancião da comunidade.</p>
             </motion.li>
           </ul>
           <ul className="list-2">
-            <li>
+            <motion.li
+              variants={animateRight}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ...animateRight.visible.transition }}
+              viewport={{ ...animateRight.visible.viewport }}
+            >
               <h3>Respeito acima de tudo</h3>
               <p>Não seja um bobo! Contribua para um lugar prazeroso.</p>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li
+              variants={animateRight}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ...animateRight.visible.transition }}
+              viewport={{ ...animateRight.visible.viewport }}
+            >
               <h3>Diga não ao bullying</h3>
               <p>É possível denunciar usuários mal intencinados.</p>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li
+              variants={animateRight}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ...animateRight.visible.transition }}
+              viewport={{ ...animateRight.visible.viewport }}
+            >
               <h3>Não compartilhe qualquer informação</h3>
               <p>Evite compartilhar dados pessoais com desconhecidos</p>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li
+              variants={animateRight}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ ...animateRight.visible.transition }}
+              viewport={{ ...animateRight.visible.viewport }}
+            >
               <h3>Interaja com a comunidade</h3>
               <p>
                 Crie um ambiente confortável para compartilhar conhecimento.
               </p>
-            </li>
+            </motion.li>
           </ul>
         </div>
       </ComecarContainer>

@@ -1,10 +1,10 @@
 import { createBrowserRouter } from "react-router-dom"
 import MainPage from "./pages/MainPage"
-import Login from "./pages/Login"
+import Login from "./pages/Entrar"
 import React from "react"
 import Layout from "./Layout"
-import Entrar from "./pages/Login/Entrar"
-import Criar from "./pages/Login/Criar"
+import Entrar from "./pages/Entrar/Login"
+import Criar from "./pages/Entrar/Criar"
 import Dashboard from "./pages/Dashboard"
 
 const router = createBrowserRouter([
