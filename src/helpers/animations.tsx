@@ -5,11 +5,11 @@ const animateLeft = {
     opacity: 1,
     transition: {
       staggerChildren: 1,
-      stiffness: 500,
+      stiffness: 1000,
       damping: 200,
       duration: 0.8,
     },
-    viewport: { once: true, amount: 0.1 },
+    viewport: { once: false, amount: 0.1 },
   },
 }
 
@@ -20,12 +20,12 @@ const animateRight = {
     opacity: 1,
     transition: {
       staggerChildren: 1,
-      stiffness: 300,
-      damping: 100,
+      stiffness: 1000,
+      damping: 200,
       bounce: 0.8,
       duration: 0.8,
     },
-    viewport: { once: true, amount: 0.1 },
+    viewport: { once: false, amount: 0.1 },
   },
 }
 

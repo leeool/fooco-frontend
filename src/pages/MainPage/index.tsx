@@ -33,23 +33,9 @@ const MainPage = () => {
   const navigate = useNavigate()
   const { isLoggedIn, loading } = useUserStore()
 
-  const list = React.useRef(null)
-  const { scrollYProgress } = useScroll({
-    target: list,
-    offset: ["start end", "end start"],
-  })
-  const xr = useTransform(scrollYProgress, [0, 0.2], [-250, 0])
-  const xrSpring = useSpring(xr, { stiffness: 500, damping: 100 })
-  const xl = useTransform(scrollYProgress, [0, 0.4], [250, 0])
-  const xlSpring = useSpring(xl, { stiffness: 500, damping: 100 })
-
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    console.log(latest)
-  })
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -138,7 +124,7 @@ const MainPage = () => {
             Veja como você pode entrar de cabeça do jeito certo nessa jornada!
           </Paragraph>
         </div>
-        <div className="list" ref={list}>
+        <div className="list">
           <ul className="list-1">
             <motion.li
               variants={animateLeft}
