@@ -14,6 +14,9 @@ import UseFetch from "src/hooks/UseFetch"
 import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
 import useUserStore from "src/stores/UseUserStore"
 import UseToastStore from "@components/Toast/UseToastStore"
+import { Controller, useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { createUserSchema } from "src/schemas"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -22,56 +25,51 @@ const animateLeft = {
 }
 
 const index = () => {
-  const {
-    email,
-    username,
-    password,
-    confirmPassword,
-    setConfirmPassword,
-    setEmail,
-    setUsername,
-    setPassword,
-  } = UseCreateUserStore()
-  const { loginUser, setIsUserLoggedIn } = useUserStore()
-  const { setToastMessage } = UseToastStore()
-  const { error, request, loading } = UseFetch<IUserData>()
-  const navigate = useNavigate()
+  const { email, password } = UseCreateUserStore()
+  const { request, loading } = UseFetch<IUserData>()
   const [page, setPage] = React.useState<number>(1)
   const [userId, setUserId] = React.useState<string | null>(null)
 
-  const handleCreateUser = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const { loginUser, setIsUserLoggedIn } = useUserStore()
+  const { setToastMessage } = UseToastStore()
+  const navigate = useNavigate()
 
-    if (password !== confirmPassword) {
-      return setToastMessage(
-        "Verifique a senha",
-        "As senhas devem ser iguais. Tente novamente."
+  const { handleSubmit, control } = useForm<User>({
+    resolver: zodResolver(createUserSchema.omit({ username: true })),
+    mode: "onBlur" || "onSubmit" || "onTouched",
+  })
+
+  const { handleSubmit: handleSubmitUser, control: controlUser } =
+    useForm<User>({
+      resolver: zodResolver(createUserSchema.pick({ username: true })),
+      mode: "onBlur" || "onSubmit" || "onTouched",
+    })
+
+  const handleCreateUser = handleSubmit(
+    async ({ email, pass: { password } }) => {
+      const userProv = email.split("@")[0] + Math.floor(Math.random() * 100)
+
+      const { url: urlCreateUser, options: optionsCreateUser } = USER_POST(
+        userProv,
+        email,
+        password
       )
+      const { data: createUserData, error: createUserError } = await request(
+        urlCreateUser,
+        optionsCreateUser
+      )
+
+      if (createUserError || !createUserData) return
+
+      setUserId(createUserData.id)
+      await loginUser(email, password)
+
+      setPage(2)
+      return
     }
+  )
 
-    const userProv = email.split("@")[0] + Math.floor(Math.random() * 100)
-
-    const { url: urlCreateUser, options: optionsCreateUser } = USER_POST(
-      userProv,
-      email,
-      password
-    )
-    const { data: createUserData, error: createUserError } = await request(
-      urlCreateUser,
-      optionsCreateUser
-    )
-
-    if (createUserError || !createUserData) return
-
-    setUserId(createUserData.id)
-    await loginUser(email, password)
-
-    return setPage(2)
-  }
-
-  const handleUpdateUser = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-
+  const handleUpdateUser = handleSubmitUser(async ({ username }) => {
     if (!userId) return
 
     const { options: optionsUpdateUser, url: urlUpdateUser } = USER_PUT(
@@ -89,8 +87,7 @@ const index = () => {
       setToastMessage(`Bem-vindo(a) ${username}!`, "Usuário criado com sucesso")
       navigate("/")
     }
-  }
-
+  })
   return (
     <Container
       as={motion.div}
@@ -114,36 +111,74 @@ const index = () => {
             className="form"
             onSubmit={handleCreateUser}
           >
-            <Input
-              id="email"
-              type="email"
-              placeholder="exemplo@email.com"
-              icon={<Letter />}
-              label={"Email"}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
+            <Controller
+              control={control}
+              name="email"
+              defaultValue={email}
+              render={({
+                field: { onChange, value, ref, onBlur },
+                fieldState,
+              }) => (
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="exemplo@email.com"
+                  icon={<Letter />}
+                  label={"Email"}
+                  value={value}
+                  onChange={onChange}
+                  innerRef={ref}
+                  fieldState={fieldState}
+                  onBlur={onBlur}
+                />
+              )}
             />
-            <Input
-              id="senha"
-              type="password"
-              placeholder="******"
-              icon={<Lock />}
-              label={"Senha secreta"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
+            <Controller
+              control={control}
+              name="pass.password"
+              defaultValue={password}
+              render={({
+                field: { onChange, value, ref, onBlur },
+                fieldState,
+              }) => (
+                <Input
+                  id="senha"
+                  type="password"
+                  placeholder="******"
+                  icon={<Lock />}
+                  label={"Senha secreta"}
+                  value={value}
+                  onChange={onChange}
+                  innerRef={ref}
+                  fieldState={fieldState}
+                  onBlur={onBlur}
+                />
+              )}
             />
-            <Input
-              id="confirma"
-              type="password"
-              placeholder="******"
-              icon={<Lock />}
-              label={"Confirme sua senha"}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
+
+            <Controller
+              control={control}
+              name="pass.confirmPassword"
+              defaultValue=""
+              render={({
+                field: { onChange, value, ref, onBlur },
+                fieldState,
+              }) => (
+                <Input
+                  id="confirma"
+                  type="password"
+                  placeholder="******"
+                  icon={<Lock />}
+                  label={"Confirme sua senha"}
+                  value={value}
+                  onChange={onChange}
+                  innerRef={ref}
+                  fieldState={fieldState}
+                  onBlur={onBlur}
+                />
+              )}
             />
+
             <Button variant="solid" icon={<Foquinho />} loading={loading}>
               Avançar
             </Button>
@@ -161,15 +196,27 @@ const index = () => {
             className="form"
             onSubmit={handleUpdateUser}
           >
-            <Input
-              id="username"
-              type="text"
-              placeholder={email.split("@")[0]}
-              icon={<Letter />}
-              label={"Crie seu apelido"}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
+            <Controller
+              control={controlUser}
+              name="username"
+              defaultValue=""
+              render={({
+                field: { onChange, value, ref, onBlur },
+                fieldState,
+              }) => (
+                <Input
+                  id="username"
+                  type="text"
+                  placeholder={email.split("@")[0]}
+                  icon={<Letter />}
+                  label={"Crie seu apelido"}
+                  value={value}
+                  onChange={onChange}
+                  innerRef={ref}
+                  fieldState={fieldState}
+                  onBlur={onBlur}
+                />
+              )}
             />
 
             <Button variant="solid" icon={<Foquinho />} loading={loading}>
@@ -178,7 +225,6 @@ const index = () => {
           </motion.form>
         )}
       </AnimatePresence>
-      <Error>{error}</Error>
 
       <p>
         Já tem uma conta?{" "}

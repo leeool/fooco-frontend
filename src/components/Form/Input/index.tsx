@@ -1,4 +1,5 @@
-import React, { InputHTMLAttributes } from "react"
+import React from "react"
+import { ControllerFieldState, FieldError } from "react-hook-form"
 import { InputContainer } from "./style"
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -8,34 +9,28 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   placeholder: string
   value?: string
   icon: React.ReactNode
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   props?: React.InputHTMLAttributes<HTMLInputElement>
+  innerRef?: React.Ref<HTMLInputElement>
+  fieldState?: ControllerFieldState
 }
 
 const index = ({
   id,
-  type,
   label,
   placeholder,
-  value,
   icon,
-  onChange,
+  innerRef,
+  fieldState,
   ...props
 }: Props) => {
   return (
     <InputContainer>
       <label htmlFor={id}>{label}</label>
       <div className="input">
-        <input
-          type={type}
-          id={id}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          {...props}
-        />
+        <input id={id} placeholder={placeholder} ref={innerRef} {...props} />
         <span className="icon">{icon}</span>
       </div>
+      <p>{fieldState && fieldState.error?.message}</p>
     </InputContainer>
   )
 }
