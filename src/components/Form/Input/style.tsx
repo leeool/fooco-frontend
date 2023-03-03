@@ -3,8 +3,9 @@ import styled from "styled-components"
 export const InputContainer = styled.div`
   max-width: 100%;
   max-height: 100%;
+  position: relative;
 
-  input:focus ~ span path {
+  &:focus-within span path {
     stroke: ${({ theme }) => theme.backgroundColor.secondary};
   }
 
@@ -65,6 +66,16 @@ export const InputContainer = styled.div`
         outline: 1px solid ${({ theme }) => theme.backgroundColor.secondary};
         box-shadow: 0 0 0 4px #f3503a40;
       }
+    }
+  }
+
+  &[data-invalid="true"] {
+    input {
+      background-color: #ffae0044;
+    }
+    svg,
+    path {
+      stroke: #ffae00;
     }
   }
 `

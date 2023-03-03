@@ -1,6 +1,7 @@
 import React from "react"
-import { ControllerFieldState, FieldError } from "react-hook-form"
+import { ControllerFieldState } from "react-hook-form"
 import { InputContainer } from "./style"
+import Error from "@components/Text/Error"
 
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   id: string
@@ -24,13 +25,13 @@ const index = ({
   ...props
 }: Props) => {
   return (
-    <InputContainer>
+    <InputContainer data-invalid={fieldState?.invalid}>
       <label htmlFor={id}>{label}</label>
       <div className="input">
         <input id={id} placeholder={placeholder} ref={innerRef} {...props} />
         <span className="icon">{icon}</span>
       </div>
-      <p>{fieldState && fieldState.error?.message}</p>
+      <Error>{fieldState && fieldState.error?.message}</Error>
     </InputContainer>
   )
 }
