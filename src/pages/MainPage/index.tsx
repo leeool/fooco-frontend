@@ -19,13 +19,7 @@ import { Paragraph } from "@components/Text/Paragraph"
 import { Navigate, useNavigate } from "react-router-dom"
 import useUserStore from "src/stores/UseUserStore"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
-import {
-  motion,
-  useScroll,
-  useMotionValueEvent,
-  useTransform,
-  useSpring,
-} from "framer-motion"
+import { motion } from "framer-motion"
 import { animateLeft, animateRight } from "src/helpers/animations"
 
 const MainPage = () => {

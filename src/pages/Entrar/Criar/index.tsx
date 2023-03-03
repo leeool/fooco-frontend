@@ -8,7 +8,6 @@ import Button from "@components/Form/Button"
 import { Link, useNavigate } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
-import Error from "@components/Text/Error"
 import { USER_POST, USER_PUT } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
 import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
@@ -21,7 +20,7 @@ import { createUserSchema } from "src/schemas"
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
   visible: { x: "0", opacity: 1 },
-  transition: { type: "spring" },
+  transition: { type: "spring", duration: 1 },
 }
 
 const index = () => {
@@ -94,7 +93,7 @@ const index = () => {
       variants={animateLeft}
       initial="hidden"
       animate="visible"
-      transition={{ type: "spring" }}
+      transition={animateLeft.transition}
     >
       <Title size="xl">Faça parte da comunidade</Title>
       <AnimatePresence mode="popLayout">
@@ -102,12 +101,8 @@ const index = () => {
           <motion.form
             variants={animateLeft}
             key={"1"}
-            initial={{ x: "-2rem", opacity: 0 }}
-            animate={
-              page === 1 ? { x: "0", opacity: 1 } : { x: "-2rem", opacity: 0 }
-            }
-            exit={"hidden"}
-            transition={{ type: "spring", duration: 0.5 }}
+            initial={"initial"}
+            transition={animateLeft.transition}
             className="form"
             onSubmit={handleCreateUser}
           >
@@ -187,12 +182,8 @@ const index = () => {
           <motion.form
             variants={animateLeft}
             key={"2"}
-            initial={{ x: "-2rem", opacity: 0 }}
-            animate={
-              page === 2 ? { x: "0", opacity: 1 } : { x: "-2rem", opacity: 0 }
-            }
-            exit={"hidden"}
-            transition={{ type: "spring" }}
+            initial={"initial"}
+            transition={animateLeft.transition}
             className="form"
             onSubmit={handleUpdateUser}
           >

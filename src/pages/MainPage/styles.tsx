@@ -128,6 +128,7 @@ export const ComecarContainer = styled.section`
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
     justify-content: center;
+    overflow: hidden;
   }
 
   .list::before {
