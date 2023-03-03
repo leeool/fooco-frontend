@@ -2,6 +2,9 @@ import z from "zod"
 
 const usernameRegex = /^[a-zA-Z0-9]{4,20}$/
 
+const passwordRegex =
+  /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$!%*?&]?)[A-Za-z\d@$#!%*?&]{8,}$/
+
 export const createUserSchema = z
   .object({
     username: z
@@ -19,7 +22,12 @@ export const createUserSchema = z
         password: z
           .string()
           .trim()
-          .min(8, "A senha deve ter no mínimo 8 caracteres"),
+          .min(8, "A senha deve ter no mínimo 8 caracteres")
+          .regex(
+            passwordRegex,
+            "A senha deve conter pelo menos uma letra e um número"
+          ),
+
         confirmPassword: z
           .string()
           .trim()
