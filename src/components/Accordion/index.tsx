@@ -1,7 +1,8 @@
 import React from "react"
 import * as Accordion from "@radix-ui/react-accordion"
-import { Container } from "./style"
+import { Container, Item, RootContainer, Header } from "./style"
 import { ReactComponent as Seta } from "@assets/icons/seta-baixo.svg"
+import { LayoutGroup, motion, spring } from "framer-motion"
 
 interface IPropsAccordion {
   items: {
@@ -19,27 +20,44 @@ interface TriggerProps {
 const index = ({ items, className }: IPropsAccordion) => {
   return (
     <Container>
-      <Accordion.Root type="single" collapsible className={className}>
+      <RootContainer
+        type="single"
+        collapsible
+        className={className}
+        forwardedAs={motion.div}
+        transition={{ layout: { duration: 0.5 }, duration: 1 }}
+      >
         {items.map(({ content, header }) => (
-          <Accordion.Item value={header} className="item" key={header}>
+          <Item
+            value={header}
+            key={header}
+            forwardedAs={motion.div}
+            layout
+            animate={{ transition: { type: "spring", duration: 2 } }}
+          >
             <AccordionTrigger className="trigger">{header}</AccordionTrigger>
             <Accordion.Content className="content">
               <div className="content-text">{content}</div>
             </Accordion.Content>
-          </Accordion.Item>
+          </Item>
         ))}
-      </Accordion.Root>
+      </RootContainer>
     </Container>
   )
 }
 
 const AccordionTrigger = ({ children, className }: TriggerProps) => (
-  <Accordion.Header className={className}>
+  <Header
+    className={className}
+    forwardedAs={motion.div}
+    layout
+    animate={{ transition: { type: "spring", duration: 1 } }}
+  >
     <Accordion.Trigger>
       {children}
       <Seta />
     </Accordion.Trigger>
-  </Accordion.Header>
+  </Header>
 )
 
 export default index

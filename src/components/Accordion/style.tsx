@@ -1,63 +1,54 @@
+import { AccordionHeader, AccordionItem, Root } from "@radix-ui/react-accordion"
 import styled from "styled-components"
 
-export const Container = styled.div`
-  .item {
-    background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-    max-width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    transition: none;
+export const Item = styled(AccordionItem)`
+  max-width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: none;
+  height: fit-content;
 
-    &[data-state="closed"] {
-      height: fit-content;
-    }
-
-    &[data-state="open"]:hover {
-      .trigger button {
-        background-color: ${({ theme }) =>
-          theme.backgroundColor.alternativeState};
-      }
-      background-color: ${({ theme }) =>
-        theme.backgroundColor.alternativeState};
-    }
+  &[data-state="closed"] {
+    height: fit-content;
   }
 
+  &:hover {
+    filter: brightness(1.2);
+  }
+`
+
+export const RootContainer = styled(Root)``
+
+export const Header = styled(AccordionHeader)``
+
+export const Container = styled.div`
   .trigger button {
     display: flex;
     justify-content: space-between;
-    font-size: 1.25rem;
-    font-weight: 400;
+    gap: 1rem;
+    font-size: 1.4rem;
+    font-weight: 500;
     transition: none;
     padding: 0.8rem 1rem;
     font-family: "Rubik", sans-serif;
     width: 100%;
     text-align: start;
-    color: ${({ theme }) => theme.textColor.subtitle};
-    background-color: ${({ theme }) => theme.backgroundColor.tertiary};
+    color: #fff;
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
     cursor: pointer;
 
     svg path {
-      stroke: ${({ theme }) => theme.textColor.details};
+      stroke: #fff;
     }
 
     svg {
       rotate: -90deg;
       transition: 300ms ease-in-out rotate;
-    }
-
-    &[data-state="closed"]:hover {
-      background-color: ${({ theme }) =>
-        theme.backgroundColor.alternativeState};
+      width: 1.5rem;
     }
   }
 
   .trigger button[data-state="open"] {
-    color: ${({ theme }) => theme.textColor.title};
-
-    svg path {
-      stroke: ${({ theme }) => theme.textColor.title};
-    }
-
     svg {
       rotate: 0deg;
       transition: 300ms ease-in-out rotate;
@@ -70,8 +61,8 @@ export const Container = styled.div`
     height: 2px;
     width: calc(100% - 2rem);
     position: absolute;
-    background-color: ${({ theme }) => theme.backgroundColor.details};
-    opacity: 0.5;
+    background-color: #fff;
+    opacity: 0.7;
     left: 1rem;
   }
 
@@ -79,6 +70,8 @@ export const Container = styled.div`
     overflow: hidden;
     position: relative;
     font-family: "Roboto", sans-serif;
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
+    width: auto;
   }
   .content[data-state="open"] {
     animation: slideDown 300ms ease-out;
@@ -90,8 +83,8 @@ export const Container = styled.div`
   .content-text {
     padding: 1rem;
     line-height: 1.5;
-    font-size: 1rem;
-    color: ${({ theme }) => theme.textColor.subtitle};
+    font-size: 1.2rem;
+    color: #fff;
   }
 
   @media (max-width: 600px) {

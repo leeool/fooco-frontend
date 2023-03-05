@@ -1,5 +1,9 @@
 const animateLeft = {
-  hidden: { x: -200, opacity: 0 },
+  hidden: {
+    x: -200,
+    opacity: 0,
+    viewport: { once: false, amount: 0.1 },
+  },
   visible: {
     x: 0,
     opacity: 1,
@@ -14,7 +18,11 @@ const animateLeft = {
 }
 
 const animateRight = {
-  hidden: { x: 200, opacity: 0 },
+  hidden: {
+    x: 200,
+    opacity: 0,
+    viewport: { once: false, amount: 0.1 },
+  },
   visible: {
     x: 0,
     opacity: 1,

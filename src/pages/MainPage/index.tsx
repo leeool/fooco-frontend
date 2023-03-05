@@ -21,11 +21,15 @@ import useUserStore from "src/stores/UseUserStore"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
 import { motion } from "framer-motion"
 import { animateLeft, animateRight } from "src/helpers/animations"
+import UseMatchWindowSize from "src/hooks/UseWindowSize"
+import Input from "@components/Form/Input"
+import Button from "@components/Form/Button"
 
 const MainPage = () => {
   const { setEmail } = UseCreateUserStore()
   const navigate = useNavigate()
   const { isLoggedIn, loading } = useUserStore()
+  const match = UseMatchWindowSize(600)
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
@@ -35,7 +39,6 @@ const MainPage = () => {
     e.preventDefault()
     navigate("/entrar/criar")
   }
-
   if (loading) return <div>Carregando...</div>
   if (isLoggedIn) return <Navigate to="/" replace />
   return (
@@ -54,15 +57,30 @@ const MainPage = () => {
             ajuda outras pessoas e aprende coisas novas com estudantes de
             qualquer lugar do mundo.
           </Paragraph>
-          <InputButton
-            button={"Fazer Parte"}
-            buttonIcon={<Seta />}
-            id="fazerparte"
-            placeholder="seuemail@email.com"
-            icon={<Letter />}
-            onChange={handleEmail}
-            onClick={handleClick}
-          />
+          {match ? (
+            <div style={{ display: "grid", gap: "0.8rem" }}>
+              <Input
+                type="email"
+                id="fazerparte"
+                placeholder="seuemail@email.com"
+                icon={<Letter />}
+                onChange={handleEmail}
+              />
+              <Button variant="solid" onClick={handleClick}>
+                Fazer Parte
+              </Button>
+            </div>
+          ) : (
+            <InputButton
+              button={"Fazer Parte"}
+              buttonIcon={<Seta />}
+              id="fazerparte"
+              placeholder="seuemail@email.com"
+              icon={<Letter />}
+              onChange={handleEmail}
+              onClick={handleClick}
+            />
+          )}
         </motion.div>
         <motion.div
           variants={animateRight}
@@ -76,15 +94,15 @@ const MainPage = () => {
       </InicioContainer>
       <BarContainer>
         <ul className="list">
-          <li>
+          <motion.li variants={animateLeft} initial="hidden" animate="visible">
             <Globe />
             <p>Usuários do mundo todo</p>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li variants={animateLeft} initial="hidden" animate="visible">
             <Lock />
             <p>Projeto open source</p>
-          </li>
-          <li>
+          </motion.li>
+          <motion.li variants={animateLeft} initial="hidden" animate="visible">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -100,7 +118,7 @@ const MainPage = () => {
             </svg>
 
             <p>Ganhe pontos e recompensas</p>
-          </li>
+          </motion.li>
         </ul>
         <div className="slogan">
           <h3>
@@ -182,7 +200,7 @@ const MainPage = () => {
               viewport={{ ...animateRight.visible.viewport }}
             >
               <h3>Diga não ao bullying</h3>
-              <p>É possível denunciar usuários mal intencinados.</p>
+              <p>É possível denunciar usuários mal-intencionados.</p>
             </motion.li>
             <motion.li
               variants={animateRight}
@@ -230,7 +248,7 @@ const MainPage = () => {
                 header: "O que é um projeto Open Source?",
                 content: (
                   <>
-                    O termo em inglês “open source” significa “código aberto” e
+                    O termo em inglês “open source” quer dizer “código aberto” e
                     se refere ao código-fonte de um site ou aplicativo que pode
                     ser compartilhado com outros usuários.
                   </>
@@ -244,7 +262,7 @@ const MainPage = () => {
               {
                 header: "Posso fazer qualquer tipo de pergunta na plataforma?",
                 content:
-                  "Caso sua pergunta seja ofensiva, infringindo as regras da plataforma, você pode ser punido ou silenciado por tempo inderminado.",
+                  "Caso sua pergunta seja ofensiva, infringindo as regras da plataforma, você pode ser punido ou silenciado por tempo indeterminado.",
               },
             ]}
           />
@@ -258,15 +276,30 @@ const MainPage = () => {
           <Paragraph size="xl">Se junte a nossa comunidade agora</Paragraph>
         </div>
         <div className="input">
-          <InputButton
-            button={"Fazer Parte"}
-            buttonIcon={<Seta />}
-            id="fazerparte"
-            placeholder="seuemail@email.com"
-            icon={<Letter />}
-            onChange={handleEmail}
-            onClick={handleClick}
-          />
+          {match ? (
+            <div style={{ display: "grid", gap: "0.8rem" }}>
+              <Input
+                type="email"
+                id="fazerparte"
+                placeholder="seuemail@email.com"
+                icon={<Letter />}
+                onChange={handleEmail}
+              />
+              <Button variant="solid" onClick={handleClick}>
+                Fazer Parte
+              </Button>
+            </div>
+          ) : (
+            <InputButton
+              button={"Fazer Parte"}
+              buttonIcon={<Seta />}
+              id="fazerparte"
+              placeholder="seuemail@email.com"
+              icon={<Letter />}
+              onChange={handleEmail}
+              onClick={handleClick}
+            />
+          )}
         </div>
       </DecidiuContainer>
     </Container>

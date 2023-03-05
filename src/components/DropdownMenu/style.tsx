@@ -3,7 +3,8 @@ import styled from "styled-components"
 import {
   DropdownMenuArrow,
   DropdownMenuContent,
-  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu"
 
@@ -39,34 +40,51 @@ export const Content = styled(DropdownMenuContent)`
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
 `
 
-export const Item = styled(DropdownMenuItem)`
+export const Item = styled(DropdownMenuRadioItem)`
   & > * {
     font-size: 1.3rem;
     display: flex;
-    border-radius: 5px;
-    color: ${({ theme }) => theme.textColor.title};
-    background-color: ${({ theme }) => theme.backgroundColor.primary};
     font-weight: 500;
     place-items: center;
     padding: 0.2rem 2rem;
     transition: none;
     cursor: pointer;
     gap: 0.6rem;
+    color: ${({ theme }) => theme.backgroundColor.secondary};
 
     svg {
       display: flex;
       width: 1.8rem;
       height: 1.8rem;
     }
+  }
 
-    &:hover {
-      background-color: ${({ theme }) => theme.backgroundColor.secondary};
-      transition: none;
+  &:hover {
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
+    * {
       color: #fff;
     }
   }
+
+  &[data-state="checked"] {
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
+
+    * {
+      color: #fff;
+    }
+  }
+  border-radius: 5px;
+  transition: none;
+  overflow: hidden;
 `
 
 export const Arrow = styled(DropdownMenuArrow)`
   fill: ${({ theme }) => theme.backgroundColor.secondary};
+`
+
+export const RadioGroup = styled(DropdownMenuRadioGroup)`
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 `

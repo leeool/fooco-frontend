@@ -20,15 +20,16 @@ export const ButtonContainer = styled.button<Props>`
   max-height: 100%;
   text-align: center;
   background-color: ${({ theme }) => theme.backgroundColor.primary};
+  width: 100%;
 
   svg {
     width: 2rem;
     height: 2rem;
   }
 
-  &[data-loading="true"] {
+  &:disabled {
     cursor: wait;
-    filter: opacity(0.6);
+    filter: opacity(0.5) grayscale(0.2);
 
     svg {
       animation: spin 2s linear infinite;

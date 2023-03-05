@@ -19,6 +19,7 @@ export const Container = styled.div`
     }
 
     button {
+      width: fit-content;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       text-transform: uppercase;

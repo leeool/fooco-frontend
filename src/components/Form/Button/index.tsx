@@ -1,12 +1,13 @@
-import React from "react"
+import React, { ButtonHTMLAttributes } from "react"
 import { ButtonContainer } from "./style"
 
-interface IButtonProps {
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode
   variant: "outlined" | "solid" | "transparent"
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
   icon?: React.ReactNode
   loading?: boolean
+  props?: ButtonHTMLAttributes<HTMLButtonElement>
 }
 
 const Button = ({
@@ -15,13 +16,10 @@ const Button = ({
   onClick,
   icon,
   loading,
+  ...props
 }: IButtonProps) => {
   return (
-    <ButtonContainer
-      onClick={onClick}
-      variant={variant}
-      data-loading={loading ? "true" : "false"}
-    >
+    <ButtonContainer onClick={onClick} variant={variant} {...props}>
       {loading ? "Carregando..." : children}
       {icon}
     </ButtonContainer>

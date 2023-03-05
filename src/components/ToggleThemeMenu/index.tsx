@@ -9,6 +9,7 @@ const index = () => {
 
   return (
     <DropdownMenu
+      values={["dark", "light"]}
       classTrigger="dropdown-menu"
       trigger={<>{selectedTheme === "light" ? <Sun /> : <Moon />}</>}
       item={[

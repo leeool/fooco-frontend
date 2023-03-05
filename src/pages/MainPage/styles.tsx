@@ -108,15 +108,40 @@ export const BarContainer = styled.section`
   }
 
   .slogan span {
-    background-color: #fff;
     color: ${({ theme }) => theme.textColor.title};
     padding: 0 0.5rem;
-    border-radius: 10px;
+    position: relative;
+    z-index: 100;
+
+    &::before {
+      content: "";
+      background-color: #fff;
+      width: 0;
+      height: 100%;
+      display: block;
+      position: absolute;
+      border-radius: 10px;
+      z-index: -1;
+      top: 0;
+      left: 0;
+      animation: sloganAnimation 0.8s ease forwards;
+      animation-delay: 0.8s;
+    }
   }
 
   *::selection {
     background-color: #efefef;
     color: ${({ theme }) => theme.textColor.title};
+  }
+
+  @keyframes sloganAnimation {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 100%;
+    }
   }
 `
 
@@ -203,8 +228,8 @@ export const ComecarContainer = styled.section`
 export const DuvidaContainer = styled.section`
   .duvidas {
     margin-top: 2rem;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;
+    flex-flow: row wrap;
     column-gap: 1.5rem;
     row-gap: 1rem;
   }
