@@ -59,14 +59,14 @@ const useUserStore = create<IUser>((set, get) => ({
 
       const { url, options } = GET_USER(validate.data.id)
 
-      const response = await instance<IUserLogin | { error: string }>(
+      const response = await instance<IUserData | { error: string }>(
         url,
         options
       )
       if (response.status >= 400 && "error" in response.data)
         throw new Error(response.data.error)
       else if (!("error" in response.data) && response.status < 400) {
-        set({ isLoggedIn: true })
+        set({ isLoggedIn: true, userData: response.data })
       }
     } catch (error) {
       console.error(error)
