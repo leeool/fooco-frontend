@@ -22,7 +22,7 @@ const animateLeft = {
 const index = () => {
   const { email, password, setEmail, setPassword } = UseCreateUserStore()
   const useNav = useNavigate()
-  const { getUserWToken } = useUserStore()
+  const { getUserWToken, loading: loginLoading } = useUserStore()
   const { loading, request } = UseFetch<IUserLogin | null>()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -69,7 +69,12 @@ const index = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <Button variant="solid" icon={<Foquinho />} loading={loading}>
+        <Button
+          variant="solid"
+          icon={<Foquinho />}
+          disabled={loading || loginLoading}
+          loading={loading || loginLoading}
+        >
           Entrar
         </Button>
       </form>

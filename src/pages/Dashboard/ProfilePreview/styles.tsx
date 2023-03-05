@@ -15,25 +15,20 @@ export const Username = styled.div`
   background-color: ${({ theme }) => theme.backgroundColor.secondary};
   color: #fff;
   width: fit-content;
-  padding: 0 0.6rem;
+  padding: 0.1rem 0.5rem;
   border-radius: 5px;
+  margin-bottom: 0.5rem;
 `
-
-export const Avatar = styled.img`
-  width: 100%;
-  border-radius: 50%;
-`
-
-export const Description = styled.p``
 
 export const UserData = styled.div`
   display: grid;
 
   .user-info {
     display: grid;
-    grid-template-columns: 7rem 1fr;
+    grid-template-columns: 6rem 1fr;
+    grid-template-rows: 6rem;
     grid-area: 1 / -1;
-    translate: 0 1.5rem;
+    translate: 0 3rem;
     gap: 0.8rem;
     align-items: end;
     padding: 0 1rem;
@@ -48,10 +43,6 @@ export const Banner = styled.img`
   grid-area: 1 / -1;
 `
 
-export const About = styled.div`
-  padding: 1rem;
-`
-
 export const Separator = styled.span`
   display: inline-block;
   width: 100%;
@@ -59,4 +50,12 @@ export const Separator = styled.span`
   background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
   margin-top: 3rem;
   margin-bottom: 1rem;
+`
+
+export const About = styled.div`
+  padding: 1rem;
+`
+
+export const Description = styled.p`
+  color: ${({ theme }) => theme.textColor.paragraph};
 `
