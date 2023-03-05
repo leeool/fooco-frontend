@@ -25,8 +25,9 @@ import { ConfirmLogout } from "./styles"
 import { Paragraph } from "@components/Text/Paragraph"
 
 const index = () => {
-  const { logoutUser } = useUserStore()
+  const { logoutUser, userData } = useUserStore()
 
+  if (!userData) return null
   return (
     <>
       <Link to="/" className="logo">
@@ -47,7 +48,7 @@ const index = () => {
         <DropdownMenu>
           <DropdownMenuTrigger>
             <User />
-            Usuário
+            {userData.username}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuGroup>
