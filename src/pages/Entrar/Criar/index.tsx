@@ -29,7 +29,12 @@ const index = () => {
   const [page, setPage] = React.useState<number>(1)
   const [userId, setUserId] = React.useState<string | null>(null)
 
-  const { loginUser, setIsUserLoggedIn, loading: loginLoading } = useUserStore()
+  const {
+    loginUser,
+    setIsUserLoggedIn,
+    loading: loginLoading,
+    getUserWToken,
+  } = useUserStore()
   const { setToastMessage } = UseToastStore()
   const navigate = useNavigate()
 
@@ -82,7 +87,7 @@ const index = () => {
     if (updateUserError) return
 
     if (updateUserResponse && updateUserResponse.status < 300) {
-      setIsUserLoggedIn(true)
+      await getUserWToken()
       setToastMessage(`Bem-vindo(a) ${username}!`, "Usuário criado com sucesso")
       navigate("/")
     }
