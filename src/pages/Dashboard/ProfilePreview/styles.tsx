@@ -18,6 +18,11 @@ export const Username = styled.div`
   padding: 0.1rem 0.5rem;
   border-radius: 5px;
   margin-bottom: 0.5rem;
+
+  &::selection {
+    background-color: #fff;
+    color: ${({ theme }) => theme.textColor.title};
+  }
 `
 
 export const UserData = styled.div`

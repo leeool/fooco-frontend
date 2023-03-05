@@ -1,38 +1,11 @@
 import styled from "styled-components"
 import * as Dialog from "@radix-ui/react-dialog"
 
-export const DialogTrigger = styled(Dialog.Trigger)`
+export const Trigger = styled(Dialog.Trigger)`
   cursor: pointer;
-  padding: 0.3rem;
   background-color: transparent;
-  border-top-left-radius: 50%;
-  border-top-right-radius: 50%;
   display: flex;
-  padding: 0.5rem;
   position: relative;
-
-  &::before {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 2px;
-    background-color: ${({ theme }) => theme.textColor.title};
-    left: 0;
-    bottom: 0;
-  }
-
-  &:hover,
-  &[data-state="open"] {
-    background-color: ${({ theme }) => theme.backgroundColor.primary};
-  }
-
-  svg,
-  path {
-    stroke: ${({ theme }) => theme.backgroundColor.secondary};
-    width: 1.8rem;
-    height: 1.8rem;
-  }
 `
 
 export const DialogOverlay = styled(Dialog.Overlay)`
@@ -51,11 +24,13 @@ export const DialogOverlay = styled(Dialog.Overlay)`
   }
 `
 
-export const DialogContent = styled(Dialog.Content)`
+export const Content = styled(Dialog.Content)`
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
   position: fixed;
   inset: 0;
-  width: calc(100% - 5rem);
+  width: 100%;
+  padding: 1rem 2rem;
+  max-width: fit-content;
   height: fit-content;
   border-radius: 20px;
   top: 20%;

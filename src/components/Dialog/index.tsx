@@ -1,19 +1,32 @@
 import React from "react"
-import * as Dialog from "@radix-ui/react-dialog"
-import { DialogContent, DialogOverlay, DialogTrigger } from "./styles"
+import * as DialogPrimitive from "@radix-ui/react-dialog"
+import { Content, DialogOverlay, Trigger } from "./styles"
 
-const index = () => {
+interface ContentProps {
+  children: React.ReactNode
+}
+
+interface TriggerProps {
+  children: React.ReactNode
+}
+
+interface Props {
+  children: React.ReactNode
+}
+
+export const DialogRoot = DialogPrimitive.Root
+
+export const DialogContent = ({ children }: ContentProps) => {
   return (
-    <>
-      <Dialog.Root>
-        <DialogTrigger asChild></DialogTrigger>
-        <Dialog.Portal>
-          <DialogOverlay />
-          <DialogContent></DialogContent>
-        </Dialog.Portal>
-      </Dialog.Root>
-    </>
+    <DialogPrimitive.Portal>
+      <DialogOverlay />
+      <Content>{children}</Content>
+    </DialogPrimitive.Portal>
   )
 }
 
-export default index
+export const DialogTrigger = ({ children }: TriggerProps) => {
+  return <Trigger>{children}</Trigger>
+}
+
+export const DialogClose = DialogPrimitive.Close

@@ -7,7 +7,7 @@ import ToggleThemeMenu from "@components/ToggleThemeMenu"
 const index = () => {
   return (
     <>
-      <Link to="/">
+      <Link to="/" className="logo">
         <Logo />
       </Link>
       <div className="buttons">

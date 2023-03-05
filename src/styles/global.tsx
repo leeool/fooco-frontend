@@ -26,6 +26,7 @@ export default createGlobalStyle`
   a {
     color: ${({ theme }) => theme.textColor.title};
     font-size: inherit;
+    width: 100%;  
   }
 
   body{

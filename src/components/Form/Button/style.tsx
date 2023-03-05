@@ -7,7 +7,7 @@ interface Props {
 
 export const ButtonContainer = styled.button<Props>`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   border: none;
   cursor: pointer;
   padding: 0.4rem 1rem;

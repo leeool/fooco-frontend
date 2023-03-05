@@ -17,6 +17,7 @@ export const Fallback = styled(AvatarFallback)`
   font-weight: 500;
   color: ${({ theme }) => theme.textColor.title};
   text-transform: uppercase;
+  user-select: none;
 `
 
 export const Root = styled(Avatar)`

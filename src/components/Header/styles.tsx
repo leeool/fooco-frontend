@@ -16,6 +16,10 @@ export const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
     gap: 2rem;
+
+    a {
+      width: fit-content;
+    }
   }
 
   .buttons-logged {
@@ -37,18 +41,10 @@ export const HeaderContainer = styled.header`
     }
   }
 
-  & > svg {
-    min-width: 4rem;
+  & .logo {
+    max-width: 13rem;
   }
 
-  /* @media (max-width: 1100px) {
-    padding: 0.8rem 1rem;
-    gap: 1rem;
-
-    .buttons {
-      gap: 1rem;
-    }
-  } */
   @media (max-width: 1000px) {
     display: flex;
     flex-direction: column;
