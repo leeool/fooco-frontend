@@ -43,6 +43,10 @@ const useUserStore = create<IUser>((set, get) => ({
     }
   },
   getUserWToken: async () => {
+    const userIsloggedIn = get().isLoggedIn
+
+    if (userIsloggedIn) return
+
     const token = localStorage.getItem("token")
 
     if (!token) return

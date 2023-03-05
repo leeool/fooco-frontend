@@ -29,7 +29,7 @@ const index = () => {
   const [page, setPage] = React.useState<number>(1)
   const [userId, setUserId] = React.useState<string | null>(null)
 
-  const { loginUser, setIsUserLoggedIn } = useUserStore()
+  const { loginUser, setIsUserLoggedIn, loading: loginLoading } = useUserStore()
   const { setToastMessage } = UseToastStore()
   const navigate = useNavigate()
 
@@ -174,7 +174,11 @@ const index = () => {
               )}
             />
 
-            <Button variant="solid" icon={<Foquinho />} loading={loading}>
+            <Button
+              variant="solid"
+              icon={<Foquinho />}
+              disabled={loading || loginLoading}
+            >
               Avançar
             </Button>
           </motion.form>
@@ -210,7 +214,11 @@ const index = () => {
               )}
             />
 
-            <Button variant="solid" icon={<Foquinho />} loading={loading}>
+            <Button
+              variant="solid"
+              icon={<Foquinho />}
+              disabled={loading || loginLoading}
+            >
               Criar Conta
             </Button>
           </motion.form>
