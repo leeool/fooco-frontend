@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const Container = styled.div`
   display: grid;
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-  border-radius: 10px;
+  border-radius: 15px;
   position: relative;
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
 `
@@ -36,7 +36,7 @@ export const UserData = styled.div`
 `
 
 export const Banner = styled.img`
-  border-radius: 10px 10px 0 0;
+  border-radius: 15px 15px 0 0;
   object-fit: cover;
   width: 100%;
   height: 8rem;
@@ -54,8 +54,69 @@ export const Separator = styled.span`
 
 export const About = styled.div`
   padding: 1rem;
+  display: grid;
+  gap: 1rem;
 `
 
 export const Description = styled.p`
   color: ${({ theme }) => theme.textColor.paragraph};
+  font-size: 1.1rem;
+  font-family: "Roboto", sans-serif;
+`
+
+export const Item = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: ${({ theme }) => theme.backgroundColor.secondary};
+
+  svg,
+  path {
+    stroke: currentColor;
+    stroke-width: 2.5;
+    width: 2rem;
+  }
+`
+
+export const Tags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  span {
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
+    color: #fff;
+    padding: 0.1rem 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: none;
+    border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+
+    &:hover {
+      background-color: #fff;
+      color: ${({ theme }) => theme.backgroundColor.secondary};
+      border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+    }
+  }
+
+  .add {
+    background-color: #fff;
+    color: ${({ theme }) => theme.backgroundColor.secondary};
+    border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+
+    svg {
+      display: flex;
+      place-items: center;
+      stroke: ${({ theme }) => theme.backgroundColor.secondary};
+      stroke-width: 2;
+      width: 1.2rem;
+    }
+
+    &:hover {
+      background-color: ${({ theme }) => theme.backgroundColor.secondary};
+      svg {
+        stroke: #fff;
+      }
+    }
+  }
 `
