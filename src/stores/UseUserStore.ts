@@ -14,6 +14,8 @@ interface IUser {
   userData: IUserData | null
   loading: boolean
   logoutUser: () => void
+  tags: string[]
+  setTag: (tag: string[]) => void
 }
 
 const useUserStore = create<IUser>((set, get) => ({
@@ -67,6 +69,7 @@ const useUserStore = create<IUser>((set, get) => ({
         throw new Error(response.data.error)
       else if (!("error" in response.data) && response.status < 400) {
         set({ isLoggedIn: true, userData: response.data })
+        console.log(response)
       }
     } catch (error) {
       console.error(error)
@@ -80,8 +83,10 @@ const useUserStore = create<IUser>((set, get) => ({
   loading: false,
   logoutUser: () => {
     localStorage.removeItem("token")
-    set({ isLoggedIn: false, userData: null })
+    set({ isLoggedIn: false, userData: null, tags: [] })
   },
+  tags: [],
+  setTag: (tag) => set({ tags: tag }),
 }))
 
 export default useUserStore
