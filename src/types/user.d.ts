@@ -14,6 +14,14 @@ interface IUserData {
   id: string
   email: string
   created_at: Date
+  about: string
+  avatar_url: string
+  banner_url: string
+  liked_posts: string[]
+  disliked_posts: string[]
+  educational_place: string
+  educational_place_url: string
+  tags: string[]
   posts: IUserPosts[]
 }
 
