@@ -1,11 +1,5 @@
 import axios from "axios"
 
-interface IUserUpdate {
-  username?: string
-  email?: string
-  password?: string
-}
-
 const ENDPOINT = "https://fooco-backend.onrender.com"
 
 export const instance = axios.create({
@@ -57,7 +51,7 @@ export const GET_USER = (id: string) => {
 }
 
 export const USER_PUT = (
-  { username, email, password }: IUserUpdate,
+  userData: Partial<IUserData & { password: string }>,
   id: string
 ) => {
   return {
@@ -65,9 +59,7 @@ export const USER_PUT = (
     options: {
       method: "PUT",
       data: {
-        username: username,
-        email: email,
-        password: password,
+        ...userData,
       },
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
