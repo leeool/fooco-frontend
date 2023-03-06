@@ -1,6 +1,6 @@
-import { Avatar } from "@components/User/Avatar"
-import { Hat, Plus } from "@assets/index"
 import React from "react"
+import { Avatar } from "@components/User/Avatar"
+import { Hashtag, Hat, Plus } from "@assets/index"
 import useUserStore from "src/stores/UseUserStore"
 import {
   About,
@@ -12,10 +12,18 @@ import {
   Separator,
   Item,
   Tags,
+  NewTagContainer,
+  TagsDialog,
 } from "./styles"
+import { DialogContent, DialogRoot, DialogTrigger } from "@components/Dialog"
+import { Button, Input } from "@components/Form"
+import { Title } from "@components/Text/Title"
+import { Controller, useForm } from "react-hook-form"
+import UseFetch from "src/hooks/UseFetch"
+import { USER_PUT } from "src/api/apiCalls"
 
 const ProfilePreview = () => {
-  const { userData, loading } = useUserStore()
+  const { userData, loading, tags } = useUserStore()
 
   if (loading || !userData) return <div>carregando.....</div>
   return (
@@ -28,7 +36,7 @@ const ProfilePreview = () => {
             fallback={userData.username.slice(0, 2)}
             delayMs={500}
           />
-          <Username>@{userData?.username}</Username>
+          <Username>@{userData.username}</Username>
         </div>
       </UserData>
       <Separator />
@@ -42,18 +50,78 @@ const ProfilePreview = () => {
           <span>ETEC Adolpho Berezin</span>
         </Item>
         <Tags>
-          <span>Programação</span>
-          <span>Música</span>
-          <span>Desenvolvedor</span>
-          <span>Front-End</span>
-          <span>Back-End</span>
-          <span>UX/UI</span>
-          <span className="add">
-            <Plus />
-          </span>
+          {userData.tags.concat(...tags).map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+          <DialogRoot>
+            <DialogTrigger>
+              <span className="add">
+                <Plus />
+              </span>
+            </DialogTrigger>
+            <DialogContent>
+              <AddNewTag userData={userData} />
+            </DialogContent>
+          </DialogRoot>
         </Tags>
       </About>
     </Container>
+  )
+}
+
+const AddNewTag = ({ userData }: { userData: IUserData }) => {
+  const { tags, setTag } = useUserStore()
+  const { handleSubmit, control } = useForm()
+  const { request, loading } = UseFetch<IUserData>()
+
+  const submitTag = handleSubmit(async (fieldValues) => {
+    if (tags.includes(fieldValues.newtag)) {
+      return
+    }
+
+    const { url, options } = USER_PUT(
+      { tags: [...userData.tags, fieldValues.newtag] },
+      userData.id
+    )
+
+    const response = await request(url, options)
+
+    if (!response.error) {
+      setTag([...tags, fieldValues.newtag])
+    }
+  })
+
+  return (
+    <NewTagContainer>
+      <Title size="lg">Adicionar nova tag</Title>
+      <form onSubmit={submitTag}>
+        <Controller
+          defaultValue={""}
+          control={control}
+          name="newtag"
+          render={({ field: { onChange, onBlur, ref } }) => (
+            <Input
+              label="Nova Tag"
+              type="text"
+              id="newtag"
+              placeholder="Digite uma nova tag"
+              icon={<Hashtag />}
+              onChange={onChange}
+              onBlur={onBlur}
+              innerRef={ref}
+            />
+          )}
+        />
+        <Button variant="solid" loading={loading} disabled={loading}>
+          Adicionar
+        </Button>
+      </form>
+      <TagsDialog>
+        {userData.tags.concat(...tags).map((tag) => (
+          <span key={tag}>{tag}</span>
+        ))}
+      </TagsDialog>
+    </NewTagContainer>
   )
 }
 

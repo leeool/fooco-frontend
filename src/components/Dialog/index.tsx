@@ -1,4 +1,4 @@
-import React from "react"
+import React, { forwardRef } from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { Content, DialogOverlay, Trigger } from "./styles"
 
@@ -16,14 +16,16 @@ interface Props {
 
 export const DialogRoot = DialogPrimitive.Root
 
-export const DialogContent = ({ children }: ContentProps) => {
-  return (
+export const DialogContent = React.forwardRef<HTMLDivElement, Props>(
+  ({ children }, ref) => (
     <DialogPrimitive.Portal>
       <DialogOverlay />
-      <Content>{children}</Content>
+      <Content ref={ref}>{children}</Content>
     </DialogPrimitive.Portal>
   )
-}
+)
+
+DialogContent.displayName = "DialogContent"
 
 export const DialogTrigger = ({ children }: TriggerProps) => {
   return <Trigger>{children}</Trigger>

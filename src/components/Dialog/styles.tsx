@@ -25,20 +25,23 @@ export const DialogOverlay = styled(Dialog.Overlay)`
 `
 
 export const Content = styled(Dialog.Content)`
-  background-color: ${({ theme }) => theme.backgroundColor.tertiary};
+  background-color: ${({ theme }) => theme.backgroundColor.primary};
   position: fixed;
   inset: 0;
-  width: 100%;
+  width: max-content;
   padding: 1rem 2rem;
-  max-width: fit-content;
   height: fit-content;
   border-radius: 20px;
-  top: 20%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
     hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
   animation: contentShow 500ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  @media (max-width: 600px) {
+    padding: 1rem;
+  }
 
   @keyframes contentShow {
     from {

@@ -33,19 +33,26 @@ export const UserData = styled.div`
     grid-template-columns: 6rem 1fr;
     grid-template-rows: 6rem;
     grid-area: 1 / -1;
-    translate: 0 3rem;
+    translate: 0 3.5rem;
     gap: 0.8rem;
     align-items: end;
     padding: 0 1rem;
   }
 `
 
-export const Banner = styled.img`
+export const Banner = styled.div<{ src: string }>`
   border-radius: 15px 15px 0 0;
   object-fit: cover;
   width: 100%;
   height: 8rem;
   grid-area: 1 / -1;
+  background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.5) 10%,
+      rgba(0, 212, 255, 0) 100%
+    ),
+    url(${({ src }) => src}) no-repeat;
+  background-size: 100%;
 `
 
 export const Separator = styled.span`
@@ -87,6 +94,7 @@ export const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  max-width: 100%;
 
   span {
     background-color: ${({ theme }) => theme.backgroundColor.secondary};
@@ -98,30 +106,54 @@ export const Tags = styled.div`
     border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
 
     &:hover {
-      background-color: #fff;
+      background-color: ${({ theme }) => theme.backgroundColor.primary};
       color: ${({ theme }) => theme.backgroundColor.secondary};
       border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
     }
   }
 
   .add {
-    background-color: #fff;
-    color: ${({ theme }) => theme.backgroundColor.secondary};
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
     border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
 
     svg {
       display: flex;
       place-items: center;
-      stroke: ${({ theme }) => theme.backgroundColor.secondary};
+      stroke: #fff;
       stroke-width: 2;
       width: 1.2rem;
     }
 
     &:hover {
-      background-color: ${({ theme }) => theme.backgroundColor.secondary};
+      background-color: ${({ theme }) => theme.backgroundColor.primary};
       svg {
-        stroke: #fff;
+        stroke: ${({ theme }) => theme.backgroundColor.secondary};
       }
+    }
+  }
+`
+
+export const TagsDialog = styled(Tags)`
+  max-width: 100%;
+`
+
+export const NewTagContainer = styled.div`
+  padding: 1rem 2rem;
+  display: grid;
+  gap: 2rem;
+  max-width: 30rem;
+
+  svg {
+    width: 1.7rem;
+    height: 100%;
+  }
+
+  form {
+    display: grid;
+    gap: 1rem;
+
+    button {
+      height: fit-content;
     }
   }
 `
