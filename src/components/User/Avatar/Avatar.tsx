@@ -1,5 +1,4 @@
 import React from "react"
-import * as Avatar from "@radix-ui/react-avatar"
 import { Fallback, Image, Root } from "./styles"
 
 interface Props {

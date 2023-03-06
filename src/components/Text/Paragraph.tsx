@@ -13,9 +13,9 @@ export const Paragraph = styled.p<IPropsParagraph>`
     prop: "size",
     variants: {
       "2xl": {
-        fontSize: "1.3rem",
+        fontSize: "1.4rem",
         "@media (max-width: 600px)": {
-          fontSize: "1.1rem",
+          fontSize: "1.3rem",
         },
       },
       xl: {

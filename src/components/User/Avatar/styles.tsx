@@ -3,19 +3,20 @@ import styled from "styled-components"
 
 export const Image = styled(AvatarImage)`
   width: 100%;
+  border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
 `
 
 export const Fallback = styled(AvatarFallback)`
   width: 100%;
   height: 100%;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.backgroundColor.secondary};
   display: flex;
   place-content: center;
   align-items: center;
   font-size: 2rem;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
-  color: ${({ theme }) => theme.textColor.title};
+  color: #fff;
   text-transform: uppercase;
   user-select: none;
 `
@@ -26,7 +27,6 @@ export const Root = styled(Avatar)`
   place-content: center;
   width: 100%;
   border-radius: 50%;
-  border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
 
   overflow: hidden;
 `

@@ -5,7 +5,7 @@ import { instance } from "src/api/apiCalls"
 interface IOptions {
   method: string
   params?: { [key: string]: string }
-  data?: { [key: string]: string | undefined }
+  data?: { [key: string]: any }
 }
 
 const UseFetch = <T,>() => {

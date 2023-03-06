@@ -25,14 +25,12 @@ const index = ({ items, className }: IPropsAccordion) => {
         collapsible
         className={className}
         forwardedAs={motion.div}
-        transition={{ layout: { duration: 0.5 }, duration: 1 }}
       >
         {items.map(({ content, header }) => (
           <Item
             value={header}
             key={header}
             forwardedAs={motion.div}
-            layout
             animate={{ transition: { type: "spring", duration: 2 } }}
           >
             <AccordionTrigger className="trigger">{header}</AccordionTrigger>
@@ -50,7 +48,6 @@ const AccordionTrigger = ({ children, className }: TriggerProps) => (
   <Header
     className={className}
     forwardedAs={motion.div}
-    layout
     animate={{ transition: { type: "spring", duration: 1 } }}
   >
     <Accordion.Trigger>

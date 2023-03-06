@@ -10,7 +10,7 @@ export const InputContainer = styled.div`
   }
 
   label {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
 
     @media (max-width: 700px) {
       font-size: 1rem;

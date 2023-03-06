@@ -26,6 +26,7 @@ import { Paragraph } from "@components/Text/Paragraph"
 
 const index = () => {
   const { logoutUser, userData } = useUserStore()
+  const ref = React.useRef<HTMLDivElement>(null)
 
   if (!userData) return null
   return (
@@ -62,7 +63,7 @@ const index = () => {
                 <DropdownMenuItem onClick={(e) => e.preventDefault()}>
                   <DialogTrigger>Sair</DialogTrigger>
                 </DropdownMenuItem>
-                <DialogContent>
+                <DialogContent ref={ref}>
                   <ConfirmLogout>
                     <div>
                       <Title size="md">Tem certeza que deseja sair?</Title>
@@ -71,13 +72,11 @@ const index = () => {
                       </Paragraph>
                     </div>
                     <div className="buttons">
-                      <DialogClose>
+                      <Button variant="outlined" onClick={logoutUser}>
+                        Sair
+                      </Button>
+                      <DialogClose asChild>
                         <Button variant="solid">Ficar</Button>
-                      </DialogClose>
-                      <DialogClose>
-                        <Button variant="outlined" onClick={logoutUser}>
-                          Sair
-                        </Button>
                       </DialogClose>
                     </div>
                   </ConfirmLogout>

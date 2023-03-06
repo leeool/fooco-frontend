@@ -34,7 +34,7 @@ export const Title = styled.h1<TitleProps>`
       md: {
         fontSize: "1.6rem",
         "@media (max-width: 600px)": {
-          fontSize: "1rem",
+          fontSize: "1.3rem",
         },
       },
     },

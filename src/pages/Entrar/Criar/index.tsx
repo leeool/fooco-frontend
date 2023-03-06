@@ -29,12 +29,7 @@ const index = () => {
   const [page, setPage] = React.useState<number>(1)
   const [userId, setUserId] = React.useState<string | null>(null)
 
-  const {
-    loginUser,
-    setIsUserLoggedIn,
-    loading: loginLoading,
-    getUserWToken,
-  } = useUserStore()
+  const { loginUser, loading: loginLoading, getUserWToken } = useUserStore()
   const { setToastMessage } = UseToastStore()
   const navigate = useNavigate()
 
