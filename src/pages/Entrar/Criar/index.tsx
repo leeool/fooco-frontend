@@ -35,13 +35,13 @@ const index = () => {
 
   const { handleSubmit, control } = useForm<User>({
     resolver: zodResolver(createUserSchema.omit({ username: true })),
-    mode: "onBlur" || "onSubmit" || "onTouched",
+    mode: "all",
   })
 
   const { handleSubmit: handleSubmitUser, control: controlUser } =
     useForm<User>({
       resolver: zodResolver(createUserSchema.pick({ username: true })),
-      mode: "onBlur" || "onSubmit" || "onTouched",
+      mode: "all",
     })
 
   const handleCreateUser = handleSubmit(
@@ -136,18 +136,20 @@ const index = () => {
                 field: { onChange, value, ref, onBlur },
                 fieldState,
               }) => (
-                <Input
-                  id="senha"
-                  type="password"
-                  placeholder="******"
-                  icon={<Lock />}
-                  label={"Senha secreta"}
-                  value={value}
-                  onChange={onChange}
-                  innerRef={ref}
-                  fieldState={fieldState}
-                  onBlur={onBlur}
-                />
+                <>
+                  <Input
+                    id="senha"
+                    type="password"
+                    placeholder="******"
+                    icon={<Lock />}
+                    label={"Senha secreta"}
+                    value={value}
+                    onChange={onChange}
+                    innerRef={ref}
+                    fieldState={fieldState}
+                    onBlur={onBlur}
+                  />
+                </>
               )}
             />
 
@@ -178,6 +180,7 @@ const index = () => {
               variant="solid"
               icon={<Foquinho />}
               disabled={loading || loginLoading}
+              loading={loading || loginLoading}
             >
               Avançar
             </Button>

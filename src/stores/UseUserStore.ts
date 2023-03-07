@@ -50,11 +50,10 @@ const useUserStore = create<IUser>((set, get) => ({
     if (userIsloggedIn) return
 
     const token = localStorage.getItem("token")
-
-    if (!token) return
+    set({ loading: true })
 
     try {
-      set({ loading: true })
+      if (!token) throw new Error("No token provided")
       const { url: urlValidate, options: optValidate } = VALIDATE_TOKEN(token)
       const validate = await instance(urlValidate, optValidate)
       if (!validate) return
@@ -69,7 +68,6 @@ const useUserStore = create<IUser>((set, get) => ({
         throw new Error(response.data.error)
       else if (!("error" in response.data) && response.status < 400) {
         set({ isLoggedIn: true, userData: response.data })
-        console.log(response)
       }
     } catch (error) {
       console.error(error)

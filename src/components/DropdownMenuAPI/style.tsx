@@ -96,7 +96,7 @@ export const RadioItem = styled(DropdownMenuRadioItem)`
 `
 
 export const Item = styled(DropdownMenuItem)`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   display: flex;
   font-weight: 500;
   place-items: center;

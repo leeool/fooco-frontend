@@ -115,6 +115,10 @@ export const Tags = styled.div`
   .add {
     background-color: ${({ theme }) => theme.backgroundColor.secondary};
     border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+    display: flex;
+    place-items: center;
+    place-content: center;
+    padding: 0;
 
     svg {
       display: flex;

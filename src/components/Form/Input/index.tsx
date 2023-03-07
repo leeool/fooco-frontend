@@ -25,13 +25,15 @@ const index = ({
   ...props
 }: Props) => {
   return (
-    <InputContainer data-invalid={fieldState?.invalid}>
+    <InputContainer>
       <label htmlFor={id}>{label}</label>
       <div className="input">
         <input id={id} placeholder={placeholder} ref={innerRef} {...props} />
         <span className="icon">{icon}</span>
       </div>
-      <Error>{fieldState && fieldState.error?.message}</Error>
+      <Error className={`error ${fieldState?.error && "active"}`}>
+        {fieldState && fieldState.error?.message}
+      </Error>
     </InputContainer>
   )
 }

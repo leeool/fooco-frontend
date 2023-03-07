@@ -79,3 +79,12 @@ export const VALIDATE_TOKEN = (token: string) => {
     },
   }
 }
+
+export const GET_POSTS = () => {
+  return {
+    url: ENDPOINT + "/post",
+    options: {
+      method: "GET",
+    },
+  }
+}

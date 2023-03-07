@@ -21,6 +21,7 @@ export const ButtonContainer = styled.button<Props>`
   text-align: center;
   background-color: ${({ theme }) => theme.backgroundColor.primary};
   width: 100%;
+  font-size: 1.2rem;
 
   svg {
     width: 2rem;

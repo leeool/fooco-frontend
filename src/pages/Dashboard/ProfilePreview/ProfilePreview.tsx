@@ -21,11 +21,13 @@ import { Title } from "@components/Text/Title"
 import { Controller, useForm } from "react-hook-form"
 import UseFetch from "src/hooks/UseFetch"
 import { USER_PUT } from "src/api/apiCalls"
+import ReactLoading from "react-loading"
 
 const ProfilePreview = () => {
   const { userData, loading, tags } = useUserStore()
 
-  if (loading || !userData) return <div>carregando.....</div>
+  if (loading || !userData)
+    return <ReactLoading type="spin" color="#E63A23" height={50} width={50} />
   return (
     <Container>
       <UserData>

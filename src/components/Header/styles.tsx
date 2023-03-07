@@ -34,6 +34,7 @@ export const HeaderContainer = styled.header`
       align-items: center;
       cursor: pointer;
       gap: 0.3rem;
+      font-size: 1.2rem;
 
       &:hover {
         filter: brightness(1.1);
@@ -54,10 +55,11 @@ export const HeaderContainer = styled.header`
     .buttons {
       grid-column: 1 / -1;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
     }
 
     .buttons-logged {
+      justify-content: space-between;
       align-items: center;
     }
 

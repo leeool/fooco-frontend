@@ -24,6 +24,7 @@ import { animateLeft, animateRight } from "src/helpers/animations"
 import UseMatchWindowSize from "src/hooks/UseWindowSize"
 import Input from "@components/Form/Input"
 import Button from "@components/Form/Button"
+import ReactLoading from "react-loading"
 
 const MainPage = () => {
   const { setEmail } = UseCreateUserStore()
@@ -39,7 +40,17 @@ const MainPage = () => {
     e.preventDefault()
     navigate("/entrar/criar")
   }
-  if (loading) return <div>Carregando...</div>
+
+  if (loading)
+    return (
+      <ReactLoading
+        type="spin"
+        color="#E63A23"
+        height={50}
+        width={50}
+        className="load-icon"
+      />
+    )
   if (isLoggedIn) return <Navigate to="/" replace />
   return (
     <Container>

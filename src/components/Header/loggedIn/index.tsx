@@ -28,7 +28,6 @@ const index = () => {
   const { logoutUser, userData } = useUserStore()
   const ref = React.useRef<HTMLDivElement>(null)
 
-  if (!userData) return null
   return (
     <>
       <Link to="/" className="logo">
@@ -49,7 +48,7 @@ const index = () => {
         <DropdownMenu>
           <DropdownMenuTrigger>
             <User />
-            {userData.username}
+            {userData?.username}
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuGroup>

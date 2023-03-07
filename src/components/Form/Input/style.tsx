@@ -9,6 +9,19 @@ export const InputContainer = styled.div`
     stroke: ${({ theme }) => theme.backgroundColor.secondary};
   }
 
+  .error {
+    translate: 0 -1rem;
+    padding: 0.3rem 1rem;
+    z-index: -4;
+    transition: all 0.3s ease;
+    width: 100%;
+    position: sticky;
+
+    &.active {
+      translate: 0 0.3rem;
+    }
+  }
+
   label {
     font-size: 1.2rem;
 
