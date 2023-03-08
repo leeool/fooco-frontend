@@ -6,6 +6,7 @@ export const Container = styled.div`
   border-radius: 15px;
   position: relative;
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
+  height: fit-content;
 `
 
 export const Username = styled.div`
