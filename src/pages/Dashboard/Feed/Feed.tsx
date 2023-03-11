@@ -5,7 +5,7 @@ import SkeletonLoad from "src/helpers/Skeleton"
 import UseFetch from "src/hooks/UseFetch"
 import UseMatchWindowSize from "src/hooks/UseWindowSize"
 import ProfilePreview from "../ProfilePreview"
-import Posts from "./Post/Post"
+import Post from "./Post/Post"
 import { Container, PostContainer } from "./styles"
 
 const Feed = () => {
@@ -33,7 +33,7 @@ const Feed = () => {
         {loadingPosts ? (
           <LoadingPosts />
         ) : (
-          posts?.map((post) => <Posts post={post} key={post.id} />).reverse()
+          posts?.map((post) => <Post post={post} key={post.id} />).reverse()
         )}
       </PostContainer>
       {match ? null : <ProfilePreview />}
