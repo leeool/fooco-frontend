@@ -41,3 +41,51 @@ export const Content = styled.p`
     font-size: 1rem;
   }
 `
+
+export const Tags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  max-width: 100%;
+
+  span {
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
+    font-size: 0.8rem;
+    color: #fff;
+    padding: 0rem 0.3rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: none;
+    border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+
+    &:hover {
+      background-color: ${({ theme }) => theme.backgroundColor.primary};
+      color: ${({ theme }) => theme.backgroundColor.secondary};
+      border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+    }
+  }
+
+  /* .add {
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
+    border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+    display: flex;
+    place-items: center;
+    place-content: center;
+    padding: 0;
+
+    svg {
+      display: flex;
+      place-items: center;
+      stroke: #fff;
+      stroke-width: 2;
+      width: 1.2rem;
+    }
+
+    &:hover {
+      background-color: ${({ theme }) => theme.backgroundColor.primary};
+      svg {
+        stroke: ${({ theme }) => theme.backgroundColor.secondary};
+      }
+    }
+  } */
+`
