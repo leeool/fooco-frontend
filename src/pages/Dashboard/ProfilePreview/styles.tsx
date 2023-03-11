@@ -26,12 +26,31 @@ export const Username = styled.div`
   }
 `
 
+export const Points = styled.div`
+  background-color: #fff;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: ${({ theme }) => theme.textColor.title};
+  border-radius: 5px;
+  padding: 0.1rem 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.4rem;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+`
+
 export const UserData = styled.div`
   display: grid;
 
   .user-info {
     display: grid;
-    grid-template-columns: 6rem 1fr;
+    grid-template-columns: 6rem 1fr 0.5fr;
     grid-template-rows: 6rem;
     grid-area: 1 / -1;
     translate: 0 3.5rem;

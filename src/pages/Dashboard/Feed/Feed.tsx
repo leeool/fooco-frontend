@@ -43,13 +43,11 @@ const Feed = () => {
 
 const LoadingPosts = () => (
   <SkeletonLoad>
-    <>
-      <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
-      <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
-      <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
-      <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
-      <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
-    </>
+    <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
+    <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
+    <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
+    <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
+    <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
   </SkeletonLoad>
 )
 

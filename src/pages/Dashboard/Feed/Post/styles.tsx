@@ -89,3 +89,9 @@ export const Tags = styled.div`
     }
   } */
 `
+
+export const AuthorAndTags = styled.div`
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+`

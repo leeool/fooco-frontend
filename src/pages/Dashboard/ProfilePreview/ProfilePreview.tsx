@@ -1,6 +1,6 @@
 import React from "react"
 import { Avatar } from "@components/User/Avatar"
-import { Hashtag, Hat, Plus } from "@assets/index"
+import { Hashtag, Hat, Plus, Point } from "@assets/index"
 import useUserStore from "src/stores/UseUserStore"
 import {
   About,
@@ -14,6 +14,7 @@ import {
   Tags,
   NewTagContainer,
   TagsDialog,
+  Points,
 } from "./styles"
 import { DialogContent, DialogRoot, DialogTrigger } from "@components/Dialog"
 import { Button, Input } from "@components/Form"
@@ -22,6 +23,7 @@ import { Controller, useForm } from "react-hook-form"
 import UseFetch from "src/hooks/UseFetch"
 import { USER_PUT } from "src/api/apiCalls"
 import ReactLoading from "react-loading"
+import getUserPoints from "src/helpers/getUserPoints"
 
 const ProfilePreview = () => {
   const { userData, loading, tags } = useUserStore()
@@ -39,6 +41,10 @@ const ProfilePreview = () => {
             delayMs={500}
           />
           <Username>@{userData.username}</Username>
+          <Points>
+            <Point />
+            {getUserPoints(userData)}
+          </Points>
         </div>
       </UserData>
       <Separator />

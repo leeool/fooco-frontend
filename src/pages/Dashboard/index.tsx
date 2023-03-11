@@ -6,11 +6,7 @@ const index = () => {
   const { isLoggedIn } = useUserStore()
 
   if (!isLoggedIn) return <Navigate to="/comecar" replace />
-  return (
-    <>
-      <Outlet />
-    </>
-  )
+  return <Outlet />
 }
 
 export default index
