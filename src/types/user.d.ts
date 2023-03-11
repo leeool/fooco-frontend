@@ -31,6 +31,7 @@ interface IUserPosts {
   content: string
   created_at: Date
   user: IUserData
+  points: number
 }
 
 interface IError {
