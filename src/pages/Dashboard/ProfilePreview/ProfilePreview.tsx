@@ -51,7 +51,7 @@ const ProfilePreview = () => {
           <Hat />
           <span>ETEC Adolpho Berezin</span>
         </Item>
-        <Tags>
+        {/* <Tags>
           {userData.tags.concat(...tags).map((tag) => (
             <span key={tag}>{tag}</span>
           ))}
@@ -65,7 +65,7 @@ const ProfilePreview = () => {
               <AddNewTag userData={userData} />
             </DialogContent>
           </DialogRoot>
-        </Tags>
+        </Tags> */}
       </About>
     </Container>
   )
