@@ -116,7 +116,7 @@ export const BarContainer = styled.section`
     &::before {
       content: "";
       background-color: #fff;
-      width: 0;
+      width: 100%;
       height: 100%;
       display: block;
       position: absolute;
@@ -124,8 +124,12 @@ export const BarContainer = styled.section`
       z-index: -1;
       top: 0;
       left: 0;
-      animation: sloganAnimation 0.8s ease forwards;
-      animation-delay: 0.8s;
+
+      @media (min-width: 600px) {
+        width: 0;
+        animation: sloganAnimation 0.8s ease forwards;
+        animation-delay: 0.8s;
+      }
     }
   }
 
