@@ -5,7 +5,7 @@ import Input from "@components/Form/Input"
 import { ReactComponent as Letter } from "@assets/icons/letter.svg"
 import { ReactComponent as Lock } from "@assets/icons/lock.svg"
 import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
-import Button from "@components/Form/Button"
+import { Button } from "@components/Form"
 import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import useUserStore from "src/stores/UseUserStore"
@@ -69,13 +69,11 @@ const index = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <Button
-          variant="solid"
-          icon={<Foquinho />}
-          disabled={loading || loginLoading}
-          loading={loading || loginLoading}
-        >
-          Entrar
+        <Button variant="solid" disabled={loading || loginLoading}>
+          <>
+            Entrar
+            <Foquinho />
+          </>
         </Button>
       </form>
 

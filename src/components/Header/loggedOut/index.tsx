@@ -1,6 +1,6 @@
 import React from "react"
 import { ReactComponent as Logo } from "@assets/logo.svg"
-import Button from "@components/Form/Button"
+import { Button } from "@components/Form"
 import { Link } from "react-router-dom"
 import ToggleThemeMenu from "@components/ToggleThemeMenu"
 

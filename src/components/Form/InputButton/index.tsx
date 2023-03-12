@@ -1,7 +1,6 @@
 import React from "react"
-import Button from "../Button"
+import { Button } from "../Button"
 import { Container } from "./style"
-import Input from "../Input"
 
 interface Props {
   label?: string
@@ -32,7 +31,7 @@ const index = ({
           <input type="text" placeholder={placeholder} onChange={onChange} />
           <span className="icon">{icon}</span>
         </div>
-        <Button variant="solid" icon={buttonIcon} onClick={onClick}>
+        <Button variant="solid" onClick={onClick}>
           {button}
         </Button>
       </form>

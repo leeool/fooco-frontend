@@ -20,7 +20,7 @@ import {
   DialogTrigger,
 } from "@components/Dialog"
 import { Title } from "@components/Text/Title"
-import Button from "@components/Form/Button"
+import { Button } from "@components/Form"
 import { ConfirmLogout } from "./styles"
 import { Paragraph } from "@components/Text/Paragraph"
 

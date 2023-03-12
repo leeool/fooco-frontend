@@ -4,9 +4,6 @@ export const Container = styled.div`
   display: grid;
   gap: 1rem;
   padding: 1rem 0;
-
-  border-bottom: 2px solid
-    ${({ theme }) => theme.backgroundColor.alternativeState};
 `
 
 export const Author = styled.span`
@@ -26,6 +23,11 @@ export const PostTitle = styled.h4`
   @media (max-width: 600px) {
     font-size: 1.4rem;
   }
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `
 
 export const PostInfo = styled.div`
@@ -36,9 +38,19 @@ export const PostInfo = styled.div`
 export const Content = styled.p`
   color: ${(props) => props.theme.textColor.paragraph};
   font-size: 1.2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 
   @media (max-width: 600px) {
     font-size: 1rem;
+  }
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
   }
 `
 
@@ -62,34 +74,36 @@ export const Tags = styled.div`
       color: ${({ theme }) => theme.backgroundColor.primary};
     }
   }
-
-  /* .add {
-    background-color: ${({ theme }) => theme.backgroundColor.secondary};
-    border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
-    display: flex;
-    place-items: center;
-    place-content: center;
-    padding: 0;
-
-    svg {
-      display: flex;
-      place-items: center;
-      stroke: #fff;
-      stroke-width: 2;
-      width: 1.2rem;
-    }
-
-    &:hover {
-      background-color: ${({ theme }) => theme.backgroundColor.primary};
-      svg {
-        stroke: ${({ theme }) => theme.backgroundColor.secondary};
-      }
-    }
-  } */
 `
 
 export const AuthorAndTags = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr;
   gap: 1rem;
   align-items: center;
+`
+
+export const Interactions = styled.div`
+  border-top: 2px solid ${({ theme }) => theme.backgroundColor.alternativeState};
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 0;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+    gap: 0.5rem;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  button {
+    padding: 0.4rem 0;
+  }
 `

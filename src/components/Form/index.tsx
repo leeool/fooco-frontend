@@ -1,5 +1,5 @@
 import Input from "./Input"
-import Button from "./Button"
 import InputButton from "./InputButton"
+import { ButtonSecondary, Button } from "./Button"
 
-export { Input, Button, InputButton }
+export { Input, Button, InputButton, ButtonSecondary }

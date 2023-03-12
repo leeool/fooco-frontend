@@ -1,10 +1,6 @@
-import React, { forwardRef } from "react"
+import React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
 import { Content, DialogOverlay, Trigger } from "./styles"
-
-interface ContentProps {
-  children: React.ReactNode
-}
 
 interface TriggerProps {
   children: React.ReactNode

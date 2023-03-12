@@ -40,7 +40,7 @@ export const Content = styled(Dialog.Content)`
   animation: contentShow 500ms cubic-bezier(0.16, 1, 0.3, 1);
 
   @media (max-width: 600px) {
-    padding: 1rem;
+    padding: 0.8rem 1rem;
   }
 
   @keyframes contentShow {

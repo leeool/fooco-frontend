@@ -58,37 +58,33 @@ export const Content = styled(DropdownMenuContent)`
 `
 
 export const RadioItem = styled(DropdownMenuRadioItem)`
-  & > * {
-    font-size: 1.3rem;
-    display: flex;
-    font-weight: 500;
-    place-items: center;
-    padding: 0.2rem 2rem;
-    transition: none;
-    cursor: pointer;
-    gap: 0.6rem;
-    color: ${({ theme }) => theme.backgroundColor.secondary};
+  font-size: 1.3rem;
+  display: flex;
+  font-weight: 500;
+  place-items: center;
+  padding: 0.2rem 1rem;
+  transition: none;
+  cursor: pointer;
+  gap: 0.6rem;
+  color: ${({ theme }) => theme.backgroundColor.secondary};
+  font-family: "Roboto", sans-serif;
+  width: 100%;
 
-    svg {
-      display: flex;
-      width: 1.8rem;
-      height: 1.8rem;
-    }
+  svg {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  button {
+    width: 100%;
   }
 
   &:hover {
-    background-color: ${({ theme }) => theme.backgroundColor.secondary};
-    * {
-      color: #fff;
-    }
+    background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
   }
 
   &[data-state="checked"] {
-    background-color: ${({ theme }) => theme.backgroundColor.secondary};
-
-    * {
-      color: #fff;
-    }
+    background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
   }
   border-radius: 5px;
   transition: none;
@@ -109,7 +105,6 @@ export const Item = styled(DropdownMenuItem)`
   width: 100%;
 
   svg {
-    display: flex;
     width: 1.8rem;
     height: 1.8rem;
   }

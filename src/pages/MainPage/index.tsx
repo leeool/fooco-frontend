@@ -23,7 +23,7 @@ import { motion } from "framer-motion"
 import { animateLeft, animateRight } from "src/helpers/animations"
 import UseMatchWindowSize from "src/hooks/UseWindowSize"
 import Input from "@components/Form/Input"
-import Button from "@components/Form/Button"
+import { Button } from "@components/Form"
 import ReactLoading from "react-loading"
 
 const MainPage = () => {

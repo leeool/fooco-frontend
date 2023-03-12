@@ -39,6 +39,7 @@ export const Points = styled.div`
   font-size: 1.4rem;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
+  outline: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
 
   svg {
     width: 1rem;
@@ -102,6 +103,7 @@ export const Item = styled.div`
   align-items: center;
   gap: 0.6rem;
   color: ${({ theme }) => theme.backgroundColor.secondary};
+  width: 100%;
 
   svg,
   path {

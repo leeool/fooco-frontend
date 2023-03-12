@@ -8,6 +8,9 @@ import router from "./routes"
 import Toast from "@components/Toast"
 import useUserStore from "./stores/UseUserStore"
 import UseToastStore from "@components/Toast/UseToastStore"
+import { QueryClient, QueryClientProvider } from "react-query"
+
+const queryClient = new QueryClient()
 
 const App = () => {
   const { localTheme, selectedTheme } = themeStore()
@@ -23,11 +26,13 @@ const App = () => {
   }, [])
 
   return (
-    <ThemeProvider theme={theme[selectedTheme]}>
-      <GlobalStyle />
-      <RouterProvider router={router} />
-      <Toast title={toastContent.title} description={toastContent.message} />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme[selectedTheme]}>
+        <GlobalStyle />
+        <RouterProvider router={router} />
+        <Toast title={toastContent.title} description={toastContent.message} />
+      </ThemeProvider>
+    </QueryClientProvider>
   )
 }
 

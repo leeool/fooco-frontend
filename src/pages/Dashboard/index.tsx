@@ -1,11 +1,7 @@
 import React from "react"
-import { Navigate, Outlet } from "react-router"
-import useUserStore from "src/stores/UseUserStore"
+import { Outlet } from "react-router"
 
 const index = () => {
-  const { isLoggedIn } = useUserStore()
-
-  if (!isLoggedIn) return <Navigate to="/comecar" replace />
   return <Outlet />
 }
 

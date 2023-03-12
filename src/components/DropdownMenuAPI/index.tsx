@@ -28,3 +28,5 @@ export const DropdownMenuContent = ({ children }: Props) => {
     </DropdownMenuPrimitive.Portal>
   )
 }
+export const DropdownMenuRadioGroup = RadioGroup
+export const DropdownMenuRadioItem = RadioItem

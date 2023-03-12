@@ -7,6 +7,7 @@ import Entrar from "./pages/Entrar/Login"
 import Criar from "./pages/Entrar/Criar"
 import Dashboard from "./pages/Dashboard"
 import Feed from "./pages/Dashboard/Feed"
+import PostPage from "./pages/PostPage/PostPage"
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
           {
             path: "perfil",
             element: <div>Perfil</div>,
+          },
+          {
+            path: "pergunta/:id",
+            element: <PostPage />,
           },
         ],
       },

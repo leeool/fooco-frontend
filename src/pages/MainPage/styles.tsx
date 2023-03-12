@@ -232,15 +232,8 @@ export const ComecarContainer = styled.section`
 export const DuvidaContainer = styled.section`
   .duvidas {
     margin-top: 2rem;
-    display: flex;
-    flex-flow: row wrap;
-    column-gap: 1.5rem;
+    display: grid;
     row-gap: 1rem;
-  }
-  @media (max-width: 1000px) {
-    .duvidas {
-      grid-template-columns: 1fr;
-    }
   }
 `
 

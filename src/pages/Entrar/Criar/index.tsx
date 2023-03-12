@@ -4,7 +4,7 @@ import { Container } from "./styles"
 import Input from "@components/Form/Input"
 import { ReactComponent as Letter } from "@assets/icons/letter.svg"
 import { ReactComponent as Lock } from "@assets/icons/lock.svg"
-import Button from "@components/Form/Button"
+import { Button } from "@components/Form"
 import { Link, useNavigate } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
@@ -16,6 +16,7 @@ import UseToastStore from "@components/Toast/UseToastStore"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createUserSchema } from "src/schemas"
+import { Foquinho2 } from "@assets/index"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -176,13 +177,11 @@ const index = () => {
               )}
             />
 
-            <Button
-              variant="solid"
-              icon={<Foquinho />}
-              disabled={loading || loginLoading}
-              loading={loading || loginLoading}
-            >
-              Avançar
+            <Button variant="solid" disabled={loading || loginLoading}>
+              <>
+                Avançar
+                <Foquinho2 />
+              </>
             </Button>
           </motion.form>
         ) : (
@@ -217,12 +216,11 @@ const index = () => {
               )}
             />
 
-            <Button
-              variant="solid"
-              icon={<Foquinho />}
-              disabled={loading || loginLoading}
-            >
-              Criar Conta
+            <Button variant="solid" disabled={loading || loginLoading}>
+              <>
+                <Foquinho />
+                Criar Conta
+              </>
             </Button>
           </motion.form>
         )}

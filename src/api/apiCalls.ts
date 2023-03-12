@@ -88,3 +88,12 @@ export const GET_POSTS = () => {
     },
   }
 }
+
+export const GET_POST = (id: string) => {
+  return {
+    url: ENDPOINT + `/post/${id}`,
+    options: {
+      method: "GET",
+    },
+  }
+}

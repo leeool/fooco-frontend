@@ -24,12 +24,55 @@ import UseFetch from "src/hooks/UseFetch"
 import { USER_PUT } from "src/api/apiCalls"
 import ReactLoading from "react-loading"
 import getUserPoints from "src/helpers/getUserPoints"
+import SkeletonLoad from "src/helpers/Skeleton"
+import Skeleton from "react-loading-skeleton"
 
 const ProfilePreview = () => {
-  const { userData, loading, tags } = useUserStore()
+  const { userData, loading, isLoggedIn } = useUserStore()
 
   if (loading || !userData)
-    return <ReactLoading type="spin" color="#E63A23" height={50} width={50} />
+    return (
+      <Container>
+        <SkeletonLoad>
+          <UserData>
+            <div className="user-info">
+              <Skeleton width={"7rem"} count={1} height={"7rem"} circle />
+              <Skeleton
+                width={"100%"}
+                count={1}
+                height={30}
+                borderRadius={"10px"}
+              />
+              <Skeleton
+                width={"100%"}
+                count={1}
+                height={30}
+                borderRadius={"10px"}
+              />
+            </div>
+          </UserData>
+          <Separator />
+          <About>
+            <Skeleton
+              width={"100%"}
+              count={3}
+              height={15}
+              borderRadius={"5px"}
+            />
+            <Item>
+              <Hat />
+              <Skeleton
+                width={200}
+                count={1}
+                height={15}
+                borderRadius={"5px"}
+              />
+            </Item>
+          </About>
+        </SkeletonLoad>
+      </Container>
+    )
+  if (!isLoggedIn) return null
   return (
     <Container>
       <UserData>
@@ -120,7 +163,7 @@ const AddNewTag = ({ userData }: { userData: IUserData }) => {
             />
           )}
         />
-        <Button variant="solid" loading={loading} disabled={loading}>
+        <Button variant="solid" disabled={loading}>
           Adicionar
         </Button>
       </form>

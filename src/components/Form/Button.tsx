@@ -5,28 +5,36 @@ interface Props {
   variant: "outlined" | "solid" | "transparent"
 }
 
-export const ButtonContainer = styled.button<Props>`
+export const ButtonContainer = styled.button`
   display: flex;
   justify-content: center;
   border: none;
   cursor: pointer;
   padding: 0.4rem 1rem;
-  min-height: 2.4rem;
+  /* min-height: 2.4rem; */
   height: 100%;
   border-radius: 20px;
   font-weight: 700;
   align-items: center;
   gap: 0.4rem;
-  max-height: 100%;
+  /* max-height: 100%; */
   text-align: center;
   background-color: ${({ theme }) => theme.backgroundColor.primary};
   width: 100%;
   font-size: 1.2rem;
 
-  svg {
-    width: 2rem;
-    height: 2rem;
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
   }
+`
+
+export const Button = styled(ButtonContainer)<Props>`
+  border: none;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  font-weight: 700;
+  background-color: ${({ theme }) => theme.backgroundColor.primary};
 
   &:disabled {
     cursor: wait;
@@ -35,6 +43,11 @@ export const ButtonContainer = styled.button<Props>`
     svg {
       animation: spin 2s linear infinite;
     }
+  }
+
+  svg {
+    width: 2rem;
+    height: 2rem;
   }
 
   ${variant({
@@ -78,6 +91,28 @@ export const ButtonContainer = styled.button<Props>`
     }
     to {
       transform: rotate(360deg);
+    }
+  }
+`
+
+export const ButtonSecondary = styled(ButtonContainer)`
+  background-color: ${({ theme }) => theme.backgroundColor.tertiary};
+  border-radius: 10px;
+  color: ${({ theme }) => theme.textColor.title};
+  font-weight: 500;
+  font-size: 1rem;
+
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
+    color: ${({ theme }) => theme.backgroundColor.tertiary};
+
+    path {
+      stroke: ${({ theme }) => theme.backgroundColor.tertiary};
     }
   }
 `
