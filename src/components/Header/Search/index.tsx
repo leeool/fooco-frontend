@@ -1,7 +1,6 @@
 import React from "react"
 import UseMatchWindowSize from "src/hooks/UseWindowSize"
 import { Container, SearchContainer } from "./styles"
-import SearchPopup from "../SearchPopup"
 
 const Search = () => {
   const match = UseMatchWindowSize(1100)

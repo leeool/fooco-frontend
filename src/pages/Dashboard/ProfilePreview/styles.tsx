@@ -31,6 +31,7 @@ export const Points = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  justify-self: start;
   color: ${({ theme }) => theme.textColor.title};
   border-radius: 5px;
   padding: 0.1rem 0.5rem;

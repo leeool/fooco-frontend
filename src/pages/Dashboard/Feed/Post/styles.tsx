@@ -49,19 +49,17 @@ export const Tags = styled.div`
   max-width: 100%;
 
   span {
-    background-color: ${({ theme }) => theme.backgroundColor.secondary};
-    font-size: 0.8rem;
-    color: #fff;
-    padding: 0rem 0.3rem;
+    background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
+    font-size: 0.85rem;
+    color: ${(props) => props.theme.textColor.title};
+    padding: 0.1rem 0.4rem;
     border-radius: 5px;
     cursor: pointer;
     transition: none;
-    border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
 
     &:hover {
-      background-color: ${({ theme }) => theme.backgroundColor.primary};
-      color: ${({ theme }) => theme.backgroundColor.secondary};
-      border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+      background-color: ${({ theme }) => theme.backgroundColor.secondary};
+      color: ${({ theme }) => theme.backgroundColor.primary};
     }
   }
 

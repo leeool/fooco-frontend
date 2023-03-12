@@ -32,7 +32,7 @@ const light = {
     tertiary: "#EFEFEF",
     details: "#B9B9B9",
     detailsAlt: "#d9d9d9",
-    alternativeState: "#ff624e20",
+    alternativeState: "#ff624e30",
   },
   textColor: {
     title: "#E63A23",
