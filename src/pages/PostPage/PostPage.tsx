@@ -3,8 +3,8 @@ import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { useQuery } from "react-query"
 import { useNavigate, useParams } from "react-router"
-import { instance } from "src/api/apiCalls"
-import formatDate from "src/helpers/formatDate"
+import { FEEDBACK_POST, instance } from "src/api/apiCalls"
+import UseFetch from "src/hooks/UseFetch"
 import useUserStore from "src/stores/UseUserStore"
 import {
   Author,
@@ -21,13 +21,15 @@ import {
 
 const PostPage = () => {
   const { id } = useParams()
-  const { isLoggedIn } = useUserStore()
+  const { isLoggedIn, userData } = useUserStore()
   const nav = useNavigate()
   const { data, isLoading, isFetching } = useQuery<IUserPosts | IError>(
     "post",
     () => instance(`/post/${id}`, { method: "GET" }).then((res) => res.data),
     { refetchOnWindowFocus: false }
   )
+  const { request, data: feedbackData } = UseFetch<string>()
+  const [feedback, setFeedback] = React.useState<string | null>(null)
 
   const getDate = (date: string) => {
     const now = new Date()
@@ -46,7 +48,25 @@ const PostPage = () => {
     }
 
     const feedbackType = e.currentTarget.dataset.feedback
+
+    if (!feedbackType || !userData || !id) return
+
+    setFeedback((prev) => (prev === feedbackType ? null : feedbackType))
+
+    const { options, url } = FEEDBACK_POST(feedbackType, userData.id, id)
+
+    request(url, options)
   }
+
+  React.useEffect(() => {
+    if (id && userData?.liked_posts.includes(id)) {
+      setFeedback("like")
+    } else if (id && userData?.disliked_posts.includes(id)) {
+      setFeedback("dislike")
+    } else {
+      setFeedback(null)
+    }
+  }, [id, userData])
 
   if (isLoading || isFetching) return <div>Loading...</div>
   if (data && "error" in data) return <div>{data.error}</div>
@@ -55,11 +75,21 @@ const PostPage = () => {
     <Container>
       <Interactions>
         <Feedback>
-          <button onClick={handleFeedback} data-feedback="like">
+          <button
+            onClick={handleFeedback}
+            data-feedback="like"
+            data-active={feedback === "like"}
+          >
             <MiniSeta />
           </button>
-          <span>{data.points}</span>
-          <button onClick={handleFeedback} data-feedback="dislike">
+          <span>
+            {feedbackData !== null ? String(feedbackData) : data.points}
+          </span>
+          <button
+            onClick={handleFeedback}
+            data-feedback="dislike"
+            data-active={feedback === "dislike"}
+          >
             <MiniSeta style={{ rotate: "180deg" }} />
           </button>
         </Feedback>

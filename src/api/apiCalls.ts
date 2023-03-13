@@ -97,3 +97,23 @@ export const GET_POST = (id: string) => {
     },
   }
 }
+
+export const FEEDBACK_POST = (
+  option: string,
+  userID: string,
+  postID: string
+) => {
+  return {
+    url: ENDPOINT + "/post/feedback/" + postID,
+    options: {
+      method: "POST",
+      data: {
+        option: option,
+        user_id: userID,
+      },
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    },
+  }
+}

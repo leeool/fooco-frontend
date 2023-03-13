@@ -84,6 +84,10 @@ export const Feedback = styled.div`
   span {
     color: ${({ theme }) => theme.textColor.title};
   }
+
+  button[data-active="true"] svg {
+    color: ${({ theme }) => theme.textColor.title};
+  }
 `
 
 export const Interactions = styled.div`
