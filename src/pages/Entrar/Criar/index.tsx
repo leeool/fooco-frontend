@@ -178,10 +178,7 @@ const index = () => {
             />
 
             <Button variant="solid" disabled={loading || loginLoading}>
-              <>
-                Avançar
-                <Foquinho2 />
-              </>
+              {loading || loginLoading ? "Carregando..." : "Avançar"}
             </Button>
           </motion.form>
         ) : (
@@ -217,10 +214,7 @@ const index = () => {
             />
 
             <Button variant="solid" disabled={loading || loginLoading}>
-              <>
-                <Foquinho />
-                Criar Conta
-              </>
+              {loading || loginLoading ? "Carregando..." : "Avançar"}
             </Button>
           </motion.form>
         )}

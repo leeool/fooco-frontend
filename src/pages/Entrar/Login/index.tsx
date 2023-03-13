@@ -70,10 +70,7 @@ const index = () => {
           required
         />
         <Button variant="solid" disabled={loading || loginLoading}>
-          <>
-            Entrar
-            <Foquinho />
-          </>
+          {loading || loginLoading ? "Carregando..." : "Entrar"}
         </Button>
       </form>
 
