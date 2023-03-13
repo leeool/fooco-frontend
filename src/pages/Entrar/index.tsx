@@ -16,7 +16,7 @@ const index = () => {
         <Foquinho />
       </div>
       <div className="outlet">
-        <Link to={"/comecar"} className="logo">
+        <Link to={"/"} className="logo">
           <Logo />
         </Link>
         <Outlet />

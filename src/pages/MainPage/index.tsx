@@ -51,7 +51,7 @@ const MainPage = () => {
         className="load-icon"
       />
     )
-  if (isLoggedIn) return <Navigate to="/" replace />
+  if (isLoggedIn) return <Navigate to="/app" replace />
   return (
     <Container>
       <InicioContainer>

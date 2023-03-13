@@ -30,12 +30,12 @@ const index = () => {
 
   return (
     <>
-      <Link to="/" className="logo">
+      <Link to="/app" className="logo">
         <Logo />
       </Link>
       <Search />
       <div className="buttons-logged">
-        <Link to={"/"}>
+        <Link to={"/app"}>
           <button>
             <Home />
             Início
@@ -52,10 +52,10 @@ const index = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuGroup>
-              <Link to={"/perfil"}>
+              <Link to={"/app/perfil"}>
                 <DropdownMenuItem>Perfil</DropdownMenuItem>
               </Link>
-              <Link to={"/"}>
+              <Link to={"/app"}>
                 <DropdownMenuItem>Configurações</DropdownMenuItem>
               </Link>
               <DialogRoot>

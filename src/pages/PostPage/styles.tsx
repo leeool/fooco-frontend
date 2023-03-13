@@ -94,8 +94,8 @@ export const Interactions = styled.div`
   align-items: center;
 
   svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.8rem;
+    height: 1.8rem;
     color: ${({ theme }) => theme.backgroundColor.detailsAlt};
     cursor: pointer;
 
