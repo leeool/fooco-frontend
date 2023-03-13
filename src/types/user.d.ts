@@ -13,7 +13,7 @@ interface IUserData {
   username: string
   id: string
   email: string
-  created_at: Date
+  created_at: string
   about: string
   avatar_url: string
   banner_url: string
@@ -29,7 +29,7 @@ interface IUserPosts {
   id: string
   title: string
   content: string
-  created_at: Date
+  created_at: string
   user: IUserData
   points: number
 }
