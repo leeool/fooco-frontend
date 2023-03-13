@@ -1,26 +1,45 @@
 import { createBrowserRouter } from "react-router-dom"
-import MainPage from "./pages/MainPage"
-import Login from "./pages/Entrar"
 import React from "react"
-import Layout from "./Layout"
-import Entrar from "./pages/Entrar/Login"
-import Criar from "./pages/Entrar/Criar"
-import Dashboard from "./pages/Dashboard"
-import Feed from "./pages/Dashboard/Feed"
-import PostPage from "./pages/PostPage/PostPage"
+// import Layout from "./Layout"
+// import Login from "./pages/Entrar"
+// import Entrar from "./pages/Entrar/Login"
+// import Criar from "./pages/Entrar/Criar"
+// import Dashboard from "./pages/Dashboard"
+// import Feed from "./pages/Dashboard/Feed"
+// import PostPage from "./pages/PostPage/PostPage"
+const Layout = React.lazy(() => import("./Layout"))
+const MainPage = React.lazy(() => import("./pages/MainPage"))
+const PostPage = React.lazy(() => import("./pages/PostPage/PostPage"))
+const Feed = React.lazy(() => import("./pages/Dashboard/Feed"))
+const Dashboard = React.lazy(() => import("./pages/Dashboard"))
+const Criar = React.lazy(() => import("./pages/Entrar/Criar"))
+const Entrar = React.lazy(() => import("./pages/Entrar/Login"))
+const Login = React.lazy(() => import("./pages/Entrar"))
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: <Layout />,
+    element: (
+      <React.Suspense>
+        <Layout />
+      </React.Suspense>
+    ),
     children: [
       {
         path: "app",
-        element: <Dashboard />,
+        element: (
+          <React.Suspense>
+            <Dashboard />
+          </React.Suspense>
+        ),
         children: [
           {
             path: "",
-            element: <Feed />,
+            element: (
+              <React.Suspense>
+                <Feed />
+              </React.Suspense>
+            ),
           },
           {
             path: "perfil",
@@ -28,31 +47,55 @@ const router = createBrowserRouter([
           },
           {
             path: "pergunta/:id",
-            element: <PostPage />,
+            element: (
+              <React.Suspense>
+                <PostPage />
+              </React.Suspense>
+            ),
           },
         ],
       },
       {
         path: "",
-        element: <MainPage />,
+        element: (
+          <React.Suspense>
+            <MainPage />
+          </React.Suspense>
+        ),
       },
       {
         path: "*",
-        element: <Dashboard />,
+        element: (
+          <React.Suspense>
+            <Dashboard />
+          </React.Suspense>
+        ),
       },
     ],
   },
   {
     path: "/entrar",
-    element: <Login />,
+    element: (
+      <React.Suspense>
+        <Login />
+      </React.Suspense>
+    ),
     children: [
       {
         path: "",
-        element: <Entrar />,
+        element: (
+          <React.Suspense>
+            <Entrar />
+          </React.Suspense>
+        ),
       },
       {
         path: "criar",
-        element: <Criar />,
+        element: (
+          <React.Suspense>
+            <Criar />
+          </React.Suspense>
+        ),
       },
     ],
   },
