@@ -7,6 +7,7 @@ import { ReactComponent as Foquinho2 } from "./foquinho2.svg"
 import { ReactComponent as Point } from "./icons/point.svg"
 import { ReactComponent as Share } from "./icons/share.svg"
 import { ReactComponent as Bookmark } from "./icons/bookmark.svg"
+import { ReactComponent as MiniSeta } from "./icons/miniseta.svg"
 
 export {
   Hat,
@@ -18,4 +19,5 @@ export {
   Reply,
   Share,
   Bookmark,
+  MiniSeta,
 }

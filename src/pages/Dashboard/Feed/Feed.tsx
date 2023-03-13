@@ -1,6 +1,5 @@
 import React from "react"
 import Skeleton from "react-loading-skeleton"
-import { Link } from "react-router-dom"
 import { GET_POSTS } from "src/api/apiCalls"
 import SkeletonLoad from "src/helpers/Skeleton"
 import UseFetch from "src/hooks/UseFetch"

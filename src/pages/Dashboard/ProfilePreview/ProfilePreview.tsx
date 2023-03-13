@@ -1,6 +1,6 @@
 import React from "react"
 import { Avatar } from "@components/User/Avatar"
-import { Hashtag, Hat, Plus, Point } from "@assets/index"
+import { Hat, Point } from "@assets/index"
 import useUserStore from "src/stores/UseUserStore"
 import {
   About,
@@ -11,18 +11,8 @@ import {
   Username,
   Separator,
   Item,
-  Tags,
-  NewTagContainer,
-  TagsDialog,
   Points,
 } from "./styles"
-import { DialogContent, DialogRoot, DialogTrigger } from "@components/Dialog"
-import { Button, Input } from "@components/Form"
-import { Title } from "@components/Text/Title"
-import { Controller, useForm } from "react-hook-form"
-import UseFetch from "src/hooks/UseFetch"
-import { USER_PUT } from "src/api/apiCalls"
-import ReactLoading from "react-loading"
 import getUserPoints from "src/helpers/getUserPoints"
 import SkeletonLoad from "src/helpers/Skeleton"
 import Skeleton from "react-loading-skeleton"
@@ -30,13 +20,13 @@ import Skeleton from "react-loading-skeleton"
 const ProfilePreview = () => {
   const { userData, loading, isLoggedIn } = useUserStore()
 
-  if (loading || !userData)
+  if (loading)
     return (
       <Container>
         <SkeletonLoad>
           <UserData>
             <div className="user-info">
-              <Skeleton width={"7rem"} count={1} height={"7rem"} circle />
+              <Skeleton width={"6em"} count={1} height={"6rem"} circle />
               <Skeleton
                 width={"100%"}
                 count={1}
@@ -72,7 +62,7 @@ const ProfilePreview = () => {
         </SkeletonLoad>
       </Container>
     )
-  if (!isLoggedIn) return null
+  if (!isLoggedIn || !userData) return null
   return (
     <Container>
       <UserData>
@@ -100,79 +90,8 @@ const ProfilePreview = () => {
           <Hat />
           <span>ETEC Adolpho Berezin</span>
         </Item>
-        {/* <Tags>
-          {userData.tags.concat(...tags).map((tag) => (
-            <span key={tag}>{tag}</span>
-          ))}
-          <DialogRoot>
-            <DialogTrigger>
-              <span className="add">
-                <Plus />
-              </span>
-            </DialogTrigger>
-            <DialogContent>
-              <AddNewTag userData={userData} />
-            </DialogContent>
-          </DialogRoot>
-        </Tags> */}
       </About>
     </Container>
-  )
-}
-
-const AddNewTag = ({ userData }: { userData: IUserData }) => {
-  const { tags, setTag } = useUserStore()
-  const { handleSubmit, control } = useForm()
-  const { request, loading } = UseFetch<IUserData>()
-
-  const submitTag = handleSubmit(async (fieldValues) => {
-    if (tags.includes(fieldValues.newtag)) {
-      return
-    }
-
-    const { url, options } = USER_PUT(
-      { tags: [...userData.tags, fieldValues.newtag] },
-      userData.id
-    )
-
-    const response = await request(url, options)
-
-    if (!response.error) {
-      setTag([...tags, fieldValues.newtag])
-    }
-  })
-
-  return (
-    <NewTagContainer>
-      <Title size="lg">Adicionar nova tag</Title>
-      <form onSubmit={submitTag}>
-        <Controller
-          defaultValue={""}
-          control={control}
-          name="newtag"
-          render={({ field: { onChange, onBlur, ref } }) => (
-            <Input
-              label="Nova Tag"
-              type="text"
-              id="newtag"
-              placeholder="Digite uma nova tag"
-              icon={<Hashtag />}
-              onChange={onChange}
-              onBlur={onBlur}
-              innerRef={ref}
-            />
-          )}
-        />
-        <Button variant="solid" disabled={loading}>
-          Adicionar
-        </Button>
-      </form>
-      <TagsDialog>
-        {userData.tags.concat(...tags).map((tag) => (
-          <span key={tag}>{tag}</span>
-        ))}
-      </TagsDialog>
-    </NewTagContainer>
   )
 }
 
