@@ -96,7 +96,7 @@ export const Interactions = styled.div`
   svg {
     width: 1.5rem;
     height: 1.5rem;
-    color: ${({ theme }) => theme.textColor.details};
+    color: ${({ theme }) => theme.backgroundColor.detailsAlt};
     cursor: pointer;
 
     &:hover {
@@ -109,11 +109,17 @@ export const Details = styled.div`
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: auto 1fr;
+  gap: 1rem;
   justify-content: space-between;
   align-items: center;
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
   padding: 0.8rem;
   border-radius: 10px;
+
+  button {
+    place-self: start;
+    height: fit-content;
+  }
 `
 
 export const Tags = styled.div`
@@ -122,6 +128,7 @@ export const Tags = styled.div`
   gap: 0.5rem;
   max-width: 100%;
   justify-self: end;
+  justify-content: end;
 
   span {
     background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
@@ -135,6 +142,10 @@ export const Tags = styled.div`
     &:hover {
       background-color: ${({ theme }) => theme.backgroundColor.secondary};
       color: ${({ theme }) => theme.backgroundColor.primary};
+    }
+
+    @media (max-width: 600px) {
+      font-size: 0.8rem;
     }
   }
 `

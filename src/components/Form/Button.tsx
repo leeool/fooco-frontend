@@ -101,10 +101,10 @@ export const ButtonSecondary = styled(ButtonContainer)`
   color: ${({ theme }) => theme.textColor.title};
   font-weight: 500;
   font-size: 1rem;
+  padding: 0.4rem 1rem;
 
   @media (max-width: 600px) {
-    font-size: 0.8rem;
-    padding: 0.2rem 0.5rem;
+    font-size: 0.9rem;
   }
 
   &:hover {
