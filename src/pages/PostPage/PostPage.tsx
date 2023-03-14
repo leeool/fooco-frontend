@@ -58,16 +58,6 @@ const PostPage = () => {
     request(url, options)
   }
 
-  React.useEffect(() => {
-    if (id && userData?.liked_posts.includes(id)) {
-      setFeedback("like")
-    } else if (id && userData?.disliked_posts.includes(id)) {
-      setFeedback("dislike")
-    } else {
-      setFeedback(null)
-    }
-  }, [id, userData])
-
   if (isLoading || isFetching) return <div>Loading...</div>
   if (data && "error" in data) return <div>{data.error}</div>
   if (!data) return null

@@ -17,11 +17,8 @@ interface IUserData {
   about: string
   avatar_url: string
   banner_url: string
-  liked_posts: string[]
-  disliked_posts: string[]
   educational_place: string
   educational_place_url: string
-  tags: string[]
   posts: IUserPosts[]
 }
 
@@ -32,6 +29,9 @@ interface IUserPosts {
   created_at: string
   user: IUserData
   points: number
+  tags: string[]
+  users_liked: string[]
+  users_disliked: string[]
 }
 
 interface IError {
