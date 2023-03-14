@@ -27,9 +27,9 @@ const Post = ({ post }: Props) => {
         <AuthorAndTags>
           <Author>por {post.user.username}</Author>
           <Tags>
-            <span>TCC</span>
-            <span>Dicas de Estudos</span>
-            <span>Socialização</span>
+            {post.tags.map((tag) => (
+              <span key={tag}>{tag}</span>
+            ))}
           </Tags>
         </AuthorAndTags>
       </PostInfo>
