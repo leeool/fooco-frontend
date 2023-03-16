@@ -19,6 +19,7 @@ import {
   Tags,
   Title,
 } from "./styles"
+import ReactLoading from "react-loading"
 
 const PostPage = () => {
   const { id } = useParams()
@@ -70,7 +71,16 @@ const PostPage = () => {
     else if (userDislikedPost) return setFeedback("dislike")
   }, [data, userData, id])
 
-  if (isLoading || isFetching) return <div>Loading...</div>
+  if (isLoading || isFetching)
+    return (
+      <ReactLoading
+        type="spin"
+        color="#E63A23"
+        height={50}
+        width={50}
+        className="load-icon"
+      />
+    )
   if (isError(data)) return <div>{data.error}</div>
   if (!data) return null
   return (
