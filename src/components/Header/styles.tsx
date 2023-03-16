@@ -13,8 +13,8 @@ export const HeaderContainer = styled.header`
   transition: background-color 0.3s ease-in-out;
 
   .loading {
+    display: block;
     width: 100%;
-    grid-column: 1 / -1;
   }
 
   .buttons {
@@ -76,6 +76,11 @@ export const HeaderContainer = styled.header`
     gap: 1rem;
     grid-template-columns: 1fr;
     padding: 0.6rem 1rem;
+
+    .loading {
+      width: 100%;
+      grid-column: 1 / -1;
+    }
 
     .buttons {
       grid-column: 1 / -1;

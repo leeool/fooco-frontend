@@ -20,24 +20,17 @@ const index = () => {
           fallback={
             <SkeletonLoad>
               <Skeleton
-                width={200}
                 count={1}
-                height={80}
+                height={51}
                 borderRadius={10}
                 containerClassName="loading"
               />
-              <Skeleton
-                width={300}
-                count={1}
-                height={40}
-                containerClassName="loading"
-              />
-              <Skeleton
-                width={200}
-                count={1}
-                height={40}
-                containerClassName="loading"
-              />
+              <Skeleton count={1} height={40} containerClassName="loading" />
+              <div style={{ display: "flex", gap: "1rem" }}>
+                <Skeleton count={1} height={30} containerClassName="loading" />
+                <Skeleton count={1} height={30} containerClassName="loading" />
+                <Skeleton count={1} height={30} containerClassName="loading" />
+              </div>
             </SkeletonLoad>
           }
           loading={loading && !isLoggedIn}
