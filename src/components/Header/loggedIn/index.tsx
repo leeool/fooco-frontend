@@ -36,10 +36,8 @@ const index = () => {
       <Search />
       <div className="buttons-logged">
         <Link to={"/app"}>
-          <button>
-            <Home />
-            Início
-          </button>
+          <Home />
+          Início
         </Link>
         <button>
           <Plus />

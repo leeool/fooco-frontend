@@ -12,6 +12,11 @@ export const HeaderContainer = styled.header`
   padding: 0.8rem 2rem;
   transition: background-color 0.3s ease-in-out;
 
+  .loading {
+    width: 100%;
+    grid-column: 1 / -1;
+  }
+
   .buttons {
     display: flex;
     align-items: center;
@@ -29,15 +34,34 @@ export const HeaderContainer = styled.header`
     color: ${({ theme }) => theme.textColor.title};
     font-weight: 500;
 
-    button {
+    button,
+    a {
       display: flex;
       align-items: center;
       cursor: pointer;
       gap: 0.3rem;
       font-size: 1.2rem;
+      flex: 1;
+      padding: 0;
+      font-weight: 500;
+      justify-content: center;
 
       &:hover {
         filter: brightness(1.1);
+      }
+    }
+
+    @media (max-width: 600px) {
+      gap: 1rem;
+
+      button,
+      a {
+        font-size: 1rem;
+
+        svg {
+          width: 1.8rem;
+          height: 1.8rem;
+        }
       }
     }
   }
@@ -47,20 +71,16 @@ export const HeaderContainer = styled.header`
   }
 
   @media (max-width: 1000px) {
-    display: flex;
+    display: grid;
     flex-direction: column;
     gap: 1rem;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: 1fr;
+    padding: 0.6rem 1rem;
 
     .buttons {
       grid-column: 1 / -1;
       align-items: center;
       justify-content: space-between;
-    }
-
-    .buttons-logged {
-      justify-content: space-between;
-      align-items: center;
     }
 
     & > a {
@@ -76,7 +96,7 @@ export const HeaderContainer = styled.header`
     .search {
       width: 100%;
       grid-column: 1 / -1;
-      grid-row: 3;
+      grid-row: 2;
     }
   }
 `

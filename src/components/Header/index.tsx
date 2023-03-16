@@ -19,9 +19,25 @@ const index = () => {
         <Loading
           fallback={
             <SkeletonLoad>
-              <Skeleton width={200} count={1} height={80} borderRadius={10} />
-              <Skeleton width={500} count={1} height={40} />
-              <Skeleton width={200} count={1} height={40} />
+              <Skeleton
+                width={200}
+                count={1}
+                height={80}
+                borderRadius={10}
+                containerClassName="loading"
+              />
+              <Skeleton
+                width={300}
+                count={1}
+                height={40}
+                containerClassName="loading"
+              />
+              <Skeleton
+                width={200}
+                count={1}
+                height={40}
+                containerClassName="loading"
+              />
             </SkeletonLoad>
           }
           loading={loading && !isLoggedIn}
