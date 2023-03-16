@@ -1,29 +1,23 @@
 import { createBrowserRouter } from "react-router-dom"
 import React from "react"
-// import Layout from "./Layout"
-// import Login from "./pages/Entrar"
+import Layout from "./Layout"
+import Login from "./pages/Entrar"
 // import Entrar from "./pages/Entrar/Login"
 // import Criar from "./pages/Entrar/Criar"
 // import Dashboard from "./pages/Dashboard"
 // import Feed from "./pages/Dashboard/Feed"
 // import PostPage from "./pages/PostPage/PostPage"
-const Layout = React.lazy(() => import("./Layout"))
 const MainPage = React.lazy(() => import("./pages/MainPage"))
 const PostPage = React.lazy(() => import("./pages/PostPage/PostPage"))
 const Feed = React.lazy(() => import("./pages/Dashboard/Feed"))
 const Dashboard = React.lazy(() => import("./pages/Dashboard"))
 const Criar = React.lazy(() => import("./pages/Entrar/Criar"))
 const Entrar = React.lazy(() => import("./pages/Entrar/Login"))
-const Login = React.lazy(() => import("./pages/Entrar"))
 
 const router = createBrowserRouter([
   {
     path: "",
-    element: (
-      <React.Suspense>
-        <Layout />
-      </React.Suspense>
-    ),
+    element: <Layout />,
     children: [
       {
         path: "app",
@@ -75,11 +69,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/entrar",
-    element: (
-      <React.Suspense>
-        <Login />
-      </React.Suspense>
-    ),
+    element: <Login />,
     children: [
       {
         path: "",
