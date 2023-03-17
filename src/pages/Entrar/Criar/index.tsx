@@ -4,19 +4,17 @@ import { Container } from "./styles"
 import Input from "@components/Form/Input"
 import { ReactComponent as Letter } from "@assets/icons/letter.svg"
 import { ReactComponent as Lock } from "@assets/icons/lock.svg"
-import { Button } from "@components/Form"
+import { Button, Checkbox } from "@components/Form"
 import { Link, useNavigate } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
 import { USER_POST, USER_PUT } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
-import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
 import useUserStore from "src/stores/UseUserStore"
 import UseToastStore from "@components/Toast/UseToastStore"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createUserSchema } from "src/schemas"
-import { Foquinho2 } from "@assets/index"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -34,7 +32,7 @@ const index = () => {
   const { setToastMessage } = UseToastStore()
   const navigate = useNavigate()
 
-  const { handleSubmit, control } = useForm<User>({
+  const { handleSubmit, control, setError } = useForm<User>({
     resolver: zodResolver(createUserSchema.omit({ username: true })),
     mode: "all",
   })
@@ -46,8 +44,14 @@ const index = () => {
     })
 
   const handleCreateUser = handleSubmit(
-    async ({ email, pass: { password } }) => {
+    async ({ email, pass: { password }, acceptTerms }) => {
+      if (!acceptTerms) {
+        setError("acceptTerms", { type: "required" })
+        return setToastMessage("Algo deu errado", "Aceite os termos de uso!")
+      }
       const userProv = email.split("@")[0] + Math.floor(Math.random() * 100)
+
+      console.log(acceptTerms)
 
       const { url: urlCreateUser, options: optionsCreateUser } = USER_POST(
         userProv,
@@ -176,7 +180,32 @@ const index = () => {
                 />
               )}
             />
-
+            <Controller
+              control={control}
+              name="acceptTerms"
+              defaultValue={false}
+              rules={{ required: true }}
+              render={({
+                field: { onChange, ref, onBlur, value },
+                fieldState,
+              }) => (
+                <Checkbox
+                  label={
+                    <>
+                      Eu aceito os{" "}
+                      <Link to={"/termos-de-uso"}>Termos de Uso</Link>
+                    </>
+                  }
+                  id="termos"
+                  value={"termos"}
+                  innerRef={ref}
+                  onChange={onChange}
+                  onBlur={onBlur}
+                  checked={value}
+                  fieldState={fieldState}
+                />
+              )}
+            />
             <Button variant="solid" disabled={loading || loginLoading}>
               {loading || loginLoading ? "Carregando..." : "Avançar"}
             </Button>

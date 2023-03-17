@@ -37,6 +37,7 @@ export const createUserSchema = z
         message: "As senhas devem ser iguais",
         path: ["confirmPassword"],
       }),
+    acceptTerms: z.boolean(),
   })
   .required()
 
