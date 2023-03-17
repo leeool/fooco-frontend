@@ -7,6 +7,7 @@ import Login from "./pages/Entrar"
 // import Dashboard from "./pages/Dashboard"
 // import Feed from "./pages/Dashboard/Feed"
 // import PostPage from "./pages/PostPage/PostPage"
+const Terms = React.lazy(() => import("./pages/Terms"))
 const MainPage = React.lazy(() => import("./pages/MainPage"))
 const PostPage = React.lazy(() => import("./pages/PostPage/PostPage"))
 const Feed = React.lazy(() => import("./pages/Dashboard/Feed"))
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
         element: (
           <React.Suspense>
             <MainPage />
+          </React.Suspense>
+        ),
+      },
+      {
+        path: "termos-de-uso",
+        element: (
+          <React.Suspense>
+            <Terms />
           </React.Suspense>
         ),
       },

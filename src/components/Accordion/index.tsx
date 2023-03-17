@@ -20,19 +20,9 @@ interface TriggerProps {
 const index = ({ items, className }: IPropsAccordion) => {
   return (
     <Container>
-      <RootContainer
-        type="single"
-        collapsible
-        className={className}
-        forwardedAs={motion.div}
-      >
+      <RootContainer type="single" collapsible className={className}>
         {items.map(({ content, header }) => (
-          <Item
-            value={header}
-            key={header}
-            forwardedAs={motion.div}
-            animate={{ transition: { type: "spring", duration: 2 } }}
-          >
+          <Item value={header} key={header}>
             <AccordionTrigger className="trigger">{header}</AccordionTrigger>
             <Accordion.Content className="content">
               <div className="content-text">{content}</div>
@@ -44,12 +34,8 @@ const index = ({ items, className }: IPropsAccordion) => {
   )
 }
 
-const AccordionTrigger = ({ children, className }: TriggerProps) => (
-  <Header
-    className={className}
-    forwardedAs={motion.div}
-    animate={{ transition: { type: "spring", duration: 1 } }}
-  >
+export const AccordionTrigger = ({ children, className }: TriggerProps) => (
+  <Header className={className}>
     <Accordion.Trigger>
       {children}
       <Seta />
