@@ -3,7 +3,11 @@ import { themeStore } from "src/stores/themeStore"
 import theme from "src/styles/theme"
 import { SkeletonTheme } from "react-loading-skeleton"
 
-const SkeletonLoad = ({ children }: { children: ReactElement[] }) => {
+const SkeletonLoad = ({
+  children,
+}: {
+  children: ReactElement[] | ReactElement
+}) => {
   const { selectedTheme } = themeStore()
 
   return (

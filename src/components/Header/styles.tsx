@@ -2,7 +2,8 @@ import styled from "styled-components"
 
 export const HeaderContainer = styled.header`
   width: 100%;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   gap: 2rem;
   align-items: center;
   justify-content: space-between;
@@ -15,6 +16,10 @@ export const HeaderContainer = styled.header`
   .loading {
     display: block;
     width: 100%;
+  }
+
+  .search {
+    justify-self: center;
   }
 
   .buttons {
@@ -68,6 +73,7 @@ export const HeaderContainer = styled.header`
 
   & .logo {
     max-width: 13rem;
+    justify-self: center;
   }
 
   @media (max-width: 1000px) {
