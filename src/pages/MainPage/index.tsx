@@ -25,6 +25,13 @@ import UseMatchWindowSize from "src/hooks/UseWindowSize"
 import Input from "@components/Form/Input"
 import { Button } from "@components/Form"
 import ReactLoading from "react-loading"
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionRoot,
+  AccordionTrigger,
+} from "@components/AccordionAPI"
+import duvidasData from "./duvidasData"
 
 const MainPage = () => {
   const { setEmail } = UseCreateUserStore()
@@ -246,38 +253,14 @@ const MainPage = () => {
           Não encontrou sua dúvida? Entre em contato com
           fooco.contato@hotmail.com
         </Paragraph>
-        <div className="items">
-          <Accordion
-            className="duvidas"
-            items={[
-              {
-                header: "O que é a plataforma Fooco?",
-                content:
-                  "A plataforma Fooco é um lugar no qual pessoas podem se juntar para trocar conhecimento através do sistema de perguntas e respostas.",
-              },
-              {
-                header: "O que é um projeto Open Source?",
-                content: (
-                  <>
-                    O termo em inglês “open source” quer dizer “código aberto” e
-                    se refere ao código-fonte de um site ou aplicativo que pode
-                    ser compartilhado com outros usuários.
-                  </>
-                ),
-              },
-              {
-                header: "O que são os pontos?",
-                content:
-                  "Você ganha pontos conforme suas interações com a comunidade. Exemplo: criar posts, responder posts, fazer amigos e muito mais.",
-              },
-              {
-                header: "Posso fazer qualquer tipo de pergunta na plataforma?",
-                content:
-                  "Caso sua pergunta seja ofensiva, infringindo as regras da plataforma, você pode ser punido ou silenciado por tempo indeterminado.",
-              },
-            ]}
-          />
-        </div>
+        <AccordionRoot type="single" style={{ marginTop: "3rem" }}>
+          {duvidasData.map(({ id, content, trigger }) => (
+            <AccordionItem value={id} key={id}>
+              <AccordionTrigger>{trigger}</AccordionTrigger>
+              <AccordionContent>{content}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </AccordionRoot>
       </DuvidaContainer>
       <DecidiuContainer>
         <div>
