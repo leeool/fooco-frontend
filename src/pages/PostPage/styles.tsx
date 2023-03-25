@@ -31,9 +31,10 @@ export const Title = styled.h1`
 
 export const Content = styled.p`
   font-size: 1.2rem;
-  line-height: 1.5;
+  line-height: 1.6;
   margin-top: 2rem;
-  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat", sans-serif;
+  max-width: 70rem;
 
   @media (max-width: 600px) {
     font-size: 1rem;
