@@ -41,7 +41,7 @@ const router = createBrowserRouter([
             element: <div>Perfil</div>,
           },
           {
-            path: "pergunta/:id",
+            path: "pergunta/:id/:postTitle",
             element: (
               <React.Suspense>
                 <PostPage />

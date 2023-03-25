@@ -18,10 +18,19 @@ interface Props {
 }
 
 const Post = ({ post }: Props) => {
+  const removeThreatRegex = /[/.]/g
+  const removeAccentRegex = /[\u0300-\u036f]/g
+  const titleParam = post.title
+    .split(" ")
+    .join("-")
+    .replace(removeThreatRegex, "")
+    .normalize("NFD")
+    .replace(removeAccentRegex, "")
+
   return (
     <Container key={post.id}>
       <PostInfo>
-        <Link to={`pergunta/${post.id}`}>
+        <Link to={`pergunta/${post.id}/${titleParam}`}>
           <PostTitle>{post.title}</PostTitle>
         </Link>
         <AuthorAndTags>
