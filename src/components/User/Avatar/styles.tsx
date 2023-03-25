@@ -19,6 +19,7 @@ export const Fallback = styled(AvatarFallback)`
   color: #fff;
   text-transform: uppercase;
   user-select: none;
+  padding: 0.8rem;
 `
 
 export const Root = styled(Avatar)`
