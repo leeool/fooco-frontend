@@ -26,6 +26,8 @@ export const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
     gap: 2rem;
+    grid-column: 2 / -1;
+    justify-self: end;
 
     a {
       width: fit-content;
@@ -92,6 +94,7 @@ export const HeaderContainer = styled.header`
       grid-column: 1 / -1;
       align-items: center;
       justify-content: space-between;
+      justify-self: center;
     }
 
     & > a {
