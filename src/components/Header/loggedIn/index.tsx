@@ -41,12 +41,12 @@ const index = () => {
         </Link>
         <button>
           <Plus />
-          Criar
+          Perguntar
         </button>
         <DropdownMenu>
           <DropdownMenuTrigger>
             <User />
-            {userData?.username}
+            Perfil
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuGroup>
