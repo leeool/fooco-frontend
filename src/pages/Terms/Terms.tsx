@@ -14,7 +14,7 @@ const Terms = () => {
   return (
     <Container>
       <div>
-        <Title size="xl">Termos de uso</Title>
+        <Title size="2xl">Termos de uso</Title>
         <Paragraph size="xl">
           A sua privacidade é importante para nós. É política da Animalia
           respeitar a sua privacidade em relação a qualquer informação sua que
