@@ -1,5 +1,4 @@
 import { Title } from "@components/Text/Title"
-import Accordion from "@components/Accordion"
 import React from "react"
 import {
   BarContainer,
