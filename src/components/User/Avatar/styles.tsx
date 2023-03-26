@@ -19,15 +19,18 @@ export const Fallback = styled(AvatarFallback)`
   color: #fff;
   text-transform: uppercase;
   user-select: none;
-  padding: 0.8rem;
+  border-radius: 50%;
+
+  /* padding: 0.8rem; */
 `
 
 export const Root = styled(Avatar)`
   display: flex;
   place-items: center;
   place-content: center;
+  place-self: center;
   width: 100%;
-  border-radius: 50%;
+  height: 100%;
 
   overflow: hidden;
 `

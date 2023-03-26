@@ -86,7 +86,7 @@ export const AuthorAndTags = styled.div`
 export const Interactions = styled.div`
   border-top: 2px solid ${({ theme }) => theme.backgroundColor.alternativeState};
   display: flex;
-  gap: 1rem;
+  gap: 0.6rem;
   padding: 1rem 0;
 
   svg {
@@ -106,4 +106,12 @@ export const Interactions = styled.div`
   button {
     padding: 0.4rem 0;
   }
+`
+
+export const Points = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: ${(props) => props.theme.textColor.title};
+  font-weight: 500;
 `

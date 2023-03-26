@@ -16,10 +16,12 @@ import { useQuery } from "react-query"
 import isError from "src/helpers/isError"
 import { Avatar } from "@components/User/Avatar"
 import useUserStore from "src/stores/UseUserStore"
+import { useNavigate } from "react-router"
 
 const Feed = () => {
   const match = UseMatchWindowSize(1000)
   const { userData } = useUserStore()
+  const navigate = useNavigate()
 
   const { data, isLoading } = useQuery<IUserPosts[] | IError>("posts", () =>
     instance("/post").then((res) => res.data)
@@ -37,8 +39,9 @@ const Feed = () => {
               src=""
               fallback={userData.username.slice(0, 2)}
               delayMs={0}
+              className="avatar"
             />
-            <Ask>Perguntar...</Ask>
+            <Ask onClick={() => navigate("perguntar")}>Perguntar...</Ask>
           </AskContainer>
         )}
         <PostContainer>

@@ -26,15 +26,27 @@ export const PostContainer = styled.div`
 
 export const AskContainer = styled.div`
   display: grid;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 4rem 1fr;
   gap: 1.5rem;
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
   border-radius: 15px;
   padding: 1rem;
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
 
+  .avatar > * {
+    font-size: 1.4rem;
+    width: 4rem;
+    height: 4rem;
+  }
+
   @media (max-width: 600px) {
-    gap: 0.6rem;
+    .avatar > * {
+      font-size: 1rem;
+      width: 3rem;
+      height: 3rem;
+    }
+    gap: 0.4rem;
+    padding: 0.8rem;
   }
 `
 
@@ -50,9 +62,13 @@ export const Ask = styled.div`
   &:hover {
     background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
   }
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
 `
 
 export const FeedContainer = styled.div`
   display: grid;
-  gap: 3rem;
+  gap: 5rem;
 `

@@ -1,4 +1,4 @@
-import { Bookmark, Reply, Share } from "@assets/index"
+import { Bookmark, Point, Reply, Share } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { Link } from "react-router-dom"
@@ -11,6 +11,7 @@ import {
   Tags,
   AuthorAndTags,
   Interactions,
+  Points,
 } from "./styles"
 
 interface Props {
@@ -46,6 +47,10 @@ const Post = ({ post }: Props) => {
         <Content>{post.content}</Content>
       </Link>
       <Interactions>
+        <Points>
+          <Point />
+          {post.points}
+        </Points>
         <ButtonSecondary>
           <Reply />
           Responder
