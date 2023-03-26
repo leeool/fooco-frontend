@@ -49,11 +49,24 @@ export const InputContainer = styled.div`
     width: 100%;
     align-items: center;
     border-radius: 20px;
+    outline: 1px solid ${({ theme }) => theme.backgroundColor.details};
 
     svg,
     path {
       stroke: ${({ theme }) => theme.backgroundColor.details};
       transition: stroke 300ms ease;
+    }
+
+    &:focus-within,
+    &:hover {
+      transition: 0.3s ease;
+      outline-color: ${({ theme }) => theme.backgroundColor.secondary};
+      box-shadow: 0 0 0 4px #f3503a40;
+
+      input {
+        background-color: ${({ theme }) =>
+          theme.backgroundColor.alternativeState};
+      }
     }
 
     input {
@@ -69,15 +82,6 @@ export const InputContainer = styled.div`
       &::placeholder {
         color: ${({ theme }) => theme.textColor.details};
         opacity: 1;
-      }
-
-      &:focus,
-      &:hover {
-        transition: 0.3s ease;
-        background-color: ${({ theme }) =>
-          theme.backgroundColor.alternativeState};
-        outline: 1px solid ${({ theme }) => theme.backgroundColor.secondary};
-        box-shadow: 0 0 0 4px #f3503a40;
       }
     }
   }

@@ -14,12 +14,22 @@ export const SearchContainer = styled.div`
   width: 100%;
   overflow: hidden;
   border-radius: 20px;
+  outline: 1px solid ${({ theme }) => theme.backgroundColor.details};
 
-  &:focus-within {
+  &:focus-within,
+  &:hover {
     span path {
       stroke: ${({ theme }) => theme.backgroundColor.secondary};
     }
     outline: 1.5px solid ${({ theme }) => theme.backgroundColor.secondary};
+    transition: 0.3s ease;
+    outline-color: ${({ theme }) => theme.backgroundColor.secondary};
+    box-shadow: 0 0 0 4px #f3503a40;
+
+    input {
+      background-color: ${({ theme }) =>
+        theme.backgroundColor.alternativeState};
+    }
   }
 
   .icon {
@@ -42,7 +52,6 @@ export const SearchContainer = styled.div`
     width: 100%;
     height: 2.5rem;
     border: none;
-    outline: none;
     padding: 0.5rem 0.8rem;
     background-color: ${({ theme }) => theme.backgroundColor.primary};
     color: ${({ theme }) => theme.textColor.subtitle};
@@ -51,14 +60,6 @@ export const SearchContainer = styled.div`
 
     &::placeholder {
       color: ${({ theme }) => theme.textColor.details};
-    }
-
-    &:focus,
-    &:hover {
-      transition: 0.3s ease;
-      background-color: ${({ theme }) =>
-        theme.backgroundColor.alternativeState};
-      box-shadow: 0 0 0 4px #f3503a40;
     }
   }
 `
