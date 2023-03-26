@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom"
 import React from "react"
 import Layout from "./Layout"
 import Login from "./pages/Entrar"
+// import CreatePost from "./pages/CreatePost"
 // import Entrar from "./pages/Entrar/Login"
 // import Criar from "./pages/Entrar/Criar"
 // import Dashboard from "./pages/Dashboard"
@@ -14,6 +15,7 @@ const Feed = React.lazy(() => import("./pages/Dashboard/Feed"))
 const Dashboard = React.lazy(() => import("./pages/Dashboard"))
 const Criar = React.lazy(() => import("./pages/Entrar/Criar"))
 const Entrar = React.lazy(() => import("./pages/Entrar/Login"))
+const CreatePost = React.lazy(() => import("./pages/CreatePost"))
 
 const router = createBrowserRouter([
   {
@@ -37,14 +39,22 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "perfil",
+            path: ":owner",
             element: <div>Perfil</div>,
           },
           {
-            path: "pergunta/:id/:postTitle",
+            path: ":owner/:title/:id",
             element: (
               <React.Suspense>
                 <PostPage />
+              </React.Suspense>
+            ),
+          },
+          {
+            path: "publicar",
+            element: (
+              <React.Suspense>
+                <CreatePost />
               </React.Suspense>
             ),
           },
