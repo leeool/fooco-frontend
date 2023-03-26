@@ -3,7 +3,7 @@ import { Avatar } from "@components/User/Avatar"
 import React from "react"
 import { useNavigate } from "react-router"
 import UseMatchWindowSize from "src/hooks/UseWindowSize"
-import { CreatePost } from "src/pages/CreatePost"
+import CreatePost from "src/pages/CreatePost"
 import useUserStore from "src/stores/UseUserStore"
 import { AskContainer, AskButton } from "./styles"
 
