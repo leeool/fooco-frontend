@@ -5,23 +5,13 @@ import SkeletonLoad from "src/helpers/Skeleton"
 import UseMatchWindowSize from "src/hooks/UseWindowSize"
 import ProfilePreview from "../ProfilePreview"
 import Post from "../Post/Post"
-import {
-  Ask,
-  AskContainer,
-  Container,
-  FeedContainer,
-  PostContainer,
-} from "./styles"
+import { Container, FeedContainer, PostContainer } from "./styles"
 import { useQuery } from "react-query"
 import isError from "src/helpers/isError"
-import { Avatar } from "@components/User/Avatar"
-import useUserStore from "src/stores/UseUserStore"
-import { useNavigate } from "react-router"
+import Ask from "./Ask"
 
 const Feed = () => {
   const match = UseMatchWindowSize(1000)
-  const { userData } = useUserStore()
-  const navigate = useNavigate()
 
   const { data, isLoading } = useQuery<IUserPosts[] | IError>("posts", () =>
     instance("/post").then((res) => res.data)
@@ -33,17 +23,7 @@ const Feed = () => {
   return (
     <Container>
       <FeedContainer>
-        {userData && (
-          <AskContainer>
-            <Avatar
-              src=""
-              fallback={userData.username.slice(0, 2)}
-              delayMs={0}
-              className="avatar"
-            />
-            <Ask onClick={() => navigate("perguntar")}>Perguntar...</Ask>
-          </AskContainer>
-        )}
+        <Ask />
         <PostContainer>
           {isLoading ? (
             <LoadingPosts />
