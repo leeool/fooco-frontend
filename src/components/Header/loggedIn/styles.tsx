@@ -3,6 +3,7 @@ import styled from "styled-components"
 export const ConfirmLogout = styled.div`
   display: grid;
   gap: 2rem;
+  min-width: 20rem;
 
   & .buttons {
     display: flex;

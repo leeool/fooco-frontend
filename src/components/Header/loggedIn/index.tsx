@@ -25,7 +25,7 @@ import { ConfirmLogout } from "./styles"
 import { Paragraph } from "@components/Text/Paragraph"
 
 const index = () => {
-  const { logoutUser, userData } = useUserStore()
+  const { logoutUser } = useUserStore()
   const ref = React.useRef<HTMLDivElement>(null)
 
   return (
@@ -39,10 +39,10 @@ const index = () => {
           <Home />
           Início
         </Link>
-        <button>
+        <Link to={"app/publicar"}>
           <Plus />
-          Perguntar
-        </button>
+          Publicar
+        </Link>
         <DropdownMenu>
           <DropdownMenuTrigger>
             <User />
