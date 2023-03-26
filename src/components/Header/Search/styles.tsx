@@ -34,9 +34,8 @@ export const SearchContainer = styled.div`
   }
 
   svg {
-    width: 1.8rem;
-    /* top: 0.5rem; */
-    stroke: #fff;
+    width: 1.5rem;
+    stroke: ${({ theme }) => theme.textColor.details};
   }
 
   input {

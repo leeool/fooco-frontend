@@ -103,6 +103,7 @@ export const Interactions = styled.div`
     height: 1.8rem;
     color: ${({ theme }) => theme.backgroundColor.detailsAlt};
     cursor: pointer;
+    stroke-width: 2px;
 
     &:hover {
       color: ${({ theme }) => theme.textColor.title};

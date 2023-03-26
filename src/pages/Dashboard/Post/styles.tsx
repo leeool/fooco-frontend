@@ -92,6 +92,7 @@ export const Interactions = styled.div`
   svg {
     width: 1.5rem;
     height: 1.5rem;
+    stroke-width: 2px;
   }
 
   @media (max-width: 600px) {

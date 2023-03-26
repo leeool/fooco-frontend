@@ -8,6 +8,7 @@ import { ReactComponent as Point } from "./icons/point.svg"
 import { ReactComponent as Share } from "./icons/share.svg"
 import { ReactComponent as Bookmark } from "./icons/bookmark.svg"
 import { ReactComponent as MiniSeta } from "./icons/miniseta.svg"
+import { ReactComponent as Send } from "./icons/send.svg"
 
 export {
   Hat,
@@ -20,4 +21,5 @@ export {
   Share,
   Bookmark,
   MiniSeta,
+  Send,
 }

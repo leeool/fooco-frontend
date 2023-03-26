@@ -1,4 +1,4 @@
-import { Bookmark, Point, Reply, Share } from "@assets/index"
+import { Bookmark, Point, Reply, Send } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { Link } from "react-router-dom"
@@ -56,8 +56,8 @@ const Post = ({ post }: Props) => {
           Responder
         </ButtonSecondary>
         <ButtonSecondary>
-          <Share />
-          Compartilhar
+          <Send />
+          Enviar
         </ButtonSecondary>
         <ButtonSecondary>
           <Bookmark />

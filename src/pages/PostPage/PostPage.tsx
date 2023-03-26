@@ -1,4 +1,4 @@
-import { Bookmark, MiniSeta, Reply, Share } from "@assets/index"
+import { Bookmark, MiniSeta, Reply, Send, Share } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { useQuery } from "react-query"
@@ -106,7 +106,7 @@ const PostPage = () => {
           </button>
         </Feedback>
         <button>
-          <Share />
+          <Send />
         </button>
         <button>
           <Bookmark />
