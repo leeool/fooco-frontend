@@ -50,7 +50,7 @@ export const AskContainer = styled.div`
   }
 `
 
-export const Ask = styled.div`
+export const AskButton = styled.div`
   font-size: 1.2rem;
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
   border-radius: 25px;

@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { variant } from "styled-system"
 
 interface IPropsParagraph {
-  size: "xl" | "2xl"
+  size: "xl" | "2xl" | "lg"
 }
 
 export const Paragraph = styled.p<IPropsParagraph>`
@@ -23,6 +23,9 @@ export const Paragraph = styled.p<IPropsParagraph>`
         "@media (max-width: 600px)": {
           fontSize: "1rem",
         },
+      },
+      lg: {
+        fontSize: "1rem",
       },
     },
   })}

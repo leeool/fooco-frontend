@@ -11,7 +11,7 @@ export const ButtonContainer = styled.button`
   border: none;
   cursor: pointer;
   padding: 0.4rem 1rem;
-  /* min-height: 2.4rem; */
+  min-height: 2.4rem;
   height: 100%;
   border-radius: 20px;
   font-weight: 700;
@@ -24,7 +24,6 @@ export const ButtonContainer = styled.button`
   font-size: 1.2rem;
 
   @media (max-width: 600px) {
-    font-size: 0.8rem;
     padding: 0.2rem 0.5rem;
   }
 `

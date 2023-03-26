@@ -31,7 +31,7 @@ const Post = ({ post }: Props) => {
   return (
     <Container key={post.id}>
       <PostInfo>
-        <Link to={`pergunta/${post.id}/${titleParam}`}>
+        <Link to={`${post.user.username}/${titleParam}/${post.id}`}>
           <PostTitle>{post.title}</PostTitle>
         </Link>
         <AuthorAndTags>
@@ -43,7 +43,7 @@ const Post = ({ post }: Props) => {
           </Tags>
         </AuthorAndTags>
       </PostInfo>
-      <Link to={`pergunta/${post.id}`}>
+      <Link to={`${post.user.username}/${titleParam}/${post.id}`}>
         <Content>{post.content}</Content>
       </Link>
       <Interactions>
