@@ -1,4 +1,4 @@
-import { Bookmark, MiniSeta, Reply, Send, Share } from "@assets/index"
+import { Bookmark, MiniSeta, Reply, Send } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { useQuery } from "react-query"
@@ -22,12 +22,15 @@ import {
 import ReactLoading from "react-loading"
 
 const PostPage = () => {
-  const { id } = useParams()
+  const { owner, slug } = useParams()
   const { isLoggedIn, userData } = useUserStore()
   const nav = useNavigate()
   const { data, isLoading, isFetching } = useQuery<IUserPosts | IError>(
     "post",
-    () => instance(`/post/${id}`, { method: "GET" }).then((res) => res.data),
+    () =>
+      instance(`/post/${owner}/${slug}`, { method: "GET" }).then(
+        (res) => res.data
+      ),
     { refetchOnWindowFocus: false }
   )
   const { request, data: feedbackData } = UseFetch<string | null>()
@@ -51,11 +54,11 @@ const PostPage = () => {
 
     const feedbackType = e.currentTarget.dataset.feedback
 
-    if (!feedbackType || !userData || !id) return
+    if (!feedbackType || !userData || !data || "error" in data) return
 
     setFeedback((prev) => (prev === feedbackType ? null : feedbackType))
 
-    const { options, url } = FEEDBACK_POST(feedbackType, userData.id, id)
+    const { options, url } = FEEDBACK_POST(feedbackType, userData.id, data.id)
 
     request(url, options)
   }
@@ -69,7 +72,7 @@ const PostPage = () => {
 
     if (userLikedPost) return setFeedback("like")
     else if (userDislikedPost) return setFeedback("dislike")
-  }, [data, userData, id])
+  }, [data, userData, owner, slug])
 
   if (isLoading || isFetching)
     return (

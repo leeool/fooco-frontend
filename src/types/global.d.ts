@@ -20,6 +20,7 @@ interface IUserData {
   educational_place: string
   educational_place_url: string
   posts: IUserPosts[]
+  saved_posts: string[]
 }
 
 interface IUserPosts {
@@ -29,6 +30,7 @@ interface IUserPosts {
   created_at: string
   user: IUserData
   points: number
+  slug: string
   tags: string[]
   users_liked: string[]
   users_disliked: string[]

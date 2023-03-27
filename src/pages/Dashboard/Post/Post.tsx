@@ -19,19 +19,18 @@ interface Props {
 }
 
 const Post = ({ post }: Props) => {
-  const removeThreatRegex = /[/.]/g
-  const removeAccentRegex = /[\u0300-\u036f]/g
-  const titleParam = post.title
+  const removeSpecialChars = /[^A-Za-z0-9\s-]/g
+  const slug = post.title
     .split(" ")
     .join("-")
-    .replace(removeThreatRegex, "")
     .normalize("NFD")
-    .replace(removeAccentRegex, "")
+    .replaceAll(removeSpecialChars, "")
+    .toLowerCase()
 
   return (
     <Container key={post.id}>
       <PostInfo>
-        <Link to={`${post.user.username}/${titleParam}/${post.id}`}>
+        <Link to={`${post.user.username}/${slug}`}>
           <PostTitle>{post.title}</PostTitle>
         </Link>
         <AuthorAndTags>
@@ -43,7 +42,7 @@ const Post = ({ post }: Props) => {
           </Tags>
         </AuthorAndTags>
       </PostInfo>
-      <Link to={`${post.user.username}/${titleParam}/${post.id}`}>
+      <Link to={`${post.user.username}/${slug}`}>
         <Content>{post.content}</Content>
       </Link>
       <Interactions>
