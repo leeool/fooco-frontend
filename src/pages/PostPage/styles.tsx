@@ -14,6 +14,11 @@ export const Info = styled.div`
   display: flex;
   gap: 2rem;
 
+  a {
+    display: inline;
+    width: fit-content;
+  }
+
   @media (max-width: 600px) {
     gap: 0.8rem;
   }
@@ -46,8 +51,10 @@ export const Author = styled.div`
   color: ${({ theme }) => theme.textColor.details};
 
   span {
+    &:hover {
+      text-decoration: underline;
+    }
     font-size: inherit;
-
     color: ${({ theme }) => theme.textColor.title};
   }
 

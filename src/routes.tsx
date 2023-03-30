@@ -1,7 +1,8 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter, Navigate } from "react-router-dom"
 import React from "react"
 import Layout from "./Layout"
 import Login from "./pages/Entrar"
+import ProfilePage from "./pages/ProfilePage"
 // import CreatePost from "./pages/CreatePost"
 // import Entrar from "./pages/Entrar/Login"
 // import Criar from "./pages/Entrar/Criar"
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
           },
           {
             path: ":owner",
-            element: <div>Perfil</div>,
+            element: <ProfilePage />,
           },
           {
             path: ":owner/:slug",
@@ -80,7 +81,7 @@ const router = createBrowserRouter([
         path: "*",
         element: (
           <React.Suspense>
-            <Dashboard />
+            <Navigate to={"/app"} />
           </React.Suspense>
         ),
       },

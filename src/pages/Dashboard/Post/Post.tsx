@@ -30,11 +30,13 @@ const Post = ({ post }: Props) => {
   return (
     <Container key={post.id}>
       <PostInfo>
-        <Link to={`${post.user.username}/${slug}`}>
+        <Link to={`/app/${post.user.username}/${slug}`}>
           <PostTitle>{post.title}</PostTitle>
         </Link>
         <AuthorAndTags>
-          <Author>por {post.user.username}</Author>
+          <Link to={`/app/${post.user.username}`}>
+            <Author>por {post.user.username}</Author>
+          </Link>
           <Tags>
             {post.tags.map((tag) => (
               <span key={tag}>{tag}</span>
@@ -42,7 +44,7 @@ const Post = ({ post }: Props) => {
           </Tags>
         </AuthorAndTags>
       </PostInfo>
-      <Link to={`${post.user.username}/${slug}`}>
+      <Link to={`/app/${post.user.username}/${slug}`}>
         <Content>{post.content}</Content>
       </Link>
       <Interactions>

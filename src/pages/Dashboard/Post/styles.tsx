@@ -10,6 +10,10 @@ export const Author = styled.span`
   color: ${(props) => props.theme.textColor.title};
   font-size: 1rem;
 
+  &:hover {
+    text-decoration: underline;
+  }
+
   @media (max-width: 600px) {
     font-size: 0.8rem;
   }

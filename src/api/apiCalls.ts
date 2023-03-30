@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const ENDPOINT = "https://fooco-backend.onrender.com"
+const ENDPOINT = "https://fooco-backend.cyclic.app"
 
 export const instance = axios.create({
   baseURL: ENDPOINT,
@@ -41,9 +41,9 @@ export const USER_POST = (
   }
 }
 
-export const GET_USER = (id: string) => {
+export const GET_USER = (username: string) => {
   return {
-    url: ENDPOINT + `/user/${id}`,
+    url: ENDPOINT + `/user/${username}`,
     options: {
       method: "GET",
     },

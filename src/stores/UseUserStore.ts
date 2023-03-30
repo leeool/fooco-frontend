@@ -58,7 +58,7 @@ const useUserStore = create<IUser>((set, get) => ({
       const validate = await instance(urlValidate, optValidate)
       if (!validate) return
 
-      const { url, options } = GET_USER(validate.data.id)
+      const { url, options } = GET_USER(validate.data.username)
 
       const response = await instance<IUserData | { error: string }>(
         url,

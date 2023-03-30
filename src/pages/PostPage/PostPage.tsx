@@ -20,6 +20,7 @@ import {
   Title,
 } from "./styles"
 import ReactLoading from "react-loading"
+import { Link } from "react-router-dom"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -119,8 +120,12 @@ const PostPage = () => {
         <Title>{data.title}</Title>
         <Info>
           <Author>
-            criado por <span>{data.user.username}</span>
+            criado por{" "}
+            <Link to={`/app/${data.user.username}`}>
+              <span>{data.user.username}</span>
+            </Link>
           </Author>
+
           <Data>
             publicado <span>{getDate(data.created_at)} dias atrás</span>
           </Data>
