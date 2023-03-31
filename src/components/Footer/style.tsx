@@ -10,6 +10,10 @@ export const FooterContainer = styled.footer`
   min-height: 12rem;
   gap: 2rem;
 
+  a {
+    color: inherit;
+  }
+
   *::selection {
     background-color: #efefef;
     color: ${({ theme }) => theme.textColor.title};

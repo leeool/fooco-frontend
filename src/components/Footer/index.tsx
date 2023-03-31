@@ -1,19 +1,31 @@
 import React from "react"
 import { FooterContainer } from "./style"
 import { ReactComponent as Logo } from "@assets/logo2.svg"
+import { Link } from "react-router-dom"
 
 const index = () => {
   return (
     <FooterContainer>
-      <Logo />
+      <Link to={"/"}>
+        <Logo />
+      </Link>
+
       <div className="footer-content">
         <div>
           <h4>Contato</h4>
-          <p>fooco.contato@hotmail.com</p>
+          <a
+            href="mailto:fooco.contato@hotmail.com"
+            target={"_blank"}
+            rel="noreferrer"
+          >
+            fooco.contato@hotmail.com
+          </a>
         </div>
         <div>
-          <h4>Termos</h4>
-          <p>Termos de Uso</p>
+          <h4>Ajuda</h4>
+          <Link to={"/termos-de-uso"}>
+            <p>Termos de Uso</p>
+          </Link>
         </div>
         <div>
           <h4>Projetos</h4>
