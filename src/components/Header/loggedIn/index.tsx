@@ -53,6 +53,9 @@ const index = () => {
               <Link to={"/app/perfil"}>
                 <DropdownMenuItem>Perfil</DropdownMenuItem>
               </Link>
+              <Link to={"/app/salvos"}>
+                <DropdownMenuItem>Salvos</DropdownMenuItem>
+              </Link>
               <Link to={"/app"}>
                 <DropdownMenuItem>Configurações</DropdownMenuItem>
               </Link>
