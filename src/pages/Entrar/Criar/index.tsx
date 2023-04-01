@@ -51,8 +51,6 @@ const index = () => {
       }
       const userProv = email.split("@")[0] + Math.floor(Math.random() * 100)
 
-      console.log(acceptTerms)
-
       const { url: urlCreateUser, options: optionsCreateUser } = USER_POST(
         userProv,
         email,
