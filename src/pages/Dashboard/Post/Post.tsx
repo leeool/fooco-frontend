@@ -37,16 +37,16 @@ const Post = ({ post }: Props) => {
           <Link to={`/app/${post.user.username}`}>
             <Author>por {post.user.username}</Author>
           </Link>
-          <Tags>
-            {post.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </Tags>
         </AuthorAndTags>
       </PostInfo>
       <Link to={`/app/${post.user.username}/${slug}`}>
         <Content>{post.content}</Content>
       </Link>
+      <Tags>
+        {post.tags.map((tag) => (
+          <span key={tag}>{tag}</span>
+        ))}
+      </Tags>
       <Interactions>
         <Points>
           <Point />
