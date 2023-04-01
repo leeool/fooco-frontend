@@ -22,10 +22,6 @@ export const ButtonContainer = styled.button`
   background-color: ${({ theme }) => theme.backgroundColor.primary};
   width: 100%;
   font-size: 1.2rem;
-
-  @media (max-width: 600px) {
-    padding: 0.2rem 0.5rem;
-  }
 `
 
 export const Button = styled(ButtonContainer)<Props>`
@@ -47,6 +43,10 @@ export const Button = styled(ButtonContainer)<Props>`
   svg {
     width: 2rem;
     height: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    padding: 0.2rem 0.5rem;
   }
 
   ${variant({
@@ -100,10 +100,10 @@ export const ButtonSecondary = styled(ButtonContainer)`
   color: ${({ theme }) => theme.textColor.title};
   font-weight: 500;
   font-size: 1rem;
-  padding: 0.4rem 1rem;
 
   @media (max-width: 600px) {
     font-size: 0.9rem;
+    padding: 1rem 1rem;
   }
 
   &:hover {

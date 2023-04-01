@@ -32,6 +32,10 @@ export const PostTitle = styled.h4`
     text-decoration: underline;
     cursor: pointer;
   }
+
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+  }
 `
 
 export const PostInfo = styled.div`
@@ -49,7 +53,7 @@ export const Content = styled.p`
   -webkit-box-orient: vertical;
 
   @media (max-width: 600px) {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   &:hover {
@@ -77,6 +81,10 @@ export const Tags = styled.div`
       background-color: ${({ theme }) => theme.backgroundColor.secondary};
       color: ${({ theme }) => theme.backgroundColor.primary};
     }
+
+    @media (max-width: 600px) {
+      font-size: 0.7rem;
+    }
   }
 `
 
@@ -84,7 +92,7 @@ export const AuthorAndTags = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 1rem;
-  align-items: center;
+  align-items: start;
 `
 
 export const Interactions = styled.div`
