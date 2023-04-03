@@ -90,6 +90,11 @@ const index = () => {
       navigate("/")
     }
   })
+
+  React.useEffect(() => {
+    document.title = `Crie uma conta • Fooco`
+  }, [])
+
   return (
     <Container
       as={motion.div}

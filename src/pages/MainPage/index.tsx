@@ -47,6 +47,10 @@ const MainPage = () => {
     navigate("/entrar/criar")
   }
 
+  React.useEffect(() => {
+    document.title = `Fooco`
+  }, [])
+
   if (loading)
     return (
       <ReactLoading

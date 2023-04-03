@@ -75,6 +75,11 @@ const PostPage = () => {
     else if (userDislikedPost) return setFeedback("dislike")
   }, [data, userData, owner, slug])
 
+  React.useEffect(() => {
+    if (!data || "error" in data) return
+    document.title = `${data.title} • ${data.user.username} • Fooco`
+  }, [data, owner, slug])
+
   if (isLoading || isFetching)
     return (
       <ReactLoading

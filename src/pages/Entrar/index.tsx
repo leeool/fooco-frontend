@@ -9,6 +9,10 @@ import useUserStore from "src/stores/UseUserStore"
 const index = () => {
   const { isLoggedIn } = useUserStore()
 
+  React.useEffect(() => {
+    document.title = `Faça login • Fooco`
+  }, [])
+
   if (isLoggedIn) return <Navigate to="/" replace />
   return (
     <Container>

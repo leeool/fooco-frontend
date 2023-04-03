@@ -17,6 +17,9 @@ const Feed = () => {
     instance("/post").then((res) => res.data)
   )
 
+  React.useEffect(() => {
+    document.title = "Fooco • Feed"
+  }, [])
   if (isError(data)) {
     return <h1>{data.error}</h1>
   }

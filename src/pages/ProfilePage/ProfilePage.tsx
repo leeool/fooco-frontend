@@ -16,6 +16,11 @@ const ProfilePage = () => {
     instance(`/user/${owner}`, { method: "GET" }).then((res) => res.data)
   )
 
+  React.useEffect(() => {
+    if (!data || "error" in data) return
+    document.title = `${data.username} • Fooco`
+  }, [data, owner])
+
   if (isLoading) return <div>Carregando...</div>
   else if (!data) return <div>Usuário não encontrado</div>
   if (isError(data)) return <div>{data.error}</div>
