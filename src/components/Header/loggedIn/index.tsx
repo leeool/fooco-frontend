@@ -25,7 +25,7 @@ import { ConfirmLogout } from "./styles"
 import { Paragraph } from "@components/Text/Paragraph"
 
 const index = () => {
-  const { logoutUser } = useUserStore()
+  const { logoutUser, userData } = useUserStore()
   const ref = React.useRef<HTMLDivElement>(null)
 
   return (
@@ -50,7 +50,7 @@ const index = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuGroup>
-              <Link to={"/app/perfil"}>
+              <Link to={`/app/${userData?.username}`}>
                 <DropdownMenuItem>Perfil</DropdownMenuItem>
               </Link>
               <Link to={"/app/salvos"}>
