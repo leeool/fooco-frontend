@@ -133,6 +133,10 @@ export const Details = styled.div`
     place-self: start;
     height: fit-content;
   }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 export const Tags = styled.div`
@@ -160,5 +164,9 @@ export const Tags = styled.div`
     @media (max-width: 600px) {
       font-size: 0.8rem;
     }
+  }
+
+  @media (max-width: 600px) {
+    justify-content: start;
   }
 `

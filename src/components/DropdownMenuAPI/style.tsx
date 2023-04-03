@@ -103,6 +103,7 @@ export const Item = styled(DropdownMenuItem)`
   color: ${({ theme }) => theme.backgroundColor.secondary};
   font-family: "Roboto", sans-serif;
   width: 100%;
+  background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
 
   svg {
     width: 1.8rem;
@@ -111,10 +112,6 @@ export const Item = styled(DropdownMenuItem)`
 
   button {
     width: 100%;
-  }
-
-  &:nth-child(odd) {
-    background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
   }
 
   &:hover {

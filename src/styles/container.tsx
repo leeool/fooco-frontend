@@ -7,6 +7,7 @@ export const MainContainer = styled.div`
 
   .main-content {
     max-width: 89rem;
+    min-height: 100vh;
     width: 100%;
     margin: 8rem auto;
     flex: 1;

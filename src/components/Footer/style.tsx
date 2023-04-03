@@ -12,6 +12,7 @@ export const FooterContainer = styled.footer`
 
   a {
     color: inherit;
+    width: fit-content;
   }
 
   *::selection {
@@ -54,5 +55,20 @@ export const FooterContainer = styled.footer`
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
     justify-items: center;
+
+    .footer-content {
+      h4 {
+        font-size: 1rem;
+      }
+
+      p,
+      a {
+        font-size: 0.8rem;
+      }
+    }
+
+    svg {
+      width: 10rem;
+    }
   }
 `
