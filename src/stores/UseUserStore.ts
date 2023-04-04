@@ -14,8 +14,8 @@ interface IUser {
   userData: IUserData | null
   loading: boolean
   logoutUser: () => void
-  tags: string[]
-  setTag: (tag: string[]) => void
+  savedPosts: string[]
+  setSavedPosts: (savedPosts: string[]) => void
 }
 
 const useUserStore = create<IUser>((set, get) => ({
@@ -81,10 +81,10 @@ const useUserStore = create<IUser>((set, get) => ({
   loading: false,
   logoutUser: () => {
     localStorage.removeItem("token")
-    set({ isLoggedIn: false, userData: null, tags: [] })
+    set({ isLoggedIn: false, userData: null, savedPosts: [] })
   },
-  tags: [],
-  setTag: (tag) => set({ tags: tag }),
+  savedPosts: [],
+  setSavedPosts: (savedPosts: string[]) => set({ savedPosts }),
 }))
 
 export default useUserStore

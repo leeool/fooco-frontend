@@ -21,6 +21,8 @@ import {
 } from "./styles"
 import ReactLoading from "react-loading"
 import { Link } from "react-router-dom"
+import { formatRelative, formatDistanceToNow } from "date-fns"
+import { ptBR } from "date-fns/locale"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -132,7 +134,12 @@ const PostPage = () => {
           </Author>
 
           <Data>
-            publicado <span>{getDate(data.created_at)} dias atrás</span>
+            publicado a{" "}
+            <span>
+              {formatDistanceToNow(new Date(data.created_at), {
+                locale: ptBR,
+              })}
+            </span>
           </Data>
         </Info>
         <Content>{data.content}</Content>

@@ -9,9 +9,11 @@ import { Container, FeedContainer, PostContainer } from "./styles"
 import { useQuery } from "react-query"
 import isError from "src/helpers/isError"
 import Ask from "./Ask"
+import useUserStore from "src/stores/UseUserStore"
 
 const Feed = () => {
   const match = UseMatchWindowSize(1000)
+  const { setSavedPosts, userData } = useUserStore()
 
   const { data, isLoading } = useQuery<IUserPosts[] | IError>("posts", () =>
     instance("/post").then((res) => res.data)
@@ -20,6 +22,13 @@ const Feed = () => {
   React.useEffect(() => {
     document.title = "Fooco • Feed"
   }, [])
+
+  React.useEffect(() => {
+    if (!data || isError(data) || !userData) return
+    console.log("carregou")
+    setSavedPosts(userData.saved_posts)
+  }, [data])
+
   if (isError(data)) {
     return <h1>{data.error}</h1>
   }
@@ -31,7 +40,7 @@ const Feed = () => {
           {isLoading ? (
             <LoadingPosts />
           ) : (
-            data?.map((post) => <Post post={post} key={post.id} />).reverse()
+            data?.map((post) => <Post post={post} key={post.id} />)
           )}
         </PostContainer>
       </FeedContainer>

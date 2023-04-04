@@ -7,11 +7,15 @@ export const Container = styled.div`
 `
 
 export const Author = styled.span`
-  color: ${(props) => props.theme.textColor.title};
+  color: ${(props) => props.theme.textColor.paragraph};
   font-size: 1rem;
 
-  &:hover {
-    text-decoration: underline;
+  span {
+    color: ${(props) => props.theme.textColor.title};
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   @media (max-width: 600px) {
@@ -88,11 +92,19 @@ export const Tags = styled.div`
   }
 `
 
-export const AuthorAndTags = styled.div`
+export const Details = styled.div`
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 1rem;
   align-items: start;
+`
+
+export const DateContainer = styled.span`
+  color: ${(props) => props.theme.textColor.paragraph};
+
+  span {
+    color: ${(props) => props.theme.textColor.title};
+  }
 `
 
 export const Interactions = styled.div`
@@ -105,6 +117,10 @@ export const Interactions = styled.div`
     width: 1.5rem;
     height: 1.5rem;
     stroke-width: 2px;
+
+    &[data-saved="true"] {
+      fill: ${({ theme }) => theme.backgroundColor.secondary};
+    }
   }
 
   @media (max-width: 600px) {
