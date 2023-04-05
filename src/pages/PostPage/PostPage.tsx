@@ -21,7 +21,7 @@ import {
 } from "./styles"
 import ReactLoading from "react-loading"
 import { Link } from "react-router-dom"
-import { formatRelative, formatDistanceToNow } from "date-fns"
+import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
 const PostPage = () => {
@@ -38,14 +38,6 @@ const PostPage = () => {
   )
   const { request, data: feedbackData } = UseFetch<string | null>()
   const [feedback, setFeedback] = React.useState<string | null>(null)
-
-  const getDate = (date: string) => {
-    const now = new Date()
-    const prevDate = new Date(date)
-    const diff = now.getDate() - prevDate.getDate()
-
-    return diff
-  }
 
   const handleFeedback = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -76,6 +68,15 @@ const PostPage = () => {
     if (userLikedPost) return setFeedback("like")
     else if (userDislikedPost) return setFeedback("dislike")
   }, [data, userData, owner, slug])
+
+  React.useEffect(() => {
+    window.onbeforeunload = () =>
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      })
+  }, [])
 
   React.useEffect(() => {
     if (!data || "error" in data) return

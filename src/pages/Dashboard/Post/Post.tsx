@@ -17,7 +17,7 @@ import {
 } from "./styles"
 import { USER_PUT } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
-import { formatRelative, formatDistanceToNow } from "date-fns"
+import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
 interface Props {

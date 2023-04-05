@@ -2,13 +2,15 @@ import { createBrowserRouter, Navigate } from "react-router-dom"
 import React from "react"
 import Layout from "./Layout"
 import Login from "./pages/Entrar"
-import ProfilePage from "./pages/ProfilePage"
+import ScrollPageToTop from "./helpers/ScrollPageToTop"
+// import ProfilePage from "./pages/ProfilePage"
 // import CreatePost from "./pages/CreatePost"
 // import Entrar from "./pages/Entrar/Login"
 // import Criar from "./pages/Entrar/Criar"
 // import Dashboard from "./pages/Dashboard"
 // import Feed from "./pages/Dashboard/Feed"
 // import PostPage from "./pages/PostPage/PostPage"
+const ProfilePage = React.lazy(() => import("./pages/ProfilePage"))
 const Terms = React.lazy(() => import("./pages/Terms"))
 const MainPage = React.lazy(() => import("./pages/MainPage"))
 const PostPage = React.lazy(() => import("./pages/PostPage/PostPage"))
@@ -41,13 +43,21 @@ const router = createBrowserRouter([
           },
           {
             path: ":owner",
-            element: <ProfilePage />,
+            element: (
+              <React.Suspense>
+                <ScrollPageToTop>
+                  <ProfilePage />
+                </ScrollPageToTop>
+              </React.Suspense>
+            ),
           },
           {
             path: ":owner/:slug",
             element: (
               <React.Suspense>
-                <PostPage />
+                <ScrollPageToTop>
+                  <PostPage />
+                </ScrollPageToTop>
               </React.Suspense>
             ),
           },
