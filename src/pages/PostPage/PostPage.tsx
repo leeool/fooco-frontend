@@ -23,10 +23,12 @@ import ReactLoading from "react-loading"
 import { Link } from "react-router-dom"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
+import UseSavePost from "src/helpers/SavePost"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
-  const { isLoggedIn, userData } = useUserStore()
+  const { isLoggedIn, userData, savedPosts } = useUserStore()
+  const { handleSavePost } = UseSavePost()
   const nav = useNavigate()
   const { data, isLoading, isFetching } = useQuery<IUserPosts | IError>(
     "post",
@@ -120,7 +122,11 @@ const PostPage = () => {
         <button>
           <Send />
         </button>
-        <button>
+        <button
+          data-saved={savedPosts.includes(data.id)}
+          onClick={handleSavePost}
+          data-id={data.id}
+        >
           <Bookmark />
         </button>
       </Interactions>

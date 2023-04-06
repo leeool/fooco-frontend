@@ -15,52 +15,24 @@ import {
   Points,
   DateContainer,
 } from "./styles"
-import { USER_PUT } from "src/api/apiCalls"
-import UseFetch from "src/hooks/UseFetch"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
+import UseSavePost from "src/helpers/SavePost"
 
 interface Props {
   post: IUserPosts
 }
 
 const Post = ({ post }: Props) => {
-  const { userData, setSavedPosts, savedPosts, isLoggedIn } = useUserStore()
   const removeSpecialChars = /[^A-Za-z0-9\s-]/g
-  const { request } = UseFetch()
+  const { savedPosts } = useUserStore()
+  const { handleSavePost } = UseSavePost()
   const slug = post.title
     .split(" ")
     .join("-")
     .normalize("NFD")
     .replaceAll(removeSpecialChars, "")
     .toLowerCase()
-
-  const handleSave = React.useCallback(
-    async (e: React.MouseEvent<HTMLButtonElement>) => {
-      const postId = e.currentTarget.dataset.id
-      if (!userData || !isLoggedIn || !postId) return
-      let saved_posts
-
-      if (savedPosts.includes(postId)) {
-        const removePost = savedPosts.filter((id) => id !== postId)
-        saved_posts = removePost
-        setSavedPosts(removePost)
-        console.log("removeu")
-        console.log(removePost)
-      } else {
-        const savePost = savedPosts.concat(postId)
-        saved_posts = savePost
-        setSavedPosts(savePost)
-        console.log("salvou")
-        console.log(savePost)
-      }
-
-      const { options, url } = USER_PUT({ saved_posts }, userData.id)
-
-      await request(url, options)
-    },
-    []
-  )
 
   return (
     <Container key={post.id}>
@@ -105,7 +77,7 @@ const Post = ({ post }: Props) => {
           <Send />
           Enviar
         </ButtonSecondary>
-        <ButtonSecondary onClick={handleSave} data-id={post.id}>
+        <ButtonSecondary onClick={handleSavePost} data-id={post.id}>
           <Bookmark data-saved={savedPosts.includes(post.id)} />
           {savedPosts.includes(post.id) ? "Remover" : "Salvar"}
         </ButtonSecondary>

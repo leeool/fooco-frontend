@@ -105,6 +105,11 @@ export const Interactions = styled.div`
   gap: 1.5rem;
   align-items: center;
 
+  button[data-saved="true"] svg {
+    fill: ${({ theme }) => theme.backgroundColor.secondary};
+    color: ${({ theme }) => theme.backgroundColor.secondary};
+  }
+
   svg {
     width: 1.8rem;
     height: 1.8rem;

@@ -35,6 +35,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "",
+            index: true,
             element: (
               <React.Suspense>
                 <Feed />
@@ -73,6 +74,7 @@ const router = createBrowserRouter([
       },
       {
         path: "",
+        index: true,
         element: (
           <React.Suspense>
             <MainPage />
@@ -103,6 +105,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
+        index: true,
         element: (
           <React.Suspense>
             <Entrar />
