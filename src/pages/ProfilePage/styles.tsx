@@ -61,7 +61,6 @@ export const About = styled.p`
 export const EditContainer = styled.form`
   display: grid;
   gap: 2rem;
-  min-width: 50rem;
 
   .buttons {
     display: flex;

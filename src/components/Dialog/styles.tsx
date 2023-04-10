@@ -30,7 +30,8 @@ export const Content = styled(Dialog.Content)`
   position: fixed;
   inset: 0;
   /* min-width: 60rem; */
-  width: fit-content;
+  width: 100%;
+  max-width: 60rem;
   padding: 1rem 2rem;
   height: fit-content;
   max-height: 40rem;
