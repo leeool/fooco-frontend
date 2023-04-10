@@ -24,6 +24,7 @@ import { Link } from "react-router-dom"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import UseSavePost from "src/helpers/SavePost"
+import { PostNotFound } from "../NotFound"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -96,7 +97,7 @@ const PostPage = () => {
       />
     )
   if (isError(data)) return <div>{data.error}</div>
-  if (!data) return null
+  if (!data) return <PostNotFound />
   return (
     <Container>
       <Interactions>

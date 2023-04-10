@@ -10,7 +10,9 @@ import useUserStore from "./stores/UseUserStore"
 import UseToastStore from "@components/Toast/UseToastStore"
 import { QueryClient, QueryClientProvider } from "react-query"
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions: { queries: { refetchOnWindowFocus: false } },
+})
 
 const App = () => {
   const { localTheme, selectedTheme } = themeStore()
