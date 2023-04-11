@@ -55,7 +55,7 @@ const ProfilePage = () => {
             justifyContent: "space-between",
           }}
         >
-          <Title size="lg">{data.username}</Title>
+          <Title size="lg">@{data.username}</Title>
           <UserEdit>{userOwnProfile ? <EditProfile /> : null}</UserEdit>
         </div>
         {data.about.length > 0 ? <About>{data.about}</About> : null}
@@ -72,7 +72,9 @@ const ProfilePage = () => {
           )}
         </PostContainer>
       ) : (
-        <div>{data.username} ainda não fez nenhuma publicação /:</div>
+        <Title size="md">
+          {data.username} ainda não fez nenhuma publicação /:
+        </Title>
       )}
     </Container>
   )

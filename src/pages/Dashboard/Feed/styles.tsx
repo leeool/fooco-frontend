@@ -6,6 +6,7 @@ export const Container = styled.div`
   grid-template-columns: 1fr 0.4fr;
   justify-content: space-between;
   gap: 5rem;
+  position: relative;
 
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;

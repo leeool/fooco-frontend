@@ -50,7 +50,7 @@ const index = () => {
           </DropdownMenuTrigger>
           <DropdownMenuContent>
             <DropdownMenuGroup>
-              <Link to={`/app/${userData?.username}`}>
+              <Link to={`/app/${userData?.username}`} reloadDocument>
                 <DropdownMenuItem>Perfil</DropdownMenuItem>
               </Link>
               <Link to={"/app/salvos"}>

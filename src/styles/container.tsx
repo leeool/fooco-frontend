@@ -9,7 +9,7 @@ export const MainContainer = styled.div`
     max-width: 89rem;
     min-height: 100vh;
     width: 100%;
-    margin: 8rem auto;
+    margin: 14rem auto;
     flex: 1;
 
     .load-icon {

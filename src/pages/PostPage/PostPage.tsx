@@ -137,7 +137,7 @@ const PostPage = () => {
           <Author>
             criado por{" "}
             <Link to={`/app/${data.user.username}`}>
-              <span>{data.user.username}</span>
+              <span>@{data.user.username}</span>
             </Link>
           </Author>
 

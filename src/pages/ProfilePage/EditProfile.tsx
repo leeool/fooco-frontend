@@ -1,10 +1,5 @@
 import { Edit } from "@assets/index"
-import {
-  DialogClose,
-  DialogContent,
-  DialogRoot,
-  DialogTrigger,
-} from "@components/Dialog"
+import { DialogContent, DialogRoot, DialogTrigger } from "@components/Dialog"
 import { Button, Input } from "@components/Form"
 import React from "react"
 import useUserStore from "src/stores/UseUserStore"

@@ -13,7 +13,7 @@ export const UserInfo = styled.div`
   display: grid;
   grid-template-columns: 6rem 1fr;
   grid-template-rows: 6rem;
-  gap: 2rem;
+  gap: 1rem;
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
   align-content: center;
   padding: 1rem 2rem;
@@ -54,8 +54,12 @@ export const UserEdit = styled.div`
 
 export const About = styled.p`
   grid-column: 1 / -1;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: ${({ theme }) => theme.textColor.paragraph};
+
+  @media (max-width: 600px) {
+    font-size: 0.9rem;
+  }
 `
 
 export const EditContainer = styled.form`

@@ -40,6 +40,7 @@ export const Content = styled(DropdownMenuContent)`
   display: grid;
   gap: 0.2rem;
   box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+  z-index: 101;
 
   &[data-state="open"] {
     animation: slideDownAndFade 0.3s ease;

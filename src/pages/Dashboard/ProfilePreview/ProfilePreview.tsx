@@ -16,6 +16,7 @@ import {
 import getUserPoints from "src/helpers/getUserPoints"
 import SkeletonLoad from "src/helpers/Skeleton"
 import Skeleton from "react-loading-skeleton"
+import { Link } from "react-router-dom"
 
 const ProfilePreview = () => {
   const { userData, loading, isLoggedIn } = useUserStore()
@@ -67,18 +68,19 @@ const ProfilePreview = () => {
     <Container>
       <UserData>
         <Banner src="https://placekitten.com/800/500" />
-        <div className="user-info">
+        <Link to={`/app/${userData.username}`} className="user-info">
           <Avatar
             src={userData.avatar_url}
             fallback={userData.username.slice(0, 2)}
             delayMs={500}
           />
           <Username>@{userData.username}</Username>
+
           <Points>
             <Point />
             {getUserPoints(userData)}
           </Points>
-        </div>
+        </Link>
       </UserData>
       <Separator />
       <About>
@@ -87,8 +89,12 @@ const ProfilePreview = () => {
         ) : null}
 
         <Item>
-          <Hat />
-          <span>ETEC Adolpho Berezin</span>
+          {userData.educational_place && (
+            <>
+              <Hat />
+              <span>{userData.educational_place}</span>
+            </>
+          )}
         </Item>
       </About>
     </Container>

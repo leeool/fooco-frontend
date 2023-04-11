@@ -2,16 +2,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import styled from "styled-components"
 
 export const Image = styled(AvatarImage)`
-  width: 100%;
-  /* height: 100%; */
-
   border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
   border-radius: 50%;
+  width: 100%;
+  height: 100%;
 `
 
 export const Fallback = styled(AvatarFallback)`
-  width: 100%;
-  height: 100%;
   background-color: ${({ theme }) => theme.backgroundColor.secondary};
   display: flex;
   place-content: center;
@@ -23,8 +20,8 @@ export const Fallback = styled(AvatarFallback)`
   text-transform: uppercase;
   user-select: none;
   border-radius: 50%;
-
-  /* padding: 0.8rem; */
+  width: 100%;
+  height: 100%;
 `
 
 export const Root = styled(Avatar)`
@@ -32,8 +29,4 @@ export const Root = styled(Avatar)`
   place-items: center;
   place-content: center;
   place-self: center;
-  width: 100%;
-  height: 100%;
-
-  overflow: hidden;
 `

@@ -41,9 +41,9 @@ const Post = ({ post }: Props) => {
           <PostTitle>{post.title}</PostTitle>
         </Link>
         <Details>
-          <Link to={`/app/${post.user.username}`}>
+          <Link to={`/app/${post.user.username}`} reloadDocument>
             <Author>
-              por <span>{post.user.username}</span>
+              por <span>@{post.user.username}</span>
             </Author>
           </Link>
           <DateContainer>
