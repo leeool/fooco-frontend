@@ -62,9 +62,33 @@ export const EditContainer = styled.form`
   display: grid;
   gap: 2rem;
 
+  &[data-loading="true"]::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+  }
+
   .buttons {
     display: flex;
     justify-self: flex-end;
     gap: 1rem;
   }
+`
+
+export const FixedTitle = styled.div`
+  background-color: ${({ theme }) => theme.backgroundColor.primary};
+  width: 100%;
+`
+
+export const LoadingEdit = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: 100;
 `

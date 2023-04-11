@@ -12,7 +12,6 @@ import Post from "../Dashboard/Post/Post"
 import { UserNotFound } from "../NotFound"
 import ReactLoading from "react-loading"
 import useUserStore from "src/stores/UseUserStore"
-import { Edit } from "@assets/index"
 import { Avatar } from "@components/User/Avatar"
 import EditProfile from "./EditProfile"
 
@@ -44,7 +43,11 @@ const ProfilePage = () => {
   return (
     <Container>
       <UserInfo>
-        <Avatar src="" delayMs={0} fallback={data.username.slice(0, 2)} />
+        <Avatar
+          src={data.avatar_url}
+          delayMs={0}
+          fallback={data.username.slice(0, 2)}
+        />
         <div
           style={{
             display: "flex",
@@ -55,7 +58,7 @@ const ProfilePage = () => {
           <Title size="lg">{data.username}</Title>
           <UserEdit>{userOwnProfile ? <EditProfile /> : null}</UserEdit>
         </div>
-        {data.about.length > 0 ? <About>? data.about</About> : null}
+        {data.about.length > 0 ? <About>{data.about}</About> : null}
       </UserInfo>
 
       {data.posts.length > 0 ? (

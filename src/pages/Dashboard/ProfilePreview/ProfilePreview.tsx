@@ -69,7 +69,7 @@ const ProfilePreview = () => {
         <Banner src="https://placekitten.com/800/500" />
         <div className="user-info">
           <Avatar
-            src=""
+            src={userData.avatar_url}
             fallback={userData.username.slice(0, 2)}
             delayMs={500}
           />
@@ -82,10 +82,10 @@ const ProfilePreview = () => {
       </UserData>
       <Separator />
       <About>
-        <Description>
-          Aluno de Informática na ETEC Adolpho Berezin. Minha paixão é a
-          programação. Curto músicas para relaxar.
-        </Description>
+        {userData.about.length > 0 ? (
+          <Description>{userData.about}</Description>
+        ) : null}
+
         <Item>
           <Hat />
           <span>ETEC Adolpho Berezin</span>

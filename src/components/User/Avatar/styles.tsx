@@ -3,7 +3,10 @@ import styled from "styled-components"
 
 export const Image = styled(AvatarImage)`
   width: 100%;
+  /* height: 100%; */
+
   border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+  border-radius: 50%;
 `
 
 export const Fallback = styled(AvatarFallback)`
