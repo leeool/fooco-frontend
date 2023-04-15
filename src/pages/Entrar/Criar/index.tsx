@@ -15,6 +15,7 @@ import UseToastStore from "@components/Toast/UseToastStore"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createUserSchema } from "src/schemas"
+import isError from "src/helpers/isError"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -26,13 +27,18 @@ const index = () => {
   const { email, password } = UseCreateUserStore()
   const { request, loading } = UseFetch<IUserData>()
   const [page, setPage] = React.useState<number>(1)
-  const [userId, setUserId] = React.useState<string | null>(null)
 
-  const { loginUser, loading: loginLoading, getUserWToken } = useUserStore()
+  const {
+    loginUser,
+    loading: loginLoading,
+    validateUser,
+    setIsUserLoggedIn,
+  } = useUserStore()
   const { setToastMessage } = UseToastStore()
   const navigate = useNavigate()
+  const [userID, setUserID] = React.useState<string | null>(null)
 
-  const { handleSubmit, control, setError } = useForm<User>({
+  const { handleSubmit, control, setError, getValues } = useForm<User>({
     resolver: zodResolver(createUserSchema.omit({ username: true })),
     mode: "all",
   })
@@ -45,50 +51,55 @@ const index = () => {
 
   const handleCreateUser = handleSubmit(
     async ({ email, pass: { password }, acceptTerms }) => {
+      const userProv =
+        email.split("@")[0].slice(0, 10) + Math.floor(Math.random() * 100)
+
       if (!acceptTerms) {
         setError("acceptTerms", { type: "required" })
         return setToastMessage("Algo deu errado", "Aceite os termos de uso!")
       }
-      const userProv = email.split("@")[0] + Math.floor(Math.random() * 100)
 
-      const { url: urlCreateUser, options: optionsCreateUser } = USER_POST(
-        userProv,
-        email,
-        password
-      )
-      const { data: createUserData, error: createUserError } = await request(
-        urlCreateUser,
-        optionsCreateUser
-      )
+      // criar conta
+      const { url, options } = USER_POST(userProv, email, password)
 
-      if (createUserError || !createUserData) return
+      const { data, error } = await request(url, options)
 
-      setUserId(createUserData.id)
+      if (isError(data)) {
+        setToastMessage("Algo deu errado", data.error)
+        return
+      } else if (error || !data) {
+        setToastMessage("Algo deu errado", "Tente novamente mais tarde")
+        return
+      }
+
       await loginUser(email, password)
-
+      setUserID(data.id)
       setPage(2)
-      return
     }
   )
 
   const handleUpdateUser = handleSubmitUser(async ({ username }) => {
-    if (!userId) return
+    if (!userID) return
 
-    const { options: optionsUpdateUser, url: urlUpdateUser } = USER_PUT(
-      { username },
-      userId
-    )
+    // atualizar conta
+    const { url, options } = USER_PUT({ username }, userID)
 
-    const { error: updateUserError, response: updateUserResponse } =
-      await request(urlUpdateUser, optionsUpdateUser)
+    const { data, error } = await request(url, options)
 
-    if (updateUserError) return
-
-    if (updateUserResponse && updateUserResponse.status < 300) {
-      await getUserWToken()
-      setToastMessage(`Bem-vindo(a) ${username}!`, "Usuário criado com sucesso")
-      navigate("/")
+    if (isError(data)) {
+      setError("username", { type: "validate", message: data.error })
+      setToastMessage("Algo deu errado", data.error)
+      return
+    } else if (error || !data) {
+      setToastMessage("Algo deu errado", "Tente novamente mais tarde")
+      return
     }
+
+    // login
+    await validateUser()
+
+    setToastMessage(`Bem-vindo(a) ${username}!`, "Usuário criado com sucesso")
+    navigate("/app")
   })
 
   React.useEffect(() => {
@@ -209,7 +220,11 @@ const index = () => {
                 />
               )}
             />
-            <Button variant="solid" disabled={loading || loginLoading}>
+            <Button
+              variant="solid"
+              type="submit"
+              disabled={loading || loginLoading}
+            >
               {loading || loginLoading ? "Carregando..." : "Avançar"}
             </Button>
           </motion.form>
@@ -233,7 +248,7 @@ const index = () => {
                 <Input
                   id="username"
                   type="text"
-                  placeholder={email.split("@")[0]}
+                  placeholder={getValues("email").split("@")[0]}
                   icon={<Letter />}
                   label={"Crie seu apelido"}
                   value={value}
@@ -245,7 +260,11 @@ const index = () => {
               )}
             />
 
-            <Button variant="solid" disabled={loading || loginLoading}>
+            <Button
+              variant="solid"
+              disabled={loading || loginLoading}
+              type="submit"
+            >
               {loading || loginLoading ? "Carregando..." : "Avançar"}
             </Button>
           </motion.form>

@@ -1,16 +1,11 @@
-import {
-  GET_USER,
-  instance,
-  USER_LOGIN,
-  VALIDATE_TOKEN,
-} from "src/api/apiCalls"
+import { instance, USER_LOGIN, VALIDATE_TOKEN } from "src/api/apiCalls"
 import { create } from "zustand"
 
 interface IUser {
   isLoggedIn: boolean
   setIsUserLoggedIn: (isLoggedIn: boolean) => void
   loginUser: (email: string, password: string) => Promise<void>
-  getUserWToken: () => Promise<void>
+  validateUser: () => Promise<void>
   userData: IUserData | null
   loading: boolean
   logoutUser: () => void
@@ -25,14 +20,14 @@ const useUserStore = create<IUser>((set, get) => ({
     try {
       set({ loading: true })
       const { url, options } = USER_LOGIN(email, password)
-      const response = await instance<IUserLogin | { error: string }>(
-        url,
-        options
-      )
+      const response = await instance<
+        { token: string; user: IUserData } | { error: string }
+      >(url, options)
       if (response.status >= 300 && "error" in response.data) {
         throw new Error(response.data.error)
       } else if (!("error" in response.data) && response.status < 400) {
         localStorage.setItem("token", response.data.token)
+        // set({ isLoggedIn: true, userData: response.data.user })
       }
     } catch (error) {
       const logoutUser = get().logoutUser
@@ -44,7 +39,7 @@ const useUserStore = create<IUser>((set, get) => ({
       set({ loading: false })
     }
   },
-  getUserWToken: async () => {
+  validateUser: async () => {
     const userIsloggedIn = get().isLoggedIn
 
     if (userIsloggedIn) return
@@ -54,21 +49,17 @@ const useUserStore = create<IUser>((set, get) => ({
 
     try {
       if (!token) throw new Error("No token provided")
+
       const { url: urlValidate, options: optValidate } = VALIDATE_TOKEN(token)
-      const validate = await instance(urlValidate, optValidate)
-      if (!validate) return
 
-      const { url, options } = GET_USER(validate.data.username)
+      const { status, data } = await instance<{
+        decoded: unknown
+        user: IUserData
+      }>(urlValidate, optValidate)
 
-      const response = await instance<IUserData | { error: string }>(
-        url,
-        options
-      )
-      if (response.status >= 400 && "error" in response.data)
-        throw new Error(response.data.error)
-      else if (!("error" in response.data) && response.status < 400) {
-        set({ isLoggedIn: true, userData: response.data })
-      }
+      if (status >= 400 || !data) throw new Error("Not authorized")
+
+      set({ isLoggedIn: true, userData: data.user })
     } catch (error) {
       console.error(error)
       const logoutUser = get().logoutUser

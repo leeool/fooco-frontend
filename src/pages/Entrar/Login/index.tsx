@@ -4,13 +4,11 @@ import { Container } from "./styles"
 import Input from "@components/Form/Input"
 import { ReactComponent as Letter } from "@assets/icons/letter.svg"
 import { ReactComponent as Lock } from "@assets/icons/lock.svg"
-import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
 import { Button } from "@components/Form"
 import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import useUserStore from "src/stores/UseUserStore"
 import UseFetch from "src/hooks/UseFetch"
-import { USER_LOGIN } from "src/api/apiCalls"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
 
 const animateLeft = {
@@ -22,21 +20,15 @@ const animateLeft = {
 const index = () => {
   const { email, password, setEmail, setPassword } = UseCreateUserStore()
   const useNav = useNavigate()
-  const { getUserWToken, loading: loginLoading } = useUserStore()
-  const { loading, request } = UseFetch<IUserLogin | null>()
+  const { validateUser, loading: loginLoading, loginUser } = useUserStore()
+  const { loading } = UseFetch<IUserLogin | null>()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { options, url } = USER_LOGIN(email, password)
-    const { response } = await request(url, options)
-
-    if (response && response.status < 400) {
-      localStorage.setItem("token", response.data.token)
-      localStorage.setItem("id", response.data.user.id)
-      await getUserWToken()
-      useNav("/")
-    }
+    await loginUser(email, password)
+    await validateUser()
+    useNav("/")
   }
 
   return (

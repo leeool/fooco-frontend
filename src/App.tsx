@@ -16,7 +16,7 @@ const queryClient = new QueryClient({
 
 const App = () => {
   const { localTheme, selectedTheme } = themeStore()
-  const { getUserWToken } = useUserStore()
+  const { validateUser } = useUserStore()
   const { toastContent } = UseToastStore()
 
   React.useEffect(() => {
@@ -24,7 +24,7 @@ const App = () => {
   }, [selectedTheme])
 
   React.useEffect(() => {
-    getUserWToken()
+    validateUser()
   }, [])
 
   return (
