@@ -13,6 +13,7 @@ export const DialogOverlay = styled(Dialog.Overlay)`
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 3;
 
   @keyframes overlayShow {
     from {
@@ -29,6 +30,7 @@ export const Content = styled(Dialog.Content)`
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
   position: fixed;
   inset: 0;
+  z-index: 4;
   /* min-width: 60rem; */
   width: 100%;
   max-width: 60rem;

@@ -14,7 +14,7 @@ export const HeaderContainer = styled.header`
   padding: 0.8rem 2rem;
   transition: background-color 0.3s ease-in-out;
   position: fixed;
-  z-index: 100;
+  z-index: 3;
 
   .loading {
     display: block;

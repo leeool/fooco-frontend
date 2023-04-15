@@ -9,7 +9,7 @@ export const MainContainer = styled.div`
     max-width: 89rem;
     min-height: 100vh;
     width: 100%;
-    margin: 14rem auto;
+    margin: 10rem auto;
     flex: 1;
 
     .load-icon {
@@ -17,9 +17,9 @@ export const MainContainer = styled.div`
     }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 1000px) {
     .main-content {
-      margin-top: 4rem;
+      margin-top: 14rem;
     }
   }
 `

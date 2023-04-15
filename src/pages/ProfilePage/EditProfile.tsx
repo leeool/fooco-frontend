@@ -12,6 +12,7 @@ import UseFetch from "src/hooks/UseFetch"
 import { USER_PUT } from "src/api/apiCalls"
 import ReactLoading from "react-loading"
 import UseToastStore from "@components/Toast/UseToastStore"
+import { useNavigate } from "react-router-dom"
 
 const EditProfile = () => {
   const { userData, isLoggedIn } = useUserStore()
@@ -22,6 +23,7 @@ const EditProfile = () => {
   const [open, setOpen] = React.useState<boolean>(false)
   const { request, loading } = UseFetch()
   const { setToastMessage } = UseToastStore()
+  const nav = useNavigate()
 
   const handleUpdateUser = handleSubmit(async (data) => {
     if (!userData || !isLoggedIn) return
@@ -34,13 +36,22 @@ const EditProfile = () => {
 
     const { options, url } = USER_PUT({ ...modifiedData }, userData.id)
 
-    const { response } = await request(url, options)
+    const { response, data: updatedData } = await request(url, options)
 
-    if (!response || response.status >= 300) return
+    if (
+      !response ||
+      response.status >= 300 ||
+      !updatedData ||
+      typeof updatedData !== "object" ||
+      !("username" in updatedData)
+    )
+      return
 
+    setOpen(false)
+    nav(`/app/${updatedData.username}`)
+    window.location.reload()
     setToastMessage("Sucesso!", "Perfil atualizado com sucesso!")
-
-    return setOpen(false)
+    return
   })
 
   if (!userData || !isLoggedIn) return null

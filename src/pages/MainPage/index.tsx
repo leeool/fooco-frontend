@@ -143,8 +143,7 @@ const MainPage = () => {
         </ul>
         <div className="slogan">
           <h3>
-            Desenvolvido por <span>estudantes</span>, para{" "}
-            <span>estudantes</span>.
+            <span>Juntos aprendemos mais.</span>
           </h3>
         </div>
       </BarContainer>

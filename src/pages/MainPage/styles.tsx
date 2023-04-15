@@ -111,7 +111,7 @@ export const BarContainer = styled.section`
     color: ${({ theme }) => theme.textColor.title};
     padding: 0 0.5rem;
     position: relative;
-    z-index: 100;
+    z-index: 0;
 
     &::before {
       content: "";

@@ -28,12 +28,7 @@ const index = () => {
   const { request, loading } = UseFetch<IUserData>()
   const [page, setPage] = React.useState<number>(1)
 
-  const {
-    loginUser,
-    loading: loginLoading,
-    validateUser,
-    setIsUserLoggedIn,
-  } = useUserStore()
+  const { loginUser, loading: loginLoading, validateUser } = useUserStore()
   const { setToastMessage } = UseToastStore()
   const navigate = useNavigate()
   const [userID, setUserID] = React.useState<string | null>(null)
