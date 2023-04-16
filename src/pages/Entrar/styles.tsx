@@ -67,3 +67,22 @@ export const Container = styled.main`
     }
   }
 `
+
+export const SocialLogin = styled.div`
+  margin-top: 2rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  button {
+    width: 5rem;
+
+    &[data-theme="dark"] {
+      svg {
+        fill: #fff;
+        width: 100%;
+      }
+    }
+  }
+`

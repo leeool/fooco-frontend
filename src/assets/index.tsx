@@ -10,6 +10,9 @@ import { ReactComponent as Bookmark } from "./icons/bookmark.svg"
 import { ReactComponent as MiniSeta } from "./icons/miniseta.svg"
 import { ReactComponent as Send } from "./icons/send.svg"
 import { ReactComponent as Edit } from "./icons/edit.svg"
+import { ReactComponent as GithubIcon } from "./icons/github.svg"
+import { ReactComponent as MicrosoftIcon } from "./icons/microsoft.svg"
+import { ReactComponent as GoogleIcon } from "./icons/google.svg"
 
 export {
   Hat,
@@ -24,4 +27,7 @@ export {
   MiniSeta,
   Send,
   Edit,
+  GithubIcon,
+  MicrosoftIcon,
+  GoogleIcon,
 }

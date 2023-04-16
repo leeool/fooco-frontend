@@ -8,6 +8,7 @@ interface IUser {
   validateUser: () => Promise<void>
   userData: IUserData | null
   loading: boolean
+  setLoading: (loading: boolean) => void
   logoutUser: () => void
   savedPosts: string[]
   setSavedPosts: (savedPosts: string[]) => void
@@ -70,6 +71,7 @@ const useUserStore = create<IUser>((set, get) => ({
   },
   userData: null,
   loading: false,
+  setLoading: (loading: boolean) => set({ loading }),
   logoutUser: () => {
     localStorage.removeItem("token")
     set({ isLoggedIn: false, userData: null, savedPosts: [] })

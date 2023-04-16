@@ -1,13 +1,20 @@
 import React from "react"
 import { Navigate, Outlet } from "react-router"
-import { Container } from "./styles"
+import { Container, SocialLogin } from "./styles"
 import { ReactComponent as Foquinho } from "@assets/foquinho2.svg"
 import { ReactComponent as Logo } from "@assets/logo.svg"
 import { Link } from "react-router-dom"
 import useUserStore from "src/stores/UseUserStore"
+import { Button } from "@components/Form"
+import { GithubIcon, GoogleIcon, MicrosoftIcon } from "@assets/index"
+import { themeStore } from "src/stores/themeStore"
+import useLoginSocialUser from "./loginSocials"
 
 const index = () => {
   const { isLoggedIn } = useUserStore()
+  const { selectedTheme } = themeStore()
+  const { loginWithGoogle, loginWithGithub, loginWithMicrosoft } =
+    useLoginSocialUser()
 
   React.useEffect(() => {
     document.title = `Faça login • Fooco`
@@ -24,6 +31,21 @@ const index = () => {
           <Logo />
         </Link>
         <Outlet />
+        <SocialLogin>
+          <Button variant="outlined" onClick={loginWithGoogle}>
+            <GoogleIcon />
+          </Button>
+          <Button
+            variant="outlined"
+            data-theme={selectedTheme}
+            onClick={loginWithGithub}
+          >
+            <GithubIcon />
+          </Button>
+          <Button variant="outlined" onClick={loginWithMicrosoft}>
+            <MicrosoftIcon />
+          </Button>
+        </SocialLogin>
       </div>
     </Container>
   )

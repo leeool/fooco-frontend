@@ -1,0 +1,92 @@
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  OAuthProvider,
+  User,
+} from "firebase/auth"
+import { USER_POST } from "src/api/apiCalls"
+import app from "src/api/firebaseConfig"
+import UseFetch from "src/hooks/UseFetch"
+import useUserStore from "src/stores/UseUserStore"
+import React from "react"
+
+const auth = getAuth(app)
+const googleProvider = new GoogleAuthProvider()
+const githubProvider = new GithubAuthProvider()
+const microsoftProvider = new OAuthProvider("microsoft.com")
+
+const useLoginSocialUser = () => {
+  const { loginUser, validateUser, setLoading } = useUserStore()
+  const { request } = UseFetch<IUserData>()
+
+  const loginUserSocial = async (user: User & { accessToken?: string }) => {
+    if (!user || !user.displayName || !user.email || !user.accessToken) return
+
+    setLoading(true)
+
+    const provUsername =
+      user.displayName.split(" ").join("_").slice(0, 10).toLowerCase() +
+      Math.floor(Math.random() * 1000)
+
+    const { options, url } = USER_POST(
+      provUsername,
+      user.email,
+      user.accessToken.split(".")[0]
+    )
+
+    await request(url, options)
+
+    setLoading(false)
+
+    await loginUser(user.email, user.accessToken)
+    await validateUser()
+
+    return
+  }
+
+  const loginWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider)
+      const credential = GoogleAuthProvider.credentialFromResult(result)
+      if (!credential) return
+
+      await loginUserSocial(result.user)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const loginWithGithub = async () => {
+    try {
+      const result = await signInWithPopup(auth, githubProvider)
+      const credential = GithubAuthProvider.credentialFromResult(result)
+      if (!credential) return
+      await loginUserSocial(result.user)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const loginWithMicrosoft = async () => {
+    try {
+      const result = await signInWithPopup(auth, microsoftProvider)
+      const credential = OAuthProvider.credentialFromResult(result)
+      if (!credential) return
+
+      await loginUserSocial(result.user)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  return {
+    loginWithGithub,
+    loginWithGoogle,
+    loginWithMicrosoft,
+    loginUserSocial,
+  }
+}
+
+export default useLoginSocialUser

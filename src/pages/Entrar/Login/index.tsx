@@ -40,6 +40,7 @@ const index = () => {
       transition={{ type: "spring" }}
     >
       <Title size="xl">Bem vindo de volta!</Title>
+
       <form className="form" onSubmit={handleSubmit}>
         <Input
           id="email"
