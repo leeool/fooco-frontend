@@ -29,7 +29,7 @@ import { PostNotFound } from "../NotFound"
 const PostPage = () => {
   const { owner, slug } = useParams()
   const { isLoggedIn, userData, savedPosts } = useUserStore()
-  const { handleSavePost } = UseSavePost()
+  const { handleSavePost, loading: savePostLoading } = UseSavePost()
   const nav = useNavigate()
   const { data, isLoading, isFetching } = useQuery<IUserPosts | IError>(
     "post",
@@ -39,11 +39,13 @@ const PostPage = () => {
       ),
     { refetchOnWindowFocus: false }
   )
-  const { request, data: feedbackData } = UseFetch<string | null>()
+  const { request, data: feedbackData, loading } = UseFetch<string | null>()
   const [feedback, setFeedback] = React.useState<string | null>(null)
 
   const handleFeedback = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
+
+    if (loading) return
 
     if (!isLoggedIn) {
       nav("/entrar")
@@ -101,7 +103,7 @@ const PostPage = () => {
   return (
     <Container>
       <Interactions>
-        <Feedback>
+        <Feedback data-loading={loading}>
           <button
             onClick={handleFeedback}
             data-feedback="like"
@@ -127,6 +129,7 @@ const PostPage = () => {
           data-saved={savedPosts.includes(data.id)}
           onClick={handleSavePost}
           data-id={data.id}
+          data-loading={savePostLoading}
         >
           <Bookmark />
         </button>

@@ -8,11 +8,13 @@ import isError from "./isError"
 const UseSavePost = () => {
   const { userData, isLoggedIn, savedPosts, setSavedPosts } = useUserStore()
   const nav = useNavigate()
-  const { request } = UseFetch()
+  const { request, loading } = UseFetch()
   const loc = useLocation()
 
   const handleSavePost = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const postId = e.currentTarget.dataset.id
+
+    if (loading) return
 
     if (!postId || !userData || !isLoggedIn) {
       nav("/entrar")
@@ -44,7 +46,7 @@ const UseSavePost = () => {
     setSavedPosts([...new Set([...savedPosts, ...userData.saved_posts])])
   }, [userData, isLoggedIn, loc])
 
-  return { handleSavePost }
+  return { handleSavePost, loading }
 }
 
 export default UseSavePost

@@ -96,6 +96,13 @@ export const Feedback = styled.div`
   button[data-active="true"] svg {
     color: ${({ theme }) => theme.textColor.title};
   }
+
+  &[data-loading="true"] {
+    button svg {
+      cursor: wait;
+      opacity: 0.5;
+    }
+  }
 `
 
 export const Interactions = styled.div`
@@ -108,6 +115,11 @@ export const Interactions = styled.div`
   button[data-saved="true"] svg {
     fill: ${({ theme }) => theme.backgroundColor.secondary};
     color: ${({ theme }) => theme.backgroundColor.secondary};
+  }
+
+  button[data-loading="true"] svg {
+    cursor: wait;
+    opacity: 0.5;
   }
 
   svg {

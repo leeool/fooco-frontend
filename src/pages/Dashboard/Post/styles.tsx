@@ -123,6 +123,11 @@ export const Interactions = styled.div`
     }
   }
 
+  button[data-loading="true"] {
+    cursor: wait;
+    opacity: 0.5;
+  }
+
   @media (max-width: 600px) {
     gap: 0.5rem;
 

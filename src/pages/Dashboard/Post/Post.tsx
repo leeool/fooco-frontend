@@ -26,7 +26,7 @@ interface Props {
 const Post = ({ post }: Props) => {
   const removeSpecialChars = /[^A-Za-z0-9\s-]/g
   const { savedPosts } = useUserStore()
-  const { handleSavePost } = UseSavePost()
+  const { handleSavePost, loading } = UseSavePost()
   const slug = post.title
     .split(" ")
     .join("-")
@@ -77,7 +77,11 @@ const Post = ({ post }: Props) => {
           <Send />
           Enviar
         </ButtonSecondary>
-        <ButtonSecondary onClick={handleSavePost} data-id={post.id}>
+        <ButtonSecondary
+          onClick={handleSavePost}
+          data-id={post.id}
+          data-loading={loading}
+        >
           <Bookmark data-saved={savedPosts.includes(post.id)} />
           {savedPosts.includes(post.id) ? "Remover" : "Salvar"}
         </ButtonSecondary>
