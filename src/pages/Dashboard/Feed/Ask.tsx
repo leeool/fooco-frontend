@@ -24,10 +24,10 @@ const Ask = () => {
           className="avatar"
         />
       </Link>
-      {match ? (
-        <AskButton onClick={() => nav("publicar")}>
-          Publicar como {userData.username}...
-        </AskButton>
+      <AskButton onClick={() => nav("publicar")}>
+        Publicar como {userData.username}...
+      </AskButton>
+      {/* {match ? (
       ) : (
         <DialogRoot>
           <DialogTrigger>
@@ -37,7 +37,7 @@ const Ask = () => {
             <CreatePost />
           </DialogContent>
         </DialogRoot>
-      )}
+      )} */}
     </AskContainer>
   )
 }

@@ -32,8 +32,8 @@ export const Content = styled(Dialog.Content)`
   inset: 0;
   z-index: 4;
   /* min-width: 60rem; */
-  width: 100%;
-  max-width: 60rem;
+  width: fit-content;
+  max-width: 80rem;
   padding: 1rem 2rem;
   height: fit-content;
   max-height: 40rem;
