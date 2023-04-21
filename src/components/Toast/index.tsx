@@ -13,7 +13,7 @@ const index = ({ title, description }: Props) => {
 
   return (
     <Toast.Provider swipeDirection="right">
-      <Root open={open} onOpenChange={setOpen} duration={10000}>
+      <Root open={open} onOpenChange={setOpen} duration={5000}>
         <Title>{title}</Title>
         <Description>{description}</Description>
       </Root>
