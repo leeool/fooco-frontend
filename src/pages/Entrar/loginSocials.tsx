@@ -11,6 +11,7 @@ import app from "src/api/firebaseConfig"
 import UseFetch from "src/hooks/UseFetch"
 import useUserStore from "src/stores/UseUserStore"
 import React from "react"
+import UseToastStore from "@components/Toast/UseToastStore"
 
 const auth = getAuth(app)
 const googleProvider = new GoogleAuthProvider()
@@ -20,12 +21,19 @@ const microsoftProvider = new OAuthProvider("microsoft.com")
 const useLoginSocialUser = () => {
   const { loginUser, validateUser, setLoading } = useUserStore()
   const { request } = UseFetch<IUserData>()
+  const { setToastMessage } = UseToastStore()
 
   const loginUserSocial = async (user: User & { accessToken?: string }) => {
     if (!user || !user.displayName || !user.email || !user.accessToken) return
 
-    setLoading(true)
+    const { request: loginResponse } = await loginUser(
+      user.email,
+      user.accessToken
+    )
+    await validateUser()
+    if (loginResponse) return
 
+    setLoading(true)
     const provUsername =
       user.displayName.split(" ").join("_").slice(0, 10).toLowerCase() +
       Math.floor(Math.random() * 1000)
@@ -37,11 +45,10 @@ const useLoginSocialUser = () => {
     )
 
     await request(url, options)
-
-    setLoading(false)
-
     await loginUser(user.email, user.accessToken)
     await validateUser()
+
+    setLoading(false)
 
     return
   }
@@ -54,7 +61,7 @@ const useLoginSocialUser = () => {
 
       await loginUserSocial(result.user)
     } catch (error) {
-      console.log(error)
+      setToastMessage("Erro ao fazer login com o Google", "error")
     }
   }
 

@@ -4,7 +4,7 @@ import { create } from "zustand"
 interface IUser {
   isLoggedIn: boolean
   setIsUserLoggedIn: (isLoggedIn: boolean) => void
-  loginUser: (email: string, password: string) => Promise<void>
+  loginUser: (email: string, password: string) => Promise<any>
   validateUser: () => Promise<void>
   userData: IUserData | null
   loading: boolean
@@ -18,26 +18,30 @@ const useUserStore = create<IUser>((set, get) => ({
   isLoggedIn: false,
   setIsUserLoggedIn: (isLoggedIn: boolean) => set({ isLoggedIn }),
   loginUser: async (email: string, password: string) => {
+    let request = null
+
     try {
       set({ loading: true })
       const { url, options } = USER_LOGIN(email, password)
-      const response = await instance<
+      request = await instance<
         { token: string; user: IUserData } | { error: string }
       >(url, options)
-      if (response.status >= 300 && "error" in response.data) {
-        throw new Error(response.data.error)
-      } else if (!("error" in response.data) && response.status < 400) {
-        localStorage.setItem("token", response.data.token)
+      if (request.status >= 300 && "error" in request.data) {
+        throw new Error(request.data.error)
+      } else if (!("error" in request.data) && request.status < 400) {
+        localStorage.setItem("token", request.data.token)
         // set({ isLoggedIn: true, userData: response.data.user })
       }
     } catch (error) {
       const logoutUser = get().logoutUser
+      request = null
       logoutUser()
       if (error instanceof Error) {
         console.error(error)
       }
     } finally {
       set({ loading: false })
+      return { request }
     }
   },
   validateUser: async () => {
