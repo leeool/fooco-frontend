@@ -60,9 +60,16 @@ export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
     font-size: 1rem;
   }
 
+  ul {
+    height: min-content;
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+  }
+
   ul li {
     list-style: disc;
     margin-left: 1rem;
+    height: min-content;
 
     ul li {
       list-style: circle;
@@ -208,35 +215,52 @@ export const Container = styled(MarkdownStyle)`
       height: calc(100vh - 20rem);
       margin: 0 auto;
       line-height: 1.5;
-      overflow-y: auto;
       max-width: 90rem;
       justify-content: center;
       margin: 0 auto;
+      overflow: auto;
 
       .bytemd-preview {
         display: inline-block;
-        padding: 1rem;
-        height: 100vh;
+        height: 100%;
         width: 100%;
-        max-width: 80rem;
-        margin: 0 auto;
+        /* max-width: 80rem; */
         justify-self: center;
-        line-height: 1.5;
         font-family: "Rubik", sans-serif;
         transition: none;
+        overflow: auto;
+        vertical-align: top;
+
+        .markdown-body {
+          margin: 0 auto;
+          padding: 1rem;
+          width: 100%;
+          max-width: 800px;
+          word-wrap: break-word;
+          word-break: normal;
+          line-height: 1.5;
+        }
       }
 
       .bytemd-editor {
-        padding: 1rem 0.5rem;
-        width: 100%;
-        height: fit-content;
-        overflow-y: auto;
-        max-width: 80rem;
-        margin: 0 auto;
-        justify-self: center;
+        display: inline-block;
+        /* padding: 1rem 0.5rem; */
+        /* width: 100%; */
+        height: 100%;
+        /* overflow-y: auto; */
+        /* max-width: 80rem; */
+        /* margin: 0 auto; */
+        overflow: hidden;
 
         .CodeMirror {
           font-family: "Roboto Mono", monospace;
+          position: relative;
+          overflow: hidden;
+          height: 100%;
+          direction: ltr;
+          padding: 0 0.5rem;
+          line-height: 1.5;
+          padding: 1rem;
 
           &-vscrollbar,
           &-hscrollbar,
@@ -246,6 +270,48 @@ export const Container = styled(MarkdownStyle)`
             z-index: 1;
             display: none;
             outline: none;
+          }
+
+          .cm-header,
+          .cm-strong {
+            font-weight: 700;
+          }
+
+          .cm-link {
+            text-decoration: underline;
+          }
+
+          .CodeMirror-vscrollbar {
+            right: 0;
+            top: 0;
+            overflow-x: hidden;
+            overflow-y: scroll;
+          }
+          .CodeMirror-hscrollbar {
+            bottom: 0;
+            left: 0;
+            overflow-y: hidden;
+            overflow-x: scroll;
+          }
+
+          .CodeMirror-scrollbar-filler {
+            right: 0;
+            bottom: 0;
+          }
+          .CodeMirror-gutter-filler {
+            left: 0;
+            bottom: 0;
+          }
+
+          .CodeMirror-scroll {
+            overflow: auto !important;
+            margin-bottom: -50px;
+            margin-right: -50px;
+            padding-bottom: 50px;
+            height: 100%;
+            outline: none;
+            position: relative;
+            z-index: 0;
           }
 
           .CodeMirror-gutter-elt {
@@ -287,7 +353,7 @@ export const Container = styled(MarkdownStyle)`
           margin: 0 auto;
           cursor: text;
           min-height: 1px;
-          width: 100%;
+          max-width: 90%;
 
           .cm-header {
             font-weight: 600;
@@ -390,7 +456,8 @@ export const Container = styled(MarkdownStyle)`
     }
 
     .bytemd-status {
-      padding: 0.5rem;
+      padding: 0.3rem;
+      font-size: 0.8rem;
       background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
       display: flex;
       justify-content: space-between;
@@ -398,10 +465,11 @@ export const Container = styled(MarkdownStyle)`
       &-left {
         display: flex;
         gap: 0.5rem;
+        font-size: 0.8rem;
       }
 
       &-right {
-        display: none;
+        /* display: none; */
       }
     }
   }
