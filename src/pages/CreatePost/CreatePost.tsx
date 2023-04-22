@@ -2,7 +2,7 @@ import { Button, Input } from "@components/Form"
 import { Title } from "@components/Text/Title"
 import React from "react"
 import { AskForm, Buttons, Container, TextArea } from "./styles"
-import { Markdown, Viewer } from "@components/MarkdownEditor"
+import { Markdown, MarkdownParser } from "@components/MarkdownEditor"
 
 const CreatePost = () => {
   const [value, setValue] = React.useState("")

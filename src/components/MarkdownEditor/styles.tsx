@@ -1,14 +1,26 @@
-import styled, { createGlobalStyle } from "styled-components"
+import styled from "styled-components"
+import lightTheme from "highlight.js/styles/github.css?inline"
+import darkTheme from "highlight.js/styles/github-dark.css?inline"
 
-export const MarkdownStyle = styled.span`
+export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
   * {
     line-height: 1.5;
   }
 
+  ${({ selectedTheme }) => (selectedTheme === "dark" ? darkTheme : lightTheme)}
+
   h1 {
-    border-bottom: 2px solid ${({ theme }) => theme.backgroundColor.details};
     margin-bottom: 1.3rem;
     font-size: 2rem;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: ${({ theme }) => theme.backgroundColor.details};
+      opacity: 0.5;
+    }
   }
 
   h2,
@@ -16,8 +28,16 @@ export const MarkdownStyle = styled.span`
   h4,
   h5,
   h6 {
-    border-bottom: 1px solid ${({ theme }) => theme.backgroundColor.details};
     margin: 1rem 0;
+
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: ${({ theme }) => theme.backgroundColor.details};
+      opacity: 0.5;
+    }
   }
 
   h2 {
@@ -59,9 +79,27 @@ export const MarkdownStyle = styled.span`
     list-style: decimal;
     margin-left: 1rem;
   }
+
+  p {
+    margin: 1rem 0;
+  }
+
+  .cm-comment {
+    color: #23a8e6;
+  }
+
+  .hljs,
+  code {
+    background-color: ${({ theme, selectedTheme }) =>
+      selectedTheme === "dark"
+        ? theme.backgroundColor.detailsAlt
+        : theme.backgroundColor.detailsAlt};
+    border-radius: 0.5rem;
+    font-family: "Roboto Mono", monospace;
+  }
 `
 
-export const Container = styled.div`
+export const Container = styled(MarkdownStyle)`
   .bytemd {
     background-color: ${({ theme }) => theme.backgroundColor.tertiary};
     border-radius: 0.5rem;
@@ -89,6 +127,13 @@ export const Container = styled.div`
     & .CodeMirror-gutters,
     & .CodeMirror-linenumber {
       box-sizing: content-box;
+    }
+
+    &.bytemd-split .bytemd-body {
+      .bytemd-preview {
+        background-color: ${({ theme }) =>
+          theme.backgroundColor.detailsAlt + "55"};
+      }
     }
 
     .bytemd-toolbar {
@@ -169,14 +214,14 @@ export const Container = styled.div`
       .bytemd-preview {
         display: inline-block;
         padding: 1rem;
-        border-left: 1px solid
-          ${({ theme }) => theme.backgroundColor.detailsAlt};
-        height: fit-content;
+        height: 100vh;
         width: 100%;
         max-width: 80rem;
         margin: 0 auto;
         justify-self: center;
         line-height: 1.5;
+        font-family: "Rubik", sans-serif;
+        transition: none;
       }
 
       .bytemd-editor {
@@ -189,7 +234,7 @@ export const Container = styled.div`
         justify-self: center;
 
         .CodeMirror {
-          font-family: monospace;
+          font-family: "Roboto Mono", monospace;
 
           &-vscrollbar,
           &-hscrollbar,
@@ -241,6 +286,22 @@ export const Container = styled.div`
           cursor: text;
           min-height: 1px;
           width: 100%;
+
+          .cm-header {
+            font-weight: 600;
+            color: ${({ theme }) => theme.textColor.title};
+          }
+
+          .cm-variable-2 {
+            color: ${({ selectedTheme }) =>
+              selectedTheme === "light" ? "#233ae6" : "#fff"};
+          }
+          .cm-variable-3 {
+            color: #26e623;
+          }
+          .cm-keyword {
+            color: #bf23e6;
+          }
         }
 
         .CodeMirror-line,

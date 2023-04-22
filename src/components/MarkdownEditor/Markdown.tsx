@@ -1,14 +1,20 @@
 import { Editor } from "@bytemd/react"
 import React from "react"
 import { Container, MarkdownStyle } from "./styles"
+import { themeStore } from "src/stores/themeStore"
+import highlight from "@bytemd/plugin-highlight-ssr"
+// import "highlight.js/styles/monokai.css"
 
 interface Props {
   onChange: (e: string) => void
   value: string
 }
 
+const byteMdPlugins = [highlight({ detect: true })]
+
 const Markdown = ({ onChange, value }: Props) => {
   const editorRef = React.useRef<HTMLDivElement>(null)
+  const { selectedTheme } = themeStore()
 
   React.useEffect(() => {
     if (editorRef.current) {
@@ -20,10 +26,16 @@ const Markdown = ({ onChange, value }: Props) => {
   }, [])
 
   return (
-    <Container ref={editorRef}>
-      <MarkdownStyle>
-        <Editor value={value} onChange={onChange} mode={"split"} />
-      </MarkdownStyle>
+    <Container ref={editorRef} selectedTheme={selectedTheme}>
+      <Editor
+        value={value}
+        onChange={onChange}
+        mode={"split"}
+        editorConfig={{
+          autofocus: true,
+        }}
+        plugins={byteMdPlugins}
+      />
     </Container>
   )
 }

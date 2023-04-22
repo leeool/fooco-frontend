@@ -1,4 +1,4 @@
 import Markdown from "./Markdown"
-import Viewer from "./Viewer"
+import MarkdownParser from "./MarkdownParser"
 
-export { Markdown, Viewer }
+export { Markdown, MarkdownParser }
