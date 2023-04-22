@@ -75,6 +75,10 @@ export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
     }
   }
 
+  img {
+    max-width: 50%;
+  }
+
   ol li {
     list-style: decimal;
     margin-left: 1rem;
@@ -90,10 +94,7 @@ export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
 
   .hljs,
   code {
-    background-color: ${({ theme, selectedTheme }) =>
-      selectedTheme === "dark"
-        ? theme.backgroundColor.detailsAlt
-        : theme.backgroundColor.detailsAlt};
+    background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "77"};
     border-radius: 0.5rem;
     font-family: "Roboto Mono", monospace;
   }
@@ -162,6 +163,7 @@ export const Container = styled(MarkdownStyle)`
 
           &:hover {
             background-color: ${({ theme }) => theme.backgroundColor.secondary};
+            color: #fff;
           }
         }
       }
@@ -203,7 +205,7 @@ export const Container = styled(MarkdownStyle)`
     .bytemd-body {
       display: flex;
       justify-content: space-between;
-      height: calc(100vh - 30rem);
+      height: calc(100vh - 20rem);
       margin: 0 auto;
       line-height: 1.5;
       overflow-y: auto;

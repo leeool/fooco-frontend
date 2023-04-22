@@ -25,6 +25,7 @@ const CreatePost = () => {
           label="Título da publicação"
         />
         <Markdown value={value} onChange={(e) => setValue(e)} />
+        <MarkdownParser value={value} />
         <Input
           placeholder="Palavras-chave da sua publicação"
           type="text"
