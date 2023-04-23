@@ -3,6 +3,8 @@ import lightTheme from "highlight.js/styles/github.css?inline"
 import darkTheme from "highlight.js/styles/github-dark.css?inline"
 
 export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
+  display: block;
+
   * {
     line-height: 1.5;
   }
@@ -60,9 +62,12 @@ export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
     font-size: 1rem;
   }
 
+  pre {
+    margin: 1rem 0;
+  }
+
   ul {
     height: min-content;
-    margin-bottom: 1rem;
     margin-left: 1rem;
   }
 
@@ -108,380 +113,684 @@ export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
 `
 
 export const Container = styled(MarkdownStyle)`
+  .bytemd-status {
+    display: none;
+  }
+
+  .bytemd-body {
+    height: calc(100vh - 410px);
+    min-height: 150px;
+    overflow: auto;
+    resize: vertical;
+    border-radius: 0.6rem;
+
+    &:focus-within .CodeMirror {
+      background-color: ${({ theme }) => theme.backgroundColor.primary};
+    }
+  }
+  .bytemd-fullscreen .bytemd-body {
+    flex: 1;
+    resize: none;
+    z-index: 1000;
+  }
+  .bytemd-fullscreen {
+    display: flex !important;
+    flex-direction: column;
+    z-index: 1000;
+  }
   .bytemd {
-    background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-    border-radius: 0.5rem;
+    display: inline-block;
+    width: 100%;
+    padding: 1px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0.6rem;
+    border-color: ${({ theme }) => theme.backgroundColor.details};
+    font-family: "Roboto Mono", apple-system, monospace;
+    box-sizing: border-box;
+  }
+
+  .bytemd-split .bytemd-body .bytemd-preview {
+    border-left: 1px solid ${({ theme }) => theme.backgroundColor.details};
+  }
+
+  .bytemd * {
+    box-sizing: border-box;
+  }
+  .bytemd-hidden {
+    display: none !important;
+  }
+  .bytemd .CodeMirror-scroll,
+  .bytemd .CodeMirror-sizer,
+  .bytemd .CodeMirror-gutter,
+  .bytemd .CodeMirror-gutters,
+  .bytemd .CodeMirror-linenumber {
+    box-sizing: content-box;
+  }
+  .bytemd .CodeMirror,
+  .bytemd code,
+  .bytemd kbd {
+    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  }
+  .bytemd-toolbar {
+    /* border-top-left-radius: 4px;
+    border-top-right-radius: 4px; */
+    padding: 4px 12px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-color: ${({ theme }) => theme.backgroundColor.details};
+    user-select: none;
     overflow: hidden;
-    border: 1px solid ${({ theme }) => theme.backgroundColor.details};
+    background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "55"};
+  }
+  .bytemd-toolbar-left {
+    float: left;
+  }
+  .bytemd-toolbar-right {
+    float: right;
+  }
+  .bytemd-toolbar-tab {
+    display: inline-block;
+    cursor: pointer;
+    padding-left: 8px;
+    padding-right: 8px;
+    line-height: 24px;
+    font-size: 14px;
+  }
+  .bytemd-toolbar-tab-active {
+    text-decoration: underline;
+    text-underline-position: under;
+  }
+  .bytemd-toolbar-icon {
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 6px;
+    margin-right: 6px;
+    transition: none;
 
-    &:focus-within,
     &:hover {
-      border: 1px solid ${({ theme }) => theme.backgroundColor.secondary};
-      box-shadow: 0 0 0 3px #f3503a40;
-      transition: border 0.2s ease-in-out;
+      background-color: ${({ theme }) =>
+        theme.backgroundColor.secondary + "55"};
     }
+  }
+  .bytemd-toolbar-icon svg,
+  .bytemd-toolbar-icon img {
+    display: block;
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+  }
+  .bytemd-dropdown {
+    max-height: 320px;
+    overflow: auto;
+    font-size: 14px;
+    background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
+    padding: 0.5rem;
+    display: grid;
+    gap: 0.3rem;
+    border-radius: 0.4rem;
+  }
+  .bytemd-dropdown-title {
+    margin: 0 12px;
+    font-weight: 500;
+    line-height: 32px;
+  }
+  .bytemd-dropdown-item {
+    padding: 4px 12px;
+    height: 32px;
+    cursor: pointer;
+    background-color: ${({ theme }) => theme.backgroundColor.details + "55"};
+    border-radius: 0.4rem;
+    transition: none;
+    display: flex;
+    align-items: center;
+    color: ${({ theme }) => theme.textColor.subtitle};
 
-    & * {
-      box-sizing: border-box;
+    &:hover {
+      background-color: ${({ theme }) => theme.textColor.title};
+      color: #fff;
     }
+  }
+  .bytemd-dropdown-item-icon {
+    display: inline-block;
+  }
+  .bytemd-dropdown-item-icon svg {
+    display: block;
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+  }
+  .bytemd-dropdown-item-title {
+    display: inline-block;
+    line-height: 24px;
+    vertical-align: top;
+  }
+  .bytemd-editor {
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    overflow: hidden;
+    font-family: "Roboto Mono", apple-system, monospace !important;
+  }
+  .bytemd-editor .CodeMirror {
+    height: 100%;
+    font-size: 14px !important;
+    line-height: 1.5;
+    font-family: "Roboto Mono", apple-system, monospace !important;
+  }
+  .bytemd-editor .CodeMirror .CodeMirror-lines {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 16px 0;
+  }
+  .bytemd-editor .CodeMirror pre.CodeMirror-line,
+  .bytemd-editor .CodeMirror pre.CodeMirror-line-like {
+    padding: 0 4%;
+    padding-right: 4rem;
+  }
+  .bytemd-preview {
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    overflow: auto;
+    font-family: "Rubik", sans-serif;
+    background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "55"};
+  }
+  .bytemd-preview .markdown-body {
+    word-break: break-word;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 16px 4%;
+  }
+  .bytemd-sidebar {
+    display: inline-block;
+    vertical-align: top;
+    height: 100%;
+    overflow: auto;
+    font-size: 16px;
+    border-left: 1px solid ${({ theme }) => theme.backgroundColor.details};
+    width: 280px;
+    position: relative;
+    padding: 0 16px;
+    font-family: "Rubik", sans-serif;
 
-    &-hidden {
-      display: none;
+    ul,
+    li {
+      margin: 0;
     }
+  }
+  .bytemd-sidebar-close {
+    position: absolute;
+    padding: 16px;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+  .bytemd-sidebar h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 32px 0 16px;
+  }
+  .bytemd-sidebar ul {
+    padding-left: 0;
+  }
+  .bytemd-help {
+    font-size: 13px;
+  }
+  .bytemd-help ul {
+    line-height: 20px;
+  }
+  .bytemd-help ul svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+  }
+  .bytemd-help ul div {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .bytemd-help li {
+    list-style: none;
+    margin-bottom: 12px;
+  }
+  .bytemd-help-icon {
+    padding: 2px 0;
+  }
+  .bytemd-help-title {
+    padding-left: 8px;
+    font-size: 0.9rem;
+  }
+  .bytemd-help-content {
+    float: right;
 
-    & .CodeMirror-scroll,
-    & .CodeMirror-sizer,
-    & .CodeMirror-gutter,
-    & .CodeMirror-gutters,
-    & .CodeMirror-linenumber {
-      box-sizing: content-box;
-    }
-
-    &.bytemd-split .bytemd-body {
-      .bytemd-preview {
-        background-color: ${({ theme }) =>
-          theme.backgroundColor.detailsAlt + "55"};
-      }
-    }
-
-    .bytemd-toolbar {
-      padding: 0.5rem;
-      display: flex;
-      justify-content: space-between;
-      background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
-
-      .bytemd-dropdown {
-        background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-        border: 1px solid ${({ theme }) => theme.backgroundColor.details};
-        padding: 0.4rem;
-        border-radius: 0.4rem;
-        gap: 0.3rem;
-        display: flex;
-        flex-direction: column;
-
-        .bytemd-dropdown-item {
-          display: flex;
-          gap: 0.2rem;
-          padding: 0.2rem 0.8rem;
-          border-radius: 0.4rem;
-          background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
-          cursor: pointer;
-          transition: none;
-
-          &:hover {
-            background-color: ${({ theme }) => theme.backgroundColor.secondary};
-            color: #fff;
-          }
-        }
-      }
-
-      .bytemd-tippy {
-        width: 2rem;
-        height: 2rem;
-        padding: 0.4rem;
-        border-radius: 0.2rem;
-        cursor: pointer;
-        transition: none;
-
-        &:hover {
-          background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-        }
-
-        svg {
-          display: block;
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      &-left,
-      &-right {
-        display: flex;
-        gap: 0.8rem;
-      }
-
-      &-right {
-        .bytemd-toolbar-icon-active {
-          svg {
-            color: ${({ theme }) => theme.backgroundColor.secondary};
-          }
-        }
-      }
-    }
-
-    .bytemd-body {
-      display: flex;
-      justify-content: space-between;
-      height: calc(100vh - 20rem);
-      margin: 0 auto;
-      line-height: 1.5;
-      max-width: 90rem;
-      justify-content: center;
-      margin: 0 auto;
-      overflow: auto;
-
-      .bytemd-preview {
-        display: inline-block;
-        height: 100%;
-        width: 100%;
-        /* max-width: 80rem; */
-        justify-self: center;
-        font-family: "Rubik", sans-serif;
-        transition: none;
-        overflow: auto;
-        vertical-align: top;
-
-        .markdown-body {
-          margin: 0 auto;
-          padding: 1rem;
-          width: 100%;
-          max-width: 800px;
-          word-wrap: break-word;
-          word-break: normal;
-          line-height: 1.5;
-        }
-      }
-
-      .bytemd-editor {
-        display: inline-block;
-        /* padding: 1rem 0.5rem; */
-        width: 100%;
-        height: 100%;
-        /* overflow-y: auto; */
-        /* max-width: 100rem; */
-        /* margin: 0 auto; */
-        overflow: hidden;
-
-        .CodeMirror {
-          font-family: "Roboto Mono", monospace;
-          position: relative;
-          height: 100%;
-          overflow: hidden;
-          direction: ltr;
-          /* padding: 1rem; */
-          overflow-y: unset;
-          line-height: 1.5;
-
-          &-vscrollbar,
-          &-hscrollbar,
-          &-scrollbar-filler,
-          &-gutter-filler {
-            position: absolute;
-            z-index: 1;
-            display: none;
-            outline: none;
-          }
-
-          .cm-header,
-          .cm-strong {
-            font-weight: 700;
-          }
-
-          .cm-link {
-            text-decoration: underline;
-          }
-
-          .CodeMirror-vscrollbar {
-            right: 0;
-            top: 0;
-            overflow-x: hidden;
-            overflow-y: scroll;
-          }
-          .CodeMirror-hscrollbar {
-            bottom: 0;
-            left: 0;
-            overflow-y: hidden;
-            overflow-x: scroll;
-          }
-
-          .CodeMirror-scrollbar-filler {
-            right: 0;
-            bottom: 0;
-          }
-          .CodeMirror-gutter-filler {
-            left: 0;
-            bottom: 0;
-          }
-
-          .CodeMirror-scroll {
-            overflow: auto !important;
-            margin-bottom: -50px;
-            margin-right: -50px;
-            /* padding-bottom: 100px; */
-            height: 100%;
-            outline: none;
-            position: relative;
-            z-index: 0;
-            width: 100%;
-          }
-
-          .CodeMirror-gutter-elt {
-            position: absolute;
-            cursor: default;
-            z-index: 4;
-          }
-
-          .CodeMirror-cursor {
-            position: absolute;
-            pointer-events: none;
-            background-color: ${({ theme }) => theme.backgroundColor.secondary};
-            opacity: 1;
-            width: 2px;
-          }
-
-          .CodeMirror-cursors {
-            position: relative;
-            z-index: 3;
-          }
-          .CodeMirror-dragcursors,
-          .CodeMirror-selected,
-          .CodeMirror-focused .CodeMirror-cursors {
-            visibility: visible;
-            background-color: ${({ theme }) => theme.backgroundColor.secondary};
-            opacity: 0.5;
-          }
-
-          .CodeMirror-measure {
-            position: absolute;
-            width: 100%;
-            height: 0;
-            overflow: hidden;
-            visibility: hidden;
-          }
-        }
-
-        .CodeMirror-lines {
-          cursor: text;
-          min-height: 1px;
-          width: 100%;
-          padding: 1rem;
-
-          .cm-header {
-            font-weight: 600;
-            color: ${({ theme }) => theme.textColor.title};
-          }
-
-          .cm-variable-2 {
-            color: ${({ selectedTheme }) =>
-              selectedTheme === "light" ? "#233ae6" : "#fff"};
-          }
-          .cm-variable-3 {
-            color: #26e623;
-          }
-          .cm-keyword {
-            color: #bf23e6;
-          }
-        }
-
-        .CodeMirror-line,
-        .CodeMirror-line-like {
-          -moz-border-radius: 0;
-          -webkit-border-radius: 0;
-          border-radius: 0;
-          border-width: 0;
-          background: transparent;
-          font-family: inherit;
-          font-size: inherit;
-          margin: 0;
-          white-space: pre;
-          word-wrap: normal;
-          line-height: inherit;
-          z-index: 2;
-          position: relative;
-          overflow: visible;
-          -webkit-font-variant-ligatures: contextual;
-          font-variant-ligatures: contextual;
-        }
-
-        .CodeMirror-wrap pre.CodeMirror-line,
-        .CodeMirror-wrap pre.CodeMirror-line-like {
-          word-wrap: break-word;
-          white-space: pre-wrap;
-          word-break: normal;
-        }
-
-        .CodeMirror-code {
-          outline: none;
-        }
-      }
-
-      .bytemd-sidebar {
-        background-color: ${({ theme }) =>
-          theme.backgroundColor.detailsAlt + "55"};
-        padding: 0.5rem;
-        justify-self: end;
-        overflow-y: auto;
-        max-width: 20rem;
-        width: 100%;
-        border-left: 1px solid ${({ theme }) => theme.backgroundColor.details};
-        position: relative;
-
-        .bytemd-sidebar-close {
-          position: absolute;
-          right: 0.5rem;
-        }
-
-        &.bytemd-hidden {
-          display: none;
-        }
-
-        .bytemd-help {
-          width: 100%;
-
-          ul {
-            margin: 0;
-            padding: 0;
-          }
-
-          li {
-            display: grid;
-            grid-template-columns: auto auto 1fr;
-            gap: 0.5rem;
-            margin: 0.5rem 0;
-            align-items: center;
-
-            code,
-            kbd {
-              font-size: 0.9rem;
-              font-family: "Roboto Mono", monospace;
-              background-color: transparent;
-            }
-
-            .bytemd-help-content {
-              justify-self: flex-end;
-              opacity: 0.5;
-              display: block;
-            }
-          }
-
-          h2 {
-            font-size: 1.2rem;
-            margin: 1rem 0;
-          }
-
-          &.bytemd-hidden {
-            display: none;
-          }
-        }
-      }
-    }
-
-    .bytemd-status {
-      padding: 0.3rem;
+    code,
+    kbd {
       font-size: 0.8rem;
-      background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
-      display: flex;
-      justify-content: space-between;
-
-      &-left {
-        display: flex;
-        gap: 0.5rem;
-        font-size: 0.8rem;
-      }
-
-      &-right {
-        /* display: none; */
-      }
     }
+  }
+  .bytemd-toc li {
+    list-style: none;
+    margin-bottom: 4px;
+    font-size: 14px;
+    line-height: 2;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .bytemd-toc-first {
+    font-weight: 500;
+  }
+  .bytemd-fullscreen.bytemd {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    border: none;
+    height: 100vh !important;
+  }
+  .CodeMirror {
+    font-family: monospace;
+    height: 300px;
+    direction: ltr;
+  }
+  .CodeMirror-lines {
+    padding: 4px 0;
+  }
+  .CodeMirror pre.CodeMirror-line,
+  .CodeMirror pre.CodeMirror-line-like {
+    padding: 0 4px;
+  }
+  .CodeMirror-gutters {
+    border-right-style: solid;
+    border-right-width: 1px;
+    white-space: nowrap;
+  }
+  .CodeMirror-linenumber {
+    padding: 0 3px 0 5px;
+    min-width: 20px;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .CodeMirror-cursor {
+    border-right: none;
+    width: 0;
+    border-left: 1px solid #f00;
+  }
+  .CodeMirror div.CodeMirror-secondarycursor {
+    border-left: 1px solid #f00;
+  }
+  .cm-tab {
+    display: inline-block;
+    text-decoration: inherit;
+  }
+  .cm-header,
+  .cm-strong {
+    font-weight: 700;
+  }
+
+  .cm-header {
+    color: ${({ theme }) => theme.textColor.title};
+  }
+  .cm-em {
+    font-style: italic;
+  }
+  .cm-link {
+    text-decoration: underline;
+  }
+  .cm-strikethrough {
+    text-decoration: line-through;
+  }
+
+  .cm-s-default .cm-variable {
+    color: #30e623;
+  }
+  .cm-s-default .cm-variable-2 {
+    color: #e023e6;
+  }
+  .cm-s-default .cm-variable-3,
+  .cm-s-default .cm-type {
+    color: #6723e6;
+  }
+
+  .CodeMirror-composing {
+    border-bottom: 2px solid;
+  }
+  .CodeMirror {
+    position: relative;
+    overflow: hidden;
+    background: ${({ theme }) => theme.backgroundColor.detailsAlt + "55"};
+  }
+  .CodeMirror-scroll {
+    overflow: scroll !important;
+    margin-bottom: -50px;
+    margin-right: -50px;
+    padding-bottom: 50px;
+    height: 100%;
+    outline: none;
+    position: relative;
+    z-index: 0;
+  }
+  .CodeMirror-sizer {
+    position: relative;
+  }
+  .CodeMirror-sizer > div {
+    box-sizing: content-box;
+  }
+  .CodeMirror-vscrollbar,
+  .CodeMirror-hscrollbar,
+  .CodeMirror-scrollbar-filler,
+  .CodeMirror-gutter-filler {
+    position: absolute;
+    z-index: 1;
+    display: none;
+    outline: none;
+  }
+  .CodeMirror-vscrollbar {
+    right: 0;
+    top: 0;
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
+  .CodeMirror-hscrollbar {
+    bottom: 0;
+    left: 0;
+    overflow-y: hidden;
+    overflow-x: scroll;
+  }
+  .CodeMirror-scrollbar-filler {
+    right: 0;
+    bottom: 0;
+  }
+  .CodeMirror-gutter-filler {
+    left: 0;
+    bottom: 0;
+  }
+  .CodeMirror-gutters {
+    position: absolute;
+    left: 0;
+    top: 0;
+    min-height: 100%;
+    z-index: 3;
+  }
+  .CodeMirror-gutter {
+    white-space: normal;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: -50px;
+  }
+  .CodeMirror-gutter-wrapper {
+    position: absolute;
+    z-index: 4;
+    background: none !important;
+    border: none !important;
+  }
+  .CodeMirror-gutter-background {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 4;
+  }
+  .CodeMirror-gutter-elt {
+    position: absolute;
+    cursor: default;
+    z-index: 4;
+  }
+  .CodeMirror-lines {
+    cursor: text;
+    min-height: 1px;
+  }
+  .CodeMirror pre.CodeMirror-line,
+  .CodeMirror pre.CodeMirror-line-like {
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    border-width: 0;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 0;
+    white-space: pre;
+    word-wrap: normal;
+    line-height: inherit;
+    z-index: 2;
+    position: relative;
+    overflow: visible;
+    -webkit-font-variant-ligatures: contextual;
+    font-variant-ligatures: contextual;
+  }
+  .CodeMirror-wrap pre.CodeMirror-line,
+  .CodeMirror-wrap pre.CodeMirror-line-like {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: normal;
+  }
+  .CodeMirror-linebackground {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .CodeMirror-linewidget {
+    position: relative;
+    z-index: 2;
+    padding: 0.1px;
+  }
+  .CodeMirror-rtl pre {
+    direction: rtl;
+  }
+  .CodeMirror-code {
+    outline: none;
+  }
+  .CodeMirror-scroll,
+  .CodeMirror-sizer,
+  .CodeMirror-gutter,
+  .CodeMirror-gutters,
+  .CodeMirror-linenumber {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+  .CodeMirror-measure {
+    position: absolute;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+  }
+  .CodeMirror-cursor {
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .CodeMirror-selected {
+    background: ${({ theme }) => theme.backgroundColor.details + "55"};
+  }
+  span.CodeMirror-selectedtext {
+    background: ${({ theme }) => theme.backgroundColor.details + "55"};
+  }
+
+  .CodeMirror-measure pre {
+    position: static;
+  }
+  div.CodeMirror-cursors {
+    visibility: hidden;
+    position: relative;
+    z-index: 3;
+  }
+  div.CodeMirror-dragcursors,
+  .CodeMirror-focused div.CodeMirror-cursors {
+    visibility: visible;
+  }
+  .CodeMirror-crosshair {
+    cursor: crosshair;
+  }
+  .cm-force-border {
+    padding-right: 0.1px;
+  }
+  @media print {
+    .CodeMirror div.CodeMirror-cursors {
+      visibility: hidden;
+    }
+  }
+  .cm-tab-wrap-hack:after {
+    content: "";
+  }
+  .tippy-box[data-animation="fade"][data-state="hidden"] {
+    opacity: 0;
+  }
+  [data-tippy-root] {
+    max-width: calc(100vw - 10px);
+  }
+  .tippy-box {
+    position: relative;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: normal;
+    outline: 0;
+    transition-property: transform, visibility, opacity;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+      sans-serif, Apple Color Emoji, Segoe UI Emoji;
+  }
+  .tippy-box[data-placement^="top"] > .tippy-arrow {
+    bottom: 0;
+  }
+  .tippy-box[data-placement^="top"] > .tippy-arrow:before {
+    bottom: -7px;
+    left: 0;
+    border-width: 8px 8px 0;
+    border-top-color: initial;
+    transform-origin: center top;
+  }
+  .tippy-box[data-placement^="bottom"] > .tippy-arrow {
+    top: 0;
+  }
+  .tippy-box[data-placement^="bottom"] > .tippy-arrow:before {
+    top: -7px;
+    left: 0;
+    border-width: 0 8px 8px;
+    border-bottom-color: initial;
+    transform-origin: center bottom;
+  }
+  .tippy-box[data-placement^="left"] > .tippy-arrow {
+    right: 0;
+  }
+  .tippy-box[data-placement^="left"] > .tippy-arrow:before {
+    border-width: 8px 0 8px 8px;
+    border-left-color: initial;
+    right: -7px;
+    transform-origin: center left;
+  }
+  .tippy-box[data-placement^="right"] > .tippy-arrow {
+    left: 0;
+  }
+  .tippy-box[data-placement^="right"] > .tippy-arrow:before {
+    left: -7px;
+    border-width: 8px 8px 8px 0;
+    border-right-color: initial;
+    transform-origin: center right;
+  }
+  .tippy-box[data-inertia][data-state="visible"] {
+    transition-timing-function: cubic-bezier(0.54, 1.5, 0.38, 1.11);
+  }
+  .tippy-arrow {
+    width: 16px;
+    height: 16px;
+  }
+  .tippy-arrow:before {
+    content: "";
+    position: absolute;
+    border-color: transparent;
+    border-style: solid;
+  }
+  .tippy-content {
+    position: relative;
+    padding: 5px 9px;
+    z-index: 1;
+  }
+  .tippy-box[data-theme~="light-border"] {
+    background-clip: padding-box;
+    border-radius: 6px;
+  }
+  .tippy-box[data-theme~="light-border"] > .tippy-arrow:after,
+  .tippy-box[data-theme~="light-border"] > .tippy-svg-arrow:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+  }
+  .tippy-box[data-theme~="light-border"] > .tippy-arrow:after {
+    border-color: transparent;
+    border-style: solid;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="top"]
+    > .tippy-arrow:after {
+    border-width: 7px 7px 0;
+    top: 17px;
+    left: 1px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="top"]
+    > .tippy-svg-arrow
+    > svg {
+    top: 16px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="top"]
+    > .tippy-svg-arrow:after {
+    top: 17px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="bottom"]
+    > .tippy-arrow:after {
+    border-width: 0 7px 7px;
+    bottom: 17px;
+    left: 1px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="bottom"]
+    > .tippy-svg-arrow
+    > svg {
+    bottom: 16px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="bottom"]
+    > .tippy-svg-arrow:after {
+    bottom: 17px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="left"]
+    > .tippy-arrow:after {
+    border-width: 7px 0 7px 7px;
+    left: 17px;
+    top: 1px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="left"]
+    > .tippy-svg-arrow
+    > svg {
+    left: 11px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="left"]
+    > .tippy-svg-arrow:after {
+    left: 12px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="right"]
+    > .tippy-arrow:after {
+    border-width: 7px 7px 7px 0;
+    right: 17px;
+    top: 1px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="right"]
+    > .tippy-svg-arrow
+    > svg {
+    right: 11px;
+  }
+  .tippy-box[data-theme~="light-border"][data-placement^="right"]
+    > .tippy-svg-arrow:after {
+    right: 12px;
+  }
+  .tippy-box[data-theme~="light-border"] > .tippy-svg-arrow:after {
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iNiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMCA2czEuNzk2LS4wMTMgNC42Ny0zLjYxNUM1Ljg1MS45IDYuOTMuMDA2IDggMGMxLjA3LS4wMDYgMi4xNDguODg3IDMuMzQzIDIuMzg1QzE0LjIzMyA2LjAwNSAxNiA2IDE2IDZIMHoiIGZpbGw9InJnYmEoMCwgOCwgMTYsIDAuMikiLz48L3N2Zz4=);
+    background-size: 16px 6px;
+    width: 16px;
+    height: 6px;
+  }
+  .bytemd-toolbar .tippy-content {
+    padding-left: 0;
+    padding-right: 0;
   }
 `
