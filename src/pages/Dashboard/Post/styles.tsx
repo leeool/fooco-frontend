@@ -17,20 +17,12 @@ export const Author = styled.span`
       text-decoration: underline;
     }
   }
-
-  @media (max-width: 600px) {
-    font-size: 0.8rem;
-  }
 `
 
 export const PostTitle = styled.h4`
   color: ${(props) => props.theme.textColor.subtitle};
-  font-size: 1.8rem;
+  font-size: 2rem;
   font-weight: 500;
-
-  @media (max-width: 600px) {
-    font-size: 1.4rem;
-  }
 
   &:hover {
     text-decoration: underline;
@@ -38,7 +30,7 @@ export const PostTitle = styled.h4`
   }
 
   @media (max-width: 600px) {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 `
 
@@ -97,6 +89,14 @@ export const Details = styled.div`
   grid-template-columns: auto 1fr;
   gap: 1rem;
   align-items: start;
+
+  @media (max-width: 600px) {
+    font-size: 0.85rem;
+
+    * {
+      font-size: 0.85rem;
+    }
+  }
 `
 
 export const DateContainer = styled.span`
@@ -129,16 +129,17 @@ export const Interactions = styled.div`
   }
 
   @media (max-width: 600px) {
-    gap: 0.5rem;
+    padding: 0;
+    padding-top: 0.6rem;
+
+    button svg {
+      display: none;
+    }
 
     svg {
-      width: 1rem;
-      height: 1rem;
+      width: 1.2rem;
+      height: 1.2rem;
     }
-  }
-
-  button {
-    padding: 0.4rem 0;
   }
 `
 

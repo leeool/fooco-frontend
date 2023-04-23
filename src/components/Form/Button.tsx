@@ -10,7 +10,6 @@ export const ButtonContainer = styled.button`
   justify-content: center;
   border: none;
   cursor: pointer;
-  padding: 0.4rem 1rem;
   min-height: 2.4rem;
   height: 100%;
   border-radius: 20px;
@@ -100,10 +99,11 @@ export const ButtonSecondary = styled(ButtonContainer)`
   color: ${({ theme }) => theme.textColor.title};
   font-weight: 500;
   font-size: 1rem;
+  padding: 0.2rem 1rem;
 
   @media (max-width: 600px) {
     font-size: 0.9rem;
-    padding: 1rem 1rem;
+    padding: 0.2rem 0.5rem;
   }
 
   &:hover {
