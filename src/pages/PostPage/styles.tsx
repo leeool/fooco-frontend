@@ -86,8 +86,9 @@ export const Feedback = styled.div`
   gap: 0.3rem;
 
   svg {
-    width: 2rem !important;
-    height: 2rem !important;
+    width: 2rem;
+    height: 2rem;
+    stroke-width: 5;
   }
 
   span {
@@ -102,6 +103,12 @@ export const Feedback = styled.div`
     button svg {
       cursor: wait;
       opacity: 0.5;
+    }
+  }
+
+  @media (max-width: 600px) {
+    span {
+      font-size: 1rem;
     }
   }
 `
@@ -128,10 +135,16 @@ export const Interactions = styled.div`
     height: 1.8rem;
     color: ${({ theme }) => theme.backgroundColor.detailsAlt};
     cursor: pointer;
-    stroke-width: 2px;
+    stroke-width: 2;
 
     &:hover {
       color: ${({ theme }) => theme.textColor.title};
+    }
+  }
+
+  @media (max-width: 600px) {
+    svg {
+      width: 1.3rem;
     }
   }
 `

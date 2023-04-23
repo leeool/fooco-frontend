@@ -9,7 +9,7 @@ export const MainContainer = styled.div`
     max-width: 80rem;
     min-height: 100vh;
     width: 100%;
-    margin: 10rem auto;
+    margin: 8rem auto;
     flex: 1;
     padding: 0 1rem;
 
@@ -20,7 +20,7 @@ export const MainContainer = styled.div`
 
   @media (max-width: 1000px) {
     .main-content {
-      margin-top: 14rem;
+      margin-top: 12rem;
     }
   }
 `
