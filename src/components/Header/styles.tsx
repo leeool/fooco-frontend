@@ -1,19 +1,16 @@
 import styled from "styled-components"
 
 export const HeaderContainer = styled.header`
-  width: 98%;
-  left: 50%;
-  transform: translateX(-50%);
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 2rem;
   align-items: center;
   justify-content: space-between;
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-  border-radius: 20px;
-  padding: 0.8rem 2rem;
+  padding: 0.6rem 2rem;
   transition: background-color 0.3s ease-in-out;
   position: fixed;
+  width: 100%;
   z-index: 3;
 
   .loading {
@@ -86,7 +83,7 @@ export const HeaderContainer = styled.header`
     flex-direction: column;
     gap: 1rem;
     grid-template-columns: 1fr;
-    padding: 0.6rem 1rem;
+    padding: 0.4rem 1rem;
 
     .loading {
       width: 100%;

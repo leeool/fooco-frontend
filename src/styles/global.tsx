@@ -33,11 +33,6 @@ export default createGlobalStyle`
     font-family: "Rubik", sans-serif;
     background-color: ${({ theme }) => theme.backgroundColor.primary};
     color: ${({ theme }) => theme.textColor.base};
-    margin: 1rem;
-
-    @media(max-width: 600px){
-      margin: 0.5rem
-    }
   };
   
 
