@@ -245,11 +245,11 @@ export const Container = styled(MarkdownStyle)`
       .bytemd-editor {
         display: inline-block;
         /* padding: 1rem 0.5rem; */
-        /* width: 100%; */
+        width: 100%;
         height: 100%;
         /* overflow-y: auto; */
-        /* max-width: 80rem; */
-        /* margin: 0 auto; */
+        max-width: 100rem;
+        margin: 0 auto;
         overflow: hidden;
 
         .CodeMirror {
@@ -261,6 +261,8 @@ export const Container = styled(MarkdownStyle)`
           padding: 0 0.5rem;
           line-height: 1.5;
           padding: 1rem;
+          width: 100%;
+          max-width: 90rem;
 
           &-vscrollbar,
           &-hscrollbar,
@@ -312,6 +314,8 @@ export const Container = styled(MarkdownStyle)`
             outline: none;
             position: relative;
             z-index: 0;
+            width: 100%;
+            max-width: 90rem;
           }
 
           .CodeMirror-gutter-elt {
@@ -353,7 +357,7 @@ export const Container = styled(MarkdownStyle)`
           margin: 0 auto;
           cursor: text;
           min-height: 1px;
-          max-width: 90%;
+          max-width: 100%;
 
           .cm-header {
             font-weight: 600;
@@ -405,7 +409,8 @@ export const Container = styled(MarkdownStyle)`
       }
 
       .bytemd-sidebar {
-        background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
+        background-color: ${({ theme }) =>
+          theme.backgroundColor.detailsAlt + "55"};
         padding: 0.5rem;
         justify-self: end;
         overflow-y: auto;
@@ -426,14 +431,23 @@ export const Container = styled(MarkdownStyle)`
         .bytemd-help {
           width: 100%;
 
+          ul {
+            margin: 0;
+            padding: 0;
+          }
+
           li {
             display: grid;
             grid-template-columns: auto auto 1fr;
             gap: 0.5rem;
+            margin: 0.5rem 0;
+            align-items: center;
 
             code,
             kbd {
               font-size: 0.9rem;
+              font-family: "Roboto Mono", monospace;
+              background-color: transparent;
             }
 
             .bytemd-help-content {
@@ -445,7 +459,7 @@ export const Container = styled(MarkdownStyle)`
 
           h2 {
             font-size: 1.2rem;
-            margin: 0.5rem 0;
+            margin: 1rem 0;
           }
 
           &.bytemd-hidden {
