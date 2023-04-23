@@ -248,21 +248,19 @@ export const Container = styled(MarkdownStyle)`
         width: 100%;
         height: 100%;
         /* overflow-y: auto; */
-        max-width: 100rem;
-        margin: 0 auto;
+        /* max-width: 100rem; */
+        /* margin: 0 auto; */
         overflow: hidden;
 
         .CodeMirror {
           font-family: "Roboto Mono", monospace;
           position: relative;
-          overflow: hidden;
           height: 100%;
+          overflow: hidden;
           direction: ltr;
-          padding: 0 0.5rem;
+          /* padding: 1rem; */
+          overflow-y: unset;
           line-height: 1.5;
-          padding: 1rem;
-          width: 100%;
-          max-width: 90rem;
 
           &-vscrollbar,
           &-hscrollbar,
@@ -309,13 +307,12 @@ export const Container = styled(MarkdownStyle)`
             overflow: auto !important;
             margin-bottom: -50px;
             margin-right: -50px;
-            padding-bottom: 50px;
+            /* padding-bottom: 100px; */
             height: 100%;
             outline: none;
             position: relative;
             z-index: 0;
             width: 100%;
-            max-width: 90rem;
           }
 
           .CodeMirror-gutter-elt {
@@ -354,10 +351,10 @@ export const Container = styled(MarkdownStyle)`
         }
 
         .CodeMirror-lines {
-          margin: 0 auto;
           cursor: text;
           min-height: 1px;
-          max-width: 100%;
+          width: 100%;
+          padding: 1rem;
 
           .cm-header {
             font-weight: 600;
