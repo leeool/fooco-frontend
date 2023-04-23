@@ -2,7 +2,9 @@ import styled from "styled-components"
 
 export const Container = styled.section`
   width: 100%;
-  min-width: 50rem;
+  /* min-width: 50rem; */
+  max-width: 70rem;
+  margin: 0 auto;
 
   @media (max-width: 1000px) {
     min-width: 0;

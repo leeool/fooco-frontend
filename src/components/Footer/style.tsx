@@ -5,7 +5,6 @@ export const FooterContainer = styled.footer`
   grid-template-columns: 1fr 3fr;
   background-color: ${({ theme }) => theme.backgroundColor.secondary};
   align-items: flex-start;
-  border-radius: 20px;
   padding: 1rem 2rem;
   min-height: 12rem;
   gap: 2rem;

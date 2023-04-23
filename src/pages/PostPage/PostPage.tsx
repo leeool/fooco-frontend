@@ -25,6 +25,7 @@ import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import UseSavePost from "src/helpers/SavePost"
 import { PostNotFound } from "../NotFound"
+import { MarkdownParser } from "@components/MarkdownEditor"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -153,7 +154,9 @@ const PostPage = () => {
             </span>
           </Data>
         </Info>
-        <Content>{data.content}</Content>
+        <Content>
+          <MarkdownParser value={data.content} />
+        </Content>
       </div>
       <Details>
         <ButtonSecondary>

@@ -6,7 +6,6 @@ import useUserStore from "src/stores/UseUserStore"
 import {
   Author,
   Container,
-  Content,
   PostInfo,
   PostTitle,
   Tags,
@@ -56,9 +55,6 @@ const Post = ({ post }: Props) => {
           </DateContainer>
         </Details>
       </PostInfo>
-      <Link to={`/app/${post.user.username}/${slug}`}>
-        <Content>{post.content}</Content>
-      </Link>
       <Tags>
         {post.tags.map((tag) => (
           <span key={tag}>{tag}</span>

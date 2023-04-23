@@ -2,8 +2,13 @@ import styled from "styled-components"
 import lightTheme from "highlight.js/styles/github.css?inline"
 import darkTheme from "highlight.js/styles/github-dark.css?inline"
 
-export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
-  display: block;
+export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
+  .markdown-body {
+    width: 100%;
+    @media (max-width: 600px) {
+      width: calc(100cqw - 5rem);
+    }
+  }
 
   * {
     line-height: 1.5;
@@ -14,6 +19,7 @@ export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
   h1 {
     margin-bottom: 1.3rem;
     font-size: 2rem;
+    font-weight: 600;
 
     &::after {
       content: "";
@@ -31,6 +37,7 @@ export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
   h5,
   h6 {
     margin: 1rem 0;
+    font-weight: 600;
 
     &::after {
       content: "";
@@ -71,6 +78,10 @@ export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
     margin-left: 1rem;
   }
 
+  li {
+    font-size: 1.1rem;
+  }
+
   ul li {
     list-style: disc;
     margin-left: 1rem;
@@ -97,6 +108,7 @@ export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
   }
 
   p {
+    font-size: 1.1rem;
     margin: 1rem 0;
   }
 
@@ -105,10 +117,16 @@ export const MarkdownStyle = styled.span<{ selectedTheme: "dark" | "light" }>`
   }
 
   .hljs,
-  code {
+  code,
+  pre {
     background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "77"};
     border-radius: 0.5rem;
-    font-family: "Roboto Mono", monospace;
+    font-family: "Roboto Mono", monospace !important;
+  }
+
+  code {
+    padding: 0 0.4rem;
+    background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "cc"};
   }
 `
 
@@ -152,6 +170,10 @@ export const Container = styled(MarkdownStyle)`
 
   .bytemd-split .bytemd-body .bytemd-preview {
     border-left: 1px solid ${({ theme }) => theme.backgroundColor.details};
+
+    .markdown-body {
+      max-width: 100%;
+    }
   }
 
   .bytemd * {
@@ -299,7 +321,8 @@ export const Container = styled(MarkdownStyle)`
     background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "55"};
   }
   .bytemd-preview .markdown-body {
-    word-break: break-word;
+    word-break: break-all;
+    overflow-wrap: break-word;
     max-width: 60rem;
     margin: 0 auto;
     padding: 16px 4%;

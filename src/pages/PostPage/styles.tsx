@@ -4,6 +4,8 @@ export const Container = styled.article`
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 2rem;
+  margin: 0 auto;
+  max-width: 60rem;
 
   @media (max-width: 600px) {
     gap: 0.8rem;
@@ -25,8 +27,8 @@ export const Info = styled.div`
 `
 
 export const Title = styled.h1`
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 2.5rem;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 
   @media (max-width: 600px) {
@@ -34,12 +36,11 @@ export const Title = styled.h1`
   }
 `
 
-export const Content = styled.p`
+export const Content = styled.div`
   font-size: 1.2rem;
   line-height: 1.6;
   margin-top: 2rem;
-  font-family: "Montserrat", sans-serif;
-  max-width: 70rem;
+  font-family: "Rubik", sans-serif;
 
   @media (max-width: 600px) {
     font-size: 1rem;

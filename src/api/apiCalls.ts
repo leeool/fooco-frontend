@@ -117,3 +117,26 @@ export const FEEDBACK_POST = (
     },
   }
 }
+
+export const POST_POST = (
+  title: string,
+  content: string,
+  user_id: string,
+  tags?: string[]
+) => {
+  return {
+    url: ENDPOINT + "/post",
+    options: {
+      method: "POST",
+      data: {
+        title,
+        content,
+        user_id,
+        tags,
+      },
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    },
+  }
+}
