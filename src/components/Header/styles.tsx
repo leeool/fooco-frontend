@@ -1,6 +1,10 @@
 import styled from "styled-components"
 
-export const HeaderContainer = styled.header`
+interface Props {
+  isScrolledDown: boolean
+}
+
+export const HeaderContainer = styled.header<Props>`
   display: grid;
   grid-template-columns: auto 1fr auto;
   gap: 2rem;
@@ -12,6 +16,8 @@ export const HeaderContainer = styled.header`
   position: fixed;
   width: 100%;
   z-index: 3;
+  transition: top 0.3s ease;
+  top: ${({ isScrolledDown }) => (isScrolledDown ? "-12rem" : "0")};
 
   .loading {
     display: block;

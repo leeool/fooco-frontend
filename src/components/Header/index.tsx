@@ -12,9 +12,27 @@ import UseMatchWindowSize from "src/hooks/UseWindowSize"
 const index = () => {
   const { isLoggedIn, loading } = useUserStore()
   const match = UseMatchWindowSize(1000)
+  const [hide, setHide] = React.useState(false)
+
+  React.useEffect(() => {
+    const handleScroll = (e: WheelEvent) => {
+      if (e.deltaY > 0 && !hide) {
+        setHide(true)
+        return
+      } else {
+        setHide(false)
+      }
+    }
+
+    document.addEventListener("wheel", handleScroll)
+
+    return () => {
+      document.removeEventListener("wheel", handleScroll)
+    }
+  }, [])
 
   return (
-    <HeaderContainer>
+    <HeaderContainer isScrolledDown={hide}>
       {isLoggedIn ? (
         <LoggedIn />
       ) : (
