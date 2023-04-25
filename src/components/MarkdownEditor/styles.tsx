@@ -128,6 +128,21 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
     padding: 0 0.4rem;
     background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "cc"};
   }
+
+  .cm-quote {
+    color: #236ee6;
+  }
+
+  blockquote {
+    border-left: 0.3rem solid
+      ${({ theme }) => theme.backgroundColor.details + "cc"};
+    padding-left: 1rem;
+    color: ${({ theme }) => theme.textColor.paragraph};
+  }
+
+  a {
+    text-decoration: underline;
+  }
 `
 
 export const Container = styled(MarkdownStyle)`
@@ -321,7 +336,7 @@ export const Container = styled(MarkdownStyle)`
     background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "55"};
   }
   .bytemd-preview .markdown-body {
-    word-break: break-all;
+    word-break: normal;
     overflow-wrap: break-word;
     max-width: 60rem;
     margin: 0 auto;
