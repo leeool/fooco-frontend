@@ -31,6 +31,10 @@ const index = () => {
     }
   }, [])
 
+  React.useEffect(() => {
+    setHide(false)
+  }, [window.location.pathname])
+
   return (
     <HeaderContainer isScrolledDown={hide}>
       {isLoggedIn ? (
