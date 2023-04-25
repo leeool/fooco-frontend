@@ -65,6 +65,9 @@ export const About = styled.p`
 export const EditContainer = styled.form`
   display: grid;
   gap: 2rem;
+  max-width: 40rem;
+  width: 100cqw;
+  padding: 0 0.5rem;
 
   &[data-loading="true"]::after {
     content: "";
