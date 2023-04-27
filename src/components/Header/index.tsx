@@ -15,19 +15,14 @@ const index = () => {
   const [hide, setHide] = React.useState(false)
 
   React.useEffect(() => {
-    const handleScroll = (e: WheelEvent) => {
-      if (e.deltaY > 0 && !hide) {
-        setHide(true)
-        return
-      } else {
-        setHide(false)
-      }
+    const handleScroll = () => {
+      if (window.scrollY > 100) setHide(true)
+      else if (window.scrollY <= 100) setHide(false)
     }
 
-    document.addEventListener("wheel", handleScroll)
-
+    document.addEventListener("scroll", handleScroll)
     return () => {
-      document.removeEventListener("wheel", handleScroll)
+      document.removeEventListener("scroll", handleScroll)
     }
   }, [])
 
