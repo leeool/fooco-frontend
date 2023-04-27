@@ -51,7 +51,8 @@ const index = () => {
 
       if (!acceptTerms) {
         setError("acceptTerms", { type: "required" })
-        return setToastMessage("Algo deu errado", "Aceite os termos de uso!")
+        setToastMessage("Algo deu errado", "Aceite os termos de uso!")
+        return
       }
 
       // criar conta
@@ -59,13 +60,7 @@ const index = () => {
 
       const { data, error } = await request(url, options)
 
-      if (isError(data)) {
-        setToastMessage("Algo deu errado", data.error)
-        return
-      } else if (error || !data) {
-        setToastMessage("Algo deu errado", "Tente novamente mais tarde")
-        return
-      }
+      if (isError(data) || error || !data) return
 
       await loginUser(email, password)
       setUserID(data.id)

@@ -10,6 +10,7 @@ import { motion } from "framer-motion"
 import useUserStore from "src/stores/UseUserStore"
 import UseFetch from "src/hooks/UseFetch"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
+import UseToastStore from "@components/Toast/UseToastStore"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -19,8 +20,14 @@ const animateLeft = {
 
 const index = () => {
   const { email, password, setEmail, setPassword } = UseCreateUserStore()
+  const { setToastMessage } = UseToastStore()
   const useNav = useNavigate()
-  const { validateUser, loading: loginLoading, loginUser } = useUserStore()
+  const {
+    validateUser,
+    loading: loginLoading,
+    loginUser,
+    isLoggedIn,
+  } = useUserStore()
   const { loading } = UseFetch<IUserLogin | null>()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -28,7 +35,13 @@ const index = () => {
 
     await loginUser(email, password)
     await validateUser()
-    useNav("/")
+
+    if (isLoggedIn) {
+      useNav("/")
+      return
+    } else {
+      setToastMessage("Email ou senha incorretos", "error")
+    }
   }
 
   return (
