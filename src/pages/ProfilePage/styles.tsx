@@ -3,6 +3,8 @@ import styled from "styled-components"
 export const Container = styled.section`
   display: grid;
   gap: 5rem;
+  max-width: 70rem;
+  margin: 0 auto;
 
   @media (max-width: 600px) {
     gap: 2rem;

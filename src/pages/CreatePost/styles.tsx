@@ -25,14 +25,3 @@ export const Buttons = styled.div`
   justify-self: flex-end;
   gap: 1rem;
 `
-
-export const TextArea = styled.textarea`
-  background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-  border-radius: 10px;
-  padding: 1rem;
-  resize: none;
-
-  &::placeholder {
-    opacity: 0.4;
-  }
-`

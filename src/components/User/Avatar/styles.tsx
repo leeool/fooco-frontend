@@ -6,6 +6,8 @@ export const Image = styled(AvatarImage)`
   border-radius: 50%;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
 `
 
 export const Fallback = styled(AvatarFallback)`
