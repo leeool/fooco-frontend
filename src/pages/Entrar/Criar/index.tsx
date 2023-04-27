@@ -8,7 +8,7 @@ import { Button, Checkbox } from "@components/Form"
 import { Link, useNavigate } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
-import { USER_POST, USER_PUT } from "src/api/apiCalls"
+import { USER_LOGIN, USER_POST, USER_PUT } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
 import useUserStore from "src/stores/UseUserStore"
 import UseToastStore from "@components/Toast/UseToastStore"
@@ -26,9 +26,11 @@ const animateLeft = {
 const index = () => {
   const { email, password } = UseCreateUserStore()
   const { request, loading } = UseFetch<IUserData>()
+  const { request: requestLogin, loading: loginLoading } =
+    UseFetch<IUserLogin>()
   const [page, setPage] = React.useState<number>(1)
 
-  const { loginUser, loading: loginLoading, validateUser } = useUserStore()
+  const { validateUser } = useUserStore()
   const { setToastMessage } = UseToastStore()
   const navigate = useNavigate()
   const [userID, setUserID] = React.useState<string | null>(null)
@@ -62,7 +64,21 @@ const index = () => {
 
       if (isError(data) || error || !data) return
 
-      await loginUser(email, password)
+      // get user token
+      const { url: loginURL, options: loginOptions } = USER_LOGIN(
+        email,
+        password
+      )
+
+      const { data: loginData, error: loginError } = await requestLogin(
+        loginURL,
+        loginOptions
+      )
+
+      if (isError(loginData) || loginError || !loginData) return
+
+      localStorage.setItem("token", loginData.token)
+
       setUserID(data.id)
       setPage(2)
     }
@@ -88,8 +104,8 @@ const index = () => {
     // login
     await validateUser()
 
-    setToastMessage(`Bem-vindo(a) ${username}!`, "Usuário criado com sucesso")
     navigate("/app")
+    setToastMessage(`Bem-vindo(a) ${username}!`, "Usuário criado com sucesso")
   })
 
   React.useEffect(() => {

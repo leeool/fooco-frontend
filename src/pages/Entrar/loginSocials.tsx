@@ -19,18 +19,15 @@ const githubProvider = new GithubAuthProvider()
 const microsoftProvider = new OAuthProvider("microsoft.com")
 
 const useLoginSocialUser = () => {
-  const { loginUser, validateUser, setLoading } = useUserStore()
+  const { loginUser, setLoading } = useUserStore()
   const { request } = UseFetch<IUserData>()
   const { setToastMessage } = UseToastStore()
 
-  const loginUserSocial = async (user: User & { accessToken?: string }) => {
-    if (!user || !user.displayName || !user.email || !user.accessToken) return
+  const loginUserSocial = async (user: User) => {
+    console.log(user.uid)
+    if (!user || !user.displayName || !user.email || !user.uid) return
 
-    const { request: loginResponse } = await loginUser(
-      user.email,
-      user.accessToken
-    )
-    await validateUser()
+    const { request: loginResponse } = await loginUser(user.email, user.uid)
     if (loginResponse) return
 
     setLoading(true)
@@ -38,15 +35,10 @@ const useLoginSocialUser = () => {
       user.displayName.split(" ").join("_").slice(0, 10).toLowerCase() +
       Math.floor(Math.random() * 1000)
 
-    const { options, url } = USER_POST(
-      provUsername,
-      user.email,
-      user.accessToken.split(".")[0]
-    )
+    const { options, url } = USER_POST(provUsername, user.email, user.uid)
 
     await request(url, options)
-    await loginUser(user.email, user.accessToken)
-    await validateUser()
+    await loginUser(user.email, user.uid)
 
     setLoading(false)
 

@@ -34,13 +34,12 @@ const index = () => {
     e.preventDefault()
 
     await loginUser(email, password)
-    await validateUser()
 
     if (isLoggedIn) {
       useNav("/")
       return
     } else {
-      setToastMessage("Email ou senha incorretos", "error")
+      setToastMessage("Algo deu errado", "Email ou senha incorretos")
     }
   }
 

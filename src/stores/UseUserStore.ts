@@ -29,7 +29,9 @@ const useUserStore = create<IUser>((set, get) => ({
       if (request.status >= 300 && "error" in request.data) {
         throw new Error(request.data.error)
       } else if (!("error" in request.data) && request.status < 400) {
+        const validate = get().validateUser
         localStorage.setItem("token", request.data.token)
+        validate()
         // set({ isLoggedIn: true, userData: response.data.user })
       }
     } catch (error) {
