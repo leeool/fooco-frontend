@@ -11,7 +11,6 @@ import { createPostSchema } from "src/schemas"
 import { POST_POST } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
 import isError from "src/helpers/isError"
-import UseToastStore from "@components/Toast/UseToastStore"
 
 const CreatePost = () => {
   const [value, setValue] = React.useState("")
@@ -19,14 +18,15 @@ const CreatePost = () => {
   const { userData, isLoggedIn } = useUserStore()
   const { control, handleSubmit } = useForm<Post>({
     resolver: zodResolver(createPostSchema),
+    mode: "all",
+    shouldFocusError: true,
   })
   const { request, loading } = UseFetch<IUserPosts>()
-  const { setToastMessage } = UseToastStore()
 
   const handleCreatePost = handleSubmit(async ({ tags, title }) => {
     console.log({ tags, title, value })
 
-    const arrTags = tags?.split(",")
+    const arrTags = tags?.split(/[,;\s]/g).filter((value) => Boolean(value))
 
     if (!isLoggedIn || !userData) return nav("/entrar")
 
@@ -36,8 +36,7 @@ const CreatePost = () => {
 
     if (isError(data) || error || !data) {
       console.log({ error, data })
-      setToastMessage("Algo deu errado", "Tente novamente mais tarde!")
-
+      window.scrollTo({ top: 0, behavior: "smooth" })
       return
     }
     nav(`/app/${userData.username}/${data.slug}`)
@@ -52,6 +51,7 @@ const CreatePost = () => {
         <Controller
           name="title"
           control={control}
+          defaultValue=""
           render={({ field, fieldState }) => (
             <Input
               placeholder="Descreva sua publicação"
@@ -68,12 +68,13 @@ const CreatePost = () => {
         <Controller
           control={control}
           name="tags"
+          defaultValue=""
           render={({ field, fieldState }) => (
             <Input
               placeholder="Palavras-chave da sua publicação"
               type="text"
               id="tags"
-              label="Tags (separadas por vírgula)"
+              label="Tags"
               fieldState={fieldState}
               {...field}
             />
