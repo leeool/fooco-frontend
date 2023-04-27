@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const Container = styled.main`
   display: grid;
   grid-template-columns: 1.5fr 1fr;
-  height: calc(100vh - 2rem);
+  height: calc(100vh);
   position: relative;
 
   .toast {
@@ -22,7 +22,6 @@ export const Container = styled.main`
   .foquinho {
     display: grid;
     background-color: ${({ theme }) => theme.backgroundColor.secondary};
-    border-radius: 20px;
     position: relative;
     place-items: center;
     padding: 0 1rem;
