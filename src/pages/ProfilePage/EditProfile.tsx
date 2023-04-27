@@ -1,6 +1,6 @@
 import { Edit } from "@assets/index"
 import { DialogContent, DialogRoot, DialogTrigger } from "@components/Dialog"
-import { Button, Input } from "@components/Form"
+import { Button, Input, TextArea } from "@components/Form"
 import React from "react"
 import useUserStore from "src/stores/UseUserStore"
 import { EditContainer, FixedTitle, LoadingEdit } from "./styles"
@@ -112,13 +112,12 @@ const EditProfile = () => {
             name="about"
             defaultValue={userData.about}
             render={({ field, fieldState }) => (
-              <Input
-                id="sobre"
+              <TextArea
                 placeholder={"Descreva você"}
-                type="text"
+                {...field}
+                id="sobre"
                 label="Sobre"
                 fieldState={fieldState}
-                {...field}
               />
             )}
           />
