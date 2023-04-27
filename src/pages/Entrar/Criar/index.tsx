@@ -94,12 +94,9 @@ const index = () => {
 
     if (isError(data)) {
       setError("username", { type: "validate", message: data.error })
-      setToastMessage("Algo deu errado", data.error)
+      // setToastMessage("Algo deu errado", data.error)
       return
-    } else if (error || !data) {
-      setToastMessage("Algo deu errado", "Tente novamente mais tarde")
-      return
-    }
+    } else if (error || !data) return
 
     // login
     await validateUser()
