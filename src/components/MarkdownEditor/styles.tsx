@@ -151,7 +151,7 @@ export const Container = styled(MarkdownStyle)`
   }
 
   .bytemd-body {
-    height: calc(100vh - 410px);
+    height: calc(100vh - 40rem);
     min-height: 150px;
     overflow: auto;
     resize: vertical;
