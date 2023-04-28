@@ -23,17 +23,20 @@ import { Title } from "@components/Text/Title"
 import { Button } from "@components/Form"
 import { ConfirmLogout } from "./styles"
 import { Paragraph } from "@components/Text/Paragraph"
+import UseMatchWindowSize from "src/hooks/UseWindowSize"
+import { FoquinhoIcon } from "@assets/index"
 
 const index = () => {
   const { logoutUser, userData } = useUserStore()
   const ref = React.useRef<HTMLDivElement>(null)
+  const match = UseMatchWindowSize(600)
 
   return (
     <>
       <Link to="/app" className="logo">
-        <Logo />
+        {match ? <FoquinhoIcon /> : <Logo />}
       </Link>
-      <Search />
+      {/* <Search /> */}
       <div className="buttons-logged">
         <Link to={"/app"}>
           <Home />

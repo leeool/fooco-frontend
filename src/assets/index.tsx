@@ -13,6 +13,7 @@ import { ReactComponent as Edit } from "./icons/edit.svg"
 import { ReactComponent as GithubIcon } from "./icons/github.svg"
 import { ReactComponent as MicrosoftIcon } from "./icons/microsoft.svg"
 import { ReactComponent as GoogleIcon } from "./icons/google.svg"
+import { ReactComponent as FoquinhoIcon } from "./icons/foquinhoIcon.svg"
 
 export {
   Hat,
@@ -30,4 +31,5 @@ export {
   GithubIcon,
   MicrosoftIcon,
   GoogleIcon,
+  FoquinhoIcon,
 }

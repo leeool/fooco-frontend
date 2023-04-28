@@ -6,7 +6,7 @@ interface Props {
 
 export const HeaderContainer = styled.header<Props>`
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto auto;
   gap: 2rem;
   align-items: center;
   justify-content: space-between;
@@ -70,10 +70,11 @@ export const HeaderContainer = styled.header<Props>`
       button,
       a {
         font-size: 1rem;
+        gap: 0.2rem;
 
         svg {
-          width: 1.8rem;
-          height: 1.8rem;
+          width: 1.5rem;
+          height: 1.5rem;
         }
       }
     }
@@ -81,14 +82,30 @@ export const HeaderContainer = styled.header<Props>`
 
   & .logo {
     max-width: 13rem;
-    justify-self: center;
+    width: 100%;
+    height: 100%;
+    /* justify-self: start; */
+    /* align-self: center; */
+    place-items: center;
+
+    svg {
+      width: 90%;
+      height: 90%;
+    }
+
+    @media (max-width: 600px) {
+      max-width: 6rem;
+      max-height: 4rem;
+      display: flex;
+      justify-content: center;
+    }
   }
 
   @media (max-width: 1000px) {
     display: grid;
-    flex-direction: column;
+    /* flex-direction: column; */
     gap: 1rem;
-    grid-template-columns: 1fr;
+    grid-template-columns: auto auto;
     padding: 0.4rem 1rem;
 
     .loading {
@@ -97,7 +114,7 @@ export const HeaderContainer = styled.header<Props>`
     }
 
     .buttons {
-      grid-column: 1 / -1;
+      /* grid-column: 1 / -1; */
       align-items: center;
       justify-content: space-between;
       justify-self: center;
@@ -108,7 +125,7 @@ export const HeaderContainer = styled.header<Props>`
         width: 100%;
       }
       display: block;
-      grid-column: 1 / -1;
+      /* grid-column: 1 / -1; */
       width: 100%;
       justify-self: center;
     }
@@ -117,6 +134,19 @@ export const HeaderContainer = styled.header<Props>`
       width: 100%;
       grid-column: 1 / -1;
       grid-row: 2;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .buttons-logged {
+      svg {
+        width: 50%;
+        height: 50%;
+      }
+    }
+
+    .buttons {
+      gap: 1rem;
     }
   }
 `

@@ -46,6 +46,7 @@ export const Button = styled(ButtonContainer)<Props>`
 
   @media (max-width: 600px) {
     padding: 0.2rem 0.5rem;
+    font-size: 0.9rem;
   }
 
   ${variant({
