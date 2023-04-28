@@ -51,7 +51,7 @@ const index = () => {
       animate="visible"
       transition={{ type: "spring" }}
     >
-      <Title size="xl">Bem vindo de volta!</Title>
+      <Title size="xl">Bem-vindo de volta!</Title>
 
       <form className="form" onSubmit={handleSubmit}>
         <Input
