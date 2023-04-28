@@ -33,9 +33,9 @@ const index = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    await loginUser(email, password)
+    const { request } = await loginUser(email, password)
 
-    if (isLoggedIn) {
+    if (request) {
       useNav("/")
       return
     } else {
