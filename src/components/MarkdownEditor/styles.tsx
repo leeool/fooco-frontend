@@ -127,6 +127,7 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
   code {
     padding: 0 0.4rem;
     background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "cc"};
+    overflow-wrap: break-word;
   }
 
   .cm-quote {
