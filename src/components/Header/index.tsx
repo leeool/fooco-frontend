@@ -60,11 +60,25 @@ const MobileLoading = () => {
         containerClassName="logo"
         width={200}
       />
-      <Skeleton count={1} height={40} containerClassName="loading" />
-      <div style={{ display: "flex", gap: "2rem" }}>
-        <Skeleton count={1} height={30} containerClassName="loading" />
-        <Skeleton count={1} height={30} containerClassName="loading" />
-        <Skeleton count={1} height={30} containerClassName="loading" />
+      <div style={{ display: "flex", gap: "0.5rem" }}>
+        <Skeleton
+          count={1}
+          height={30}
+          width={70}
+          containerClassName="loading"
+        />
+        <Skeleton
+          count={1}
+          height={30}
+          width={70}
+          containerClassName="loading"
+        />
+        <Skeleton
+          count={1}
+          height={30}
+          width={70}
+          containerClassName="loading"
+        />
       </div>
     </>
   )
@@ -80,7 +94,6 @@ const DesktopLoading = () => {
         containerClassName="loading"
         width={200}
       />
-      <Skeleton count={1} height={40} containerClassName="search" width={500} />
       <div style={{ display: "flex", gap: "2rem" }}>
         <Skeleton
           count={1}
