@@ -11,7 +11,6 @@ import UseMatchWindowSize from "src/hooks/UseWindowSize"
 
 const index = () => {
   const { isLoggedIn, loading } = useUserStore()
-  const match = UseMatchWindowSize(1000)
   const [hide, setHide] = React.useState(false)
 
   React.useEffect(() => {
@@ -36,12 +35,8 @@ const index = () => {
         <LoggedIn />
       ) : (
         <Loading
-          fallback={
-            <SkeletonLoad>
-              {match ? <MobileLoading /> : <DesktopLoading />}
-            </SkeletonLoad>
-          }
-          loading={loading && !isLoggedIn}
+          fallback={<HandleHeaderLoading />}
+          loading={loading || !isLoggedIn}
         >
           <LoggedOut />
         </Loading>
@@ -50,17 +45,23 @@ const index = () => {
   )
 }
 
+const HandleHeaderLoading = () => {
+  const match = UseMatchWindowSize(1000)
+
+  return match ? <MobileLoading /> : <DesktopLoading />
+}
+
 const MobileLoading = () => {
   return (
-    <>
+    <SkeletonLoad>
       <Skeleton
         count={1}
         height={51}
         borderRadius={10}
         containerClassName="logo"
-        width={200}
+        width={100}
       />
-      <div style={{ display: "flex", gap: "0.5rem" }}>
+      <div style={{ display: "flex", gap: "1rem" }}>
         <Skeleton
           count={1}
           height={30}
@@ -80,13 +81,13 @@ const MobileLoading = () => {
           containerClassName="loading"
         />
       </div>
-    </>
+    </SkeletonLoad>
   )
 }
 
 const DesktopLoading = () => {
   return (
-    <>
+    <SkeletonLoad>
       <Skeleton
         count={1}
         height={51}
@@ -114,7 +115,7 @@ const DesktopLoading = () => {
           width={120}
         />
       </div>
-    </>
+    </SkeletonLoad>
   )
 }
 
