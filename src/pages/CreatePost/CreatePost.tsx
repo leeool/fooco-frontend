@@ -14,7 +14,7 @@ import isError from "src/helpers/isError"
 import UseToastStore from "@components/Toast/UseToastStore"
 
 const CreatePost = ({ post }: { post: IUserPosts }) => {
-  const [value, setValue] = React.useState(post.content || "")
+  const [value, setValue] = React.useState(post?.content || "")
   const nav = useNavigate()
   const { userData, isLoggedIn } = useUserStore()
   const { control, handleSubmit } = useForm<Post>({
@@ -80,7 +80,7 @@ const CreatePost = ({ post }: { post: IUserPosts }) => {
         <Controller
           name="title"
           control={control}
-          defaultValue={post.title || ""}
+          defaultValue={post?.title || ""}
           render={({ field, fieldState }) => (
             <Input
               placeholder="Descreva sua publicação"
@@ -97,7 +97,7 @@ const CreatePost = ({ post }: { post: IUserPosts }) => {
         <Controller
           control={control}
           name="tags"
-          defaultValue={post.tags.join(" ") || ""}
+          defaultValue={post?.tags.join(" ") || ""}
           render={({ field, fieldState }) => (
             <Input
               placeholder="Palavras-chave da sua publicação"
