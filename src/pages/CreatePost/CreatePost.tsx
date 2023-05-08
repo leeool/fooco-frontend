@@ -13,7 +13,7 @@ import UseFetch from "src/hooks/UseFetch"
 import isError from "src/helpers/isError"
 import UseToastStore from "@components/Toast/UseToastStore"
 
-const CreatePost = ({ post }: { post: IUserPosts }) => {
+const CreatePost = ({ post }: { post?: IUserPosts }) => {
   const [value, setValue] = React.useState(post?.content || "")
   const nav = useNavigate()
   const { userData, isLoggedIn } = useUserStore()
