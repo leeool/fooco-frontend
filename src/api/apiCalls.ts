@@ -140,3 +140,38 @@ export const POST_POST = (
     },
   }
 }
+
+export const DELETE_POST = (postID: string, userID: string) => {
+  return {
+    url: ENDPOINT + `/post/${postID}`,
+    options: {
+      method: "DELETE",
+      data: {
+        user_id: userID,
+      },
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    },
+  }
+}
+
+export const PUT_POST = (
+  post: Partial<IUserPosts>,
+  postID: string,
+  userID: string
+) => {
+  return {
+    url: ENDPOINT + `/post/${postID}`,
+    options: {
+      method: "PUT",
+      data: {
+        ...post,
+        user_id: userID,
+      },
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    },
+  }
+}

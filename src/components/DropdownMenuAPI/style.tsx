@@ -130,6 +130,10 @@ export const Item = styled(DropdownMenuItem)`
   border-radius: 5px;
   transition: none;
   overflow: hidden;
+
+  &[data-type="danger"] {
+    background-color: #f003;
+  }
 `
 
 export const Arrow = styled(DropdownMenuArrow)`

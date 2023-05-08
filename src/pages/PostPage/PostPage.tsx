@@ -2,8 +2,8 @@ import { Bookmark, MiniSeta, Reply, Send } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { useQuery } from "react-query"
-import { useNavigate, useParams } from "react-router"
-import { FEEDBACK_POST, instance } from "src/api/apiCalls"
+import { useNavigate, useNavigation, useParams } from "react-router"
+import { DELETE_POST, FEEDBACK_POST, instance } from "src/api/apiCalls"
 import isError from "src/helpers/isError"
 import UseFetch from "src/hooks/UseFetch"
 import useUserStore from "src/stores/UseUserStore"
@@ -26,6 +26,14 @@ import { ptBR } from "date-fns/locale"
 import UseSavePost from "src/helpers/SavePost"
 import { PostNotFound } from "../NotFound"
 import { MarkdownParser } from "@components/MarkdownEditor"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@components/DropdownMenuAPI"
+import UseToastStore from "@components/Toast/UseToastStore"
+import CreatePost from "../CreatePost"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -42,6 +50,7 @@ const PostPage = () => {
   )
   const { request, data: feedbackData, loading } = UseFetch<string | null>()
   const [feedback, setFeedback] = React.useState<string | null>(null)
+  const [isEditing, setIsEditing] = React.useState<boolean>(false)
 
   const handleFeedback = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -101,6 +110,7 @@ const PostPage = () => {
     )
   if (isError(data)) return <div>{data.error}</div>
   if (!data) return <PostNotFound />
+  if (isEditing) return <CreatePost post={data} />
   return (
     <Container>
       <Interactions>
@@ -144,7 +154,6 @@ const PostPage = () => {
               <span>@{data.user.username}</span>
             </Link>
           </Author>
-
           <Data>
             publicado a{" "}
             <span>
@@ -153,6 +162,9 @@ const PostPage = () => {
               })}
             </span>
           </Data>
+          {userData?.id === data.user.id ? (
+            <HandlePost post={data} setIsEditing={setIsEditing} />
+          ) : null}
         </Info>
         <Content>
           <MarkdownParser value={data.content} />
@@ -170,6 +182,68 @@ const PostPage = () => {
         </Tags>
       </Details>
     </Container>
+  )
+}
+
+const HandlePost = ({
+  post,
+  setIsEditing,
+}: {
+  post: IUserPosts
+  setIsEditing: React.Dispatch<boolean>
+}) => {
+  const { request, loading } = UseFetch()
+  const { userData } = useUserStore()
+  const { setToastMessage } = UseToastStore()
+  const nav = useNavigate()
+
+  const handlePostDelete = async () => {
+    if (!userData || loading) return
+
+    const { url, options } = DELETE_POST(post.id, userData.id)
+
+    const { response } = await request(url, options)
+
+    if ((response && response?.status >= 300) || !response) return
+    else {
+      nav(`/app/${userData.username}`)
+      setToastMessage("Sucesso", "Publicação deletada com sucesso!")
+      return
+    }
+  }
+
+  const handleUpdatePost = () => {
+    if (!userData || loading) return
+
+    setIsEditing(true)
+  }
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="info-btn">
+        <ButtonSecondary>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+            />
+          </svg>
+        </ButtonSecondary>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem onClick={handleUpdatePost}>Editar</DropdownMenuItem>
+        <DropdownMenuItem data-type="danger" onClick={handlePostDelete}>
+          Deletar
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 

@@ -22,12 +22,7 @@ const index = () => {
   const { email, password, setEmail, setPassword } = UseCreateUserStore()
   const { setToastMessage } = UseToastStore()
   const useNav = useNavigate()
-  const {
-    validateUser,
-    loading: loginLoading,
-    loginUser,
-    isLoggedIn,
-  } = useUserStore()
+  const { loading: loginLoading, loginUser } = useUserStore()
   const { loading } = UseFetch<IUserLogin | null>()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

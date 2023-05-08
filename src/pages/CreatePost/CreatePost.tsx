@@ -8,12 +8,13 @@ import { useNavigate } from "react-router"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createPostSchema } from "src/schemas"
-import { POST_POST } from "src/api/apiCalls"
+import { POST_POST, PUT_POST } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
 import isError from "src/helpers/isError"
+import UseToastStore from "@components/Toast/UseToastStore"
 
-const CreatePost = () => {
-  const [value, setValue] = React.useState("")
+const CreatePost = ({ post }: { post: IUserPosts }) => {
+  const [value, setValue] = React.useState(post.content || "")
   const nav = useNavigate()
   const { userData, isLoggedIn } = useUserStore()
   const { control, handleSubmit } = useForm<Post>({
@@ -22,6 +23,7 @@ const CreatePost = () => {
     shouldFocusError: true,
   })
   const { request, loading } = UseFetch<IUserPosts>()
+  const { setToastMessage } = UseToastStore()
 
   const handleCreatePost = handleSubmit(async ({ tags, title }) => {
     console.log({ tags, title, value })
@@ -40,6 +42,33 @@ const CreatePost = () => {
       return
     }
     nav(`/app/${userData.username}/${data.slug}`)
+    setToastMessage("Sucesso", "Publicação criada com sucesso!")
+  })
+
+  const handleUpdatePost = handleSubmit(async ({ tags, title }) => {
+    if (!isLoggedIn || !userData || !post) return
+
+    if (
+      post.content === value &&
+      post.title === title &&
+      post.tags.join(" ") === tags
+    )
+      return
+
+    const { options, url } = PUT_POST(
+      { title, content: value, tags: tags?.trim().split(/[,;\s]/g) },
+      post.id,
+      userData.id
+    )
+
+    const { data, error } = await request(url, options)
+
+    if (isError(data) || error || !data) {
+      console.log({ error, data })
+      window.scrollTo({ top: 0, behavior: "smooth" })
+      return
+    }
+    document.location.reload()
   })
 
   return (
@@ -47,11 +76,11 @@ const CreatePost = () => {
       <Title size="xl" className="title">
         Publicar
       </Title>
-      <AskForm onSubmit={handleCreatePost}>
+      <AskForm onSubmit={post ? handleUpdatePost : handleCreatePost}>
         <Controller
           name="title"
           control={control}
-          defaultValue=""
+          defaultValue={post.title || ""}
           render={({ field, fieldState }) => (
             <Input
               placeholder="Descreva sua publicação"
@@ -68,7 +97,7 @@ const CreatePost = () => {
         <Controller
           control={control}
           name="tags"
-          defaultValue=""
+          defaultValue={post.tags.join(" ") || ""}
           render={({ field, fieldState }) => (
             <Input
               placeholder="Palavras-chave da sua publicação"

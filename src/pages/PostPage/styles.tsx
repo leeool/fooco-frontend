@@ -13,8 +13,10 @@ export const Container = styled.article`
 `
 
 export const Info = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
   gap: 2rem;
+  align-items: center;
 
   a {
     display: inline;
@@ -23,6 +25,10 @@ export const Info = styled.div`
 
   @media (max-width: 600px) {
     gap: 0.8rem;
+  }
+
+  .info-btn {
+    justify-self: flex-end;
   }
 `
 

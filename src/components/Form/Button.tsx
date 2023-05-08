@@ -100,7 +100,7 @@ export const ButtonSecondary = styled(ButtonContainer)`
   color: ${({ theme }) => theme.textColor.title};
   font-weight: 500;
   font-size: 1rem;
-  padding: 0.2rem 1rem;
+  /* padding: 0.2rem; */
 
   @media (max-width: 600px) {
     font-size: 0.9rem;
@@ -114,5 +114,9 @@ export const ButtonSecondary = styled(ButtonContainer)`
     path {
       stroke: ${({ theme }) => theme.backgroundColor.tertiary};
     }
+  }
+
+  &[data-type="danger"] {
+    background-color: #f00;
   }
 `

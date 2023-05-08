@@ -34,10 +34,7 @@ const index = () => {
       {isLoggedIn ? (
         <LoggedIn />
       ) : (
-        <Loading
-          fallback={<HandleHeaderLoading />}
-          loading={loading || !isLoggedIn}
-        >
+        <Loading fallback={<HandleHeaderLoading />} loading={loading}>
           <LoggedOut />
         </Loading>
       )}
