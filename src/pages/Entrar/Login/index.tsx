@@ -36,7 +36,7 @@ const index = () => {
     const { request } = await loginUser(email, password)
 
     if (request) {
-      useNav("/")
+      useNav("/app")
       return
     } else {
       setToastMessage("Algo deu errado", "Email ou senha incorretos")
