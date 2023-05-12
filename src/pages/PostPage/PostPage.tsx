@@ -110,7 +110,7 @@ const PostPage = () => {
     )
   if (isError(data)) return <div>{data.error}</div>
   if (!data) return <PostNotFound />
-  if (isEditing) return <UpdatePost post={data} />
+  if (isEditing) return <UpdatePost post={data} setIsEditing={setIsEditing} />
   return (
     <Container>
       <Interactions>

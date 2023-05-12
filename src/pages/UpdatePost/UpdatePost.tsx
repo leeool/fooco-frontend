@@ -11,7 +11,13 @@ import { PUT_POST } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
 import isError from "src/helpers/isError"
 
-const UpdatePost = ({ post }: { post: IUserPosts }) => {
+const UpdatePost = ({
+  post,
+  setIsEditing,
+}: {
+  post: IUserPosts
+  setIsEditing: React.Dispatch<boolean>
+}) => {
   const [value, setValue] = React.useState(post?.content || "")
   const nav = useNavigate()
   const { userData, isLoggedIn } = useUserStore()
@@ -85,7 +91,7 @@ const UpdatePost = ({ post }: { post: IUserPosts }) => {
           )}
         />
         <Buttons>
-          <Button variant="outlined" onClick={() => nav("/app")}>
+          <Button variant="outlined" onClick={() => setIsEditing(false)}>
             Cancelar
           </Button>
           <Button variant="solid" disabled={loading}>
