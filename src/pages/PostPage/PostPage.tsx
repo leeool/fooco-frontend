@@ -2,7 +2,7 @@ import { Bookmark, MiniSeta, Reply, Send } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { useQuery } from "react-query"
-import { useNavigate, useNavigation, useParams } from "react-router"
+import { useNavigate, useParams } from "react-router"
 import { DELETE_POST, FEEDBACK_POST, instance } from "src/api/apiCalls"
 import isError from "src/helpers/isError"
 import UseFetch from "src/hooks/UseFetch"
@@ -33,7 +33,7 @@ import {
   DropdownMenuTrigger,
 } from "@components/DropdownMenuAPI"
 import UseToastStore from "@components/Toast/UseToastStore"
-import CreatePost from "../CreatePost"
+import UpdatePost from "../UpdatePost"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -110,7 +110,7 @@ const PostPage = () => {
     )
   if (isError(data)) return <div>{data.error}</div>
   if (!data) return <PostNotFound />
-  if (isEditing) return <CreatePost post={data} />
+  if (isEditing) return <UpdatePost post={data} />
   return (
     <Container>
       <Interactions>

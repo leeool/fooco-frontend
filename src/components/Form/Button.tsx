@@ -100,7 +100,7 @@ export const ButtonSecondary = styled(ButtonContainer)`
   color: ${({ theme }) => theme.textColor.title};
   font-weight: 500;
   font-size: 1rem;
-  /* padding: 0.2rem; */
+  padding: 0.2rem 0.6rem;
 
   @media (max-width: 600px) {
     font-size: 0.9rem;

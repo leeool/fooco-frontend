@@ -1,5 +1,4 @@
 import { Button, Input } from "@components/Form"
-import { Title } from "@components/Text/Title"
 import React from "react"
 import { AskForm, Buttons, Container } from "./styles"
 import { Markdown } from "@components/MarkdownEditor"
@@ -8,13 +7,12 @@ import { useNavigate } from "react-router"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createPostSchema } from "src/schemas"
-import { POST_POST } from "src/api/apiCalls"
+import { PUT_POST } from "src/api/apiCalls"
 import UseFetch from "src/hooks/UseFetch"
 import isError from "src/helpers/isError"
-import UseToastStore from "@components/Toast/UseToastStore"
 
-const CreatePost = () => {
-  const [value, setValue] = React.useState("")
+const UpdatePost = ({ post }: { post: IUserPosts }) => {
+  const [value, setValue] = React.useState(post?.content || "")
   const nav = useNavigate()
   const { userData, isLoggedIn } = useUserStore()
   const { control, handleSubmit } = useForm<Post>({
@@ -23,16 +21,22 @@ const CreatePost = () => {
     shouldFocusError: true,
   })
   const { request, loading } = UseFetch<IUserPosts>()
-  const { setToastMessage } = UseToastStore()
 
-  const handleCreatePost = handleSubmit(async ({ tags, title }) => {
-    console.log({ tags, title, value })
+  const handleUpdatePost = handleSubmit(async ({ tags, title }) => {
+    if (!isLoggedIn || !userData || !post) return
 
-    const arrTags = tags?.split(/[,;\s]/g).filter((value) => Boolean(value))
+    if (
+      post.content === value &&
+      post.title === title &&
+      post.tags.join(" ") === tags
+    )
+      return
 
-    if (!isLoggedIn || !userData) return nav("/entrar")
-
-    const { options, url } = POST_POST(title, value, userData.id, arrTags)
+    const { options, url } = PUT_POST(
+      { title, content: value, tags: tags?.trim().split(/[,;\s]/g) },
+      post.id,
+      userData.id
+    )
 
     const { data, error } = await request(url, options)
 
@@ -41,20 +45,17 @@ const CreatePost = () => {
       window.scrollTo({ top: 0, behavior: "smooth" })
       return
     }
-    nav(`/app/${userData.username}/${data.slug}`)
-    setToastMessage("Sucesso", "Publicação criada com sucesso!")
+    document.location.reload()
   })
 
+  if (!post) return null
   return (
     <Container>
-      <Title size="xl" className="title">
-        Publicar
-      </Title>
-      <AskForm onSubmit={handleCreatePost}>
+      <AskForm onSubmit={handleUpdatePost}>
         <Controller
           name="title"
           control={control}
-          defaultValue={""}
+          defaultValue={post.title}
           render={({ field, fieldState }) => (
             <Input
               placeholder="Descreva sua publicação"
@@ -71,7 +72,7 @@ const CreatePost = () => {
         <Controller
           control={control}
           name="tags"
-          defaultValue={""}
+          defaultValue={post.tags.join(" ")}
           render={({ field, fieldState }) => (
             <Input
               placeholder="Palavras-chave da sua publicação"
@@ -88,7 +89,7 @@ const CreatePost = () => {
             Cancelar
           </Button>
           <Button variant="solid" disabled={loading}>
-            {loading ? "Carregando..." : "Publicar"}
+            {loading ? "Carregando..." : "Editar"}
           </Button>
         </Buttons>
       </AskForm>
@@ -96,4 +97,4 @@ const CreatePost = () => {
   )
 }
 
-export default CreatePost
+export default UpdatePost
