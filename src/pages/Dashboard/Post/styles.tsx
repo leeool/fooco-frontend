@@ -85,8 +85,7 @@ export const Tags = styled.div`
 `
 
 export const Details = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
+  display: flex;
   gap: 1rem;
   align-items: start;
 
@@ -96,6 +95,10 @@ export const Details = styled.div`
     * {
       font-size: 0.85rem;
     }
+  }
+
+  a {
+    width: fit-content;
   }
 `
 

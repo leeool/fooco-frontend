@@ -53,6 +53,12 @@ const Post = ({ post }: Props) => {
               })}
             </span>
           </DateContainer>
+          <DateContainer>
+            <span>
+              {post?.reply.length}{" "}
+              {post?.reply.length === 1 ? "resposta" : "respostas"}{" "}
+            </span>
+          </DateContainer>
         </Details>
       </PostInfo>
       <Tags>

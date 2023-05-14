@@ -25,7 +25,7 @@ import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import UseSavePost from "src/helpers/SavePost"
 import { PostNotFound } from "../NotFound"
-import { Markdown, MarkdownParser } from "@components/MarkdownEditor"
+import { MarkdownParser } from "@components/MarkdownEditor"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -203,7 +203,7 @@ const PostPage = () => {
           setIsReplying={setIsReplying}
         />
       ) : null}
-      <Replies replies={data.children.concat(newReply ? [...newReply] : [])} />
+      <Replies replies={data.reply.concat(newReply ? [...newReply] : [])} />
     </Container>
   )
 }

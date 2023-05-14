@@ -32,7 +32,7 @@ const Feed = () => {
           {isLoading ? (
             <LoadingPosts />
           ) : (
-            data?.map((post) => <Post post={post} key={post.id} />).reverse()
+            data?.map((post) => <Post post={post} key={post.id} />)
           )}
         </PostContainer>
       </FeedContainer>

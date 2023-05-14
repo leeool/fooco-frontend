@@ -34,7 +34,7 @@ interface IUserPosts {
   tags: string[]
   users_liked: string[]
   users_disliked: string[]
-  children: IReply[]
+  reply: IReply[]
 }
 
 interface IError {
