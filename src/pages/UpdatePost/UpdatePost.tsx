@@ -3,7 +3,6 @@ import React from "react"
 import { AskForm, Buttons, Container } from "./styles"
 import { Markdown } from "@components/MarkdownEditor"
 import useUserStore from "src/stores/UseUserStore"
-import { useNavigate } from "react-router"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createPostSchema } from "src/schemas"
@@ -19,7 +18,6 @@ const UpdatePost = ({
   setIsEditing: React.Dispatch<boolean>
 }) => {
   const [value, setValue] = React.useState(post?.content || "")
-  const nav = useNavigate()
   const { userData, isLoggedIn } = useUserStore()
   const { control, handleSubmit } = useForm<Post>({
     resolver: zodResolver(createPostSchema),

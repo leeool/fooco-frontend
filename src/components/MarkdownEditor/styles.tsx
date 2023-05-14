@@ -70,7 +70,9 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
   }
 
   pre {
-    margin: 1rem 0;
+    &:not(:first-child) {
+      margin: 1rem;
+    }
   }
 
   ul {
@@ -109,7 +111,10 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
 
   p {
     font-size: 1.1rem;
-    margin: 1rem 0;
+
+    &:not(:first-child) {
+      margin-top: 1rem;
+    }
   }
 
   .cm-comment {

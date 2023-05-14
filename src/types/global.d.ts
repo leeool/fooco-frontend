@@ -34,8 +34,20 @@ interface IUserPosts {
   tags: string[]
   users_liked: string[]
   users_disliked: string[]
+  children: IReply[]
 }
 
 interface IError {
   error: string
+}
+
+interface IReply {
+  id: string
+  post_id: string
+  content: string
+  created_at: string
+  user: IUserData
+  points: number
+  users_liked: string[]
+  users_disliked: string[]
 }

@@ -175,3 +175,23 @@ export const PUT_POST = (
     },
   }
 }
+
+export const POST_REPLY = (
+  content: string,
+  user_id: string,
+  post_id: string
+) => {
+  return {
+    url: ENDPOINT + `/${post_id}/reply`,
+    options: {
+      method: "POST",
+      data: {
+        content,
+        user_id,
+      },
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    },
+  }
+}

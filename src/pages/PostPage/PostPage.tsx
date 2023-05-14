@@ -1,4 +1,4 @@
-import { Bookmark, MiniSeta, Reply, Send } from "@assets/index"
+import { Bookmark, MiniSeta, Reply as ReplyIcon, Send } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { useQuery } from "react-query"
@@ -25,7 +25,7 @@ import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import UseSavePost from "src/helpers/SavePost"
 import { PostNotFound } from "../NotFound"
-import { MarkdownParser } from "@components/MarkdownEditor"
+import { Markdown, MarkdownParser } from "@components/MarkdownEditor"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,6 +34,7 @@ import {
 } from "@components/DropdownMenuAPI"
 import UseToastStore from "@components/Toast/UseToastStore"
 import UpdatePost from "../UpdatePost"
+import { Replies, CreateReply } from "src/interface"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -51,6 +52,8 @@ const PostPage = () => {
   const { request, data: feedbackData, loading } = UseFetch<string | null>()
   const [feedback, setFeedback] = React.useState<string | null>(null)
   const [isEditing, setIsEditing] = React.useState<boolean>(false)
+  const [isReplying, setIsReplying] = React.useState<boolean>(false)
+  const [newReply, setNewReply] = React.useState<IReply[] | null>(null)
 
   const handleFeedback = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -73,6 +76,14 @@ const PostPage = () => {
     request(url, options)
   }
 
+  const handleReplying = () => {
+    if (!isLoggedIn) {
+      nav("/entrar")
+      return
+    }
+
+    setIsReplying((prev) => !prev)
+  }
   React.useEffect(() => {
     setFeedback(null)
     if (!data || "error" in data || !userData) return
@@ -96,6 +107,10 @@ const PostPage = () => {
   React.useEffect(() => {
     if (!data || "error" in data) return
     document.title = `${data.title} • ${data.user.username} • Fooco`
+  }, [data, owner, slug])
+
+  React.useEffect(() => {
+    setNewReply(null)
   }, [data, owner, slug])
 
   if (isLoading || isFetching)
@@ -171,8 +186,8 @@ const PostPage = () => {
         </Content>
       </div>
       <Details>
-        <ButtonSecondary>
-          <Reply />
+        <ButtonSecondary onClick={handleReplying}>
+          <ReplyIcon />
           Responder
         </ButtonSecondary>
         <Tags>
@@ -181,6 +196,14 @@ const PostPage = () => {
           ))}
         </Tags>
       </Details>
+      {isReplying ? (
+        <CreateReply
+          setNewReply={setNewReply}
+          postId={data.id}
+          setIsReplying={setIsReplying}
+        />
+      ) : null}
+      <Replies replies={data.children.concat(newReply ? [...newReply] : [])} />
     </Container>
   )
 }

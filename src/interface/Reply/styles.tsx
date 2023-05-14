@@ -1,18 +1,6 @@
 import styled from "styled-components"
 
-export const Container = styled.article`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 2rem;
-  margin: 0 auto;
-  max-width: 60rem;
-
-  @media (max-width: 600px) {
-    gap: 0.8rem;
-  }
-`
-
-export const Replies = styled.div`
+export const Container = styled.div`
   grid-column: 1 / -1;
   display: grid;
   gap: 2rem;
@@ -47,16 +35,6 @@ export const Info = styled.div`
 
   .info-btn {
     justify-self: flex-end;
-  }
-`
-
-export const Title = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-
-  @media (max-width: 600px) {
-    font-size: 1.6rem;
   }
 `
 
@@ -192,37 +170,5 @@ export const Details = styled.div`
 
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
-  }
-`
-
-export const Tags = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  max-width: 100%;
-  justify-self: end;
-  justify-content: end;
-
-  span {
-    background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
-    font-size: 1rem;
-    color: ${(props) => props.theme.textColor.title};
-    padding: 0.2rem 0.8rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: none;
-
-    &:hover {
-      background-color: ${({ theme }) => theme.backgroundColor.secondary};
-      color: ${({ theme }) => theme.backgroundColor.primary};
-    }
-
-    @media (max-width: 600px) {
-      font-size: 0.8rem;
-    }
-  }
-
-  @media (max-width: 600px) {
-    justify-content: start;
   }
 `
