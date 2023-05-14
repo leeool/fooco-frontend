@@ -12,7 +12,7 @@ import Post from "../Dashboard/Post/Post"
 import { UserNotFound } from "../NotFound"
 import ReactLoading from "react-loading"
 import useUserStore from "src/stores/UseUserStore"
-import { Avatar } from "@components/User/Avatar"
+import { Avatar } from "@interface/User/Avatar"
 import EditProfile from "./EditProfile"
 
 const ProfilePage = () => {

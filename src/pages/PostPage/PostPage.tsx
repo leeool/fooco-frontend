@@ -25,7 +25,7 @@ import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import UseSavePost from "src/helpers/SavePost"
 import { PostNotFound } from "../NotFound"
-import { MarkdownParser } from "@components/MarkdownEditor"
+import { MarkdownParser } from "src/interface/MarkdownEditor"
 import {
   DropdownMenu,
   DropdownMenuContent,

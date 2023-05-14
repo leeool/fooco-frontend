@@ -1,5 +1,5 @@
 import React from "react"
-import { Avatar } from "@components/User/Avatar"
+import { Avatar } from "@interface/User/Avatar"
 import { Hat, Point } from "@assets/index"
 import useUserStore from "src/stores/UseUserStore"
 import {

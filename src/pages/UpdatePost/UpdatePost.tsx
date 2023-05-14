@@ -1,7 +1,7 @@
 import { Button, Input } from "@components/Form"
 import React from "react"
 import { AskForm, Buttons, Container } from "./styles"
-import { Markdown } from "@components/MarkdownEditor"
+import { Markdown } from "src/interface/MarkdownEditor"
 import useUserStore from "src/stores/UseUserStore"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"

@@ -161,7 +161,6 @@ export const Container = styled(MarkdownStyle)`
     min-height: 150px;
     overflow: auto;
     resize: vertical;
-    border-radius: 0.6rem;
 
     &:focus-within .CodeMirror {
       background-color: ${({ theme }) => theme.backgroundColor.primary};
@@ -184,6 +183,7 @@ export const Container = styled(MarkdownStyle)`
     border-width: 1px;
     border-style: solid;
     border-radius: 0.6rem;
+    overflow: hidden;
     border-color: ${({ theme }) => theme.backgroundColor.details};
     font-family: "Roboto Mono", apple-system, monospace;
     box-sizing: border-box;
@@ -224,7 +224,7 @@ export const Container = styled(MarkdownStyle)`
     border-color: ${({ theme }) => theme.backgroundColor.details};
     user-select: none;
     overflow: hidden;
-    background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "55"};
+    background-color: ${({ theme }) => theme.backgroundColor.tertiary};
   }
   .bytemd-toolbar-left {
     float: left;
@@ -339,7 +339,7 @@ export const Container = styled(MarkdownStyle)`
     height: 100%;
     overflow: auto;
     font-family: "Rubik", sans-serif;
-    background-color: ${({ theme }) => theme.backgroundColor.detailsAlt + "55"};
+    background-color: ${({ theme }) => theme.backgroundColor.tertiary};
   }
   .bytemd-preview .markdown-body {
     word-break: normal;
@@ -504,7 +504,7 @@ export const Container = styled(MarkdownStyle)`
   .CodeMirror {
     position: relative;
     overflow: hidden;
-    background: ${({ theme }) => theme.backgroundColor.detailsAlt + "55"};
+    background: ${({ theme }) => theme.backgroundColor.tertiary};
   }
   .CodeMirror-scroll {
     overflow: scroll !important;

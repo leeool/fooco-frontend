@@ -1,9 +1,8 @@
 import { Editor } from "@bytemd/react"
 import React from "react"
-import { Container, MarkdownStyle } from "./styles"
+import { Container } from "./styles"
 import { themeStore } from "src/stores/themeStore"
 import highlight from "@bytemd/plugin-highlight-ssr"
-// import "highlight.js/styles/monokai.css"
 
 interface Props {
   onChange: (e: string) => void

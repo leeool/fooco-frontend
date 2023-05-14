@@ -1,8 +1,8 @@
 import React from "react"
 import { Outlet } from "react-router"
-import Header from "./components/Header"
+import Header from "./interface/Header"
 import { MainContainer } from "./styles/container"
-import Footer from "./components/Footer"
+import Footer from "./interface/Footer"
 
 const Layout = () => {
   return (

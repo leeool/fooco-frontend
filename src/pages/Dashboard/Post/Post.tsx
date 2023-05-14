@@ -4,7 +4,6 @@ import React from "react"
 import { Link } from "react-router-dom"
 import useUserStore from "src/stores/UseUserStore"
 import {
-  Author,
   Container,
   PostInfo,
   PostTitle,
@@ -12,7 +11,7 @@ import {
   Details,
   Interactions,
   Points,
-  DateContainer,
+  Item,
 } from "./styles"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
@@ -41,24 +40,24 @@ const Post = ({ post }: Props) => {
         </Link>
         <Details>
           <Link to={`/app/${post.user.username}`} reloadDocument>
-            <Author>
+            <Item>
               por <span>@{post.user.username}</span>
-            </Author>
+            </Item>
           </Link>
-          <DateContainer>
+          <Item>
             publicado a{" "}
             <span>
               {formatDistanceToNow(new Date(post.created_at), {
                 locale: ptBR,
               })}
             </span>
-          </DateContainer>
-          <DateContainer>
+          </Item>
+          <Item>
             <span>
               {post?.reply.length}{" "}
               {post?.reply.length === 1 ? "resposta" : "respostas"}{" "}
             </span>
-          </DateContainer>
+          </Item>
         </Details>
       </PostInfo>
       <Tags>

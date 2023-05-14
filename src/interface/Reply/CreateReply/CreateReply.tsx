@@ -1,5 +1,5 @@
 import { Button } from "@components/Form"
-import { Markdown } from "@components/MarkdownEditor"
+import { Markdown } from "src/interface/MarkdownEditor"
 import UseToastStore from "@components/Toast/UseToastStore"
 import React from "react"
 import { useNavigate } from "react-router"

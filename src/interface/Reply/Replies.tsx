@@ -12,7 +12,7 @@ import {
 } from "./styles"
 import { MiniSeta } from "@assets/index"
 import { Link } from "react-router-dom"
-import { MarkdownParser } from "@components/MarkdownEditor"
+import { MarkdownParser } from "src/interface/MarkdownEditor"
 import { ButtonSecondary } from "@components/Form"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"

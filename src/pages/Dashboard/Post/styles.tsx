@@ -6,19 +6,6 @@ export const Container = styled.div`
   padding: 1rem 0;
 `
 
-export const Author = styled.span`
-  color: ${(props) => props.theme.textColor.paragraph};
-  font-size: 1rem;
-
-  span {
-    color: ${(props) => props.theme.textColor.title};
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`
-
 export const PostTitle = styled.h4`
   color: ${(props) => props.theme.textColor.subtitle};
   font-size: 2rem;
@@ -102,11 +89,13 @@ export const Details = styled.div`
   }
 `
 
-export const DateContainer = styled.span`
+export const Item = styled.span`
   color: ${(props) => props.theme.textColor.paragraph};
+  font-size: 1rem;
 
   span {
     color: ${(props) => props.theme.textColor.title};
+    font-weight: 500;
   }
 `
 
