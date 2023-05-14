@@ -32,7 +32,8 @@ export const Reply = styled.div`
 `
 
 export const Info = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: auto auto 1fr;
   gap: 2rem;
   align-items: center;
 

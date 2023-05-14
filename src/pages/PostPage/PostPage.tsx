@@ -1,4 +1,4 @@
-import { Bookmark, MiniSeta, Reply as ReplyIcon, Send } from "@assets/index"
+import { Bookmark, MiniSeta, Reply as ReplyIcon, Share } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { useQuery } from "react-query"
@@ -149,7 +149,7 @@ const PostPage = () => {
           </button>
         </Feedback>
         <button>
-          <Send />
+          <Share />
         </button>
         <button
           data-saved={savedPosts.includes(data.id)}
