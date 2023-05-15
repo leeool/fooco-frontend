@@ -11,7 +11,7 @@ export const Reply = styled.div`
   grid-template-columns: auto 1fr;
   /* border-bottom: 2px solid ${({ theme }) =>
     theme.backgroundColor.detailsAlt}; */
-  gap: 2rem;
+  gap: 1rem;
   padding: 1rem 0;
 
   @media (max-width: 600px) {
@@ -86,6 +86,7 @@ export const Feedback = styled.div`
   justify-items: center;
   text-align: center;
   gap: 0.3rem;
+  align-self: start;
 
   svg {
     width: 2rem;
@@ -116,10 +117,12 @@ export const Feedback = styled.div`
 `
 
 export const Interactions = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 3.5rem;
+  grid-template-rows: 3.5rem auto;
   justify-items: center;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
   align-items: center;
 
   button[data-saved="true"] svg {
@@ -159,9 +162,10 @@ export const Details = styled.div`
   justify-content: space-between;
   align-items: center;
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
-  padding: 0.8rem;
+  /* padding: 0.8rem; */
   border-radius: 10px;
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
+  align-self: end;
 
   button {
     place-self: start;

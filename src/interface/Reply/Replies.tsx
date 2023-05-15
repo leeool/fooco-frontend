@@ -17,6 +17,7 @@ import { ButtonSecondary } from "@components/Form"
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import { Reply as ReplyIcon } from "@assets/index"
+import { Avatar } from ".."
 
 interface Props {
   replies: IReply[]
@@ -29,6 +30,11 @@ const Replies = ({ replies }: Props) => {
         .map((reply) => (
           <Reply key={reply.id}>
             <Interactions>
+              <Avatar
+                src={reply.user.avatar_url}
+                delayMs={500}
+                fallback={reply.user.username.slice(0, 2)}
+              />
               <Feedback>
                 <button>
                   <MiniSeta />
@@ -39,7 +45,7 @@ const Replies = ({ replies }: Props) => {
                 </button>
               </Feedback>
             </Interactions>
-            <div>
+            <div style={{ display: "grid" }}>
               <Info>
                 <Author>
                   criado por{" "}

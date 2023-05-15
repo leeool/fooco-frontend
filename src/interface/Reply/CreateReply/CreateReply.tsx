@@ -50,7 +50,7 @@ const CreateReply = ({ setNewReply, postId, setIsReplying }: Props) => {
         <Button variant="outlined" onClick={() => setIsReplying(false)}>
           Cancelar
         </Button>
-        <Button variant="solid" onClick={handleReply} data-loading={loading}>
+        <Button variant="solid" onClick={handleReply} disabled={loading}>
           {loading ? "Carregando..." : "Publicar"}
         </Button>
       </Buttons>
