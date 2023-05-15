@@ -63,7 +63,9 @@ const index = () => {
                 <DropdownMenuItem>Configurações</DropdownMenuItem>
               </Link>
               <DialogRoot>
-                <DropdownMenuItem onClick={(e) => e.preventDefault()}>
+                <DropdownMenuItem
+                  onClick={(e: React.MouseEvent) => e.preventDefault()}
+                >
                   <DialogTrigger>Sair</DialogTrigger>
                 </DropdownMenuItem>
                 <DialogContent ref={ref}>
