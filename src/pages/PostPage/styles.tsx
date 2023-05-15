@@ -140,6 +140,8 @@ export const Feedback = styled.div`
 
 export const Interactions = styled.div`
   display: grid;
+  grid-template-columns: 4.5rem;
+  grid-template-rows: 4.5rem auto;
   justify-items: center;
   flex-direction: column;
   gap: 1.5rem;
@@ -172,6 +174,9 @@ export const Interactions = styled.div`
     svg {
       width: 1.3rem;
     }
+
+    grid-template-columns: 3rem;
+    grid-template-rows: 3rem auto;
   }
 `
 

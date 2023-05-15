@@ -50,7 +50,7 @@ const PostPage = () => {
   const { handleSavePost, loading: savePostLoading } = UseSavePost()
   const nav = useNavigate()
   const { data, isLoading, isFetching } = useQuery<IUserPosts | IError>(
-    "post",
+    ["post", owner, slug],
     () =>
       instance(`/post/${owner}/${slug}`, { method: "GET" }).then(
         (res) => res.data
@@ -102,15 +102,6 @@ const PostPage = () => {
     if (userLikedPost) return setFeedback("like")
     else if (userDislikedPost) return setFeedback("dislike")
   }, [data, userData, owner, slug])
-
-  React.useEffect(() => {
-    window.onbeforeunload = () =>
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "smooth",
-      })
-  }, [])
 
   React.useEffect(() => {
     if (!data || "error" in data) return
