@@ -1,4 +1,12 @@
-import { Bookmark, MiniSeta, Reply as ReplyIcon, Share } from "@assets/index"
+import {
+  Bookmark,
+  Edit,
+  Ellipsis,
+  MiniSeta,
+  Reply as ReplyIcon,
+  Share,
+  Trash,
+} from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { useQuery } from "react-query"
@@ -245,24 +253,16 @@ const HandlePost = ({
     <DropdownMenu>
       <DropdownMenuTrigger className="info-btn">
         <ButtonSecondary>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-            />
-          </svg>
+          <Ellipsis />
         </ButtonSecondary>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={handleUpdatePost}>Editar</DropdownMenuItem>
-        <DropdownMenuItem data-type="danger" onClick={handlePostDelete}>
+        <DropdownMenuItem onClick={handleUpdatePost}>
+          <Edit />
+          Editar
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handlePostDelete}>
+          <Trash />
           Deletar
         </DropdownMenuItem>
       </DropdownMenuContent>

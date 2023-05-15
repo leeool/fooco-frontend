@@ -100,15 +100,15 @@ export const Item = styled(DropdownMenuItem)`
   padding: 0.2rem 1rem;
   transition: none;
   cursor: pointer;
-  gap: 0.6rem;
+  gap: 0.3rem;
   color: ${({ theme }) => theme.backgroundColor.secondary};
   font-family: "Roboto", sans-serif;
   width: 100%;
   background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
 
   svg {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   button {

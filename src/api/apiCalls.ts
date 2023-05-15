@@ -182,7 +182,7 @@ export const POST_REPLY = (
   post_id: string
 ) => {
   return {
-    url: ENDPOINT + `/${post_id}/reply`,
+    url: ENDPOINT + `/reply/${post_id}`,
     options: {
       method: "POST",
       data: {

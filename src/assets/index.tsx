@@ -14,6 +14,8 @@ import { ReactComponent as GithubIcon } from "./icons/github.svg"
 import { ReactComponent as MicrosoftIcon } from "./icons/microsoft.svg"
 import { ReactComponent as GoogleIcon } from "./icons/google.svg"
 import { ReactComponent as FoquinhoIcon } from "./icons/foquinhoIcon.svg"
+import { ReactComponent as Ellipsis } from "./icons/ellipsis.svg"
+import { ReactComponent as Trash } from "./icons/trash.svg"
 
 export {
   Hat,
@@ -32,4 +34,6 @@ export {
   MicrosoftIcon,
   GoogleIcon,
   FoquinhoIcon,
+  Ellipsis,
+  Trash,
 }
