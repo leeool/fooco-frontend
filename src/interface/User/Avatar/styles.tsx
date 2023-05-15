@@ -8,6 +8,8 @@ export const Image = styled(AvatarImage)`
   height: 100%;
   object-fit: cover;
   object-position: center;
+  min-height: 3rem;
+  min-width: 3rem;
 `
 
 export const Fallback = styled(AvatarFallback)`
@@ -22,8 +24,14 @@ export const Fallback = styled(AvatarFallback)`
   text-transform: uppercase;
   user-select: none;
   border-radius: 50%;
-  width: 100%;
-  height: 100%;
+  width: 5rem;
+  height: 5rem;
+
+  @media (max-width: 600px) {
+    font-size: 1.4rem;
+    width: 3rem;
+    height: 3rem;
+  }
 `
 
 export const Root = styled(Avatar)`

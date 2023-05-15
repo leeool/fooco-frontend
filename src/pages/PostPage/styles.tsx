@@ -2,8 +2,8 @@ import styled from "styled-components"
 
 export const Container = styled.article`
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 2rem;
+  grid-template-columns: 0.1fr 1fr;
+  gap: 1.5rem;
   margin: 0 auto;
   max-width: 60rem;
 
@@ -139,11 +139,12 @@ export const Feedback = styled.div`
 `
 
 export const Interactions = styled.div`
-  display: flex;
+  display: grid;
   justify-items: center;
   flex-direction: column;
   gap: 1.5rem;
-  align-items: center;
+  align-content: start;
+  max-width: 100%;
 
   button[data-saved="true"] svg {
     fill: ${({ theme }) => theme.backgroundColor.secondary};

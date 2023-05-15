@@ -39,7 +39,7 @@ const Post = ({ post }: Props) => {
           <PostTitle>{post.title}</PostTitle>
         </Link>
         <Details>
-          <Link to={`/app/${post.user.username}`} reloadDocument>
+          <Link to={`/app/${post.user.username}`}>
             <Item>
               por <span>@{post.user.username}</span>
             </Item>

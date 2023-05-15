@@ -42,7 +42,7 @@ import {
 } from "@components/DropdownMenuAPI"
 import UseToastStore from "@components/Toast/UseToastStore"
 import UpdatePost from "../UpdatePost"
-import { Replies, CreateReply } from "src/interface"
+import { Replies, CreateReply, Avatar } from "src/interface"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -137,6 +137,13 @@ const PostPage = () => {
   return (
     <Container>
       <Interactions>
+        <Link to={`/app/${data.user.username}`}>
+          <Avatar
+            src={data.user.avatar_url}
+            fallback={data.user.username.slice(0, 2)}
+            delayMs={500}
+          />
+        </Link>
         <Feedback data-loading={loading}>
           <button
             onClick={handleFeedback}

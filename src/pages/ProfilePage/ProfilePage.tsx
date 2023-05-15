@@ -17,8 +17,9 @@ import EditProfile from "./EditProfile"
 
 const ProfilePage = () => {
   const { owner } = useParams()
-  const { data, isLoading } = useQuery<IUserData | IError>("owner", () =>
-    instance(`/user/${owner}`, { method: "GET" }).then((res) => res.data)
+  const { data, isLoading } = useQuery<IUserData | IError>(
+    ["owner", owner],
+    () => instance(`/user/${owner}`, { method: "GET" }).then((res) => res.data)
   )
   const { userData } = useUserStore()
 

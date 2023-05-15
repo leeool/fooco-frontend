@@ -70,8 +70,11 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
   }
 
   pre {
+    max-width: 100cqb;
+    overflow-x: auto;
+
     &:not(:first-child) {
-      margin: 1rem;
+      margin: 1rem 0;
     }
   }
 
