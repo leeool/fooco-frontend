@@ -28,6 +28,9 @@ dependencies:
   axios:
     specifier: ^1.4.0
     version: 1.4.0
+  bytemd:
+    specifier: ^1.21.0
+    version: 1.21.0
   date-fns:
     specifier: ^2.30.0
     version: 2.30.0
@@ -40,6 +43,9 @@ dependencies:
   highlight.js:
     specifier: ^11.8.0
     version: 11.8.0
+  prop-types:
+    specifier: ^15.8.1
+    version: 15.8.1
   react:
     specifier: ^18.2.0
     version: 18.2.0
@@ -49,6 +55,9 @@ dependencies:
   react-hook-form:
     specifier: ^7.43.9
     version: 7.43.9(react@18.2.0)
+  react-is:
+    specifier: ^18.2.0
+    version: 18.2.0
   react-loading:
     specifier: ^2.0.3
     version: 2.0.3(prop-types@15.8.1)(react@18.2.0)
