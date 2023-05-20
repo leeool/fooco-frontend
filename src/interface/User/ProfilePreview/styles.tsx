@@ -7,8 +7,6 @@ export const Container = styled.div`
   position: relative;
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
   height: fit-content;
-  position: sticky;
-  top: 7rem;
 `
 
 export const Username = styled.div`

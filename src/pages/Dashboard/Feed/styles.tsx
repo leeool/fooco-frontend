@@ -73,3 +73,12 @@ export const FeedContainer = styled.div`
   display: grid;
   gap: 5rem;
 `
+
+export const SideColumn = styled.div`
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  gap: 2rem;
+  position: sticky;
+  top: 3rem;
+`
