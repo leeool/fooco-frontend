@@ -48,14 +48,11 @@ const PostPage = () => {
   const { owner, slug } = useParams()
   const { isLoggedIn, userData, savedPosts } = useUserStore()
   const { handleSavePost, loading: savePostLoading } = UseSavePost()
+  const { setToastMessage } = UseToastStore()
   const nav = useNavigate()
   const { data, isLoading, isFetching } = useQuery<IUserPosts | IError>(
     ["post", owner, slug],
-    () =>
-      instance(`/post/${owner}/${slug}`, { method: "GET" }).then(
-        (res) => res.data
-      ),
-    { refetchOnWindowFocus: false }
+    () => instance.get(`/post/${owner}/${slug}`).then((res) => res.data)
   )
   const { request, data: feedbackData, loading } = UseFetch<string | null>()
   const [feedback, setFeedback] = React.useState<string | null>(null)
@@ -112,6 +109,15 @@ const PostPage = () => {
     setNewReply(null)
   }, [data, owner, slug])
 
+  const handleCopyLink = () => {
+    if (!data || isError(data)) return
+    navigator.clipboard.writeText(
+      `${window.location.origin}/app/${data.user.username}/${slug}`
+    )
+
+    setToastMessage("Sucesso!", "Link copiado para a área de transferência")
+  }
+
   if (isLoading || isFetching)
     return (
       <ReactLoading
@@ -122,8 +128,7 @@ const PostPage = () => {
         className="load-icon"
       />
     )
-  if (isError(data)) return <div>{data.error}</div>
-  if (!data) return <PostNotFound />
+  if (!data || isError(data)) return <PostNotFound />
   if (isEditing) return <UpdatePost post={data} setIsEditing={setIsEditing} />
   return (
     <Container>
@@ -154,7 +159,7 @@ const PostPage = () => {
             <MiniSeta style={{ rotate: "180deg" }} />
           </button>
         </Feedback>
-        <button>
+        <button onClick={handleCopyLink}>
           <Share />
         </button>
         <button

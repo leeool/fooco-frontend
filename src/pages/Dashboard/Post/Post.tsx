@@ -1,7 +1,7 @@
 import { Bookmark, Point, Reply, Send } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import useUserStore from "src/stores/UseUserStore"
 import {
   Container,
@@ -16,6 +16,7 @@ import {
 import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import UseSavePost from "src/helpers/SavePost"
+import UseToastStore from "@components/Toast/UseToastStore"
 
 interface Props {
   post: IUserPosts
@@ -23,14 +24,24 @@ interface Props {
 
 const Post = ({ post }: Props) => {
   const removeSpecialChars = /[^A-Za-z0-9\s-]/g
+  const nav = useNavigate()
   const { savedPosts } = useUserStore()
   const { handleSavePost, loading } = UseSavePost()
+  const { setToastMessage } = UseToastStore()
   const slug = post.title
     .split(" ")
     .join("-")
     .normalize("NFD")
     .replaceAll(removeSpecialChars, "")
     .toLowerCase()
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(
+      `${window.location.origin}/app/${post.user.username}/${slug}`
+    )
+
+    setToastMessage("Sucesso!", "Link copiado para a área de transferência")
+  }
 
   return (
     <Container key={post.id}>
@@ -70,11 +81,13 @@ const Post = ({ post }: Props) => {
           <Point />
           {post.points}
         </Points>
-        <ButtonSecondary>
+        <ButtonSecondary
+          onClick={() => nav(`/app/${post.user.username}/${post.slug}`)}
+        >
           <Reply />
           Responder
         </ButtonSecondary>
-        <ButtonSecondary>
+        <ButtonSecondary onClick={handleCopyLink}>
           <Send />
           Enviar
         </ButtonSecondary>
