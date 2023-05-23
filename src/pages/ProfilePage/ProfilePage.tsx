@@ -48,6 +48,7 @@ const ProfilePage = () => {
           src={data.avatar_url}
           delayMs={0}
           fallback={data.username.slice(0, 2)}
+          size={6}
         />
         <div
           style={{

@@ -34,6 +34,7 @@ const Replies = ({ replies }: Props) => {
                 src={reply.user.avatar_url}
                 delayMs={500}
                 fallback={reply.user.username.slice(0, 2)}
+                size={3.5}
               />
               <Feedback>
                 <button>

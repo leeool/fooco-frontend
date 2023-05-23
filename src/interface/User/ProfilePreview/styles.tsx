@@ -39,7 +39,8 @@ export const Points = styled.div`
   font-size: 1.4rem;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
-  outline: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+  box-shadow: 0 0 0px 2px inset
+    ${({ theme }) => theme.backgroundColor.secondary};
 
   svg {
     width: 1rem;

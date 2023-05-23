@@ -7,13 +7,16 @@ interface Props extends AvatarProps {
   fallback: string
   delayMs: number
   props?: AvatarProps
+  size?: number
 }
 
-const Index = ({ src, fallback, delayMs, ...props }: Props) => {
+const Index = ({ src, fallback, delayMs, size = 4, ...props }: Props) => {
   return (
     <Root {...props}>
-      <Image src={src} />
-      <Fallback delayMs={delayMs}>{fallback}</Fallback>
+      <Image src={src} size={size} />
+      <Fallback delayMs={delayMs} size={size}>
+        {fallback}
+      </Fallback>
     </Root>
   )
 }

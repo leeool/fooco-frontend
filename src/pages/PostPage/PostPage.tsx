@@ -138,6 +138,7 @@ const PostPage = () => {
             src={data.user.avatar_url}
             fallback={data.user.username.slice(0, 2)}
             delayMs={500}
+            size={5}
           />
         </Link>
         <Feedback data-loading={loading}>

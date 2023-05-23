@@ -73,6 +73,7 @@ const ProfilePreview = () => {
             src={userData.avatar_url}
             fallback={userData.username.slice(0, 2)}
             delayMs={500}
+            size={5}
           />
           <Username>@{userData.username}</Username>
 

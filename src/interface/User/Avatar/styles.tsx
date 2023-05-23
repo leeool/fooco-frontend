@@ -1,27 +1,31 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
-import styled from "styled-components"
+import styled, { DefaultTheme } from "styled-components"
 
-export const Image = styled(AvatarImage)`
+interface Props {
+  size?: number
+}
+
+export const Image = styled(AvatarImage)<Props>`
   border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
   border-radius: 100%;
-  height: 4rem;
-  width: 4rem;
+  height: ${({ size }) => size + "rem"};
+  width: ${({ size }) => size + "rem"};
 `
 
-export const Fallback = styled(AvatarFallback)`
+export const Fallback = styled(AvatarFallback)<Props>`
   background-color: ${({ theme }) => theme.backgroundColor.secondary};
   display: flex;
   place-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: ${({ size }) => (size ? size / 2.5 + "rem" : 2)};
   font-family: "Rubik", sans-serif;
   font-weight: 500;
   color: #fff;
   text-transform: uppercase;
   user-select: none;
   border-radius: 100%;
-  width: 4rem;
-  height: 4rem;
+  height: ${({ size }) => size + "rem"};
+  width: ${({ size }) => size + "rem"};
 
   @media (max-width: 600px) {
     font-size: 1.4rem;
