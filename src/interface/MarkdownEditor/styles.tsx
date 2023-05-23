@@ -5,6 +5,7 @@ import darkTheme from "highlight.js/styles/github-dark.css?inline"
 export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
   .markdown-body {
     width: 100%;
+    margin: 0;
     @media (max-width: 600px) {
       width: calc(100cqw - 5rem);
     }
@@ -12,6 +13,9 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
 
   * {
     line-height: 1.5;
+    &:not():first-child {
+      margin: 1rem 0;
+    }
   }
 
   ${({ selectedTheme }) => (selectedTheme === "dark" ? darkTheme : lightTheme)}
@@ -29,6 +33,13 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
       background-color: ${({ theme }) => theme.backgroundColor.details};
       opacity: 0.5;
     }
+  }
+
+  hr {
+    width: 100%;
+    height: 2px;
+    background-color: ${({ theme }) => theme.backgroundColor.details};
+    opacity: 0.5;
   }
 
   h2,
@@ -115,8 +126,8 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
   p {
     font-size: 1.1rem;
 
-    &:not(:first-child) {
-      margin-top: 1rem;
+    &:first-child {
+      margin-top: 0;
     }
   }
 

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import styled from "styled-components"
+import styled, { AnyStyledComponent } from "styled-components"
 
 export const Container = styled.div`
   display: grid;
@@ -89,21 +89,21 @@ export const Rank = styled.div`
   padding: 0.5rem 0;
 
   > * {
-    ${Link as any}:first-child {
+    ${Link as AnyStyledComponent}:first-child {
       background-color: #ffd700aa;
       border-radius: 0.4rem;
     }
-    ${Link as any}:nth-child(2) {
+    ${Link as AnyStyledComponent}:nth-child(2) {
       background-color: #c0c0c0aa;
       border-radius: 0.4rem;
     }
 
-    ${Link as any}:nth-child(3) {
+    ${Link as AnyStyledComponent}:nth-child(3) {
       background-color: #cd7f32aa;
       border-radius: 0.4rem;
     }
 
-    ${Link as any}:nth-child(n + 4) {
+    ${Link as AnyStyledComponent}:nth-child(n + 4) {
       background-color: ${({ theme }) =>
         theme.backgroundColor.alternativeState};
       border-radius: 0.4rem;

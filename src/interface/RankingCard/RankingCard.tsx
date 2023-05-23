@@ -1,7 +1,5 @@
 import React from "react"
 import { Avatar } from "@interface/User/Avatar"
-import { Hat, Point } from "@assets/index"
-import useUserStore from "src/stores/UseUserStore"
 import {
   Container,
   Separator,
