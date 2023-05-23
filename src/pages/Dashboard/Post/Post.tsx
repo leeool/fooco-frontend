@@ -95,6 +95,7 @@ const Post = ({ post }: Props) => {
           onClick={handleSavePost}
           data-id={post.id}
           data-loading={loading}
+          disabled={loading}
         >
           <Bookmark data-saved={savedPosts.includes(post.id)} />
           {savedPosts.includes(post.id) ? "Remover" : "Salvar"}

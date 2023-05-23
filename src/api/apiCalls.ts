@@ -1,9 +1,10 @@
 import axios from "axios"
 
 const ENDPOINT = "https://fooco-backend.cyclic.app"
+// const ENDPOINT = "http://localhost:3001"
 
 export const instance = axios.create({
-  baseURL: ENDPOINT,
+  baseURL: "http://localhost:3001",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -51,7 +52,7 @@ export const GET_USER = (username: string) => {
 }
 
 export const USER_PUT = (
-  userData: Partial<IUserData & { password: string }>,
+  userData: Partial<IUserData & { password: string; savedPostsId: string[] }>,
   id: string
 ) => {
   return {

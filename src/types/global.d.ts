@@ -20,7 +20,7 @@ interface IUserData {
   educational_place: string
   educational_place_url: string
   posts: IUserPosts[]
-  saved_posts: string[]
+  savedPosts: IUserPosts[]
 }
 
 interface IUserPosts {

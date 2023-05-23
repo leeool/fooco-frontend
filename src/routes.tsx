@@ -3,6 +3,7 @@ import React from "react"
 import Layout from "./Layout"
 import Login from "./pages/Entrar"
 import ScrollPageToTop from "./helpers/ScrollPageToTop"
+import SavedPosts from "./pages/SavedPosts/SavedPosts"
 // import ProfilePage from "./pages/ProfilePage"
 // import CreatePost from "./pages/CreatePost"
 // import Entrar from "./pages/Entrar/Login"
@@ -67,6 +68,14 @@ const router = createBrowserRouter([
             element: (
               <React.Suspense>
                 <CreatePost />
+              </React.Suspense>
+            ),
+          },
+          {
+            path: "salvos",
+            element: (
+              <React.Suspense>
+                <SavedPosts />
               </React.Suspense>
             ),
           },

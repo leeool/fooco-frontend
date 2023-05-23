@@ -9,7 +9,7 @@ const UseSavePost = () => {
   const { userData, isLoggedIn, savedPosts, setSavedPosts } = useUserStore()
   const nav = useNavigate()
   const { request, loading } = UseFetch()
-  const loc = useLocation()
+  const { hash } = useLocation()
 
   const handleSavePost = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const postId = e.currentTarget.dataset.id
@@ -26,7 +26,7 @@ const UseSavePost = () => {
       setSavedPosts(removePost)
 
       const { options, url } = USER_PUT(
-        { saved_posts: removePost },
+        { savedPostsId: removePost },
         userData.id
       )
 
@@ -35,7 +35,7 @@ const UseSavePost = () => {
       const savePost = savedPosts.concat(postId)
       setSavedPosts(savePost)
 
-      const { options, url } = USER_PUT({ saved_posts: savePost }, userData.id)
+      const { options, url } = USER_PUT({ savedPostsId: savePost }, userData.id)
       await request(url, options)
     }
   }
@@ -43,8 +43,12 @@ const UseSavePost = () => {
   React.useEffect(() => {
     if (!userData || isError(userData)) return
 
-    setSavedPosts([...new Set([...savedPosts, ...userData.saved_posts])])
-  }, [userData, isLoggedIn, loc])
+    console.log("savedPosts", savedPosts)
+
+    const postsId = userData?.savedPosts?.map((post) => post.id) || []
+
+    setSavedPosts([...new Set([...postsId, ...(savedPosts || [])])])
+  }, [userData, isLoggedIn, hash])
 
   return { handleSavePost, loading }
 }
