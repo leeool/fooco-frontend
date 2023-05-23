@@ -3,13 +3,9 @@ import styled from "styled-components"
 
 export const Image = styled(AvatarImage)`
   border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  min-height: 3rem;
-  min-width: 3rem;
+  border-radius: 100%;
+  height: 4rem;
+  width: 4rem;
 `
 
 export const Fallback = styled(AvatarFallback)`
@@ -23,9 +19,9 @@ export const Fallback = styled(AvatarFallback)`
   color: #fff;
   text-transform: uppercase;
   user-select: none;
-  border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
+  border-radius: 100%;
+  width: 4rem;
+  height: 4rem;
 
   @media (max-width: 600px) {
     font-size: 1.4rem;
@@ -36,7 +32,6 @@ export const Fallback = styled(AvatarFallback)`
 
 export const Root = styled(Avatar)`
   display: flex;
-  place-items: center;
   place-content: center;
-  place-self: center;
+  align-items: center;
 `

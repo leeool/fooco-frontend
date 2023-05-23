@@ -11,7 +11,7 @@ interface Props extends AvatarProps {
 
 const Index = ({ src, fallback, delayMs, ...props }: Props) => {
   return (
-    <Root style={{ width: "100%", height: "100%", display: "flex" }} {...props}>
+    <Root {...props}>
       <Image src={src} />
       <Fallback delayMs={delayMs}>{fallback}</Fallback>
     </Root>
