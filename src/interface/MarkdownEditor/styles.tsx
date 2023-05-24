@@ -163,6 +163,12 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
   a {
     text-decoration: underline;
   }
+
+  @media (max-width: 600px) {
+    p {
+      font-size: 0.9rem;
+    }
+  }
 `
 
 export const Container = styled(MarkdownStyle)`

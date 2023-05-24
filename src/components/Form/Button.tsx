@@ -96,15 +96,21 @@ export const Button = styled(ButtonContainer)<Props>`
 
 export const ButtonSecondary = styled(ButtonContainer)`
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-  border-radius: 10px;
+  border-radius: 0.5rem;
   color: ${({ theme }) => theme.textColor.title};
-  font-weight: 500;
   font-size: 1rem;
-  padding: 0.2rem 0.6rem;
+  display: flex;
+  place-items: center;
+  height: fit-content;
+  min-height: 0;
+  padding: 0.5rem 1rem;
 
   @media (max-width: 600px) {
     font-size: 0.9rem;
-    padding: 0.2rem 0.5rem;
+  }
+
+  path {
+    fill: ${({ theme }) => theme.backgroundColor.secondary};
   }
 
   &:hover {
@@ -112,11 +118,19 @@ export const ButtonSecondary = styled(ButtonContainer)`
     color: ${({ theme }) => theme.backgroundColor.tertiary};
 
     path {
-      stroke: ${({ theme }) => theme.backgroundColor.tertiary};
+      fill: #fff;
     }
   }
 
   &[data-type="danger"] {
     background-color: #f00;
+  }
+
+  &[data-active="true"] {
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
+
+    path {
+      fill: #fff;
+    }
   }
 `

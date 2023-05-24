@@ -52,8 +52,8 @@ export default createGlobalStyle`
 }
 
 *::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 2px;
+  height: 2px;
 }
 
 *::-webkit-scrollbar-track {
