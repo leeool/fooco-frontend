@@ -12,6 +12,7 @@ export default createGlobalStyle`
     transition: background-color 200ms ease-in;
     text-decoration: none;
 
+
     &::placeholder {
       opacity: 1;
     }
@@ -33,6 +34,8 @@ export default createGlobalStyle`
     font-family: "Rubik", sans-serif;
     background-color: ${({ theme }) => theme.backgroundColor.primary};
     color: ${({ theme }) => theme.textColor.base};
+    scrollbar-width: thin;
+
   };
   
 

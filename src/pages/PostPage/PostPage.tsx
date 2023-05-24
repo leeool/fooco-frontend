@@ -43,6 +43,7 @@ import {
 import UseToastStore from "@components/Toast/UseToastStore"
 import UpdatePost from "../UpdatePost"
 import { Replies, CreateReply, Avatar } from "src/interface"
+import Complaint from "@interface/Complaint/Complaint"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -189,9 +190,7 @@ const PostPage = () => {
               })}
             </span>
           </Data>
-          {userData?.id === data.user.id ? (
-            <HandlePost post={data} setIsEditing={setIsEditing} />
-          ) : null}
+          <HandlePost post={data} setIsEditing={setIsEditing} />
         </Info>
         <Content>
           <MarkdownParser value={data.content} />
@@ -269,6 +268,11 @@ const HandlePost = ({
           <Trash />
           Deletar
         </DropdownMenuItem>
+        {userData?.id !== post.user.id && (
+          <DropdownMenuItem onClick={(e) => e.preventDefault()}>
+            <Complaint />
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   )

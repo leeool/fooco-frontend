@@ -29,9 +29,15 @@ const index = () => {
         </div>
         <div>
           <h4>Projetos</h4>
-          <p>Front-End</p>
-          <p>Back-End</p>
-          <p>Figma</p>
+          <a href="https://github.com/leeool/fooco-frontend">
+            <p>Front-End</p>
+          </a>
+          <a href="https://github.com/leeool/fooco-backend">
+            <p>Back-End</p>
+          </a>
+          <a href="https://www.figma.com/file/IZIjrImN0OdaM1uGAzFR7x/FOOCO?type=design&node-id=0%3A1&t=oDMhNeUbmb0KtN6g-1">
+            <p>Figma</p>
+          </a>
         </div>
         <div>
           <h4>Sobre Nós</h4>
