@@ -4,7 +4,7 @@ const ENDPOINT = "https://fooco-backend.cyclic.app"
 // const ENDPOINT = "http://localhost:3001"
 
 export const instance = axios.create({
-  baseURL: "http://localhost:3001",
+  baseURL: ENDPOINT,
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",

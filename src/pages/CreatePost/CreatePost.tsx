@@ -26,8 +26,6 @@ const CreatePost = () => {
   const { setToastMessage } = UseToastStore()
 
   const handleCreatePost = handleSubmit(async ({ tags, title }) => {
-    console.log({ tags, title, value })
-
     const arrTags = tags?.split(/[,;\s]/g).filter((value) => Boolean(value))
 
     if (!isLoggedIn || !userData) return nav("/entrar")
@@ -37,7 +35,6 @@ const CreatePost = () => {
     const { data, error } = await request(url, options)
 
     if (isError(data) || error || !data) {
-      console.log({ error, data })
       window.scrollTo({ top: 0, behavior: "smooth" })
       return
     }

@@ -8,6 +8,7 @@ import {
   Rank,
   Username,
   Header,
+  Position,
 } from "./styles"
 import getUserPoints from "src/helpers/getUserPoints"
 import SkeletonLoad from "src/helpers/Skeleton"
@@ -17,11 +18,14 @@ import { Title } from "@components/Text/Title"
 import { Paragraph } from "@components/Text/Paragraph"
 import { useQuery } from "react-query"
 import { instance } from "src/api/apiCalls"
+import useUserStore from "src/stores/UseUserStore"
+import { Point } from "@assets/index"
 
 const RankingCard = () => {
   const { isLoading, data } = useQuery<IUserData[]>("points", {
     queryFn: () => instance("/user").then((res) => res.data),
   })
+  const { userData } = useUserStore()
 
   if (isLoading)
     return (
@@ -51,9 +55,14 @@ const RankingCard = () => {
               a.posts.reduce((acc, { points }) => acc + points, 0)
           )
           .slice(0, 10)
-          .map((user) => (
-            <Link to={`${user.username}`} key={user.id}>
+          .map((user, index) => (
+            <Link
+              to={`${user.username}`}
+              key={user.id}
+              className={userData?.id === user.id ? "owner" : ""}
+            >
               <Item>
+                <Position>{index + 1}º</Position>
                 <Avatar
                   src={user.avatar_url}
                   fallback={"a"}
@@ -61,7 +70,10 @@ const RankingCard = () => {
                   size={2.5}
                 />
                 <Username>{user.username}</Username>
-                <Points>{getUserPoints(user)}</Points>
+                <Points>
+                  <Point />
+                  {getUserPoints(user)}
+                </Points>
               </Item>
             </Link>
           ))}

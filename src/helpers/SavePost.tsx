@@ -43,12 +43,10 @@ const UseSavePost = () => {
   React.useEffect(() => {
     if (!userData || isError(userData)) return
 
-    console.log("savedPosts", savedPosts)
-
-    const postsId = userData?.savedPosts?.map((post) => post.id) || []
+    const postsId = userData.savedPosts?.map((post) => post.id) || []
 
     setSavedPosts([...new Set([...postsId, ...(savedPosts || [])])])
-  }, [userData, isLoggedIn, hash])
+  }, [userData, hash])
 
   return { handleSavePost, loading }
 }

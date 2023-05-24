@@ -24,7 +24,6 @@ export const Username = styled.div`
   width: fit-content;
   padding: 0.1rem 0.5rem;
   border-radius: 5px;
-  margin-bottom: 0.5rem;
 
   &::selection {
     background-color: #fff;
@@ -35,14 +34,14 @@ export const Username = styled.div`
 export const Points = styled.div`
   background-color: #fff;
   display: flex;
-  gap: 0.5rem;
+  gap: 0.2rem;
   align-items: center;
-  justify-self: end;
+  place-items: center;
+  justify-self: end !important;
   color: ${({ theme }) => theme.textColor.title};
   border-radius: 5px;
-  padding: 0.1rem 0.5rem;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
+  padding: 0.1rem 0.3rem;
+  font-size: 1.1rem;
   font-family: "Rubik", sans-serif;
   font-weight: 500;
   box-shadow: 0 0 0px 2px inset
@@ -50,7 +49,6 @@ export const Points = styled.div`
 
   svg {
     width: 1rem;
-    height: 1rem;
   }
 `
 
@@ -64,21 +62,23 @@ export const Separator = styled.span`
   left: 0;
 `
 
+export const Position = styled.span`
+  align-self: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+`
+
 export const Item = styled.div`
-  display: flex;
-  gap: 0.3rem;
+  display: grid;
+  grid-template-columns: repeat(3, auto) 1fr;
+  gap: 0.5rem;
+  /* justify-content: start; */
   color: ${({ theme }) => theme.backgroundColor.secondary};
   width: 100%;
-  align-items: center;
+  align-items: end;
   padding: 0.5rem;
   border-radius: 0.5rem;
-
-  svg,
-  path {
-    stroke: currentColor;
-    stroke-width: 2.5;
-    width: 2rem;
-  }
+  /* justify-content: start; */
 `
 
 export const Rank = styled.div`
@@ -87,23 +87,28 @@ export const Rank = styled.div`
   display: grid;
   gap: 0.5rem;
   padding: 0.5rem 0;
+  scrollbar-width: thin;
+
+  .owner {
+    background-color: #4ef73877 !important;
+  }
 
   > * {
     ${Link as AnyStyledComponent}:first-child {
-      background-color: #ffd700aa;
+      background-color: #ffd70077;
       border-radius: 0.4rem;
     }
     ${Link as AnyStyledComponent}:nth-child(2) {
-      background-color: #c0c0c0aa;
+      background-color: #c0c0c077;
       border-radius: 0.4rem;
     }
 
     ${Link as AnyStyledComponent}:nth-child(3) {
-      background-color: #cd7f32aa;
+      background-color: #cd7f3277;
       border-radius: 0.4rem;
     }
 
-    ${Link as AnyStyledComponent}:nth-child(n + 4) {
+    ${Link as AnyStyledComponent}:nth-child(n  + 4) {
       background-color: ${({ theme }) =>
         theme.backgroundColor.alternativeState};
       border-radius: 0.4rem;

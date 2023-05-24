@@ -1,12 +1,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
-import styled, { DefaultTheme } from "styled-components"
+import styled from "styled-components"
 
 interface Props {
   size?: number
 }
 
 export const Image = styled(AvatarImage)<Props>`
-  border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
+  box-shadow: 0 0 0px 2px ${({ theme }) => theme.backgroundColor.secondary};
   border-radius: 100%;
   height: ${({ size }) => size + "rem"};
   width: ${({ size }) => size + "rem"};

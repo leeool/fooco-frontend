@@ -45,7 +45,6 @@ const UpdatePost = ({
     const { data, error } = await request(url, options)
 
     if (isError(data) || error || !data) {
-      console.log({ error, data })
       window.scrollTo({ top: 0, behavior: "smooth" })
       return
     }

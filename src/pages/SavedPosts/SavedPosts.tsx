@@ -5,6 +5,8 @@ import { useQuery } from "react-query"
 import { instance } from "src/api/apiCalls"
 import Post from "../Dashboard/Post/Post"
 import useUserStore from "src/stores/UseUserStore"
+import ReactLoading from "react-loading"
+import isError from "src/helpers/isError"
 
 const SavedPosts = () => {
   const { userData } = useUserStore()
@@ -19,16 +21,23 @@ const SavedPosts = () => {
     staleTime: 50,
   })
 
-  if (isLoading) return <div>loading...</div>
-  if (!data) return <div>error</div>
+  if (isLoading)
+    return (
+      <ReactLoading
+        type="spin"
+        color="#E63A23"
+        height={50}
+        width={50}
+        className="load-icon"
+      />
+    )
+  if (!data || isError(data))
+    return <Title size="xl">Nenhuma publicação salva</Title>
   return (
     <Container>
-      <Title size="xl">Posts Salvos</Title>
-      {data?.savedPosts.length === 0 ? (
-        <div>Você não salvou nenhum post ainda</div>
-      ) : (
-        data.savedPosts.map((post) => <Post key={post.id} post={post} />)
-      )}
+      <Title size="xl">Publicações Salvas</Title>
+      {data?.savedPosts.length !== 0 &&
+        data.savedPosts.map((post) => <Post key={post.id} post={post} />)}
     </Container>
   )
 }
