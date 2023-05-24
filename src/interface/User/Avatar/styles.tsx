@@ -10,6 +10,11 @@ export const Image = styled(AvatarImage)<Props>`
   border-radius: 100%;
   height: ${({ size }) => size + "rem"};
   width: ${({ size }) => size + "rem"};
+
+  @media (max-width: 600px) {
+    width: 3rem;
+    height: 3rem;
+  }
 `
 
 export const Fallback = styled(AvatarFallback)<Props>`

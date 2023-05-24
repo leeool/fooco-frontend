@@ -6,20 +6,24 @@ interface TriggerProps {
   children: React.ReactNode
 }
 
-interface Props {
+interface Props extends DialogPrimitive.DialogProps {
   children: React.ReactNode
+  props?: DialogPrimitive.DialogProps
 }
 
 export const DialogRoot = DialogPrimitive.Root
 
-export const DialogContent = React.forwardRef<HTMLDivElement, Props>(
-  ({ children }, ref) => (
-    <DialogPrimitive.Portal>
-      <DialogOverlay />
-      <Content ref={ref}>{children}</Content>
-    </DialogPrimitive.Portal>
-  )
-)
+export const DialogContent = React.forwardRef<
+  HTMLDivElement,
+  React.PropsWithChildren<Props>
+>(({ children, ...props }, ref) => (
+  <DialogPrimitive.Portal>
+    <DialogOverlay />
+    <Content ref={ref} {...props}>
+      {children}
+    </Content>
+  </DialogPrimitive.Portal>
+))
 
 DialogContent.displayName = "DialogContent"
 

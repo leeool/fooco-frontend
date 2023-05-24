@@ -39,7 +39,7 @@ const Feed = () => {
       </FeedContainer>
       <SideColumn>
         {match ? null : <ProfilePreview />}
-        <RankingCard />
+        {match ? null : <RankingCard />}
       </SideColumn>
     </Container>
   )

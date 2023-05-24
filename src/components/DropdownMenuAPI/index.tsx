@@ -8,6 +8,7 @@ import {
   RadioGroup,
   Trigger,
   Item,
+  SubTrigger,
 } from "./style"
 
 interface Props {
@@ -16,6 +17,8 @@ interface Props {
 
 export const DropdownMenu = DropdownMenuPrimitive.Root
 export const DropdownMenuItem = Item
+export const DropdownMenuSubTrigger = SubTrigger
+export const DropdownMenuSub = DropdownMenuPrimitive.Sub
 export const DropdownMenuGroup = Group
 export const DropdownMenuTrigger = Trigger
 export const DropdownMenuContent = ({ children }: Props) => {

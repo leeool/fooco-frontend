@@ -38,6 +38,8 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@components/DropdownMenuAPI"
 import UseToastStore from "@components/Toast/UseToastStore"
@@ -252,6 +254,7 @@ const HandlePost = ({
     setIsEditing(true)
   }
 
+  if (!userData) return null
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="info-btn">
@@ -260,18 +263,22 @@ const HandlePost = ({
         </ButtonSecondary>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={handleUpdatePost}>
-          <Edit />
-          Editar
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={handlePostDelete}>
-          <Trash />
-          Deletar
-        </DropdownMenuItem>
-        {userData?.id !== post.user.id && (
-          <DropdownMenuItem onClick={(e) => e.preventDefault()}>
+        {userData.id === post.user.id && (
+          <>
+            <DropdownMenuItem onClick={handleUpdatePost}>
+              <Edit />
+              Editar
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handlePostDelete}>
+              <Trash />
+              Deletar
+            </DropdownMenuItem>
+          </>
+        )}
+        {userData.id !== post.user.id && (
+          <DropdownMenuSub>
             <Complaint />
-          </DropdownMenuItem>
+          </DropdownMenuSub>
         )}
       </DropdownMenuContent>
     </DropdownMenu>

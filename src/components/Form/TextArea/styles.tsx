@@ -10,6 +10,15 @@ export const TextAreaInput = styled.textarea`
   width: 100%;
   margin-top: 0.3rem;
   font-family: "Rubik", sans-serif;
+  transition: none;
+  resize: none;
+
+  &:focus {
+    box-shadow: 0 0 0 4px #f3503a40;
+
+    outline: 1px solid ${({ theme }) => theme.backgroundColor.secondary};
+    background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
+  }
 
   &::placeholder {
     opacity: 0.4;

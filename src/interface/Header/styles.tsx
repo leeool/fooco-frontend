@@ -96,8 +96,10 @@ export const HeaderContainer = styled.header<Props>`
     @media (max-width: 600px) {
       max-width: 6rem;
       max-height: 4rem;
+      width: 100%;
       display: flex;
       justify-content: center;
+      min-width: 5rem;
     }
   }
 

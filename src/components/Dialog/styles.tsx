@@ -6,6 +6,7 @@ export const Trigger = styled(Dialog.Trigger)`
   background-color: transparent;
   position: relative;
   width: 100%;
+  font-size: inherit;
 `
 
 export const DialogOverlay = styled(Dialog.Overlay)`
@@ -61,3 +62,5 @@ export const Content = styled(Dialog.Content)`
     }
   }
 `
+
+export const Close = styled(Dialog.Close)``

@@ -7,6 +7,7 @@ import {
   DropdownMenuItem,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu"
 
@@ -32,6 +33,8 @@ export const Trigger = styled(DropdownMenuTrigger)`
   }
 `
 
+export const SubTrigger = styled(DropdownMenuSubTrigger)``
+
 export const Content = styled(DropdownMenuContent)`
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
   border-radius: 10px;
@@ -48,8 +51,8 @@ export const Content = styled(DropdownMenuContent)`
 
   @keyframes slideDownAndFade {
     from {
-      opacity: 0;
-      transform: translateY(-2px);
+      opacity: 0.5;
+      transform: translateY(-10px);
     }
     to {
       opacity: 1;
@@ -133,6 +136,10 @@ export const Item = styled(DropdownMenuItem)`
 
   &[data-type="danger"] {
     background-color: #f003;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
   }
 `
 
