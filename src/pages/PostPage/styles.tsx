@@ -108,7 +108,7 @@ export const Feedback = styled.div`
   flex-direction: column;
   justify-items: center;
   text-align: center;
-  gap: 0.3rem;
+  gap: 0.8rem;
 
   svg {
     width: 2rem;

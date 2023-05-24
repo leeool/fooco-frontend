@@ -39,7 +39,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSub,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@components/DropdownMenuAPI"
 import UseToastStore from "@components/Toast/UseToastStore"
@@ -145,23 +144,25 @@ const PostPage = () => {
           />
         </Link>
         <Feedback data-loading={loading}>
-          <button
+          <ButtonSecondary
             onClick={handleFeedback}
             data-feedback="like"
             data-active={feedback === "like"}
+            style={{ padding: "0" }}
           >
             <MiniSeta />
-          </button>
+          </ButtonSecondary>
           <span>
             {feedbackData !== null ? String(feedbackData) : data.points}
           </span>
-          <button
+          <ButtonSecondary
             onClick={handleFeedback}
             data-feedback="dislike"
             data-active={feedback === "dislike"}
+            style={{ padding: "0" }}
           >
             <MiniSeta style={{ rotate: "180deg" }} />
-          </button>
+          </ButtonSecondary>
         </Feedback>
         <button onClick={handleCopyLink}>
           <Share />
@@ -258,7 +259,7 @@ const HandlePost = ({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="info-btn">
-        <ButtonSecondary>
+        <ButtonSecondary style={{ padding: "0" }}>
           <Ellipsis />
         </ButtonSecondary>
       </DropdownMenuTrigger>
