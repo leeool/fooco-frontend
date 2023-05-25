@@ -12,6 +12,7 @@ export const TextAreaInput = styled.textarea`
   font-family: "Rubik", sans-serif;
   transition: none;
   resize: none;
+  color: ${({ theme }) => theme.textColor.base};
 
   &:focus {
     box-shadow: 0 0 0 4px #f3503a40;
