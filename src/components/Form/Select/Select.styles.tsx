@@ -10,7 +10,7 @@ export const Trigger = styled(SelectPrimitive.Trigger)`
   font-weight: 500;
   justify-content: space-between;
   cursor: pointer;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
   width: 100%;
   max-width: calc(100%);
   border: 1px solid ${({ theme }) => theme.backgroundColor.details};
@@ -35,7 +35,7 @@ export const Value = styled(SelectPrimitive.Value)``
 
 export const Content = styled(SelectPrimitive.Content)`
   overflow: hidden;
-  background-color: white;
+  background-color: ${({ theme }) => theme.backgroundColor.tertiary};
   border-radius: 0.2rem;
   width: var(--radix-select-trigger-width);
   box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35);
