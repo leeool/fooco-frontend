@@ -83,7 +83,7 @@ export const Item = styled.div`
 
 export const Rank = styled.div`
   overflow-y: auto;
-  height: 20rem;
+  height: 16rem;
   display: grid;
   gap: 0.5rem;
   padding: 0.5rem 0;

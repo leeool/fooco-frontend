@@ -78,7 +78,7 @@ export const SideColumn = styled.div`
   display: flex;
   height: fit-content;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   position: sticky;
-  top: 3rem;
+  top: 1rem;
 `

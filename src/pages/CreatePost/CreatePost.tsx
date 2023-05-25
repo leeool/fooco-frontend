@@ -8,21 +8,33 @@ import { useNavigate } from "react-router"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createPostSchema } from "src/schemas"
-import { POST_POST } from "src/api/apiCalls"
-import UseFetch from "src/hooks/UseFetch"
+import { instance, POST_POST } from "src/api/apiCalls"
 import isError from "src/helpers/isError"
 import UseToastStore from "@components/Toast/UseToastStore"
+import { useMutation } from "react-query"
 
 const CreatePost = () => {
   const [value, setValue] = React.useState("")
   const nav = useNavigate()
   const { userData, isLoggedIn } = useUserStore()
-  const { control, handleSubmit } = useForm<Post>({
+  const {
+    control,
+    handleSubmit,
+    register,
+    formState: { errors },
+    getFieldState,
+  } = useForm<Post>({
     resolver: zodResolver(createPostSchema),
     mode: "all",
     shouldFocusError: true,
   })
-  const { request, loading } = UseFetch<IUserPosts>()
+  const { mutateAsync, isLoading } = useMutation({
+    mutationFn: async (data: Partial<IUserPosts> & { user_id: string }) => {
+      const { options, url } = POST_POST(data)
+      return instance(url, options).then((res) => res.data)
+    },
+    mutationKey: "createPost",
+  })
   const { setToastMessage } = UseToastStore()
 
   const handleCreatePost = handleSubmit(async ({ tags, title }) => {
@@ -30,16 +42,28 @@ const CreatePost = () => {
 
     if (!isLoggedIn || !userData) return nav("/entrar")
 
-    const { options, url } = POST_POST(title, value, userData.id, arrTags)
-
-    const { data, error } = await request(url, options)
-
-    if (isError(data) || error || !data) {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-      return
-    }
-    nav(`/app/${userData.username}/${data.slug}`)
-    setToastMessage("Sucesso", "Publicação criada com sucesso!")
+    await mutateAsync(
+      {
+        title,
+        content: value,
+        user_id: userData.id,
+        tags: arrTags || [],
+      },
+      {
+        onSuccess(data) {
+          console.log(data)
+          nav(`/app/${userData.username}/${data.slug}`)
+          setToastMessage("Sucesso", "Publicação criada com sucesso!")
+        },
+        onError(error) {
+          if (isError(error) || error) {
+            window.scrollTo({ top: 0, behavior: "smooth" })
+            setToastMessage("Erro", "Não foi possível publicar")
+            return
+          }
+        },
+      }
+    )
   })
 
   return (
@@ -48,20 +72,12 @@ const CreatePost = () => {
         Publicar
       </Title>
       <AskForm onSubmit={handleCreatePost}>
-        <Controller
-          name="title"
-          control={control}
-          defaultValue={""}
-          render={({ field, fieldState }) => (
-            <Input
-              placeholder="Descreva sua publicação"
-              type="text"
-              id="title"
-              label="Título da publicação"
-              fieldState={fieldState}
-              {...field}
-            />
-          )}
+        <Input
+          placeholder="Descreva sua publicação"
+          type="text"
+          id="title"
+          label="Título da publicação"
+          {...register("title")}
         />
 
         <Markdown value={value} onChange={(e) => setValue(e)} />
@@ -84,8 +100,8 @@ const CreatePost = () => {
           <Button variant="outlined" onClick={() => nav("/app")}>
             Cancelar
           </Button>
-          <Button variant="solid" disabled={loading}>
-            {loading ? "Carregando..." : "Publicar"}
+          <Button variant="solid" disabled={isLoading}>
+            {isLoading ? "Carregando..." : "Publicar"}
           </Button>
         </Buttons>
       </AskForm>

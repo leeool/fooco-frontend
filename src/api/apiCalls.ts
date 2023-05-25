@@ -119,12 +119,12 @@ export const FEEDBACK_POST = (
   }
 }
 
-export const POST_POST = (
-  title: string,
-  content: string,
-  user_id: string,
-  tags?: string[]
-) => {
+export const POST_POST = ({
+  title,
+  content,
+  user_id,
+  tags,
+}: Partial<IUserPosts> & { user_id: string }) => {
   return {
     url: ENDPOINT + "/post",
     options: {
