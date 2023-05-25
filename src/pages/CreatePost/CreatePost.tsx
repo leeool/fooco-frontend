@@ -17,13 +17,7 @@ const CreatePost = () => {
   const [value, setValue] = React.useState("")
   const nav = useNavigate()
   const { userData, isLoggedIn } = useUserStore()
-  const {
-    control,
-    handleSubmit,
-    register,
-    formState: { errors },
-    getFieldState,
-  } = useForm<Post>({
+  const { control, handleSubmit } = useForm<Post>({
     resolver: zodResolver(createPostSchema),
     mode: "all",
     shouldFocusError: true,
@@ -72,12 +66,20 @@ const CreatePost = () => {
         Publicar
       </Title>
       <AskForm onSubmit={handleCreatePost}>
-        <Input
-          placeholder="Descreva sua publicação"
-          type="text"
-          id="title"
-          label="Título da publicação"
-          {...register("title")}
+        <Controller
+          name="title"
+          control={control}
+          defaultValue={""}
+          render={({ field, fieldState }) => (
+            <Input
+              placeholder="Descreva sua publicação"
+              type="text"
+              id="title"
+              label="Título da publicação"
+              fieldState={fieldState}
+              {...field}
+            />
+          )}
         />
 
         <Markdown value={value} onChange={(e) => setValue(e)} />
