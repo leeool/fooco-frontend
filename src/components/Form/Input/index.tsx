@@ -1,5 +1,10 @@
 import React from "react"
-import { ControllerFieldState } from "react-hook-form"
+import {
+  ControllerFieldState,
+  UseFormProps,
+  UseFormRegister,
+  UseFormRegisterReturn,
+} from "react-hook-form"
 import { InputContainer } from "./style"
 import Error from "@components/Text/Error"
 

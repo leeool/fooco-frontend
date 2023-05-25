@@ -27,4 +27,14 @@ export const Item = styled(ButtonSecondary)`
   justify-content: start;
 `
 
-export const Content = styled.div``
+export const Content = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+`
+
+export const ButtonsGroup = styled.div`
+  justify-self: end;
+  display: flex;
+  gap: 1rem;
+`

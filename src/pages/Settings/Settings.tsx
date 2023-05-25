@@ -1,8 +1,12 @@
-import { ButtonSecondary } from "@components/Form"
+import { Button, ButtonSecondary, Input } from "@components/Form"
 import { Title } from "@components/Text/Title"
 import React, { ReactElement } from "react"
+import { useForm } from "react-hook-form"
+import { Navigate } from "react-router"
 import { themeStore } from "src/stores/themeStore"
+import useUserStore from "src/stores/UseUserStore"
 import {
+  ButtonsGroup,
   Container,
   Content,
   Item,
@@ -16,6 +20,7 @@ interface IPages {
 }
 
 const Settings = () => {
+  const { isLoggedIn } = useUserStore()
   const [page, setPage] = React.useState<"account" | "theme">("account")
 
   const pages: IPages = {
@@ -28,6 +33,7 @@ const Settings = () => {
     setPage(e.target.dataset.page as "account" | "theme")
   }
 
+  if (!isLoggedIn) return <Navigate to={"/entrar"} />
   return (
     <Container>
       <SideContainer>
@@ -41,20 +47,50 @@ const Settings = () => {
           </Item>
         </SideNav>
       </SideContainer>
-      <Content>{pages[page]}</Content>
+      {pages[page]}
     </Container>
   )
 }
 
 const AccountSettings = () => {
-  return <div>Alterar informações da conta</div>
+  const { register, handleSubmit } = useForm()
+
+  const handleForm = handleSubmit((data) => {
+    console.log(data)
+  })
+
+  return (
+    <Content as={"form"} onSubmit={handleForm}>
+      <Title size="lg">Alterar informações</Title>
+      <Input
+        label="Novo e-email"
+        {...register("email")}
+        id="email"
+        defaultValue=""
+        placeholder="novoemail@exemplo.com"
+        type="email"
+      />
+      <Input
+        label="Nova senha"
+        {...register("password")}
+        id="password"
+        defaultValue=""
+        placeholder="*********"
+        type="password"
+      />
+      <ButtonsGroup>
+        <Button variant="outlined">Cancelar</Button>
+        <Button variant="solid">Salvar</Button>
+      </ButtonsGroup>
+    </Content>
+  )
 }
 
 const ThemeSettings = () => {
   const { toggleSelectedTheme, selectedTheme } = themeStore()
 
   return (
-    <div>
+    <Content>
       <Title size="lg">Alterar Tema</Title>
       <ButtonSecondary
         onClick={() =>
@@ -63,7 +99,7 @@ const ThemeSettings = () => {
       >
         Alterar tema
       </ButtonSecondary>
-    </div>
+    </Content>
   )
 }
 
