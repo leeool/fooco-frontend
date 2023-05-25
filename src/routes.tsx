@@ -3,8 +3,8 @@ import React from "react"
 import Layout from "./Layout"
 import Login from "./pages/Entrar"
 import ScrollPageToTop from "./helpers/ScrollPageToTop"
-import SavedPosts from "./pages/SavedPosts/SavedPosts"
-import Settings from "./pages/Settings/Settings"
+// import SavedPosts from "./pages/SavedPosts/SavedPosts"
+// import Settings from "./pages/Settings/Settings"
 // import ProfilePage from "./pages/ProfilePage"
 // import CreatePost from "./pages/CreatePost"
 // import Entrar from "./pages/Entrar/Login"
@@ -21,6 +21,8 @@ const Dashboard = React.lazy(() => import("./pages/Dashboard"))
 const Criar = React.lazy(() => import("./pages/Entrar/Criar"))
 const Entrar = React.lazy(() => import("./pages/Entrar/Login"))
 const CreatePost = React.lazy(() => import("./pages/CreatePost"))
+const SavedPosts = React.lazy(() => import("./pages/SavedPosts/SavedPosts"))
+const Settings = React.lazy(() => import("./pages/Settings/Settings"))
 
 const router = createBrowserRouter([
   {
@@ -82,7 +84,11 @@ const router = createBrowserRouter([
           },
           {
             path: "settings",
-            element: <Settings />,
+            element: (
+              <React.Suspense>
+                <Settings />,
+              </React.Suspense>
+            ),
           },
         ],
       },
