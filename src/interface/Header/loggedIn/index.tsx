@@ -59,7 +59,7 @@ const index = () => {
               <Link to={"/app/salvos"}>
                 <DropdownMenuItem>Salvos</DropdownMenuItem>
               </Link>
-              <Link to={"/app"}>
+              <Link to={"/app/settings"}>
                 <DropdownMenuItem>Configurações</DropdownMenuItem>
               </Link>
               <DialogRoot>

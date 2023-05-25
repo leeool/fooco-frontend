@@ -4,6 +4,7 @@ import Layout from "./Layout"
 import Login from "./pages/Entrar"
 import ScrollPageToTop from "./helpers/ScrollPageToTop"
 import SavedPosts from "./pages/SavedPosts/SavedPosts"
+import Settings from "./pages/Settings/Settings"
 // import ProfilePage from "./pages/ProfilePage"
 // import CreatePost from "./pages/CreatePost"
 // import Entrar from "./pages/Entrar/Login"
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
                 <SavedPosts />
               </React.Suspense>
             ),
+          },
+          {
+            path: "settings",
+            element: <Settings />,
           },
         ],
       },
