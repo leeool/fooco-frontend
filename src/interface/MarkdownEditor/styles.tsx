@@ -89,7 +89,7 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
     }
   }
 
-  ul {
+  ul, ol {
     height: min-content;
     margin-left: 1rem;
   }
@@ -165,9 +165,14 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
   }
 
   @media (max-width: 600px) {
-    p {
+    p, li {
       font-size: 0.9rem;
     }
+
+    code * {
+      font-size: 0.9rem;
+    }
+
   }
 `
 
