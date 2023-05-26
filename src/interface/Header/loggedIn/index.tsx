@@ -36,7 +36,7 @@ const index = () => {
       <Link to="/app" className="logo">
         {match ? <FoquinhoIcon /> : <Logo />}
       </Link>
-      {/* <Search /> */}
+      <Search />
       <div className="buttons-logged">
         <Link to={"/app"}>
           <Home />

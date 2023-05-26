@@ -23,6 +23,7 @@ const Entrar = React.lazy(() => import("./pages/Entrar/Login"))
 const CreatePost = React.lazy(() => import("./pages/CreatePost"))
 const SavedPosts = React.lazy(() => import("./pages/SavedPosts/SavedPosts"))
 const Settings = React.lazy(() => import("./pages/Settings/Settings"))
+const Search = React.lazy(() => import("./pages/Search/Search"))
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,16 @@ const router = createBrowserRouter([
             element: (
               <React.Suspense>
                 <Settings />,
+              </React.Suspense>
+            ),
+          },
+          {
+            path: "procurar",
+            element: (
+              <React.Suspense>
+                <ScrollPageToTop>
+                  <Search />
+                </ScrollPageToTop>
               </React.Suspense>
             ),
           },

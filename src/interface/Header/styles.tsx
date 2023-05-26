@@ -5,7 +5,7 @@ interface Props {
 }
 
 export const HeaderContainer = styled.header<Props>`
-  display: grid;
+  display: flex;
   grid-template-columns: auto auto;
   gap: 2rem;
   align-items: center;

@@ -1,15 +1,29 @@
 import React from "react"
 import UseMatchWindowSize from "src/hooks/UseWindowSize"
 import { Container, SearchContainer } from "./styles"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 const Search = () => {
   const match = UseMatchWindowSize(1100)
+  const [search, setSearch] = React.useState("")
+  const [searchParams, setSearchParams] = useSearchParams()
+  const nav = useNavigate()
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    nav(`app/procurar`)
+    setSearchParams({ q: search })
+  }
 
   return (
     <Container className="search">
-      <SearchContainer>
-        <input type="search" placeholder="Pesquisar..." />
-        <span className="icon">
+      <SearchContainer onSubmit={handleSearch}>
+        <input
+          type="search"
+          placeholder="Pesquisar..."
+          onChange={({ target }) => setSearch(target.value)}
+        />
+        <button className="icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -23,7 +37,7 @@ const Search = () => {
               d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
             />
           </svg>
-        </span>
+        </button>
       </SearchContainer>
     </Container>
   )

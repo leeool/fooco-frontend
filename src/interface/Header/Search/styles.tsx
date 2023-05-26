@@ -9,7 +9,7 @@ export const Container = styled.div`
   }
 `
 
-export const SearchContainer = styled.div`
+export const SearchContainer = styled.form`
   position: relative;
   width: 100%;
   overflow: hidden;
