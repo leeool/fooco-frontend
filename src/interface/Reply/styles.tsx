@@ -13,6 +13,7 @@ export const Reply = styled.div`
     theme.backgroundColor.detailsAlt}; */
   gap: 1rem;
   padding: 1rem 0;
+  max-width: 100%;
 
   @media (max-width: 600px) {
     gap: 0.8rem;
