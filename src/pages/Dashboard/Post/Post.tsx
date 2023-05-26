@@ -46,7 +46,7 @@ const Post = ({ post }: Props) => {
   return (
     <Container key={post.id}>
       <PostInfo>
-        <Link to={`/app/${post.user.username}/${slug}`}>
+        <Link to={`/app/${post.user.username}/${post.slug}`}>
           <PostTitle>{post.title}</PostTitle>
         </Link>
         <Details>
