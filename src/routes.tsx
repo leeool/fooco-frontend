@@ -3,6 +3,7 @@ import React from "react"
 import Layout from "./Layout"
 import Login from "./pages/Entrar"
 import ScrollPageToTop from "./helpers/ScrollPageToTop"
+import UpdatePost from "./pages/UpdatePost"
 // import SavedPosts from "./pages/SavedPosts/SavedPosts"
 // import Settings from "./pages/Settings/Settings"
 // import ProfilePage from "./pages/ProfilePage"
@@ -63,6 +64,16 @@ const router = createBrowserRouter([
               <React.Suspense>
                 <ScrollPageToTop>
                   <PostPage />
+                </ScrollPageToTop>
+              </React.Suspense>
+            ),
+          },
+          {
+            path: ":owner/:slug/editar",
+            element: (
+              <React.Suspense>
+                <ScrollPageToTop>
+                  <UpdatePost />
                 </ScrollPageToTop>
               </React.Suspense>
             ),

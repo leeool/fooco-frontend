@@ -21,9 +21,10 @@ export const PostContainer = styled.div`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  gap: 2rem;
+  gap: 1rem;
   align-items: flex-start;
   flex: 1;
+  align-content: start;
 `
 
 export const AskContainer = styled.div`
@@ -74,7 +75,7 @@ export const AskButton = styled.div`
 export const FeedContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 `
 
 export const SideColumn = styled.div`

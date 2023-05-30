@@ -42,25 +42,23 @@ import {
   DropdownMenuTrigger,
 } from "@components/DropdownMenuAPI"
 import UseToastStore from "@components/Toast/UseToastStore"
-import UpdatePost from "../UpdatePost"
 import { Replies, CreateReply, Avatar } from "src/interface"
 import Complaint from "@interface/Complaint/Complaint"
 import { useSearchStore } from "@interface/Header/Search"
 
 const PostPage = () => {
-  const { setSearch } = useSearchStore()
   const { owner, slug } = useParams()
   const { isLoggedIn, userData, savedPosts } = useUserStore()
-  const { handleSavePost, loading: savePostLoading } = UseSavePost()
-  const { setToastMessage } = UseToastStore()
-  const nav = useNavigate()
   const { data, isLoading, isFetching } = useQuery<IUserPosts | IError>(
     ["post", owner, slug],
     () => instance.get(`/post/${owner}/${slug}`).then((res) => res.data)
   )
+  const { setSearch } = useSearchStore()
+  const { handleSavePost, loading: savePostLoading } = UseSavePost()
+  const { setToastMessage } = UseToastStore()
+  const nav = useNavigate()
   const { request, data: feedbackData, loading } = UseFetch<string | null>()
   const [feedback, setFeedback] = React.useState<string | null>(null)
-  const [isEditing, setIsEditing] = React.useState<boolean>(false)
   const [isReplying, setIsReplying] = React.useState<boolean>(false)
   const [newReply, setNewReply] = React.useState<IReply[] | null>(null)
 
@@ -74,12 +72,11 @@ const PostPage = () => {
       return
     }
 
-    const feedbackType = e.currentTarget.dataset.feedback
+    const feedbackType = e.currentTarget.dataset.feedback as "like" | "dislike"
 
     if (!feedbackType || !userData || !data || "error" in data) return
 
     setFeedback((prev) => (prev === feedbackType ? null : feedbackType))
-
     const { options, url } = FEEDBACK_POST(feedbackType, userData.id, data.id)
 
     request(url, options)
@@ -105,12 +102,9 @@ const PostPage = () => {
   }, [data, userData, owner, slug])
 
   React.useEffect(() => {
+    setNewReply(null)
     if (!data || "error" in data) return
     document.title = `${data.title} • ${data.user.username} • Fooco`
-  }, [data, owner, slug])
-
-  React.useEffect(() => {
-    setNewReply(null)
   }, [data, owner, slug])
 
   const handleCopyLink = () => {
@@ -133,7 +127,6 @@ const PostPage = () => {
       />
     )
   if (!data || isError(data)) return <PostNotFound />
-  if (isEditing) return <UpdatePost post={data} setIsEditing={setIsEditing} />
   return (
     <Container>
       <Interactions>
@@ -195,7 +188,7 @@ const PostPage = () => {
               })}
             </span>
           </Data>
-          <HandlePost post={data} setIsEditing={setIsEditing} />
+          <HandlePost post={data} />
         </Info>
         <Content>
           <MarkdownParser value={data.content} />
@@ -226,13 +219,7 @@ const PostPage = () => {
   )
 }
 
-const HandlePost = ({
-  post,
-  setIsEditing,
-}: {
-  post: IUserPosts
-  setIsEditing: React.Dispatch<boolean>
-}) => {
+const HandlePost = ({ post }: { post: IUserPosts }) => {
   const { request, loading } = UseFetch()
   const { userData } = useUserStore()
   const { setToastMessage } = UseToastStore()
@@ -253,12 +240,6 @@ const HandlePost = ({
     }
   }
 
-  const handleUpdatePost = () => {
-    if (!userData || loading) return
-
-    setIsEditing(true)
-  }
-
   if (!userData) return null
   return (
     <DropdownMenu>
@@ -270,10 +251,12 @@ const HandlePost = ({
       <DropdownMenuContent>
         {userData.id === post.user.id && (
           <>
-            <DropdownMenuItem onClick={handleUpdatePost}>
-              <Edit />
-              Editar
-            </DropdownMenuItem>
+            <Link to={"editar"} state={post}>
+              <DropdownMenuItem>
+                <Edit />
+                Editar
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuItem onClick={handlePostDelete}>
               <Trash />
               Deletar
