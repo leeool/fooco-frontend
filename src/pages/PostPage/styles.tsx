@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom"
-import styled, { AnyStyledComponent } from "styled-components"
+import styled from "styled-components"
 
 export const Container = styled.article`
   display: grid;
@@ -9,7 +8,7 @@ export const Container = styled.article`
   max-width: 60rem;
 
   @media (max-width: 600px) {
-    gap: 0.8rem;
+    gap: 0.4rem;
   }
 `
 
@@ -35,7 +34,7 @@ export const Reply = styled.div`
 export const Info = styled.div`
   display: grid;
   grid-template-columns: auto auto 1fr;
-  gap: 2rem;
+  column-gap: 2rem;
   align-items: center;
 
   a {
@@ -56,6 +55,7 @@ export const Title = styled.h1`
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  grid-column: 1 / -1;
 
   @media (max-width: 600px) {
     font-size: 1.6rem;
@@ -63,14 +63,9 @@ export const Title = styled.h1`
 `
 
 export const Content = styled.div`
-  font-size: 1.2rem;
   line-height: 1.6;
-  margin-top: 2rem;
   font-family: "Rubik", sans-serif;
-
-  @media (max-width: 600px) {
-    font-size: 1rem;
-  }
+  min-width: 0;
 `
 
 export const Author = styled.div`
@@ -147,7 +142,14 @@ export const Interactions = styled.div`
   flex-direction: column;
   gap: 1.5rem;
   align-content: start;
+  justify-content: center;
   max-width: 100%;
+  justify-items: center;
+  padding-top: 0.8rem;
+
+  a {
+    display: block;
+  }
 
   button[data-saved="true"] svg {
     fill: ${({ theme }) => theme.backgroundColor.secondary};
@@ -175,9 +177,10 @@ export const Interactions = styled.div`
     svg {
       width: 1.3rem;
     }
-
-    grid-template-columns: 3rem;
-    grid-template-rows: 3rem auto;
+    gap: 1rem;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    justify-items: start;
   }
 `
 
@@ -191,7 +194,7 @@ export const Details = styled.div`
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
   padding: 0.8rem;
   border-radius: 10px;
-  margin-bottom: 3rem;
+  margin: 3rem 0;
 
   button {
     place-self: start;

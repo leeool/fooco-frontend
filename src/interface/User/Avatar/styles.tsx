@@ -10,6 +10,7 @@ export const Image = styled(AvatarImage)<Props>`
   border-radius: 100%;
   height: ${({ size }) => size + "rem"};
   width: ${({ size }) => size + "rem"};
+  align-self: start;
 
   @media (max-width: 600px) {
     width: 3rem;
@@ -42,5 +43,6 @@ export const Fallback = styled(AvatarFallback)<Props>`
 export const Root = styled(Avatar)`
   display: flex;
   place-content: center;
-  align-items: center;
+  align-items: start;
+  align-self: start;
 `

@@ -45,6 +45,7 @@ import UseToastStore from "@components/Toast/UseToastStore"
 import { Replies, CreateReply, Avatar } from "src/interface"
 import Complaint from "@interface/Complaint/Complaint"
 import { useSearchStore } from "@interface/Header/Search"
+import UseMatchWindowSize from "src/hooks/UseWindowSize"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -61,6 +62,7 @@ const PostPage = () => {
   const [feedback, setFeedback] = React.useState<string | null>(null)
   const [isReplying, setIsReplying] = React.useState<boolean>(false)
   const [newReply, setNewReply] = React.useState<IReply[] | null>(null)
+  const match = UseMatchWindowSize(600)
 
   const handleFeedback = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -130,14 +132,16 @@ const PostPage = () => {
   return (
     <Container>
       <Interactions>
-        <Link to={`/app/${data.user.username}`}>
-          <Avatar
-            src={data.user.avatar_url}
-            fallback={data.user.username.slice(0, 2)}
-            delayMs={500}
-            size={5}
-          />
-        </Link>
+        {match ? null : (
+          <Link to={`/app/${data.user.username}`}>
+            <Avatar
+              src={data.user.avatar_url}
+              fallback={data.user.username.slice(0, 2)}
+              delayMs={500}
+              size={4}
+            />
+          </Link>
+        )}
         <Feedback data-loading={loading}>
           <ButtonSecondary
             onClick={handleFeedback}
@@ -171,9 +175,9 @@ const PostPage = () => {
           <Bookmark />
         </button>
       </Interactions>
-      <div>
-        <Title>{data.title}</Title>
+      <Content>
         <Info>
+          <Title>{data.title}</Title>
           <Author>
             criado por{" "}
             <Link to={`/app/${data.user.username}`}>
@@ -190,10 +194,8 @@ const PostPage = () => {
           </Data>
           <HandlePost post={data} />
         </Info>
-        <Content>
-          <MarkdownParser value={data.content} />
-        </Content>
-      </div>
+        <MarkdownParser value={data.content} />
+      </Content>
       <Details>
         <ButtonSecondary onClick={handleReplying}>
           <ReplyIcon />

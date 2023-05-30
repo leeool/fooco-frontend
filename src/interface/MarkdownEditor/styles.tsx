@@ -3,12 +3,11 @@ import lightTheme from "highlight.js/styles/github.css?inline"
 import darkTheme from "highlight.js/styles/github-dark.css?inline"
 
 export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
+  margin-top: 2rem;
+
   .markdown-body {
     width: 100%;
     margin: 0;
-    @media (max-width: 600px) {
-      width: calc(100cqw - 5rem);
-    }
   }
 
   * {
@@ -89,7 +88,8 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
     }
   }
 
-  ul, ol {
+  ul,
+  ol {
     height: min-content;
     margin-left: 1rem;
   }
@@ -165,14 +165,12 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
   }
 
   @media (max-width: 600px) {
-    p, li {
-      font-size: 0.9rem;
+    p,
+    li,
+    code *,
+    code {
+      font-size: 0.875rem;
     }
-
-    code * {
-      font-size: 0.9rem;
-    }
-
   }
 `
 

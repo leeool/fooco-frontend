@@ -75,7 +75,7 @@ const ProfilePreview = () => {
             delayMs={500}
             size={5}
           />
-          <Username>@{userData.username}</Username>
+          <Username title={userData.username}>@{userData.username}</Username>
 
           <Points>
             <Point />

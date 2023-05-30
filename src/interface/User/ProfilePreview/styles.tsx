@@ -19,10 +19,22 @@ export const Username = styled.div`
   padding: 0.1rem 0.5rem;
   border-radius: 5px;
   margin-bottom: 0.5rem;
+  max-width: 10ch;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   &::selection {
     background-color: #fff;
     color: ${({ theme }) => theme.textColor.title};
+  }
+
+  @keyframes moveText {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
   }
 `
 

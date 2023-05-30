@@ -37,10 +37,12 @@ const Feed = () => {
           )}
         </PostContainer>
       </FeedContainer>
-      <SideColumn>
-        {match ? null : <ProfilePreview />}
-        {match ? null : <RankingCard />}
-      </SideColumn>
+      {match ? null : (
+        <SideColumn>
+          {match ? null : <ProfilePreview />}
+          {match ? null : <RankingCard />}
+        </SideColumn>
+      )}
     </Container>
   )
 }
