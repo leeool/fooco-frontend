@@ -17,12 +17,14 @@ import { formatDistanceToNow } from "date-fns"
 import { ptBR } from "date-fns/locale"
 import UseSavePost from "src/helpers/SavePost"
 import UseToastStore from "@components/Toast/UseToastStore"
+import { useSearchStore } from "@interface/Header/Search"
 
 interface Props {
   post: IUserPosts
 }
 
 const Post = ({ post }: Props) => {
+  const { setSearch } = useSearchStore()
   const removeSpecialChars = /[^A-Za-z0-9\s-]/g
   const nav = useNavigate()
   const { savedPosts } = useUserStore()
@@ -73,7 +75,9 @@ const Post = ({ post }: Props) => {
       </PostInfo>
       <Tags>
         {post.tags.map((tag) => (
-          <span key={tag}>{tag}</span>
+          <span key={tag} onClick={() => setSearch(tag)}>
+            <Link to={"/app/procurar?q=" + tag}>{tag}</Link>
+          </span>
         ))}
       </Tags>
       <Interactions>

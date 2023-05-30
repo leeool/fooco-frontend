@@ -1,4 +1,5 @@
-import styled from "styled-components"
+import { Link } from "react-router-dom"
+import styled, { AnyStyledComponent } from "styled-components"
 
 export const Container = styled.article`
   display: grid;
@@ -210,7 +211,8 @@ export const Tags = styled.div`
   justify-self: end;
   justify-content: end;
 
-  span {
+  a {
+    display: block;
     background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
     font-size: 1rem;
     color: ${(props) => props.theme.textColor.title};

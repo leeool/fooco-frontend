@@ -51,7 +51,7 @@ export const Tags = styled.div`
   gap: 0.5rem;
   max-width: 100%;
 
-  span {
+  a {
     background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
     font-size: 0.85rem;
     color: ${(props) => props.theme.textColor.title};

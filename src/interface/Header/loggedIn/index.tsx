@@ -27,8 +27,7 @@ import UseMatchWindowSize from "src/hooks/UseWindowSize"
 import { FoquinhoIcon } from "@assets/index"
 
 const index = () => {
-  const { logoutUser, userData } = useUserStore()
-  const ref = React.useRef<HTMLDivElement>(null)
+  const { userData } = useUserStore()
   const match = UseMatchWindowSize(600)
 
   return (
@@ -62,31 +61,7 @@ const index = () => {
               <Link to={"/app/settings"}>
                 <DropdownMenuItem>Configurações</DropdownMenuItem>
               </Link>
-              <DialogRoot>
-                <DropdownMenuItem
-                  onClick={(e: React.MouseEvent) => e.preventDefault()}
-                >
-                  <DialogTrigger>Sair</DialogTrigger>
-                </DropdownMenuItem>
-                <DialogContent ref={ref}>
-                  <ConfirmLogout>
-                    <div>
-                      <Title size="md">Tem certeza que deseja sair?</Title>
-                      <Paragraph size="xl">
-                        Foquinho sentirá sua falta.
-                      </Paragraph>
-                    </div>
-                    <div className="buttons">
-                      <Button variant="outlined" onClick={logoutUser}>
-                        Sair
-                      </Button>
-                      <DialogClose asChild>
-                        <Button variant="solid">Ficar</Button>
-                      </DialogClose>
-                    </div>
-                  </ConfirmLogout>
-                </DialogContent>
-              </DialogRoot>
+              <LogoutDialog />
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -95,4 +70,33 @@ const index = () => {
   )
 }
 
-export default index
+const LogoutDialog = () => {
+  const ref = React.useRef<HTMLDivElement>(null)
+  const { logoutUser } = useUserStore()
+
+  return (
+    <DialogRoot>
+      <DropdownMenuItem onClick={(e) => e.preventDefault()}>
+        <DialogTrigger>Sair</DialogTrigger>
+      </DropdownMenuItem>
+      <DialogContent ref={ref}>
+        <ConfirmLogout>
+          <div>
+            <Title size="md">Tem certeza que deseja sair?</Title>
+            <Paragraph size="xl">Foquinho sentirá sua falta.</Paragraph>
+          </div>
+          <div className="buttons">
+            <DialogClose asChild>
+              <Button variant="solid">Ficar</Button>
+            </DialogClose>
+            <Button variant="outlined" onClick={logoutUser}>
+              Sair
+            </Button>
+          </div>
+        </ConfirmLogout>
+      </DialogContent>
+    </DialogRoot>
+  )
+}
+
+export default React.memo(index)

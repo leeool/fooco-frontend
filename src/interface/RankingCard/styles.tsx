@@ -78,6 +78,7 @@ export const Item = styled.div`
   align-items: end;
   padding: 0.5rem;
   border-radius: 0.5rem;
+  height: fit-content;
   /* justify-content: start; */
 `
 
@@ -88,6 +89,10 @@ export const Rank = styled.div`
   gap: 0.5rem;
   padding: 0.5rem 0;
   scrollbar-width: thin;
+
+  a {
+    height: fit-content;
+  }
 
   .owner {
     background-color: #4ef73877 !important;

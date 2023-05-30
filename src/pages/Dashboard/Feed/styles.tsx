@@ -23,6 +23,7 @@ export const PostContainer = styled.div`
   grid-template-columns: 1fr;
   gap: 2rem;
   align-items: flex-start;
+  flex: 1;
 `
 
 export const AskContainer = styled.div`
@@ -33,6 +34,7 @@ export const AskContainer = styled.div`
   border-radius: 15px;
   padding: 1rem;
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
+  height: fit-content;
 
   .avatar > * {
     font-size: 1.4rem;
@@ -70,8 +72,9 @@ export const AskButton = styled.div`
 `
 
 export const FeedContainer = styled.div`
-  display: grid;
-  gap: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `
 
 export const SideColumn = styled.div`

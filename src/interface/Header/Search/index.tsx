@@ -2,11 +2,22 @@ import React from "react"
 import UseMatchWindowSize from "src/hooks/UseWindowSize"
 import { Container, SearchContainer } from "./styles"
 import { useNavigate, useSearchParams } from "react-router-dom"
+import { create } from "zustand"
+
+interface Props {
+  search: string
+  setSearch: (search: string) => void
+}
+
+export const useSearchStore = create<Props>((set) => ({
+  search: "",
+  setSearch: (search: string) => set({ search }),
+}))
 
 const Search = () => {
+  const { search, setSearch } = useSearchStore()
   const match = UseMatchWindowSize(1100)
-  const [search, setSearch] = React.useState("")
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [, setSearchParams] = useSearchParams()
   const nav = useNavigate()
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -22,6 +33,7 @@ const Search = () => {
           type="search"
           placeholder="Pesquisar..."
           onChange={({ target }) => setSearch(target.value)}
+          value={search}
         />
         <button className="icon">
           <svg

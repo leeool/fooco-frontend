@@ -45,8 +45,10 @@ import UseToastStore from "@components/Toast/UseToastStore"
 import UpdatePost from "../UpdatePost"
 import { Replies, CreateReply, Avatar } from "src/interface"
 import Complaint from "@interface/Complaint/Complaint"
+import { useSearchStore } from "@interface/Header/Search"
 
 const PostPage = () => {
+  const { setSearch } = useSearchStore()
   const { owner, slug } = useParams()
   const { isLoggedIn, userData, savedPosts } = useUserStore()
   const { handleSavePost, loading: savePostLoading } = UseSavePost()
@@ -206,7 +208,9 @@ const PostPage = () => {
         </ButtonSecondary>
         <Tags>
           {data.tags.map((tag) => (
-            <span key={tag}>{tag}</span>
+            <span key={tag} onClick={() => setSearch(tag)}>
+              <Link to={"/app/procurar?q=" + tag}>{tag}</Link>
+            </span>
           ))}
         </Tags>
       </Details>
