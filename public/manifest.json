@@ -1,6 +1,8 @@
 {
-  "short_name": "Fooco",
+  "start_url": "/",
   "name": "Fooco - Por estudantes, para estudantes",
+  "short_name": "Fooco",
+  "display": "standalone",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +20,6 @@
       "type": "image/png"
     }
   ],
-  "start_url": ".",
-  "display": "standalone",
   "theme_color": "#E63A23",
   "background_color": ["#fff", "#212121"]
 }
