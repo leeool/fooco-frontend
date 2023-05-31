@@ -1,6 +1,8 @@
 import { initializeApp } from "firebase/app"
+import { getStorage } from "firebase/storage"
 
 const firebaseConfig = {
+  name: "fooco-backend",
   apiKey: "AIzaSyAl96WMP6oILdGGkQ8vI7xy4pBsAv5lmL8",
   authDomain: "fooco-backend.firebaseapp.com",
   projectId: "fooco-backend",
@@ -11,5 +13,7 @@ const firebaseConfig = {
 }
 
 const app = initializeApp(firebaseConfig)
+
+export const storage = getStorage(app)
 
 export default app

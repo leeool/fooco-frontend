@@ -29,12 +29,20 @@ export const Item = styled(ButtonSecondary)`
 
 export const Content = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1rem;
+  grid-template-columns: 1fr 15rem;
+  gap: 2rem;
+  align-content: center;
 `
 
 export const ButtonsGroup = styled.div`
   justify-self: end;
   display: flex;
+  gap: 1rem;
+  grid-column: 1 / -1;
+`
+
+export const InputsGroup = styled.div`
+  display: grid;
+  grid-column: 1;
   gap: 1rem;
 `
