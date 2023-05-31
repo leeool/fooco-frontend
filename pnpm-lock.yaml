@@ -41,6 +41,9 @@ dependencies:
   date-fns:
     specifier: ^2.30.0
     version: 2.30.0
+  dotenv:
+    specifier: ^16.1.1
+    version: 16.1.1
   firebase:
     specifier: ^9.22.0
     version: 9.22.0
@@ -2776,6 +2779,11 @@ packages:
     dependencies:
       esutils: 2.0.3
     dev: true
+
+  /dotenv@16.1.1:
+    resolution: {integrity: sha512-UGmzIqXU/4b6Vb3R1Vrfd/4vGgVlB+mO+vEixOdfRhLeppkyW2BMhuK7TL8d0el+q9c4lW9qK2wZYhNLFhXYLA==}
+    engines: {node: '>=12'}
+    dev: false
 
   /electron-to-chromium@1.4.394:
     resolution: {integrity: sha512-0IbC2cfr8w5LxTz+nmn2cJTGafsK9iauV2r5A5scfzyovqLrxuLoxOHE5OBobP3oVIggJT+0JfKnw9sm87c8Hw==}
