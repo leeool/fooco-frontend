@@ -31,7 +31,7 @@ export const Content = styled.div`
   display: grid;
   grid-template-columns: 1fr 15rem;
   gap: 2rem;
-  align-content: center;
+  align-items: center;
 `
 
 export const ButtonsGroup = styled.div`
@@ -43,6 +43,7 @@ export const ButtonsGroup = styled.div`
 
 export const InputsGroup = styled.div`
   display: grid;
+  grid-template-columns: 1fr fit-content;
   grid-column: 1;
-  gap: 1rem;
+  gap: 2rem;
 `

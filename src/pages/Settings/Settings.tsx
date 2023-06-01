@@ -21,6 +21,7 @@ import {
 import { instance } from "src/api/apiCalls"
 import { UserData } from "@interface/User/ProfilePreview/styles"
 import UseToastStore from "@components/Toast/UseToastStore"
+import ChangeAvatar from "@interface/User/ChangeAvatar/ChangeAvatar"
 
 interface IPages {
   account: ReactElement
@@ -115,67 +116,75 @@ const AccountSettings = () => {
     <Content as={"form"} onSubmit={handleForm}>
       <Title size="lg">Alterar informações da conta</Title>
       <InputsGroup>
-        <Controller
-          name="email"
-          control={control}
-          defaultValue={userData.email}
-          render={({ fieldState, field }) => (
-            <Input
-              label="Novo e-email"
-              id="email"
-              defaultValue=""
-              placeholder="novoemail@exemplo.com"
-              type="email"
-              fieldState={fieldState}
-              {...field}
-            />
-          )}
-        />
-        <Controller
-          name="password"
-          control={control}
-          defaultValue=""
-          render={({ fieldState, field }) => (
-            <Input
-              label="Nova senha"
-              id="password"
-              defaultValue=""
-              placeholder="*********"
-              type="password"
-              fieldState={fieldState}
-              {...field}
-            />
-          )}
-        />
+        <div>
+          <Controller
+            name="email"
+            control={control}
+            defaultValue={userData.email}
+            render={({ fieldState, field }) => (
+              <Input
+                label="Novo e-email"
+                id="email"
+                defaultValue=""
+                placeholder="novoemail@exemplo.com"
+                type="email"
+                fieldState={fieldState}
+                {...field}
+              />
+            )}
+          />
+          <Controller
+            name="password"
+            control={control}
+            defaultValue=""
+            render={({ fieldState, field }) => (
+              <Input
+                label="Nova senha"
+                id="password"
+                defaultValue=""
+                placeholder="*********"
+                type="password"
+                fieldState={fieldState}
+                {...field}
+              />
+            )}
+          />
+        </div>
         <Controller
           name="avatarImage"
           control={control}
           defaultValue={null}
-          render={({ field: { value, onChange, ...field }, fieldState }) => (
-            <Input
-              type="file"
-              accept="image/*"
-              label="Foto de avatar"
+          render={({ field: { value, onChange } }) => (
+            <ChangeAvatar
+              src={userData.avatar_url}
+              fallback={userData.username.slice(0, 2)}
+              size={14}
               id="avatar"
               value={value?.fileName}
-              placeholder=""
               onChange={({ target }) => {
                 if (!target.files || !target.files[0]) return
                 onChange(target.files[0])
               }}
-              fieldState={fieldState}
-              {...field}
+              className={"avatar"}
             />
           )}
         />
       </InputsGroup>
-      <Avatar
-        src={userData.avatar_url}
-        delayMs={0}
-        fallback={userData.username.slice(0, 2)}
-        style={{ gridColumn: "2 / 3" }}
-        size={13}
-      />
+      {/* <Input
+        type="file"
+        accept="image/*"
+        label="Foto de avatar"
+        id="avatar"
+        value={value?.fileName}
+        placeholder=""
+        onChange={({ target }) => {
+          if (!target.files || !target.files[0]) return
+          onChange(target.files[0])
+        }}
+        fieldState={fieldState}
+        {...field}
+      /> */}
+
       <ButtonsGroup>
         <Button variant="outlined">Cancelar</Button>
         <Button variant="solid">Salvar</Button>
