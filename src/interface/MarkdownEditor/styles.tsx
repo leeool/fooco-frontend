@@ -115,7 +115,8 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
   }
 
   img {
-    max-width: 50%;
+    margin-top: 1rem;
+    max-width: 100%;
   }
 
   ol li {
