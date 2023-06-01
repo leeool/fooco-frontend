@@ -14,7 +14,6 @@ export const updateUserSchema = z
       .optional(),
     educational_place: z.string().optional(),
     about: z.string().max(300).optional(),
-    avatar_url: z.string().optional(),
   })
   .required()
 

@@ -9,7 +9,10 @@ interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   fieldState?: ControllerFieldState
 }
 
-const TextArea = ({ id, label, fieldState, ...props }: Props) => {
+const TextArea = React.forwardRef<
+  HTMLTextAreaElement,
+  React.PropsWithChildren<Props>
+>(({ id, label, fieldState, ...props }: Props) => {
   return (
     <Container>
       <label htmlFor={id}>{label}</label>
@@ -18,6 +21,8 @@ const TextArea = ({ id, label, fieldState, ...props }: Props) => {
       </TextAreaInput>
     </Container>
   )
-}
+})
+
+TextArea.displayName = "TextArea"
 
 export default TextArea

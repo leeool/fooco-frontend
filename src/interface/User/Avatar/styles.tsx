@@ -13,8 +13,8 @@ export const Image = styled(AvatarImage)<Props>`
   align-self: start;
 
   @media (max-width: 600px) {
-    width: 3rem;
-    height: 3rem;
+    width: ${({ size }) => (size ? size / 1.5 + "rem" : size)};
+    height: ${({ size }) => (size ? size / 1.5 + "rem" : size)};
   }
 `
 

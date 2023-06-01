@@ -94,21 +94,6 @@ const EditProfile = () => {
           />
           <Controller
             control={control}
-            name="avatar_url"
-            defaultValue={userData.avatar_url}
-            render={({ field, fieldState }) => (
-              <Input
-                id="avatarUrl"
-                placeholder={userData.avatar_url}
-                type="text"
-                label="URL da foto de perfil"
-                fieldState={fieldState}
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            control={control}
             name="about"
             defaultValue={userData.about}
             render={({ field, fieldState }) => (

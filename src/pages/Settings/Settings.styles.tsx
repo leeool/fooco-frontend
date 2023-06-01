@@ -6,6 +6,11 @@ export const Container = styled.div`
   grid-template-columns: 15rem 1fr;
   position: relative;
   gap: 3rem;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 `
 
 export const SideContainer = styled.div`
@@ -29,7 +34,6 @@ export const Item = styled(ButtonSecondary)`
 
 export const Content = styled.div`
   display: grid;
-  grid-template-columns: 1fr 15rem;
   gap: 2rem;
   align-items: center;
 `
@@ -42,8 +46,15 @@ export const ButtonsGroup = styled.div`
 `
 
 export const InputsGroup = styled.div`
+  min-width: 100%;
   display: grid;
-  grid-template-columns: 1fr fit-content;
-  grid-column: 1;
-  gap: 2rem;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  justify-items: center;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+  }
 `

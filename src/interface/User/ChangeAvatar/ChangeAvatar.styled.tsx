@@ -23,11 +23,12 @@ export const Container = styled.div`
     }
 
     span {
-      filter: brightness(0.7);
+      filter: brightness(0.5) ;
+      
     }
   }
 
-  span {
+  & > span {
     display: block;
     position: relative;
     grid-area: 1 / -1;
@@ -38,7 +39,7 @@ export const Container = styled.div`
     place-self: center;
     opacity: 0;
     z-index: 10;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: #fff;
     font-weight: 700;
   }

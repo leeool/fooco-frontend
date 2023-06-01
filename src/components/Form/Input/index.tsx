@@ -20,27 +20,34 @@ interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   fieldState?: ControllerFieldState
 }
 
-const index = ({
-  id,
-  label,
-  placeholder,
-  icon,
-  innerRef,
-  fieldState,
-  ...props
-}: Props) => {
-  return (
-    <InputContainer>
-      <label htmlFor={id}>{label}</label>
-      <div className="input">
-        <input id={id} placeholder={placeholder} ref={innerRef} {...props} />
-        {icon && <span className="icon">{icon}</span>}
-      </div>
-      <Error className={`error ${fieldState?.error && "active"}`}>
-        {fieldState && fieldState.error?.message}
-      </Error>
-    </InputContainer>
-  )
-}
+const index = React.forwardRef<
+  HTMLInputElement,
+  React.PropsWithChildren<Props>
+>(
+  (
+    { id, label, placeholder, icon, innerRef, fieldState, ...props },
+    forwardedRef
+  ) => {
+    return (
+      <InputContainer>
+        <label htmlFor={id}>{label}</label>
+        <div className="input">
+          <input
+            id={id}
+            placeholder={placeholder}
+            ref={forwardedRef}
+            {...props}
+          />
+          {icon && <span className="icon">{icon}</span>}
+        </div>
+        <Error className={`error ${fieldState?.error && "active"}`}>
+          {fieldState && fieldState.error?.message}
+        </Error>
+      </InputContainer>
+    )
+  }
+)
+
+index.displayName = "Input"
 
 export default index

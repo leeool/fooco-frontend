@@ -24,7 +24,6 @@ const useLoginSocialUser = () => {
   const { setToastMessage } = UseToastStore()
 
   const loginUserSocial = async (user: User) => {
-    console.log(user.uid)
     if (!user || !user.displayName || !user.email || !user.uid) return
 
     const { request: loginResponse } = await loginUser(user.email, user.uid)

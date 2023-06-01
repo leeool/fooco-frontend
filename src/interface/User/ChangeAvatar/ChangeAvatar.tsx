@@ -3,7 +3,7 @@ import React, { HTMLAttributes } from "react"
 import { Avatar } from "../Avatar"
 import { Container } from "./ChangeAvatar.styled"
 
-interface Props extends HTMLInputElement {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   src: string
   fallback: string
   styles?: React.CSSProperties

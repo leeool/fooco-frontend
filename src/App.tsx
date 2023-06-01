@@ -27,7 +27,6 @@ const App = () => {
 
   React.useEffect(() => {
     validateUser()
-    console.log(import.meta.env.VITE_DEV === "true")
   }, [])
 
   return (

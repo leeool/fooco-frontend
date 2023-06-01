@@ -13,8 +13,6 @@ const index = () => {
   const { isLoggedIn, loading } = useUserStore()
   const [hide, setHide] = React.useState(false)
 
-  console.log("header")
-
   React.useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 100) setHide(true)

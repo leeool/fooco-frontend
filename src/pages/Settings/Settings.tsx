@@ -61,13 +61,20 @@ const Settings = () => {
   )
 }
 
+interface ISettings {
+  email: string
+  password: string
+  avatar_url: File | null
+}
+
 type UpdateUser = { email: string; password: string; avatar_url: string }
 
 const AccountSettings = () => {
-  const { handleSubmit, control } = useForm()
+  const { handleSubmit, control } = useForm<ISettings>()
   const { setToastMessage } = UseToastStore()
   const { userData } = useUserStore()
-  const { mutateAsync } = useMutation({
+  const [avatar, setAvatar] = useState<string | null>(null)
+  const { mutateAsync, isLoading } = useMutation({
     mutationFn: async (data: UpdateUser) => {
       const { options, url } = USER_PUT({ ...data }, userData!.id)
 
@@ -77,36 +84,29 @@ const AccountSettings = () => {
   })
 
   const handleForm = handleSubmit(async (data) => {
-    console.log(data)
+    const imageUrl = await handleUploadImage(data.avatar_url)
 
-    const imageUrl = await handleUploadImage(data.avatarImage)
-
-    await mutateAsync(
-      {
-        email: data.email,
-        password: data.password,
-        avatar_url: imageUrl || "",
-      },
-      {
-        onSuccess: (data) => {
-          console.log(data)
-          alert("Sucesso.")
-        },
-      }
-    )
-  })
-
-  const handleUploadImage = async (file: File) => {
-    if (!file || !userData) return null
-
-    console.log(file.type)
-
-    if (file.type.split("/")[0] !== "image") {
-      setToastMessage("Algo deu errado", "Apenas imagens são aceitas!")
-      return
+    const newData = {
+      email: data.email,
+      password: data.password,
+      avatar_url: imageUrl || "",
     }
 
-    const uploadedImageURL = await uploadImage(file, userData.username)
+    Object.entries(newData).forEach(([key, value]) =>
+      value === "" ? delete newData[key as keyof ISettings] : void 0
+    )
+
+    await mutateAsync(newData, {
+      onSuccess: (data) => {
+        setToastMessage("Sucesso!", "Dados da conta atualizados.")
+      },
+    })
+  })
+
+  const handleUploadImage = async (file: File | null) => {
+    if (!file || !userData) return null
+
+    const uploadedImageURL = await uploadImage(file, userData.id)
 
     return uploadedImageURL
   }
@@ -116,16 +116,15 @@ const AccountSettings = () => {
     <Content as={"form"} onSubmit={handleForm}>
       <Title size="lg">Alterar informações da conta</Title>
       <InputsGroup>
-        <div>
+        <div style={{ width: "100%" }}>
           <Controller
             name="email"
             control={control}
-            defaultValue={userData.email}
+            defaultValue={""}
             render={({ fieldState, field }) => (
               <Input
                 label="Novo e-email"
                 id="email"
-                defaultValue=""
                 placeholder="novoemail@exemplo.com"
                 type="email"
                 fieldState={fieldState}
@@ -141,7 +140,6 @@ const AccountSettings = () => {
               <Input
                 label="Nova senha"
                 id="password"
-                defaultValue=""
                 placeholder="*********"
                 type="password"
                 fieldState={fieldState}
@@ -151,43 +149,49 @@ const AccountSettings = () => {
           />
         </div>
         <Controller
-          name="avatarImage"
+          name="avatar_url"
           control={control}
           defaultValue={null}
           render={({ field: { value, onChange } }) => (
             <ChangeAvatar
-              src={userData.avatar_url}
+              src={avatar || userData.avatar_url}
               fallback={userData.username.slice(0, 2)}
               size={14}
               id="avatar"
-              value={value?.fileName}
               onChange={({ target }) => {
-                if (!target.files || !target.files[0]) return
-                onChange(target.files[0])
+                const file = target.files?.[0]
+
+                if (!file) return
+
+                if (file.type.split("/")[0] !== "image") {
+                  setToastMessage(
+                    "Algo deu errado",
+                    "Apenas imagens são aceitas!"
+                  )
+                  return
+                }
+
+                onChange(file)
+
+                const reader = new FileReader()
+
+                reader.onloadend = () => {
+                  setAvatar(reader.result as string)
+                }
+                reader.readAsDataURL(file)
               }}
               className={"avatar"}
             />
           )}
         />
       </InputsGroup>
-      {/* <Input
-        type="file"
-        accept="image/*"
-        label="Foto de avatar"
-        id="avatar"
-        value={value?.fileName}
-        placeholder=""
-        onChange={({ target }) => {
-          if (!target.files || !target.files[0]) return
-          onChange(target.files[0])
-        }}
-        fieldState={fieldState}
-        {...field}
-      /> */}
-
       <ButtonsGroup>
-        <Button variant="outlined">Cancelar</Button>
-        <Button variant="solid">Salvar</Button>
+        <Button variant="outlined" type="button">
+          Cancelar
+        </Button>
+        <Button variant="solid" disabled={isLoading}>
+          {isLoading ? "Carregando..." : "Salvar"}
+        </Button>
       </ButtonsGroup>
     </Content>
   )
