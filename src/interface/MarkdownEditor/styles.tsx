@@ -125,6 +125,7 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
 
   p {
     font-size: 1.1rem;
+    margin-top: 1rem;
 
     &:first-child {
       margin-top: 0;

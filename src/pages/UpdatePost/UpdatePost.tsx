@@ -112,10 +112,7 @@ const UpdatePost = () => {
           )}
         />
 
-        <Markdown
-          value={(post || state).content}
-          onChange={(e) => setValue(e)}
-        />
+        <Markdown value={value} onChange={(e) => setValue(e)} />
         <Controller
           control={control}
           name="tags"
@@ -132,7 +129,7 @@ const UpdatePost = () => {
           )}
         />
         <Buttons>
-          <Button variant="outlined" onClick={() => nav(-1)}>
+          <Button variant="outlined" onClick={() => nav(-1)} type="button">
             Cancelar
           </Button>
           <Button variant="solid" disabled={isLoading}>
