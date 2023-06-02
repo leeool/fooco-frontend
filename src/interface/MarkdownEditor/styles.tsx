@@ -15,6 +15,10 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
     &:not():first-child {
       margin: 1rem 0;
     }
+
+    &:first-child {
+      margin-top: 0;
+    }
   }
 
   ${({ selectedTheme }) => (selectedTheme === "dark" ? darkTheme : lightTheme)}

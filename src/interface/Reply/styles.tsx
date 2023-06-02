@@ -42,7 +42,6 @@ export const Info = styled.div`
 export const Content = styled.div`
   font-size: 1.2rem;
   line-height: 1.6;
-  margin-top: 2rem;
   font-family: "Rubik", sans-serif;
 
   @media (max-width: 600px) {
