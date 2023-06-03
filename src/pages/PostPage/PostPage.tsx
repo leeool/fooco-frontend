@@ -202,8 +202,8 @@ const PostPage = () => {
           Responder
         </ButtonSecondary>
         <Tags>
-          {data.tags.map((tag) => (
-            <span key={tag} onClick={() => setSearch(tag)}>
+          {data.tags.map((tag, index) => (
+            <span key={tag + index} onClick={() => setSearch(tag)}>
               <Link to={"/app/procurar?q=" + tag}>{tag}</Link>
             </span>
           ))}
@@ -246,7 +246,7 @@ const HandlePost = ({ post }: { post: IUserPosts }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="info-btn">
-        <ButtonSecondary style={{ padding: "0" }}>
+        <ButtonSecondary style={{ padding: "0" }} as={"div"}>
           <Ellipsis />
         </ButtonSecondary>
       </DropdownMenuTrigger>

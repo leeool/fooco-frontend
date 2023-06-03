@@ -1,6 +1,5 @@
 import { Button, ButtonSecondary, Input } from "@components/Form"
 import { Title } from "@components/Text/Title"
-import { Avatar } from "@interface/index"
 import React, { ReactElement, useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import { useMutation } from "react-query"
@@ -19,7 +18,6 @@ import {
   SideNav,
 } from "./Settings.styles"
 import { instance } from "src/api/apiCalls"
-import { UserData } from "@interface/User/ProfilePreview/styles"
 import UseToastStore from "@components/Toast/UseToastStore"
 import ChangeAvatar from "@interface/User/ChangeAvatar/ChangeAvatar"
 
@@ -97,7 +95,7 @@ const AccountSettings = () => {
     )
 
     await mutateAsync(newData, {
-      onSuccess: (data) => {
+      onSuccess: () => {
         setToastMessage("Sucesso!", "Dados da conta atualizados.")
       },
     })
@@ -152,7 +150,7 @@ const AccountSettings = () => {
           name="avatar_url"
           control={control}
           defaultValue={null}
-          render={({ field: { value, onChange } }) => (
+          render={({ field: { onChange } }) => (
             <ChangeAvatar
               src={avatar || userData.avatar_url}
               fallback={userData.username.slice(0, 2)}

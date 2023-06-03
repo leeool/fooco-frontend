@@ -112,6 +112,7 @@ export const Item = styled(DropdownMenuItem)`
   svg {
     width: 1.5rem;
     height: 1.5rem;
+    stroke-width: 2px;
   }
 
   button {

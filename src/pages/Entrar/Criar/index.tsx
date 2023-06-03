@@ -16,6 +16,7 @@ import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createUserSchema } from "src/schemas"
 import isError from "src/helpers/isError"
+import { Arrow } from "@assets/index"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -228,7 +229,13 @@ const index = () => {
               type="submit"
               disabled={loading || loginLoading}
             >
-              {loading || loginLoading ? "Carregando..." : "Avançar"}
+              {loading || loginLoading ? (
+                "Carregando..."
+              ) : (
+                <>
+                  Avançar <Arrow />
+                </>
+              )}
             </Button>
           </motion.form>
         ) : (

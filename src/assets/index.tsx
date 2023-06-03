@@ -17,6 +17,9 @@ import { ReactComponent as FoquinhoIcon } from "./icons/foquinhoIcon.svg"
 import { ReactComponent as Ellipsis } from "./icons/ellipsis.svg"
 import { ReactComponent as Trash } from "./icons/trash.svg"
 import { ReactComponent as Logo } from "./logo.svg"
+import { ReactComponent as Bars } from "./icons/bars.svg"
+import { ReactComponent as Arrow } from "./icons/arrow.svg"
+import { ReactComponent as DoorOut } from "./icons/door-out.svg"
 
 export {
   Hat,
@@ -38,4 +41,7 @@ export {
   Ellipsis,
   Trash,
   Logo,
+  Bars,
+  Arrow,
+  DoorOut,
 }

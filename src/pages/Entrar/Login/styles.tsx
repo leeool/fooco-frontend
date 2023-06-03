@@ -8,10 +8,6 @@ export const Container = styled.section`
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.8rem;
-
-    button {
-      text-align: center;
-    }
   }
 
   & p {

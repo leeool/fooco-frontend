@@ -11,6 +11,7 @@ import useUserStore from "src/stores/UseUserStore"
 import UseFetch from "src/hooks/UseFetch"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
 import UseToastStore from "@components/Toast/UseToastStore"
+import { Arrow } from "@assets/index"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -70,7 +71,13 @@ const index = () => {
           required
         />
         <Button variant="solid" disabled={loading || loginLoading}>
-          {loading || loginLoading ? "Carregando..." : "Entrar"}
+          {loading || loginLoading ? (
+            "Carregando..."
+          ) : (
+            <>
+              Entrar <Arrow />
+            </>
+          )}
         </Button>
       </form>
 

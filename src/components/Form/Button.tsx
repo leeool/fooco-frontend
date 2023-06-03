@@ -25,10 +25,13 @@ export const ButtonContainer = styled.button`
 
 export const Button = styled(ButtonContainer)<Props>`
   border: none;
+  display: flex;
+  gap: 1rem;
   padding: 0.4rem 1rem;
-  border-radius: 20px;
+  border-radius: 1.4rem;
   font-weight: 700;
   background-color: ${({ theme }) => theme.backgroundColor.primary};
+  width: 100%;
 
   &:disabled {
     cursor: wait;
@@ -46,7 +49,13 @@ export const Button = styled(ButtonContainer)<Props>`
 
   @media (max-width: 600px) {
     padding: 0.2rem 0.5rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
+    gap: 0.5rem;
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 
   ${variant({

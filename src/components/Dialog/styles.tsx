@@ -2,6 +2,9 @@ import styled from "styled-components"
 import * as Dialog from "@radix-ui/react-dialog"
 
 export const Trigger = styled(Dialog.Trigger)`
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
   cursor: pointer;
   background-color: transparent;
   position: relative;

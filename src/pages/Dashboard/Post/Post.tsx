@@ -74,8 +74,8 @@ const Post = ({ post }: Props) => {
         </Details>
       </PostInfo>
       <Tags>
-        {post.tags.map((tag) => (
-          <span key={tag} onClick={() => setSearch(tag)}>
+        {post.tags.map((tag, index) => (
+          <span key={tag + index} onClick={() => setSearch(tag)}>
             <Link to={"/app/procurar?q=" + tag}>{tag}</Link>
           </span>
         ))}

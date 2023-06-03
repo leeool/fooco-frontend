@@ -1,12 +1,39 @@
-import { Link } from "react-router-dom"
-import styled, { AnyStyledComponent } from "styled-components"
+import styled from "styled-components"
 
-export const Container = styled.div`
+export const MenuContainer = styled.div`
   display: grid;
 `
 
 export const MenuTrigger = styled.button`
+  display: flex;
   cursor: pointer;
+  background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
+  border-radius: 0.5rem;
+  padding: 0.1rem;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+    stroke: ${({ theme }) => theme.textColor.title};
+    stroke-width: 2;
+  }
+
+  &[data-state="open"] {
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
+    svg {
+      stroke: #fff;
+    }
+  }
+`
+
+export const Background = styled.div`
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 100cqh;
+  background-color: transparent;
+  z-index: 1;
 `
 
 export const Content = styled.nav`
@@ -16,14 +43,36 @@ export const Content = styled.nav`
   top: 100%;
   width: 100%;
   display: flex;
-  gap: 1rem;
+  gap: 0.8rem;
   flex-direction: column;
-  padding: 0.5rem;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+  z-index: 10;
+  justify-items: center;
+  overflow: hidden;
 
-  & > * {
-    background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
+  &[data-state="open"] {
     padding: 0.5rem;
-    height: fit-content;
-    font-size: 1.25rem;
+    max-height: 20rem;
+  }
+`
+
+export const MenuItem = styled.span`
+  background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
+  padding: 0.5rem;
+  height: fit-content;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.textColor.base};
+  cursor: pointer;
+  border-radius: 0.5rem;
+  color: ${({ theme }) => theme.textColor.title};
+  width: 100%;
+  display: block;
+
+  a {
+    display: block;
+    color: inherit;
+    width: 100%;
   }
 `

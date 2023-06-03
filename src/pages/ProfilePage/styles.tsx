@@ -24,8 +24,8 @@ export const UserInfo = styled.div`
   @media (max-width: 600px) {
     gap: 1rem;
     padding: 1rem;
-    grid-template-columns: 4rem 1fr;
-    grid-template-rows: 4rem;
+    grid-template-columns: 6rem 1fr;
+    grid-template-rows: 6rem;
   }
 `
 
