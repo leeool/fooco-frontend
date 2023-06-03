@@ -13,8 +13,6 @@ export const Container = styled.section`
 
 export const UserInfo = styled.div`
   display: grid;
-  grid-template-columns: 6rem 1fr;
-  grid-template-rows: 6rem;
   gap: 1rem;
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
   align-content: center;
@@ -24,13 +22,28 @@ export const UserInfo = styled.div`
   @media (max-width: 600px) {
     gap: 1rem;
     padding: 1rem;
-    grid-template-columns: 6rem 1fr;
-    grid-template-rows: 6rem;
+    grid-template-columns: auto 1fr;
+  }
+`
+
+export const ProfileItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: ${({ theme }) => theme.textColor.paragraph};
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+
+    path {
+      stroke: ${({ theme }) => theme.textColor.title};
+    }
   }
 `
 
 export const UserEdit = styled.div`
-  width: 3rem;
   cursor: pointer;
   border-radius: 0.6rem;
   transition: none;
@@ -39,6 +52,7 @@ export const UserEdit = styled.div`
   place-items: center;
   justify-content: center;
   width: min-content;
+  justify-self: flex-end;
 
   button {
     justify-content: center;
@@ -64,13 +78,16 @@ export const UserEdit = styled.div`
   }
 
   @media (max-width: 600px) {
-    width: 2.5rem;
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 `
 
 export const About = styled.p`
   grid-column: 1 / -1;
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   color: ${({ theme }) => theme.textColor.paragraph};
 
   @media (max-width: 600px) {
@@ -130,5 +147,9 @@ export const Buttons = styled.div`
     width: 100%;
     height: 2px;
     background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
+  }
+
+  @media (max-width: 600px) {
+    gap: 0.5rem;
   }
 `

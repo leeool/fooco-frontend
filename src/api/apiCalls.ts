@@ -1,6 +1,5 @@
 import axios from "axios"
 
-// const ENDPOINT = "https://fooco-backend.cyclic.app"
 const ENDPOINT = import.meta.env.VITE_ENDPOINT
 
 export const instance = axios.create({

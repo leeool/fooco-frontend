@@ -4,7 +4,14 @@ import { useQuery } from "react-query"
 import { useParams } from "react-router"
 import { instance } from "src/api/apiCalls"
 import isError from "src/helpers/isError"
-import { About, Buttons, Container, UserEdit, UserInfo } from "./styles"
+import {
+  About,
+  Buttons,
+  Container,
+  ProfileItem,
+  UserEdit,
+  UserInfo,
+} from "./styles"
 import { PostContainer } from "../Dashboard/Feed/styles"
 import Post from "../Dashboard/Post/Post"
 import { UserNotFound } from "../NotFound"
@@ -13,6 +20,9 @@ import useUserStore from "src/stores/UseUserStore"
 import { Avatar } from "@interface/User/Avatar"
 import EditProfile from "./EditProfile"
 import { ButtonSecondary } from "@components/Form"
+import { Hat, Point } from "@assets/index"
+import { Points } from "@interface/User/ProfilePreview/styles"
+import getUserPoints from "src/helpers/getUserPoints"
 
 const ProfilePage = () => {
   const { owner } = useParams()
@@ -44,23 +54,50 @@ const ProfilePage = () => {
   return (
     <Container>
       <UserInfo>
-        <Avatar
-          src={data.avatar_url}
-          delayMs={0}
-          fallback={data.username.slice(0, 2)}
-          size={6}
-        />
         <div
           style={{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: "0.5rem",
+            width: "100%",
+            gridColumn: "1 / -1",
           }}
         >
-          <Title size="lg">@{data.username}</Title>
+          <Avatar
+            src={data.avatar_url}
+            delayMs={0}
+            fallback={data.username.slice(0, 2)}
+            size={6}
+          />
+          <Title
+            size="lg"
+            style={{
+              display: "flex",
+              gap: "1rem",
+              alignItems: "center",
+              flex: "1",
+            }}
+          >
+            @{data.username}
+            <Points style={{ width: "fit-content", margin: "0" }}>
+              <Point />
+              {getUserPoints(data)}
+            </Points>
+          </Title>
           <UserEdit>{userOwnProfile ? <EditProfile /> : null}</UserEdit>
         </div>
-        {data.about.length > 0 ? <About>{data.about}</About> : null}
+        <div style={{ gridColumn: "1 / -1", display: "grid", gap: "1rem" }}>
+          {data.about.length > 0 ? <About>{data.about}</About> : null}
+          <ProfileItem>
+            {data.educational_place && (
+              <>
+                <Hat />
+                {data.educational_place}
+              </>
+            )}
+          </ProfileItem>
+        </div>
       </UserInfo>
       <Buttons>
         <ButtonSecondary

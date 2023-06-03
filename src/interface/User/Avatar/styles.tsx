@@ -33,7 +33,11 @@ export const Fallback = styled(AvatarFallback)<Props>`
   height: ${({ size }) => size + "rem"};
   width: ${({ size }) => size + "rem"};
 
-
+  @media (max-width: 600px) {
+    font-size: ${({ size }) => (size ? size / 4 + "rem" : 2)};
+    width: ${({ size }) => (size ? size / 1.5 + "rem" : size)};
+    height: ${({ size }) => (size ? size / 1.5 + "rem" : size)};
+  }
 `
 
 export const Root = styled(Avatar)`
