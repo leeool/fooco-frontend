@@ -2,6 +2,10 @@ import styled from "styled-components"
 
 export const MenuContainer = styled.div`
   display: grid;
+
+  a {
+    width: 100%;
+  }
 `
 
 export const MenuTrigger = styled.button`
@@ -50,6 +54,7 @@ export const Content = styled.nav`
   z-index: 10;
   justify-items: center;
   overflow: hidden;
+  border-bottom: 1px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
 
   &[data-state="open"] {
     padding: 0.5rem;

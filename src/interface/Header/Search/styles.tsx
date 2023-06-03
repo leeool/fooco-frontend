@@ -3,9 +3,11 @@ import styled from "styled-components"
 export const Container = styled.div`
   max-width: 31rem;
   width: 100%;
+  flex: 1 0 10rem;
 
-  @media (max-width: 1000px) {
+  @media (max-width: 850px) {
     max-width: 100%;
+    flex: 0;
   }
 `
 

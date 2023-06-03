@@ -37,7 +37,7 @@ import Skeleton from "react-loading-skeleton"
 
 const index = () => {
   const { userData, loading } = useUserStore()
-  const match = UseMatchWindowSize(600)
+  const match = UseMatchWindowSize(850)
 
   if (loading && !match) return <DesktopLoading />
   else if (loading && match) return <MobileLoading />
@@ -49,36 +49,39 @@ const index = () => {
       {match ? (
         <Menu />
       ) : (
-        <Buttons>
-          <Link to={"/app"}>
-            <Home />
-            Início
-          </Link>
-          <Link to={"app/publicar"}>
-            <Plus />
-            Publicar
-          </Link>
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <User />
-              Perfil
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuGroup>
-                <Link to={`/app/${userData?.username}`}>
-                  <DropdownMenuItem>Perfil</DropdownMenuItem>
-                </Link>
-                <Link to={"/app/salvos"}>
-                  <DropdownMenuItem>Salvos</DropdownMenuItem>
-                </Link>
-                <Link to={"/app/configs"}>
-                  <DropdownMenuItem>Configurações</DropdownMenuItem>
-                </Link>
-                <LogoutDialog />
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </Buttons>
+        <>
+          <Search />
+          <Buttons>
+            <Link to={"/app"}>
+              <Home />
+              Início
+            </Link>
+            <Link to={"app/publicar"}>
+              <Plus />
+              Publicar
+            </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <User />
+                Perfil
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuGroup>
+                  <Link to={`/app/${userData?.username}`}>
+                    <DropdownMenuItem>Perfil</DropdownMenuItem>
+                  </Link>
+                  <Link to={"/app/salvos"}>
+                    <DropdownMenuItem>Salvos</DropdownMenuItem>
+                  </Link>
+                  <Link to={"/app/configs"}>
+                    <DropdownMenuItem>Configurações</DropdownMenuItem>
+                  </Link>
+                  <LogoutDialog />
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </Buttons>
+        </>
       )}
     </Container>
   )
