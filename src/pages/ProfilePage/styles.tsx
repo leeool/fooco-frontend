@@ -32,13 +32,27 @@ export const UserInfo = styled.div`
 export const UserEdit = styled.div`
   width: 3rem;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 0.6rem;
   transition: none;
-  padding: 0.5rem;
+  padding: 0.3rem;
+  display: flex;
+  place-items: center;
+  justify-content: center;
+  width: min-content;
+
+  button {
+    justify-content: center;
+    width: min-content;
+  }
+
+  background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
 
   svg {
     color: ${({ theme }) => theme.backgroundColor.secondary};
     stroke-width: 2px;
+    width: 2rem;
+    height: 2rem;
+    justify-self: center;
   }
 
   &:hover {

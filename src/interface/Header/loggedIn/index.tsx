@@ -71,7 +71,7 @@ const index = () => {
                 <Link to={"/app/salvos"}>
                   <DropdownMenuItem>Salvos</DropdownMenuItem>
                 </Link>
-                <Link to={"/app/settings"}>
+                <Link to={"/app/configs"}>
                   <DropdownMenuItem>Configurações</DropdownMenuItem>
                 </Link>
                 <LogoutDialog />
@@ -120,14 +120,18 @@ const Menu = () => {
         <Link to={`/app/${userData?.username}`}>
           <MenuItem>Perfil</MenuItem>
         </Link>
-        <Link to={`/app/settings`}>
+        <Link to={`/app/configs`}>
           <MenuItem>Configurações</MenuItem>
         </Link>
-        <MenuItem onClick={logoutUser}>Sair</MenuItem>
+        <MenuItem onClick={logoutUser}>
+          <DoorOut />
+          Sair
+        </MenuItem>
       </Content>
     </MenuContainer>
   )
 }
+
 const LogoutDialog = () => {
   const ref = React.useRef<HTMLDivElement>(null)
   const { logoutUser } = useUserStore()

@@ -95,10 +95,10 @@ const router = createBrowserRouter([
             ),
           },
           {
-            path: "settings",
+            path: "configs",
             element: (
               <React.Suspense>
-                <Settings />,
+                <Settings />
               </React.Suspense>
             ),
           },

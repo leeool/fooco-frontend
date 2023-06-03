@@ -61,18 +61,33 @@ export const MenuItem = styled.span`
   background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
   padding: 0.5rem;
   height: fit-content;
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   font-weight: 500;
   color: ${({ theme }) => theme.textColor.base};
   cursor: pointer;
   border-radius: 0.5rem;
   color: ${({ theme }) => theme.textColor.title};
   width: 100%;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: none;
+  height: 2.5rem;
 
   a {
     display: block;
     color: inherit;
     width: 100%;
+  }
+
+  svg {
+    width: 1.5rem;
+    height: 100%;
+    stroke-width: 2;
+  }
+
+  &:hover {
+    background-color: ${({ theme }) => theme.backgroundColor.secondary};
+    color: #fff;
   }
 `

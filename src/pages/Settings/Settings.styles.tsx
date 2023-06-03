@@ -4,8 +4,8 @@ import styled from "styled-components"
 export const Container = styled.div`
   display: grid;
   grid-template-columns: 15rem 1fr;
-  position: relative;
   gap: 3rem;
+  position: relative;
 
   @media (max-width: 1000px) {
     grid-template-columns: 1fr;
@@ -16,7 +16,7 @@ export const Container = styled.div`
 export const SideContainer = styled.div`
   display: grid;
   gap: 1rem;
-  top: 0rem;
+  top: 5rem;
   position: sticky;
   height: fit-content;
   /* top: 1rem; */
@@ -55,6 +55,5 @@ export const InputsGroup = styled.div`
   @media (max-width: 900px) {
     grid-template-columns: 1fr;
     gap: 1rem;
-
   }
 `
