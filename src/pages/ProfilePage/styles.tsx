@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const Container = styled.section`
   display: grid;
-  gap: 5rem;
+  gap: 2rem;
   max-width: 70rem;
   margin: 0 auto;
 
@@ -100,4 +100,21 @@ export const LoadingEdit = styled.div`
   left: 50%;
   translate: -50% -50%;
   z-index: 100;
+`
+
+export const Buttons = styled.div`
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  justify-self: start;
+  align-items: center;
+  gap: 1rem;
+  justify-items: start;
+  width: 100%;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: ${({ theme }) => theme.backgroundColor.detailsAlt};
+  }
 `

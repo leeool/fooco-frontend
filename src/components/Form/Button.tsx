@@ -137,6 +137,7 @@ export const ButtonSecondary = styled(ButtonContainer)`
 
   &[data-active="true"] {
     background-color: ${({ theme }) => theme.backgroundColor.secondary};
+    color: #fff;
 
     path {
       fill: #fff;

@@ -12,6 +12,7 @@ import { instance, POST_POST } from "src/api/apiCalls"
 import isError from "src/helpers/isError"
 import UseToastStore from "@components/Toast/UseToastStore"
 import { useMutation } from "react-query"
+import { AxiosError } from "axios"
 
 const CreatePost = () => {
   const [value, setValue] = React.useState("")
@@ -50,9 +51,12 @@ const CreatePost = () => {
           setToastMessage("Sucesso", "Publicação criada com sucesso!")
         },
         onError(error) {
-          if (isError(error) || error) {
+          if (error instanceof AxiosError) {
             window.scrollTo({ top: 0, behavior: "smooth" })
-            setToastMessage("Erro", "Não foi possível publicar")
+            const errorMessage =
+              (error.response?.data.error as string) ||
+              "Não foi possível criar a publicação"
+            setToastMessage("Erro", errorMessage)
             return
           }
         },

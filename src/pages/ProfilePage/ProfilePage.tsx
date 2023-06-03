@@ -4,21 +4,21 @@ import { useQuery } from "react-query"
 import { useParams } from "react-router"
 import { instance } from "src/api/apiCalls"
 import isError from "src/helpers/isError"
-import { About, Container, UserEdit, UserInfo } from "./styles"
+import { About, Buttons, Container, UserEdit, UserInfo } from "./styles"
 import { PostContainer } from "../Dashboard/Feed/styles"
-import SkeletonLoad from "src/helpers/Skeleton"
-import Skeleton from "react-loading-skeleton"
 import Post from "../Dashboard/Post/Post"
 import { UserNotFound } from "../NotFound"
 import ReactLoading from "react-loading"
 import useUserStore from "src/stores/UseUserStore"
 import { Avatar } from "@interface/User/Avatar"
 import EditProfile from "./EditProfile"
+import { ButtonSecondary } from "@components/Form"
 
 const ProfilePage = () => {
   const { owner } = useParams()
+  const [page, setPage] = React.useState<"posts" | "saved">("posts")
   const { data, isLoading } = useQuery<IUserData | IError>(
-    ["owner", owner],
+    ["owner", owner, page],
     () => instance(`/user/${owner}`, { method: "GET" }).then((res) => res.data)
   )
   const { userData } = useUserStore()
@@ -62,34 +62,38 @@ const ProfilePage = () => {
         </div>
         {data.about.length > 0 ? <About>{data.about}</About> : null}
       </UserInfo>
-
-      {data.posts.length > 0 ? (
-        <PostContainer>
-          {isLoading ? (
-            <LoadingPosts />
-          ) : (
-            data.posts
-              ?.map((post) => <Post post={post} key={post.id} />)
-              .reverse()
-          )}
-        </PostContainer>
+      <Buttons>
+        <ButtonSecondary
+          onClick={() => setPage("posts")}
+          data-active={page === "posts"}
+        >
+          Publicações
+        </ButtonSecondary>
+        <ButtonSecondary
+          onClick={() => setPage("saved")}
+          data-active={page === "saved"}
+        >
+          Salvos
+        </ButtonSecondary>
+        <span></span>
+      </Buttons>
+      {page === "posts" ? (
+        <UserPosts data={data.posts} />
       ) : (
-        <Title size="md">
-          {data.username} ainda não fez nenhuma publicação /:
-        </Title>
+        <UserPosts data={data.savedPosts} />
       )}
     </Container>
   )
 }
 
-export default ProfilePage
+const UserPosts = ({ data: posts }: { data: IUserPosts[] }) => {
+  return posts.length > 0 ? (
+    <PostContainer>
+      {posts?.map((post) => <Post post={post} key={post.id} />).reverse()}
+    </PostContainer>
+  ) : (
+    <Title size="md">Ainda não há nada aqui /:</Title>
+  )
+}
 
-const LoadingPosts = () => (
-  <SkeletonLoad>
-    <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
-    <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
-    <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
-    <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
-    <Skeleton width={"100%"} count={1} height={150} borderRadius={10} />
-  </SkeletonLoad>
-)
+export default ProfilePage
