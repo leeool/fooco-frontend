@@ -11,6 +11,7 @@ export const Image = styled(AvatarImage)<Props>`
   height: ${({ size }) => size + "rem"};
   width: ${({ size }) => size + "rem"};
   align-self: start;
+  object-fit: cover;
 
   @media (max-width: 600px) {
     width: ${({ size }) => (size ? size / 1.5 + "rem" : size)};

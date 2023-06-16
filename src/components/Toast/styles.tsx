@@ -10,23 +10,23 @@ export const ViewPort = styled(Toast.Viewport)`
   z-index: 9999;
   padding: ${viewportPadding};
 
-  @media (max-width: 600px) {
+  @media (max-width: 768px) {
     inset: 0;
-    top: 0;
+    top: 8%;
     left: unset;
+    padding: 0 0.5rem;
   }
 `
 
 export const Root = styled(Toast.Root)`
   background-color: ${({ theme }) => theme.backgroundColor.primary};
   display: grid;
-  padding: 1rem 1rem;
+  grid-template-columns: auto 1fr;
   border-radius: 10px;
-  gap: 0.3rem;
-  column-gap: 1rem;
   align-items: center;
-  border: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
-  max-width: 400px;
+  border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
+  width: 25rem;
+  overflow: hidden;
 
   &[data-state="open"] {
     animation: slideIn 500ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -75,6 +75,10 @@ export const Root = styled(Toast.Root)`
       transform: translateX(calc(100% + ${viewportPadding}));
     }
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 export const Title = styled(Toast.Title)`
@@ -93,4 +97,32 @@ export const Description = styled(Toast.Description)`
   @media (max-width: 600px) {
     font-size: 0.8rem;
   }
+`
+
+export const Icon = styled.span`
+  display: flex;
+  background-color: #00b100;
+  height: 100%;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  place-content: center;
+  place-items: center;
+  color: #fff;
+
+  &[data-type="success"] {
+    background-color: #4aa351;
+  }
+
+  &[data-type="warning"] {
+    background-color: #f5c544;
+    color: #212121;
+  }
+
+  &[data-type="error"] {
+    background-color: #cc494d;
+  }
+`
+
+export const Content = styled.div`
+  padding: 0.5rem;
 `

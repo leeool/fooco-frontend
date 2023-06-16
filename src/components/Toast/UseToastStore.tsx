@@ -1,20 +1,30 @@
 import { create } from "zustand"
 
 interface Props {
-  openToast: boolean
-  setToastOpen: () => void
+  open: boolean
+  setOpen: () => void
   toastContent: { title: string; message: string }
-  setToastMessage: (title: string, message: string) => void
+  setToastMessage: (
+    title: string,
+    message: string,
+    type: "success" | "warning" | "error"
+  ) => void
+  type: "success" | "warning" | "error"
 }
 
 const UseToastStore = create<Props>((set, get) => ({
-  openToast: false,
-  setToastOpen: () => set((state) => ({ openToast: !state.openToast })),
+  open: false,
+  setOpen: () => set((state) => ({ open: !state.open })),
   toastContent: { title: "", message: "" },
-  setToastMessage: (title: string, message: string) => {
-    const setOpen = get().setToastOpen
+  type: "error",
+  setToastMessage: (
+    title: string,
+    message: string,
+    type: "success" | "warning" | "error"
+  ) => {
+    const setOpen = get().setOpen
     setOpen()
-    set(() => ({ toastContent: { title, message } }))
+    set(() => ({ toastContent: { title, message, type } }))
   },
 }))
 

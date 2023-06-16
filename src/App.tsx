@@ -8,7 +8,6 @@ import { RouterProvider } from "react-router"
 import router from "./routes"
 import Toast from "@components/Toast"
 import useUserStore from "./stores/UseUserStore"
-import UseToastStore from "@components/Toast/UseToastStore"
 import { QueryClient, QueryClientProvider } from "react-query"
 import WIP from "./pages/WIP/WIP"
 
@@ -19,7 +18,6 @@ const queryClient = new QueryClient({
 const App = () => {
   const { localTheme, selectedTheme } = themeStore()
   const { validateUser } = useUserStore()
-  const { toastContent } = UseToastStore()
 
   React.useEffect(() => {
     localTheme()
@@ -39,7 +37,7 @@ const App = () => {
           <RouterProvider router={router} />
         )}
 
-        <Toast title={toastContent.title} description={toastContent.message} />
+        <Toast />
       </ThemeProvider>
     </QueryClientProvider>
   )
