@@ -27,7 +27,7 @@ import getUserPoints from "src/helpers/getUserPoints"
 const ProfilePage = () => {
   const { owner } = useParams()
   const [page, setPage] = React.useState<"posts" | "saved">("posts")
-  const { data, isLoading } = useQuery<IUserData | IError>(
+  const { data, isLoading, refetch } = useQuery<IUserData | IError>(
     ["owner", owner, page],
     () => instance(`/user/${owner}`, { method: "GET" }).then((res) => res.data)
   )
@@ -85,7 +85,11 @@ const ProfilePage = () => {
               {getUserPoints(data)}
             </Points>
           </Title>
-          <UserEdit>{userOwnProfile ? <EditProfile /> : null}</UserEdit>
+          {userOwnProfile ? (
+            <UserEdit>
+              <EditProfile refetch={refetch} />
+            </UserEdit>
+          ) : null}
         </div>
         <div style={{ gridColumn: "1 / -1", display: "grid", gap: "1rem" }}>
           {data.about.length > 0 ? <About>{data.about}</About> : null}

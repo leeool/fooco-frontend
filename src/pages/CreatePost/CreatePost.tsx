@@ -9,7 +9,6 @@ import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { createPostSchema } from "src/schemas"
 import { instance, POST_POST } from "src/api/apiCalls"
-import isError from "src/helpers/isError"
 import UseToastStore from "@components/Toast/UseToastStore"
 import { useMutation } from "react-query"
 import { AxiosError } from "axios"
@@ -48,7 +47,11 @@ const CreatePost = () => {
         onSuccess(data) {
           console.log(data)
           nav(`/app/${userData.username}/${data.slug}`)
-          setToastMessage("Sucesso", "Publicação criada com sucesso!")
+          setToastMessage(
+            "Sucesso",
+            "Publicação criada com sucesso!",
+            "success"
+          )
         },
         onError(error) {
           if (error instanceof AxiosError) {
@@ -56,8 +59,7 @@ const CreatePost = () => {
             const errorMessage =
               (error.response?.data.error as string) ||
               "Não foi possível criar a publicação"
-            setToastMessage("Erro", errorMessage)
-            return
+            setToastMessage("Erro", errorMessage, "error")
           }
         },
       }

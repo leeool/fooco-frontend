@@ -1,20 +1,21 @@
 import React from "react"
 import { useLocation, useNavigate } from "react-router"
 import { USER_PUT } from "src/api/apiCalls"
-import UseFetch from "src/hooks/UseFetch"
 import useUserStore from "src/stores/UseUserStore"
 import isError from "./isError"
+import { useMutation } from "react-query"
+import mutateProfileEdit from "src/mutations/mutateProfileEdit"
 
 const UseSavePost = () => {
   const { userData, isLoggedIn, savedPosts, setSavedPosts } = useUserStore()
   const nav = useNavigate()
-  const { request, loading } = UseFetch()
   const { hash } = useLocation()
+  const { mutate, isLoading } = useMutation(mutateProfileEdit(userData?.id))
 
   const handleSavePost = async (e: React.MouseEvent<HTMLButtonElement>) => {
     const postId = e.currentTarget.dataset.id
 
-    if (loading) return
+    if (isLoading) return
 
     if (!postId || !userData || !isLoggedIn) {
       nav("/entrar")
@@ -25,18 +26,18 @@ const UseSavePost = () => {
       const removePost = savedPosts.filter((id) => id !== postId)
       setSavedPosts(removePost)
 
-      const { options, url } = USER_PUT(
-        { savedPostsId: removePost },
-        userData.id
-      )
-
-      await request(url, options)
+      mutate({
+        modifiedData: { savedPostsId: removePost },
+        userId: userData.id,
+      })
     } else {
       const savePost = savedPosts.concat(postId)
       setSavedPosts(savePost)
 
-      const { options, url } = USER_PUT({ savedPostsId: savePost }, userData.id)
-      await request(url, options)
+      mutate({
+        modifiedData: { savedPostsId: savePost },
+        userId: userData.id,
+      })
     }
   }
 
@@ -48,7 +49,7 @@ const UseSavePost = () => {
     setSavedPosts([...new Set([...postsId, ...(savedPosts || [])])])
   }, [userData, hash])
 
-  return { handleSavePost, loading }
+  return { handleSavePost, loading: isLoading }
 }
 
 export default UseSavePost

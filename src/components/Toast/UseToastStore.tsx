@@ -16,7 +16,7 @@ const UseToastStore = create<Props>((set, get) => ({
   open: false,
   setOpen: () => set((state) => ({ open: !state.open })),
   toastContent: { title: "", message: "" },
-  type: "error",
+  type: "warning",
   setToastMessage: (
     title: string,
     message: string,
@@ -24,7 +24,7 @@ const UseToastStore = create<Props>((set, get) => ({
   ) => {
     const setOpen = get().setOpen
     setOpen()
-    set(() => ({ toastContent: { title, message, type } }))
+    set(() => ({ toastContent: { title, message }, type }))
   },
 }))
 

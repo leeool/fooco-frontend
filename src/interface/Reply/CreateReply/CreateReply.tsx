@@ -4,10 +4,11 @@ import UseToastStore from "@components/Toast/UseToastStore"
 import React from "react"
 import { useNavigate } from "react-router"
 import isError from "src/helpers/isError"
-import UseFetch from "src/hooks/UseFetch"
 import useUserStore from "src/stores/UseUserStore"
 import { Buttons, Container } from "./styles"
-import { POST_REPLY } from "src/api/apiCalls"
+import { POST_REPLY, instance } from "src/api/apiCalls"
+import { useMutation } from "react-query"
+import { AxiosError } from "axios"
 
 interface Props {
   setNewReply: React.Dispatch<React.SetStateAction<IReply[] | null>>
@@ -16,11 +17,39 @@ interface Props {
 }
 
 const CreateReply = ({ setNewReply, postId, setIsReplying }: Props) => {
-  const { request, loading } = UseFetch<IReply>()
   const { userData, isLoggedIn } = useUserStore()
   const { setToastMessage } = UseToastStore()
   const nav = useNavigate()
   const [value, setValue] = React.useState("")
+  const { mutate, isLoading } = useMutation({
+    mutationKey: ["reply", postId],
+    mutationFn: async () => {
+      if (!userData) {
+        setToastMessage(
+          "Erro!",
+          "Você precisa estar logado para fazer isso",
+          "error"
+        )
+        return Promise.reject("Você precisa estar logado para fazer isso")
+      }
+      const { options, url } = POST_REPLY(value, userData.id, postId)
+
+      return instance
+        .post(url, options.data, { headers: options.headers })
+        .then((res) => res.data)
+    },
+    onSuccess: (data) => {
+      setValue("")
+      setIsReplying(false)
+      setToastMessage("Sucesso!", "Resposta publicada com sucesso!", "success")
+      setNewReply((prev) => (prev ? [...prev, data] : [data]))
+    },
+    onError: (err) => {
+      if (err instanceof AxiosError) {
+        setToastMessage("Algo deu errado", err.response?.data.error, "error")
+      }
+    },
+  })
 
   const handleReply = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,18 +57,7 @@ const CreateReply = ({ setNewReply, postId, setIsReplying }: Props) => {
 
     if (value.length < 5) return
 
-    const { options, url } = POST_REPLY(value, userData.id, postId)
-
-    const { data, error } = await request(url, options)
-
-    if (isError(data) || error || !data) {
-      window.scrollTo({ top: 0, behavior: "smooth" })
-      return
-    }
-    setValue("")
-    setIsReplying(false)
-    setNewReply((prev) => (prev ? [...prev, data] : [data]))
-    setToastMessage("Sucesso", "Publicação criada com sucesso!")
+    mutate()
   }
 
   return (
@@ -49,8 +67,8 @@ const CreateReply = ({ setNewReply, postId, setIsReplying }: Props) => {
         <Button variant="outlined" onClick={() => setIsReplying(false)}>
           Cancelar
         </Button>
-        <Button variant="solid" onClick={handleReply} disabled={loading}>
-          {loading ? "Carregando..." : "Publicar"}
+        <Button variant="solid" onClick={handleReply} disabled={isLoading}>
+          {isLoading ? "Carregando..." : "Publicar"}
         </Button>
       </Buttons>
     </Container>

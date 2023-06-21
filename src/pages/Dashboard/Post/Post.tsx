@@ -42,7 +42,11 @@ const Post = ({ post }: Props) => {
       `${window.location.origin}/app/${post.user.username}/${slug}`
     )
 
-    setToastMessage("Sucesso!", "Link copiado para a área de transferência")
+    setToastMessage(
+      "Sucesso!",
+      "Link copiado para a área de transferência",
+      "success"
+    )
   }
 
   return (

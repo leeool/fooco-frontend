@@ -34,12 +34,18 @@ const UpdatePost = () => {
     mutationFn: async ({ post, postId, userId }: PostUpdate) => {
       const { options, url } = PUT_POST(post, postId, userId)
 
-      return instance(url, { ...options }).then((res) => res.data)
+      return instance
+        .post(url, options.data, { headers: options.headers })
+        .then((res) => res.data)
     },
     mutationKey: ["updatePost", owner, slug],
     onSuccess: () => {
       nav(-1)
-      setToastMessage("Sucesso", "Publicação atualizada com sucesso!")
+      setToastMessage(
+        "Sucesso",
+        "Publicação atualizada com sucesso!",
+        "success"
+      )
     },
   })
   const { data: post, isLoading: loadingPost } = useQuery<IUserPosts>({

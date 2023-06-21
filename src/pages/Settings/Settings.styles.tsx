@@ -19,6 +19,11 @@ export const SideContainer = styled.div`
   top: 5rem;
   position: sticky;
   height: fit-content;
+
+  @media (max-width: 765px) {
+    position: static;
+  }
+
   /* top: 1rem; */
 `
 

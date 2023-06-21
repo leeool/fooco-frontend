@@ -9,11 +9,10 @@ import {
 } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
-import { useQuery } from "react-query"
+import { useMutation, useQuery } from "react-query"
 import { useNavigate, useParams } from "react-router"
-import { DELETE_POST, FEEDBACK_POST, instance } from "src/api/apiCalls"
+import { instance } from "src/api/apiCalls"
 import isError from "src/helpers/isError"
-import UseFetch from "src/hooks/UseFetch"
 import useUserStore from "src/stores/UseUserStore"
 import {
   Author,
@@ -46,6 +45,8 @@ import { Replies, CreateReply, Avatar } from "src/interface"
 import Complaint from "@interface/Complaint/Complaint"
 import { useSearchStore } from "@interface/Header/Search"
 import UseMatchWindowSize from "src/hooks/UseWindowSize"
+import mutateFeedbackPost from "src/mutations/mutateFeedbackPost"
+import mutateDeletePost from "src/mutations/mutateDeletePost"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -58,16 +59,20 @@ const PostPage = () => {
   const { handleSavePost, loading: savePostLoading } = UseSavePost()
   const { setToastMessage } = UseToastStore()
   const nav = useNavigate()
-  const { request, data: feedbackData, loading } = UseFetch<string | null>()
   const [feedback, setFeedback] = React.useState<string | null>(null)
   const [isReplying, setIsReplying] = React.useState<boolean>(false)
   const [newReply, setNewReply] = React.useState<IReply[] | null>(null)
   const match = UseMatchWindowSize(600)
+  const {
+    mutateAsync: mutateFeedback,
+    isLoading: loadingFeedback,
+    data: dataFeedback,
+  } = useMutation(mutateFeedbackPost())
 
   const handleFeedback = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
-    if (loading) return
+    if (loadingFeedback) return
 
     if (!isLoggedIn) {
       nav("/entrar")
@@ -78,10 +83,17 @@ const PostPage = () => {
 
     if (!feedbackType || !userData || !data || "error" in data) return
 
-    setFeedback((prev) => (prev === feedbackType ? null : feedbackType))
-    const { options, url } = FEEDBACK_POST(feedbackType, userData.id, data.id)
-
-    request(url, options)
+    mutateFeedback(
+      { feedbackType, userId: userData.id, postId: data.id },
+      {
+        onSuccess: () => {
+          setFeedback((prev) => {
+            if (prev === feedbackType) return null
+            return feedbackType
+          })
+        },
+      }
+    )
   }
 
   const handleReplying = () => {
@@ -115,7 +127,11 @@ const PostPage = () => {
       `${window.location.origin}/app/${data.user.username}/${slug}`
     )
 
-    setToastMessage("Sucesso!", "Link copiado para a área de transferência")
+    setToastMessage(
+      "Sucesso!",
+      "Link copiado para a área de transferência",
+      "success"
+    )
   }
 
   if (isLoading || isFetching)
@@ -142,7 +158,7 @@ const PostPage = () => {
             />
           </Link>
         )}
-        <Feedback data-loading={loading}>
+        <Feedback data-loading={loadingFeedback}>
           <ButtonSecondary
             onClick={handleFeedback}
             data-feedback="like"
@@ -151,9 +167,7 @@ const PostPage = () => {
           >
             <MiniSeta />
           </ButtonSecondary>
-          <span>
-            {feedbackData !== null ? String(feedbackData) : data.points}
-          </span>
+          <span>{dataFeedback ? String(dataFeedback) : data.points}</span>
           <ButtonSecondary
             onClick={handleFeedback}
             data-feedback="dislike"
@@ -222,24 +236,23 @@ const PostPage = () => {
 }
 
 const HandlePost = ({ post }: { post: IUserPosts }) => {
-  const { request, loading } = UseFetch()
   const { userData } = useUserStore()
-  const { setToastMessage } = UseToastStore()
   const nav = useNavigate()
+  const { mutateAsync: deletePost, isLoading: loadingDeletePost } = useMutation(
+    mutateDeletePost()
+  )
 
   const handlePostDelete = async () => {
-    if (!userData || loading) return
+    if (!userData || loadingDeletePost) return
 
-    const { url, options } = DELETE_POST(post.id, userData.id)
-
-    const { response } = await request(url, options)
-
-    if ((response && response?.status >= 300) || !response) return
-    else {
-      nav(`/app/${userData.username}`)
-      setToastMessage("Sucesso", "Publicação deletada com sucesso!")
-      return
-    }
+    deletePost(
+      { postId: post.id, userId: userData.id },
+      {
+        onSuccess: () => {
+          nav(`/app/${userData.username}`)
+        },
+      }
+    )
   }
 
   if (!userData) return null

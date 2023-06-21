@@ -8,10 +8,9 @@ import { Button } from "@components/Form"
 import { Link, useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
 import useUserStore from "src/stores/UseUserStore"
-import UseFetch from "src/hooks/UseFetch"
 import UseCreateUserStore from "src/stores/form/UseCreateUserStore"
-import UseToastStore from "@components/Toast/UseToastStore"
 import { Arrow } from "@assets/index"
+import useUserLogin from "src/hooks/useUserLogin"
 
 const animateLeft = {
   hidden: { x: "-2rem", opacity: 0 },
@@ -21,22 +20,21 @@ const animateLeft = {
 
 const index = () => {
   const { email, password, setEmail, setPassword } = UseCreateUserStore()
-  const { setToastMessage } = UseToastStore()
   const useNav = useNavigate()
-  const { loading: loginLoading, loginUser } = useUserStore()
-  const { loading } = UseFetch<IUserLogin | null>()
+  const { mutateUserLogin, loadingUserLogin } = useUserLogin()
+  const { loading } = useUserStore()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const { request } = await loginUser(email, password)
-
-    if (request) {
-      useNav("/app")
-      return
-    } else {
-      setToastMessage("Algo deu errado", "Email ou senha incorretos")
-    }
+    await mutateUserLogin(
+      { email, password },
+      {
+        onSuccess: () => {
+          useNav("/app")
+        },
+      }
+    )
   }
 
   return (
@@ -70,8 +68,8 @@ const index = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <Button variant="solid" disabled={loading || loginLoading}>
-          {loading || loginLoading ? (
+        <Button variant="solid" disabled={loadingUserLogin || loading}>
+          {loadingUserLogin || loading ? (
             "Carregando..."
           ) : (
             <>

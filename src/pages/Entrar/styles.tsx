@@ -68,15 +68,15 @@ export const Container = styled.main`
 `
 
 export const SocialLogin = styled.div`
-  margin-top: 2rem;
+  margin: 2rem auto;
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
   justify-content: center;
+  width: fit-content;
+  justify-self: center;
 
   button {
-    width: 5rem;
-
     &[data-theme="dark"] {
       svg {
         fill: #fff;

@@ -13,8 +13,7 @@ import useLoginSocialUser from "./loginSocials"
 const index = () => {
   const { isLoggedIn } = useUserStore()
   const { selectedTheme } = themeStore()
-  const { loginWithGoogle, loginWithGithub, loginWithMicrosoft } =
-    useLoginSocialUser()
+  const { loginWithMicrosoft } = useLoginSocialUser()
 
   React.useEffect(() => {
     document.title = `Faça login • Fooco`
@@ -32,18 +31,8 @@ const index = () => {
         </Link>
         <Outlet />
         <SocialLogin>
-          <Button variant="outlined" onClick={loginWithGoogle}>
-            <GoogleIcon />
-          </Button>
-          <Button
-            variant="outlined"
-            data-theme={selectedTheme}
-            onClick={loginWithGithub}
-          >
-            <GithubIcon />
-          </Button>
           <Button variant="outlined" onClick={loginWithMicrosoft}>
-            <MicrosoftIcon />
+            <MicrosoftIcon /> Entrar com Microsoft
           </Button>
         </SocialLogin>
       </div>

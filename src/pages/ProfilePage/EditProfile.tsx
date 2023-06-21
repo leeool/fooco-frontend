@@ -8,20 +8,34 @@ import { Title } from "@components/Text/Title"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { updateUserSchema } from "src/schemas"
-import UseFetch from "src/hooks/UseFetch"
 import { USER_PUT } from "src/api/apiCalls"
 import ReactLoading from "react-loading"
 import UseToastStore from "@components/Toast/UseToastStore"
 import { useNavigate } from "react-router-dom"
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+  useMutation,
+} from "react-query"
+import mutateProfileEdit from "src/mutations/mutateProfileEdit"
 
-const EditProfile = () => {
+interface Props {
+  refetch: (
+    options?: RefetchOptions & RefetchQueryFilters
+  ) => Promise<QueryObserverResult<IUserData | IError, unknown>>
+}
+
+const EditProfile = ({ refetch }: Props) => {
   const { userData, isLoggedIn } = useUserStore()
   const { control, handleSubmit } = useForm<UserUpdate>({
     resolver: zodResolver(updateUserSchema),
     mode: "all",
   })
   const [open, setOpen] = React.useState<boolean>(false)
-  const { request, loading } = UseFetch()
+  const { mutateAsync, isLoading } = useMutation(
+    mutateProfileEdit(userData?.id)
+  )
   const { setToastMessage } = UseToastStore()
   const nav = useNavigate()
 
@@ -34,23 +48,22 @@ const EditProfile = () => {
 
     if (!Object.keys(modifiedData).length) return setOpen(false)
 
-    const { options, url } = USER_PUT({ ...modifiedData }, userData.id)
-
-    const { response, data: updatedData } = await request(url, options)
-
-    if (
-      !response ||
-      response.status >= 300 ||
-      !updatedData ||
-      typeof updatedData !== "object" ||
-      !("username" in updatedData)
+    await mutateAsync(
+      { modifiedData, userId: userData.id },
+      {
+        onSuccess: (data) => {
+          nav(`/app/${data.username}`)
+          setOpen(false)
+          setToastMessage(
+            "Sucesso!",
+            "Dados atualizados com sucesso!",
+            "success"
+          )
+          refetch()
+        },
+      }
     )
-      return
 
-    setOpen(false)
-    nav(`/app/${updatedData.username}`)
-    window.location.reload()
-    setToastMessage("Sucesso!", "Perfil atualizado com sucesso!")
     return
   })
 
@@ -61,7 +74,7 @@ const EditProfile = () => {
         <Edit />
       </DialogTrigger>
       <DialogContent>
-        {loading && (
+        {isLoading && (
           <LoadingEdit>
             <ReactLoading
               type="spin"
@@ -73,7 +86,7 @@ const EditProfile = () => {
           </LoadingEdit>
         )}
 
-        <EditContainer onSubmit={handleUpdateUser} data-loading={loading}>
+        <EditContainer onSubmit={handleUpdateUser} data-loading={isLoading}>
           <FixedTitle>
             <Title size="lg">Editar perfil</Title>
           </FixedTitle>
@@ -129,8 +142,8 @@ const EditProfile = () => {
             >
               Cancelar
             </Button>
-            <Button variant="solid" type="submit" disabled={loading}>
-              {loading ? "Carregando..." : "Salvar"}
+            <Button variant="solid" type="submit" disabled={isLoading}>
+              {isLoading ? "Carregando..." : "Salvar"}
             </Button>
           </div>
         </EditContainer>

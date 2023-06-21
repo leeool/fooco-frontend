@@ -25,12 +25,12 @@ const index = () => {
   }
 
   return (
-    <Toast.Provider swipeDirection="right" duration={5000}>
-      <Root open={true} onOpenChange={setOpen}>
+    <Toast.Provider swipeDirection="right" duration={3000}>
+      <Root open={open} onOpenChange={setOpen}>
         <Icon data-type={type}>{icons[type]}</Icon>
         <Content>
-          <Title>TESTE</Title>
-          <Description>testando as coisasdasd asasd asdas </Description>
+          <Title>{toastContent.title}</Title>
+          <Description>{toastContent.message}</Description>
         </Content>
       </Root>
 

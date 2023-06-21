@@ -10,6 +10,15 @@ export const instance = axios.create({
   },
 })
 
+export const GET_USERS = () => {
+  return {
+    url: ENDPOINT + "/user",
+    options: {
+      method: "GET",
+    },
+  }
+}
+
 export const USER_LOGIN = (email: string, password: string) => {
   return {
     url: ENDPOINT + "/user/login",

@@ -74,12 +74,16 @@ const AccountSettings = () => {
   const [avatar, setAvatar] = useState<string | null>(null)
   const { mutateAsync, isLoading } = useMutation({
     mutationFn: async (data: UpdateUser) => {
-      const { options, url } = USER_PUT({ ...data }, userData!.id)
+      if (!userData || !userData.id)
+        return Promise.reject("Usuário não encontrado")
+
+      const { options, url } = USER_PUT({ ...data }, userData.id)
 
       return instance(url, options).then((res) => res.data)
     },
     mutationKey: ["userUpdate", userData],
   })
+  const [isUploading, setIsUploading] = useState(false)
 
   const handleForm = handleSubmit(async (data) => {
     const imageUrl = await handleUploadImage(data.avatar_url)
@@ -96,7 +100,7 @@ const AccountSettings = () => {
 
     await mutateAsync(newData, {
       onSuccess: () => {
-        setToastMessage("Sucesso!", "Dados da conta atualizados.")
+        setToastMessage("Sucesso!", "Dados da conta atualizados.", "success")
       },
     })
   })
@@ -104,7 +108,9 @@ const AccountSettings = () => {
   const handleUploadImage = async (file: File | null) => {
     if (!file || !userData) return null
 
+    setIsUploading(true)
     const uploadedImageURL = await uploadImage(file, userData.id)
+    setIsUploading(false)
 
     return uploadedImageURL
   }
@@ -118,7 +124,7 @@ const AccountSettings = () => {
           <Controller
             name="email"
             control={control}
-            defaultValue={""}
+            defaultValue={userData.email}
             render={({ fieldState, field }) => (
               <Input
                 label="Novo e-email"
@@ -164,7 +170,8 @@ const AccountSettings = () => {
                 if (file.type.split("/")[0] !== "image") {
                   setToastMessage(
                     "Algo deu errado",
-                    "Apenas imagens são aceitas!"
+                    "Apenas imagens são aceitas!",
+                    "error"
                   )
                   return
                 }
@@ -187,8 +194,8 @@ const AccountSettings = () => {
         <Button variant="outlined" type="button">
           Cancelar
         </Button>
-        <Button variant="solid" disabled={isLoading}>
-          {isLoading ? "Carregando..." : "Salvar"}
+        <Button variant="solid" disabled={isLoading || isUploading}>
+          {isLoading || isUploading ? "Carregando..." : "Salvar"}
         </Button>
       </ButtonsGroup>
     </Content>
