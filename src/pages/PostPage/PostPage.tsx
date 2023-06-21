@@ -167,7 +167,9 @@ const PostPage = () => {
           >
             <MiniSeta />
           </ButtonSecondary>
-          <span>{dataFeedback ? String(dataFeedback) : data.points}</span>
+          <span>
+            {dataFeedback !== undefined ? String(dataFeedback) : data.points}
+          </span>
           <ButtonSecondary
             onClick={handleFeedback}
             data-feedback="dislike"
