@@ -27,11 +27,11 @@ import getUserPoints from "src/helpers/getUserPoints"
 const ProfilePage = () => {
   const { owner } = useParams()
   const [page, setPage] = React.useState<"posts" | "saved">("posts")
+  const { userData } = useUserStore()
   const { data, isLoading, refetch } = useQuery<IUserData | IError>(
     ["owner", owner, page],
     () => instance(`/user/${owner}`, { method: "GET" }).then((res) => res.data)
   )
-  const { userData } = useUserStore()
 
   React.useEffect(() => {
     if (!data || "error" in data) return

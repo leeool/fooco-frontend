@@ -32,7 +32,7 @@ export const AskContainer = styled.div`
   grid-template-columns: 4rem 1fr;
   gap: 1.5rem;
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-  border-radius: 15px;
+  border-radius: 0.5rem;
   padding: 1rem;
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
   height: fit-content;
@@ -85,4 +85,20 @@ export const SideColumn = styled.div`
   gap: 1rem;
   position: sticky;
   top: 1rem;
+`
+
+export const GroupContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+
+  &::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
+    display: block;
+    flex: 1;
+  }
 `

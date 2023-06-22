@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "app",
+        path: "floresta",
         element: (
           <React.Suspense>
             <Dashboard />
@@ -135,7 +135,7 @@ const router = createBrowserRouter([
         path: "*",
         element: (
           <React.Suspense>
-            <Navigate to={"/app"} />
+            <Navigate to={"/floresta"} />
           </React.Suspense>
         ),
       },

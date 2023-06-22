@@ -2,7 +2,6 @@ import {
   Bookmark,
   Edit,
   Ellipsis,
-  MiniSeta,
   Reply as ReplyIcon,
   Share,
   Trash,
@@ -20,7 +19,6 @@ import {
   Content,
   Data,
   Details,
-  Feedback,
   Info,
   Interactions,
   Tags,
@@ -41,16 +39,17 @@ import {
   DropdownMenuTrigger,
 } from "@components/DropdownMenuAPI"
 import UseToastStore from "@components/Toast/UseToastStore"
-import { Replies, CreateReply, Avatar } from "src/interface"
+import { CreateComment, Avatar } from "src/interface"
 import Complaint from "@interface/Complaint/Complaint"
 import { useSearchStore } from "@interface/Header/Search"
 import UseMatchWindowSize from "src/hooks/UseWindowSize"
-import mutateFeedbackPost from "src/mutations/mutateFeedbackPost"
 import mutateDeletePost from "src/mutations/mutateDeletePost"
+import Comments from "@interface/Comments/Comments"
+import Feedback from "@interface/Feedback/Feedback"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
-  const { isLoggedIn, userData, savedPosts } = useUserStore()
+  const { isLoggedIn, savedPosts } = useUserStore()
   const { data, isLoading, isFetching } = useQuery<IUserPosts | IError>(
     ["post", owner, slug],
     () => instance.get(`/post/${owner}/${slug}`).then((res) => res.data)
@@ -59,42 +58,9 @@ const PostPage = () => {
   const { handleSavePost, loading: savePostLoading } = UseSavePost()
   const { setToastMessage } = UseToastStore()
   const nav = useNavigate()
-  const [feedback, setFeedback] = React.useState<string | null>(null)
   const [isReplying, setIsReplying] = React.useState<boolean>(false)
-  const [newReply, setNewReply] = React.useState<IReply[] | null>(null)
+  const [comments, setComments] = React.useState<IComment[] | []>([])
   const match = UseMatchWindowSize(600)
-  const {
-    mutateAsync: mutateFeedback,
-    isLoading: loadingFeedback,
-    data: dataFeedback,
-  } = useMutation(mutateFeedbackPost())
-
-  const handleFeedback = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
-
-    if (loadingFeedback) return
-
-    if (!isLoggedIn) {
-      nav("/entrar")
-      return
-    }
-
-    const feedbackType = e.currentTarget.dataset.feedback as "like" | "dislike"
-
-    if (!feedbackType || !userData || !data || "error" in data) return
-
-    mutateFeedback(
-      { feedbackType, userId: userData.id, postId: data.id },
-      {
-        onSuccess: () => {
-          setFeedback((prev) => {
-            if (prev === feedbackType) return null
-            return feedbackType
-          })
-        },
-      }
-    )
-  }
 
   const handleReplying = () => {
     if (!isLoggedIn) {
@@ -104,19 +70,9 @@ const PostPage = () => {
 
     setIsReplying((prev) => !prev)
   }
-  React.useEffect(() => {
-    setFeedback(null)
-    if (!data || "error" in data || !userData) return
-
-    const userLikedPost = data.users_liked.includes(userData.id)
-    const userDislikedPost = data.users_disliked.includes(userData.id)
-
-    if (userLikedPost) return setFeedback("like")
-    else if (userDislikedPost) return setFeedback("dislike")
-  }, [data, userData, owner, slug])
 
   React.useEffect(() => {
-    setNewReply(null)
+    setComments([])
     if (!data || "error" in data) return
     document.title = `${data.title} • ${data.user.username} • Fooco`
   }, [data, owner, slug])
@@ -124,7 +80,7 @@ const PostPage = () => {
   const handleCopyLink = () => {
     if (!data || isError(data)) return
     navigator.clipboard.writeText(
-      `${window.location.origin}/app/${data.user.username}/${slug}`
+      `${window.location.origin}/floresta/${data.user.username}/${slug}`
     )
 
     setToastMessage(
@@ -149,7 +105,7 @@ const PostPage = () => {
     <Container>
       <Interactions>
         {match ? null : (
-          <Link to={`/app/${data.user.username}`}>
+          <Link to={`/floresta/${data.user.username}`}>
             <Avatar
               src={data.user.avatar_url}
               fallback={data.user.username.slice(0, 2)}
@@ -158,27 +114,7 @@ const PostPage = () => {
             />
           </Link>
         )}
-        <Feedback data-loading={loadingFeedback}>
-          <ButtonSecondary
-            onClick={handleFeedback}
-            data-feedback="like"
-            data-active={feedback === "like"}
-            style={{ padding: "0" }}
-          >
-            <MiniSeta />
-          </ButtonSecondary>
-          <span>
-            {dataFeedback !== undefined ? String(dataFeedback) : data.points}
-          </span>
-          <ButtonSecondary
-            onClick={handleFeedback}
-            data-feedback="dislike"
-            data-active={feedback === "dislike"}
-            style={{ padding: "0" }}
-          >
-            <MiniSeta style={{ rotate: "180deg" }} />
-          </ButtonSecondary>
-        </Feedback>
+        <Feedback content={data} target="post" />
         <button onClick={handleCopyLink}>
           <Share />
         </button>
@@ -196,7 +132,7 @@ const PostPage = () => {
           <Title>{data.title}</Title>
           <Author>
             criado por{" "}
-            <Link to={`/app/${data.user.username}`}>
+            <Link to={`/floresta/${data.user.username}`}>
               <span>@{data.user.username}</span>
             </Link>
           </Author>
@@ -220,19 +156,19 @@ const PostPage = () => {
         <Tags>
           {data.tags.map((tag, index) => (
             <span key={tag + index} onClick={() => setSearch(tag)}>
-              <Link to={"/app/procurar?q=" + tag}>{tag}</Link>
+              <Link to={"/floresta/procurar?q=" + tag}>{tag}</Link>
             </span>
           ))}
         </Tags>
       </Details>
       {isReplying ? (
-        <CreateReply
-          setNewReply={setNewReply}
+        <CreateComment
+          setComments={setComments}
           postId={data.id}
           setIsReplying={setIsReplying}
         />
       ) : null}
-      <Replies replies={data.reply.concat(newReply ? [...newReply] : [])} />
+      <Comments postId={data.id} comments={comments} />
     </Container>
   )
 }
@@ -251,7 +187,7 @@ const HandlePost = ({ post }: { post: IUserPosts }) => {
       { postId: post.id, userId: userData.id },
       {
         onSuccess: () => {
-          nav(`/app/${userData.username}`)
+          nav(`/floresta/${userData.username}`)
         },
       }
     )

@@ -9,7 +9,7 @@ const PostNotFound = () => {
     <Container>
       <Title size="2xl">Ops! Página não encontrada</Title>
       <Paragraph size="2xl">Erro 404 | Post não encontrado</Paragraph>
-      <Link to={"/app"}>Voltar à página inicial</Link>
+      <Link to={"/floresta"}>Voltar à página inicial</Link>
     </Container>
   )
 }

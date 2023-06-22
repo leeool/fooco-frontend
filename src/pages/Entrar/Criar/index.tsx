@@ -291,7 +291,7 @@ const UsernameStage = () => {
       {
         onSuccess: async () => {
           await validateUser()
-          nav("/app")
+          nav("/floresta")
         },
       }
     )

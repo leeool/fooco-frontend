@@ -39,7 +39,7 @@ const Post = ({ post }: Props) => {
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(
-      `${window.location.origin}/app/${post.user.username}/${slug}`
+      `${window.location.origin}/floresta/${post.user.username}/${slug}`
     )
 
     setToastMessage(
@@ -52,11 +52,11 @@ const Post = ({ post }: Props) => {
   return (
     <Container key={post.id}>
       <PostInfo>
-        <Link to={`/app/${post.user.username}/${post.slug}`}>
+        <Link to={`/floresta/${post.user.username}/${post.slug}`}>
           <PostTitle>{post.title}</PostTitle>
         </Link>
         <Details>
-          <Link to={`/app/${post.user.username}`}>
+          <Link to={`/floresta/${post.user.username}`}>
             <Item>
               por <span>@{post.user.username}</span>
             </Item>
@@ -70,17 +70,15 @@ const Post = ({ post }: Props) => {
             </span>
           </Item>
           <Item>
-            <span>
-              {post?.reply.length}{" "}
-              {post?.reply.length === 1 ? "resposta" : "respostas"}{" "}
-            </span>
+            Floresta
+            <span>/{post?.group?.name}</span>
           </Item>
         </Details>
       </PostInfo>
       <Tags>
         {post.tags.map((tag, index) => (
           <span key={tag + index} onClick={() => setSearch(tag)}>
-            <Link to={"/app/procurar?q=" + tag}>{tag}</Link>
+            <Link to={"/floresta/procurar?q=" + tag}>{tag}</Link>
           </span>
         ))}
       </Tags>
@@ -90,7 +88,7 @@ const Post = ({ post }: Props) => {
           {post.points}
         </Points>
         <ButtonSecondary
-          onClick={() => nav(`/app/${post.user.username}/${post.slug}`)}
+          onClick={() => nav(`/floresta/${post.user.username}/${post.slug}`)}
         >
           <Reply />
           Responder

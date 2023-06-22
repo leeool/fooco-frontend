@@ -34,14 +34,15 @@ interface IUserPosts {
   tags: string[]
   users_liked: string[]
   users_disliked: string[]
-  reply: IReply[]
+  comments: IComment[]
+  group: IGroup
 }
 
 interface IError {
   error: string
 }
 
-interface IReply {
+interface IComment {
   id: string
   post_id: string
   content: string
@@ -50,4 +51,23 @@ interface IReply {
   points: number
   users_liked: string[]
   users_disliked: string[]
+  replies: IReply[]
+}
+
+interface IReply {
+  id: string
+  parent: IComment
+  content: string
+  user: IUserData
+  users_liked: string[]
+  users_disliked: string[]
+  created_at: string
+  points: number
+}
+
+interface IGroup {
+  id: string
+  name: string
+  description: string
+  posts: IUserPosts[]
 }

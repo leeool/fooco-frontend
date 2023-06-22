@@ -1,7 +1,7 @@
 import { Button, Input } from "@components/Form"
 import { Title } from "@components/Text/Title"
 import React from "react"
-import { AskForm, Buttons, Container } from "./styles"
+import { AskForm, Buttons, Container, InputWrapper } from "./styles"
 import { Markdown } from "src/interface/MarkdownEditor"
 import useUserStore from "src/stores/UseUserStore"
 import { useNavigate } from "react-router"
@@ -12,10 +12,14 @@ import { instance, POST_POST } from "src/api/apiCalls"
 import UseToastStore from "@components/Toast/UseToastStore"
 import { useMutation } from "react-query"
 import { AxiosError } from "axios"
+import GrupoSelect from "@interface/GrupoSelect/GrupoSelect"
 
 const CreatePost = () => {
   const [value, setValue] = React.useState("")
   const nav = useNavigate()
+  const [groupId, setGroupId] = React.useState<string>(
+    "7e170c4f-a480-4503-aee6-e7071c9c6dd5"
+  )
   const { userData, isLoggedIn } = useUserStore()
   const { control, handleSubmit } = useForm<Post>({
     resolver: zodResolver(createPostSchema),
@@ -23,7 +27,9 @@ const CreatePost = () => {
     shouldFocusError: true,
   })
   const { mutateAsync, isLoading } = useMutation({
-    mutationFn: async (data: Partial<IUserPosts> & { user_id: string }) => {
+    mutationFn: async (
+      data: Partial<IUserPosts> & { user_id: string; group_id: string }
+    ) => {
       const { options, url } = POST_POST(data)
       return instance(url, options).then((res) => res.data)
     },
@@ -36,17 +42,26 @@ const CreatePost = () => {
 
     if (!isLoggedIn || !userData) return nav("/entrar")
 
+    console.log({
+      title,
+      content: value,
+      user_id: userData.id,
+      tags: arrTags || [],
+      group_id: groupId,
+    })
+
     await mutateAsync(
       {
         title,
         content: value,
         user_id: userData.id,
         tags: arrTags || [],
+        group_id: groupId,
       },
       {
         onSuccess(data) {
           console.log(data)
-          nav(`/app/${userData.username}/${data.slug}`)
+          nav(`/floresta/${userData.username}/${data.slug}`)
           setToastMessage(
             "Sucesso",
             "Publicação criada com sucesso!",
@@ -89,6 +104,11 @@ const CreatePost = () => {
         />
 
         <Markdown value={value} onChange={(e) => setValue(e)} />
+        <InputWrapper>
+          <label>Floresta</label>
+          <GrupoSelect setGroupId={setGroupId} />
+        </InputWrapper>
+
         <Controller
           control={control}
           name="tags"
@@ -97,7 +117,7 @@ const CreatePost = () => {
             <Input
               placeholder="Palavras-chave da sua publicação"
               type="text"
-              id="tags"
+              id="group"
               label="Tags"
               fieldState={fieldState}
               {...field}
@@ -105,7 +125,7 @@ const CreatePost = () => {
           )}
         />
         <Buttons>
-          <Button variant="outlined" onClick={() => nav("/app")}>
+          <Button variant="outlined" onClick={() => nav("/floresta")}>
             Cancelar
           </Button>
           <Button variant="solid" disabled={isLoading}>

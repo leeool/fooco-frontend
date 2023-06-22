@@ -4,6 +4,7 @@ export const Container = styled.div`
   grid-column: 1 / -1;
   display: grid;
   gap: 2rem;
+  /* overflow-y: hidden; */
 `
 
 export const Reply = styled.div`
@@ -12,8 +13,8 @@ export const Reply = styled.div`
   /* border-bottom: 2px solid ${({ theme }) =>
     theme.backgroundColor.detailsAlt}; */
   gap: 1rem;
-  padding: 1rem 0;
   max-width: 100%;
+  /* align-items: start; */
 
   @media (max-width: 600px) {
     gap: 0.8rem;
@@ -84,9 +85,10 @@ export const Feedback = styled.div`
   display: flex;
   flex-direction: column;
   justify-items: center;
+  justify-self: center;
   text-align: center;
   gap: 0.3rem;
-  align-self: start;
+  align-self: center;
 
   svg {
     width: 2rem;
@@ -117,13 +119,13 @@ export const Feedback = styled.div`
 `
 
 export const Interactions = styled.div`
-  display: grid;
-  grid-template-columns: 3.5rem;
-  grid-template-rows: 3.5rem auto;
+  display: flex;
+  flex-direction: column;
   justify-items: center;
   flex-direction: column;
   gap: 1rem;
   align-items: center;
+  align-content: center;
 
   button[data-saved="true"] svg {
     fill: ${({ theme }) => theme.backgroundColor.secondary};
@@ -151,6 +153,13 @@ export const Interactions = styled.div`
     svg {
       width: 1.3rem;
     }
+  }
+
+  &::after {
+    content: "";
+    width: 2px;
+    height: 100%;
+    background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
   }
 `
 

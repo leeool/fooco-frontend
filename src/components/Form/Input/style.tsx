@@ -39,7 +39,7 @@ export const InputContainer = styled.div`
     padding: 0.4rem 0.8rem;
     background-color: ${({ theme }) => theme.backgroundColor.tertiary};
     z-index: 10;
-    border-radius: 0 20px 20px 0;
+    border-radius: 0 0.5rem 0.5rem 0;
   }
 
   .input {
@@ -48,7 +48,7 @@ export const InputContainer = styled.div`
     display: flex;
     width: 100%;
     align-items: center;
-    border-radius: 20px;
+    border-radius: 0.5rem;
     outline: 1px solid ${({ theme }) => theme.backgroundColor.details};
 
     svg,
@@ -73,7 +73,7 @@ export const InputContainer = styled.div`
       padding: 0.4rem 0.8rem;
       width: 100%;
       height: 2.5rem;
-      border-radius: 20px;
+      border-radius: 0.5rem;
 
       background-color: ${({ theme }) => theme.backgroundColor.tertiary};
       transition: background-color 0.3s ease-in-out;

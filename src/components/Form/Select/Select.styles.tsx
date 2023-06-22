@@ -5,33 +5,41 @@ export const Trigger = styled(SelectPrimitive.Trigger)`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.4rem;
   font-size: 1.2rem;
-  font-weight: 500;
+  font-weight: 400;
   justify-content: space-between;
   cursor: pointer;
-  border-radius: 0.8rem;
+  border-radius: 0.2rem;
   width: 100%;
   max-width: calc(100%);
-  border: 1px solid ${({ theme }) => theme.backgroundColor.details};
+  outline: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
+  min-width: 20rem;
+  user-select: none;
+  color: ${({ theme }) => theme.textColor.base};
+  height: 2.5rem;
 
   svg {
-    rotate: 180deg;
-    width: 1.2rem;
-    height: 1.2rem;
     fill: ${({ theme }) => theme.backgroundColor.details};
   }
 
   &:hover,
   &:focus {
     box-shadow: 0 0 0 3px #f3503a40;
-    border: 1px solid ${({ theme }) => theme.backgroundColor.secondary};
+    outline-color: ${({ theme }) => theme.backgroundColor.secondary};
     background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
   }
 `
 
 export const Value = styled(SelectPrimitive.Value)``
+
+export const Label = styled(SelectPrimitive.Label)`
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: ${({ theme }) => theme.textColor.details};
+  padding: 0.2rem 1rem;
+`
 
 export const Content = styled(SelectPrimitive.Content)`
   overflow: hidden;
@@ -39,26 +47,52 @@ export const Content = styled(SelectPrimitive.Content)`
   border-radius: 0.2rem;
   width: var(--radix-select-trigger-width);
   box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35);
-  padding: 0.5rem;
   display: grid;
-  gap: 0.5rem;
+  user-select: none;
+  border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
+
+  &[data-state="open"] {
+    animation: slideDown 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-0.5rem);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 `
 
 export const Item = styled(SelectPrimitive.Item)`
-  padding: 0.3rem 1rem;
-  font-size: 1.2rem;
-  font-weight: 500;
-  color: ${({ theme }) => theme.textColor.title};
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: ${({ theme }) => theme.textColor.base};
   cursor: pointer;
-  background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
-  border-radius: 0.2rem;
+  /* background-color: ${({ theme }) =>
+    theme.backgroundColor.alternativeState}; */
   transition: none;
+  user-select: none;
+
   &:not(:last-child) {
-    margin-bottom: 0.5rem;
   }
 
   &[data-highlighted] {
-    background-color: ${({ theme }) => theme.backgroundColor.secondary};
-    color: #fff;
+    background-color: ${({ theme }) => theme.backgroundColor.alternativeState};
   }
+`
+
+export const ItemText = styled(SelectPrimitive.ItemText)`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`
+
+export const Group = styled(SelectPrimitive.Group)`
+  display: flex;
+  flex-direction: column;
 `

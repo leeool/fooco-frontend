@@ -14,7 +14,7 @@ const Index = ({ src, fallback, delayMs, size = 4, ...props }: Props) => {
   return (
     <Root {...props}>
       <Image src={src} size={size} />
-      <Fallback delayMs={delayMs} size={size}>
+      <Fallback delayMs={0} size={size}>
         {fallback}
       </Fallback>
     </Root>

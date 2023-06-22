@@ -61,7 +61,7 @@ const MainPage = () => {
         className="load-icon"
       />
     )
-  if (isLoggedIn) return <Navigate to="/app" replace />
+  if (isLoggedIn) return <Navigate to="/floresta" replace />
   return (
     <Container>
       <InicioContainer>

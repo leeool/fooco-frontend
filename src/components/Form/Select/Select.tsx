@@ -1,7 +1,8 @@
 import React from "react"
 import * as SelectPrimitive from "@radix-ui/react-select"
-import { Content, Item, Trigger } from "./Select.styles"
-import { MiniSeta } from "@assets/index"
+import { Content, Group, Item, ItemText, Label, Trigger } from "./Select.styles"
+import { MiniSeta, Point } from "@assets/index"
+import { ChevronDownIcon } from "@primer/octicons-react"
 
 interface SelectProps extends SelectPrimitive.SelectProps {
   children: React.ReactNode
@@ -24,14 +25,15 @@ export const Select = React.forwardRef<
       >
         <SelectPrimitive.Value placeholder="Selecione uma opção" />
         <SelectPrimitive.Icon>
-          <MiniSeta />
+          <ChevronDownIcon />
         </SelectPrimitive.Icon>
       </Trigger>
       <SelectPrimitive.Portal style={{ zIndex: "200" }}>
-        <Content align="start" arrowPadding={10} position="popper">
+        <Content align="start" arrowPadding={0} position="popper">
           <SelectPrimitive.ScrollUpButton></SelectPrimitive.ScrollUpButton>
           <SelectPrimitive.Viewport>{children}</SelectPrimitive.Viewport>
           <SelectPrimitive.ScrollDownButton></SelectPrimitive.ScrollDownButton>
+          <SelectPrimitive.Arrow />
         </Content>
       </SelectPrimitive.Portal>
     </SelectPrimitive.Root>
@@ -52,10 +54,13 @@ export const SelectItem = React.forwardRef<
 >(({ children, value, ...props }, forwardedRef) => {
   return (
     <Item {...props} ref={forwardedRef} value={value}>
-      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-      <SelectPrimitive.ItemIndicator></SelectPrimitive.ItemIndicator>
+      <ItemText>{children}</ItemText>
     </Item>
   )
 })
 
 SelectItem.displayName = "SelectItem"
+
+export const SelectLabel = Label
+
+export const SelectGroup = Group

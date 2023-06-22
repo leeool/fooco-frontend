@@ -12,7 +12,7 @@ const Ask = () => {
   if (!userData) return null
   return (
     <AskContainer>
-      <Link to={`/app/${userData.username}`}>
+      <Link to={`/floresta/${userData.username}`}>
         <Avatar
           src={userData.avatar_url}
           fallback={userData.username.slice(0, 2)}

@@ -43,7 +43,7 @@ const index = () => {
   else if (loading && match) return <MobileLoading />
   return (
     <Container>
-      <Link to="/app" className="logo">
+      <Link to="/floresta" className="logo">
         <Logo />
       </Link>
       {match ? (
@@ -52,11 +52,11 @@ const index = () => {
         <>
           <Search />
           <Buttons>
-            <Link to={"/app"}>
+            <Link to={"/floresta"}>
               <Home />
               Início
             </Link>
-            <Link to={"app/publicar"}>
+            <Link to={"floresta/publicar"}>
               <Plus />
               Publicar
             </Link>
@@ -67,13 +67,13 @@ const index = () => {
               </DropdownMenuTrigger>
               <DropdownMenuContent>
                 <DropdownMenuGroup>
-                  <Link to={`/app/${userData?.username}`}>
+                  <Link to={`/floresta/${userData?.username}`}>
                     <DropdownMenuItem>Perfil</DropdownMenuItem>
                   </Link>
-                  <Link to={"/app/salvos"}>
+                  <Link to={"/floresta/salvos"}>
                     <DropdownMenuItem>Salvos</DropdownMenuItem>
                   </Link>
-                  <Link to={"/app/configs"}>
+                  <Link to={"/floresta/configs"}>
                     <DropdownMenuItem>Configurações</DropdownMenuItem>
                   </Link>
                   <LogoutDialog />
@@ -114,16 +114,16 @@ const Menu = () => {
       <Content onClick={handleClick} data-state={open ? "open" : "closed"}>
         <Background />
         <Search />
-        <Link to={"/app"}>
+        <Link to={"/floresta"}>
           <MenuItem>Início</MenuItem>
         </Link>
-        <Link to={"/app/publicar"}>
+        <Link to={"/floresta/publicar"}>
           <MenuItem>Publicar</MenuItem>
         </Link>
-        <Link to={`/app/${userData?.username}`}>
+        <Link to={`/floresta/${userData?.username}`}>
           <MenuItem>Perfil</MenuItem>
         </Link>
-        <Link to={`/app/configs`}>
+        <Link to={`/floresta/configs`}>
           <MenuItem>Configurações</MenuItem>
         </Link>
         <MenuItem onClick={logoutUser}>

@@ -3,7 +3,7 @@ import lightTheme from "highlight.js/styles/github.css?inline"
 import darkTheme from "highlight.js/styles/github-dark.css?inline"
 
 export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
-  margin-top: 2rem;
+  margin-top: 1rem;
 
   .markdown-body {
     width: 100%;
@@ -180,13 +180,18 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
   }
 `
 
-export const Container = styled(MarkdownStyle)`
+interface Props {
+  compact?: boolean
+}
+
+export const Container = styled(MarkdownStyle)<Props>`
   .bytemd-status {
     display: none;
   }
 
   .bytemd-body {
-    height: calc(100vh - 40rem);
+    height: ${({ compact }) =>
+      compact ? "calc(100vh - 50rem)" : "calc(100vh - 40rem)"};
     min-height: 150px;
     overflow: auto;
     resize: vertical;

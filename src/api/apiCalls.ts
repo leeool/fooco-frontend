@@ -108,18 +108,18 @@ export const GET_POST = (id: string) => {
 }
 
 export const FEEDBACK_POST = (
-  option: string,
+  type: string,
   userID: string,
-  postID: string
+  postID: string,
+  target: "post" | "reply"
 ) => {
   return {
-    url: ENDPOINT + "/post/feedback/" + postID,
+    url: ENDPOINT + `/${target}/feedback/${postID}?type=${type}`,
+    data: {
+      user_id: userID,
+    },
     options: {
-      method: "POST",
-      data: {
-        option: option,
-        user_id: userID,
-      },
+      method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -132,7 +132,8 @@ export const POST_POST = ({
   content,
   user_id,
   tags,
-}: Partial<IUserPosts> & { user_id: string }) => {
+  group_id,
+}: Partial<IUserPosts> & { user_id: string; group_id: string }) => {
   return {
     url: ENDPOINT + "/post",
     options: {
@@ -142,6 +143,7 @@ export const POST_POST = ({
         content,
         user_id,
         tags,
+        group_id,
       },
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -185,7 +187,7 @@ export const PUT_POST = (
   }
 }
 
-export const POST_REPLY = (
+export const POST_COMMENT = (
   content: string,
   user_id: string,
   post_id: string
@@ -198,6 +200,27 @@ export const POST_REPLY = (
         content,
         user_id,
       },
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    },
+  }
+}
+
+export const POST_REPLY = (
+  content: string,
+  user_id: string,
+  parent_id: string,
+  post_id: string
+) => {
+  return {
+    url: ENDPOINT + `/reply/${post_id}/${parent_id}`,
+    data: {
+      content,
+      user_id,
+    },
+    options: {
+      method: "POST",
       headers: {
         authorization: `Bearer ${localStorage.getItem("token")}`,
       },

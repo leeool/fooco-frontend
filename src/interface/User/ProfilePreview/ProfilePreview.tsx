@@ -68,7 +68,7 @@ const ProfilePreview = () => {
     <Container>
       <UserData>
         <Banner src="https://placekitten.com/800/500" />
-        <Link to={`/app/${userData.username}`} className="user-info">
+        <Link to={`/floresta/${userData.username}`} className="user-info">
           <Avatar
             src={userData.avatar_url}
             fallback={userData.username.slice(0, 2)}

@@ -8,6 +8,7 @@ interface IData {
   userId: string
   postId: string
   feedbackType: "like" | "dislike"
+  target: "post" | "reply"
 }
 
 const mutateFeedbackPost = (): UseMutationOptions<number, unknown, IData> => {
@@ -15,12 +16,15 @@ const mutateFeedbackPost = (): UseMutationOptions<number, unknown, IData> => {
 
   return {
     mutationKey: "feedbackPost",
-    mutationFn: async ({ feedbackType, userId, postId }: IData) => {
-      const { options, url } = FEEDBACK_POST(feedbackType, userId, postId)
+    mutationFn: async ({ feedbackType, userId, postId, target }: IData) => {
+      const { options, url, data } = FEEDBACK_POST(
+        feedbackType,
+        userId,
+        postId,
+        target
+      )
 
-      return instance
-        .post(url, options.data, { headers: options.headers })
-        .then((res) => res.data)
+      return instance.put(url, data, options).then((res) => res.data)
     },
     onError: (err) => {
       if (err instanceof AxiosError) {

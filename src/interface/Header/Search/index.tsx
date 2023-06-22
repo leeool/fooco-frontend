@@ -22,7 +22,7 @@ const Search = () => {
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    nav(`app/procurar`)
+    nav(`floresta/procurar`)
     setSearchParams({ q: search })
   }
 

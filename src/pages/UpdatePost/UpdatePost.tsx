@@ -96,7 +96,9 @@ const UpdatePost = () => {
   if (userData.id !== (post || state).user.id)
     return (
       <Navigate
-        to={`/app/${(post || state).user.username}/${(post || state).slug}`}
+        to={`/floresta/${(post || state).user.username}/${
+          (post || state).slug
+        }`}
       />
     )
   return (

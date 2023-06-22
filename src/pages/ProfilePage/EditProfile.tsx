@@ -8,7 +8,6 @@ import { Title } from "@components/Text/Title"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { updateUserSchema } from "src/schemas"
-import { USER_PUT } from "src/api/apiCalls"
 import ReactLoading from "react-loading"
 import UseToastStore from "@components/Toast/UseToastStore"
 import { useNavigate } from "react-router-dom"
@@ -52,7 +51,7 @@ const EditProfile = ({ refetch }: Props) => {
       { modifiedData, userId: userData.id },
       {
         onSuccess: (data) => {
-          nav(`/app/${data.username}`)
+          nav(`/floresta/${data.username}`)
           setOpen(false)
           setToastMessage(
             "Sucesso!",

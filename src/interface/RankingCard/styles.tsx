@@ -4,7 +4,7 @@ import styled, { AnyStyledComponent } from "styled-components"
 export const Container = styled.div`
   display: grid;
   background-color: ${({ theme }) => theme.backgroundColor.tertiary};
-  border-radius: 15px;
+  border-radius: 0.5rem;
   position: relative;
   border: 2px solid ${({ theme }) => theme.backgroundColor.detailsAlt};
   height: fit-content;

@@ -1,6 +1,6 @@
-import Replies from "./Reply/Replies"
-import CreateReply from "./Reply/CreateReply/CreateReply"
+import Comments from "./Comments/Comments"
+import CreateComment from "./Comments/CreateComment/CreateComment"
 import { Avatar } from "./User/Avatar"
 import RankingCard from "./RankingCard/RankingCard"
 
-export { Replies, CreateReply, Avatar, RankingCard }
+export { Comments, CreateComment, Avatar, RankingCard }

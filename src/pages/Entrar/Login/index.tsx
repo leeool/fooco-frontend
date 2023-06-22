@@ -31,7 +31,7 @@ const index = () => {
       { email, password },
       {
         onSuccess: () => {
-          useNav("/app")
+          useNav("/floresta")
         },
       }
     )

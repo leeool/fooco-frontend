@@ -13,7 +13,7 @@ const NotFound = ({ owner }: Props) => {
     <Container>
       <Title size="2xl">Ops! Página não encontrada</Title>
       <Paragraph size="2xl">Erro 404 | O usuário {owner} não existe</Paragraph>
-      <Link to={"/app"}>Retornar à página inicial</Link>
+      <Link to={"/floresta"}>Retornar à página inicial</Link>
     </Container>
   )
 }
