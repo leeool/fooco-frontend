@@ -35,7 +35,7 @@ const UpdatePost = () => {
       const { options, url } = PUT_POST(post, postId, userId)
 
       return instance
-        .post(url, options.data, { headers: options.headers })
+        .put(url, options.data, { headers: options.headers })
         .then((res) => res.data)
     },
     mutationKey: ["updatePost", owner, slug],
@@ -92,7 +92,7 @@ const UpdatePost = () => {
         className="load-icon"
       />
     )
-  if ((!post && !state) || !userData) return <Navigate to={`/app`} />
+  if ((!post && !state) || !userData) return <Navigate to={`/floresta`} />
   if (userData.id !== (post || state).user.id)
     return (
       <Navigate
