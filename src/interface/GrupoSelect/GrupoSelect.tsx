@@ -25,7 +25,7 @@ const GrupoSelect = ({ setGroupId }: Props) => {
   return (
     <Container>
       <Select
-        defaultValue="7e170c4f-a480-4503-aee6-e7071c9c6dd5"
+        defaultValue="da9c3de7-8036-40bf-a3e3-499a556d287f"
         onValueChange={(v) => setGroupId(v)}
       >
         <SelectGroup>

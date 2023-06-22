@@ -21,7 +21,7 @@ import GrupoSelect from "@interface/GrupoSelect/GrupoSelect"
 const Feed = () => {
   const match = UseMatchWindowSize(1000)
   const [groupId, setGroupId] = React.useState<string>(
-    "7e170c4f-a480-4503-aee6-e7071c9c6dd5"
+    "da9c3de7-8036-40bf-a3e3-499a556d287f"
   )
 
   const { data, isLoading } = useQuery<IGroup | IError>(
