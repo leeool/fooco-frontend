@@ -24,6 +24,8 @@ export const Username = styled.div`
   width: fit-content;
   padding: 0.1rem 0.5rem;
   border-radius: 5px;
+  /* flex: 1; */
+  width: max-content;
 
   &::selection {
     background-color: #fff;
@@ -37,7 +39,7 @@ export const Points = styled.div`
   gap: 0.2rem;
   align-items: center;
   place-items: center;
-  justify-self: end !important;
+  justify-self: flex-end !important;
   color: ${({ theme }) => theme.textColor.title};
   border-radius: 5px;
   padding: 0.1rem 0.3rem;
@@ -70,16 +72,15 @@ export const Position = styled.span`
 
 export const Item = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, auto) 1fr;
+  grid-template-columns: 1.5rem auto auto 1fr;
   gap: 0.5rem;
-  /* justify-content: start; */
   color: ${({ theme }) => theme.backgroundColor.secondary};
   width: 100%;
   align-items: end;
   padding: 0.5rem;
   border-radius: 0.5rem;
   height: fit-content;
-  /* justify-content: start; */
+  justify-content: start;
 `
 
 export const Rank = styled.div`

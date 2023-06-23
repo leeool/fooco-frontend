@@ -61,7 +61,10 @@ const CreatePost = () => {
       {
         onSuccess(data) {
           console.log(data)
-          nav(`/floresta/${userData.username}/${data.slug}`)
+          nav(`/floresta/${userData.username}/${data.slug}`, {
+            state: { newPost: true },
+            replace: true,
+          })
           setToastMessage(
             "Sucesso",
             "Publicação criada com sucesso!",

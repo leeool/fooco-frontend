@@ -130,10 +130,10 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
 
   p {
     font-size: 1.1rem;
-    margin-top: 1rem;
+    margin-bottom: 1rem;
 
-    &:first-child {
-      margin-top: 0;
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 
@@ -164,6 +164,7 @@ export const MarkdownStyle = styled.div<{ selectedTheme: "dark" | "light" }>`
       ${({ theme }) => theme.backgroundColor.details + "cc"};
     padding-left: 1rem;
     color: ${({ theme }) => theme.textColor.paragraph};
+    margin-bottom: 1rem;
   }
 
   a {

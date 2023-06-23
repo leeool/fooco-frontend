@@ -21,4 +21,5 @@ export const queryGetReplies = (
   queryFn: async () => {
     return instance.get(`/reply/${postId}/${parentId}`).then((res) => res.data)
   },
+  refetchOnMount: true,
 })

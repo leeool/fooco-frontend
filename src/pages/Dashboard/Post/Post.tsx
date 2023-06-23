@@ -1,7 +1,7 @@
 import { Bookmark, Point, Reply, Send } from "@assets/index"
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import useUserStore from "src/stores/UseUserStore"
 import {
   Container,

@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const Image = styled(AvatarImage)<Props>`
-  box-shadow: 0 0 0px 2px ${({ theme }) => theme.backgroundColor.secondary};
+  outline: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
   border-radius: 100%;
   height: ${({ size }) => size + "rem"};
   width: ${({ size }) => size + "rem"};
@@ -20,6 +20,7 @@ export const Image = styled(AvatarImage)<Props>`
 `
 
 export const Fallback = styled(AvatarFallback)<Props>`
+  outline: 2px solid ${({ theme }) => theme.backgroundColor.secondary};
   background-color: ${({ theme }) => theme.backgroundColor.secondary};
   display: flex;
   place-content: center;

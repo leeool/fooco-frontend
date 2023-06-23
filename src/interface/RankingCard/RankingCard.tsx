@@ -65,7 +65,7 @@ const RankingCard = () => {
                 <Position>{index + 1}º</Position>
                 <Avatar
                   src={user.avatar_url}
-                  fallback={"a"}
+                  fallback={user.username.slice(0, 2)}
                   delayMs={0}
                   size={2.5}
                 />

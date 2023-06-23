@@ -9,7 +9,7 @@ import {
 import { ButtonSecondary } from "@components/Form"
 import React from "react"
 import { useMutation, useQuery } from "react-query"
-import { useNavigate, useParams } from "react-router"
+import { useLocation, useNavigate, useParams } from "react-router"
 import { instance } from "src/api/apiCalls"
 import isError from "src/helpers/isError"
 import useUserStore from "src/stores/UseUserStore"
@@ -46,6 +46,7 @@ import UseMatchWindowSize from "src/hooks/UseWindowSize"
 import mutateDeletePost from "src/mutations/mutateDeletePost"
 import Comments from "@interface/Comments/Comments"
 import Feedback from "@interface/Feedback/Feedback"
+import Confetti from "react-confetti"
 
 const PostPage = () => {
   const { owner, slug } = useParams()
@@ -61,6 +62,7 @@ const PostPage = () => {
   const [isReplying, setIsReplying] = React.useState<boolean>(false)
   const [comments, setComments] = React.useState<IComment[] | []>([])
   const match = UseMatchWindowSize(600)
+  const { state } = useLocation()
 
   const handleReplying = () => {
     if (!isLoggedIn) {
@@ -103,6 +105,15 @@ const PostPage = () => {
   if (!data || isError(data)) return <PostNotFound />
   return (
     <Container>
+      {state?.newPost && (
+        <Confetti
+          onConfettiComplete={() => nav(location.pathname, { replace: true })}
+          recycle={false}
+          tweenDuration={1000}
+          numberOfPieces={400}
+          gravity={0.05}
+        />
+      )}
       <Interactions>
         {match ? null : (
           <Link to={`/floresta/${data.user.username}`}>

@@ -21,6 +21,7 @@ interface IUserData {
   educational_place_url: string
   posts: IUserPosts[]
   savedPosts: IUserPosts[]
+  reply: IComment[]
 }
 
 interface IUserPosts {
