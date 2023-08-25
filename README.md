@@ -1,6 +1,6 @@
 # Fooco Frontend
 
-Fooco é um projeto de fórum escolar que possui por objetivo conectar os alunos das instituições de ensino no Brasil utilizando o sistema de [gamificação](https://pt.wikipedia.org/wiki/Ludifica%C3%A7%C3%A3ohttps://pt.wikipedia.org/wiki/Ludifica%C3%A7%C3%A3o).  
+Fooco é um projeto de fórum escolar que possui por objetivos conectar, gerar conhecimento e auxiliar as comunidades das instituições de ensino do Brasil. Para isto, é utilizando a [gamificação](https://pt.wikipedia.org/wiki/Ludifica%C3%A7%C3%A3ohttps://pt.wikipedia.org/wiki/Ludifica%C3%A7%C3%A3o) juntamente com o sistema de perguntas e respostas de fóruns online.  
 
 ## Detalhes
 - [Repositório do back-end](https://github.com/leeool/fooco-backend)
